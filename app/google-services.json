@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "332217662712",
+    "firebase_url": "https://smartarzamas-default-rtdb.firebaseio.com",
+    "project_id": "smartarzamas",
+    "storage_bucket": "smartarzamas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332217662712:android:eae64fa86c6ee8ff5c8f0d",
+        "android_client_info": {
+          "package_name": "com.example.smartarzamas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332217662712-18tfc4fn4he956nnmpka0lp7d7lth1ip.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA85nN6WWQhVBgQyAawc-KQHPNwDaioWEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332217662712-18tfc4fn4he956nnmpka0lp7d7lth1ip.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

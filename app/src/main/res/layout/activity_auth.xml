@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AuthActivity"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleY="3"
+        android:src="@drawable/arzamas_background_auth_1"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:visibility="visible"
+        android:id="@+id/layout_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/invisible"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/registrarion"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20sp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_user_name_up"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/user_name" />
+            <TextView
+                android:id="@+id/tv_name_err_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/err_text_color" />
+            <EditText
+                android:id="@+id/et_user_family_up"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/user_family" />
+            <TextView
+                android:id="@+id/tv_family_err_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/err_text_color" />
+
+            <EditText
+                android:id="@+id/et_email_up"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/login" />
+
+            <TextView
+                android:id="@+id/tv_email_err_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/err_text_color" />
+
+            <EditText
+                android:id="@+id/et_password_up"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/tv_password_err_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/err_text_color" />
+
+            <EditText
+                android:id="@+id/et_second_password_up"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/recycle_password"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/tv_second_password_err_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/err_text_color" />
+
+            <CheckBox
+                android:id="@+id/cb_always_use_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/always_use_this_account"
+                android:checked="true"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp"/>
+
+            <Button
+                android:id="@+id/bt_sign_in_finaly_up"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/sign_up"
+                android:visibility="gone"
+                android:background="@drawable/round_corner_button"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/bt_sign_up_up"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/sign_up"
+                android:background="@drawable/round_corner_button"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/bt_resend_varification_email_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/hyper_link"
+                android:visibility="gone"
+                android:textSize="14sp"
+                android:background="@color/invisible"
+                android:text="@string/resend_varification_email"/>
+
+            <Button
+                android:id="@+id/bt_sign_in_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/hyper_link"
+                android:textSize="14sp"
+                android:background="@color/invisible"
+                android:text="@string/sign_in"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@color/invisible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/enter"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20sp"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/et_email_in"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/login" />
+
+            <TextView
+                android:id="@+id/tv_email_err_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/err_text_color"/>
+            <EditText
+                android:id="@+id/et_password_in"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/tv_password_err_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="@color/err_text_color" />
+
+            <CheckBox
+                android:id="@+id/cb_always_use_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/always_use_this_account"
+                android:checked="true"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp"/>
+
+            <Button
+                android:id="@+id/bt_sign_in_in"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/sign_in"
+                android:layout_gravity="center"
+                android:background="@drawable/round_corner_button"
+                android:onClick="onSignIn"
+                android:textSize="14sp"
+                tools:ignore="OnClick" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bt_forgot_password_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/hyper_link"
+                    android:textSize="14sp"
+                    android:background="@color/invisible"
+                    android:text="@string/forgot_password"/>
+
+                <Button
+                    android:id="@+id/bt_sign_up_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/hyper_link"
+                    android:textSize="14sp"
+                    android:background="@color/invisible"
+                    android:text="@string/sign_up"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

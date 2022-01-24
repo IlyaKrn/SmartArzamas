@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Ямы на дорогах" android:id="@+id/pits_on_roads" />
+    <item android:title="Лужи" android:id="@+id/puddles" />
+    <item android:title="Достопримечательности" android:id="@+id/sights" />
+</menu>

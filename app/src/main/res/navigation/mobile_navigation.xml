@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_hub">
+
+    <fragment
+        android:id="@+id/navigation_hub"
+        android:name="com.example.smartarzamas.ui.hubnavigation.map.MapFragment"
+        android:label="@string/title_map"
+        tools:layout="@layout/navigation_fragment_map" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment"
+        android:label="@string/title_all_chats"
+        tools:layout="@layout/navigation_fragment_all_chats" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.smartarzamas.ui.hubnavigation.mychats.MyChatsFragment"
+        android:label="@string/title_my_chats"
+        tools:layout="@layout/navigation_fragment_my_chats" />
+</navigation>

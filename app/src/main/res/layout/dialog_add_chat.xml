@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/round_corner_dialog">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/new_chat"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        android:textAlignment="center" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20sp"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_chat_name"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/chat_name" />
+        <TextView
+            android:id="@+id/tv_chat_name_err"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@color/err_text_color" />
+        <EditText
+            android:id="@+id/tv_chat_category"
+            android:textSize="18sp"
+            android:paddingLeft="4dp"
+            android:elegantTextHeight="true"
+            android:editable="false"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/chat_category" />
+        <TextView
+            android:id="@+id/tv_category_err"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@color/err_text_color" />
+
+        <EditText
+            android:id="@+id/et_chat_description"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:hint="@string/description" />
+
+        <TextView
+            android:id="@+id/tv_description_err"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@color/err_text_color" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_gravity="right"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/cancel"
+            android:background="@drawable/round_corner_button"
+            android:onClick="onCancel"
+            android:textSize="14sp"/>
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/bt_create"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/create"
+            android:background="@drawable/round_corner_button"
+            android:onClick="onSignUp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
