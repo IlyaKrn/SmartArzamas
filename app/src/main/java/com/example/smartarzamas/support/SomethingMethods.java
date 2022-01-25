@@ -3,6 +3,7 @@ package com.example.smartarzamas.support;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,15 +74,26 @@ public class SomethingMethods {
         }
     }
     // проверка близкого совпадения строк
-    public static boolean isEquals(String first, String second){
-        first = first.toLowerCase(Locale.ROOT);
-        second = second.toLowerCase(Locale.ROOT);
-        if (first.equals(second)){
+    public static boolean isEquals(String sample, String child){
+        if (child == null)
+            child = "";
+        if (sample == null)
+            sample = "";
+
+        sample = sample.toLowerCase(Locale.ROOT);
+        child = child.toLowerCase(Locale.ROOT);
+
+        Log.e("ohohoijbv", "[" + sample + " : " + child + "]");
+
+        if (sample.equals(""))
+            return true;
+        if (sample.equals(child)){
             return true;
         }
         else {
             return false;
         }
+
     }
     // интерфейс подключения
     public interface Connection{

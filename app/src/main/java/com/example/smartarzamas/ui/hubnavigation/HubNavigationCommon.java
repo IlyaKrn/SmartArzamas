@@ -17,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 public abstract class HubNavigationCommon extends Fragment {
 
     public static final String LOG_TAG = "HubNavigationLog";
@@ -24,8 +26,9 @@ public abstract class HubNavigationCommon extends Fragment {
     public static final String MY_CHATS = "my";
     public static final String MAP = "map";
 
-    protected String currentNavigationFragment;
-
+    public static String currentNavigationFragment;
+    protected ArrayList<String> category;
+    protected String searchString;
 
     protected StorageReference firebaseStorage; // хранилище картинок
     protected DatabaseReference dbUsers;  // бд пользователей (Firebase)
@@ -52,6 +55,8 @@ public abstract class HubNavigationCommon extends Fragment {
         addHubActivityCallback();
     }
 
+
     protected abstract void addHubActivityCallback();
+
 
 }

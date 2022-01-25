@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
-import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.SomethingMethods;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
@@ -32,8 +31,8 @@ public class MapFragment extends HubNavigationCommon {
     private NavigationFragmentMapBinding binding;
     private static MapFragmentCallback callback;
 
-    FloatingActionButton fabAdd, fabCancel; // кнопки для взаимодействия с картой
-    boolean isAdd = false; // true = режим добавления метки
+    private FloatingActionButton fabAdd, fabCancel; // кнопки для взаимодействия с картой
+    private boolean isAdd = false; // true = режим добавления метки
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,9 +66,22 @@ public class MapFragment extends HubNavigationCommon {
         fabAdd.setOnClickListener(onAddListener);
         fabCancel.setOnClickListener(onAddListener);
 
+
+
+        mapViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+
+            }
+        });
+        return root;
+    }
+
+    @Override
+    protected void addHubActivityCallback() {
         HubActivity.setMapActivityCallback(new HubActivityCallback() {
             @Override
-            public void onCategoryChange(ArrayList<String> categories, User user) {
+            public void onCategoryChange(ArrayList<String> categories) {
                 if (binding != null) {
                     SomethingMethods.isConnected(MapFragment.this.getActivity().getApplicationContext(), new SomethingMethods.Connection() {
                         @Override
@@ -108,14 +120,6 @@ public class MapFragment extends HubNavigationCommon {
 
             }
         });
-
-        mapViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-
-            }
-        });
-        return root;
     }
 
     @Override

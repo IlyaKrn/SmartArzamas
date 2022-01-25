@@ -16,7 +16,6 @@ import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.adapters.ChatListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
-import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.SomethingMethods;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
@@ -34,6 +33,7 @@ public class AllChatsFragment extends HubNavigationCommon {
     private NavigationFragmentAllChatsBinding binding;
     private static AllChatsFragmentCallback callback;
 
+    ArrayList<Chat> chatMainList = new ArrayList<>();
     ArrayList<Chat> chatList = new ArrayList<>();
     ChatListAdapter adapter;
     RecyclerView rvChats;
@@ -63,61 +63,69 @@ public class AllChatsFragment extends HubNavigationCommon {
         rvChats.setAdapter(adapter);
 
 
-        HubActivity.setAllChatsActivityCallback(new HubActivityCallback() {
-            @Override
-            public void onCategoryChange(ArrayList<String> categories, User user) {
-                if (binding != null) {
-                    SomethingMethods.isConnected(AllChatsFragment.this.getActivity().getApplicationContext(), new SomethingMethods.Connection() {
-                        @Override
-                        public void isConnected() {
-                            Chat.getDatabase().addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                    if (chatList.size() > 0) chatList.clear();
-                                    for (DataSnapshot ds : snapshot.getChildren()) {
-                                        Chat c = (Chat) ds.getValue(Chat.class);
-                                        assert c != null;
-                                        for (String cat : categories) {
-                                            if (c.category.equals(cat)) {
-                                                chatList.add(c);
-                                                break;
-                                            }
-                                        }
-                                    }
-                                    adapter.notifyDataSetChanged();
-                                }
 
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-                                }
-                            });
-                        }
-                    });
-                }
-            }
-
-
-            @Override
-            public void onSearchStringChange(String search) {
-              //  Toast.makeText(getActivity().getApplicationContext(), search, Toast.LENGTH_SHORT).show();
-                if (chatList.size() > 0) chatList.clear();
-                for (Chat c : chatList){
-                    if (SomethingMethods.isEquals(c.name, search)){
-                        chatList.add(c);
-                    }
-                }
-                adapter.notifyDataSetChanged();
-            }
-        });
         allChatsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
 
             }
         });
+        getAllChatList();
         return root;
+    }
+
+    // все чаты
+    private void getAllChatList(){
+        SomethingMethods.isConnected(getContext(), new SomethingMethods.Connection() {
+            @Override
+            public void isConnected() {
+                dbChats.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (chatMainList.size() > 0) chatMainList.clear();
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+                            Chat c = (Chat) ds.getValue(Chat.class);
+                            assert c != null;
+                            chatMainList.add(c);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
+            }
+        });
+    }
+
+    @Override
+    protected void addHubActivityCallback() {
+        HubActivity.setAllChatsActivityCallback(new HubActivityCallback() {
+            @Override
+            public void onCategoryChange(ArrayList<String> categories) {
+                AllChatsFragment.this.category = categories;
+                updateListForView();
+            }
 
 
+            @Override
+            public void onSearchStringChange(String search) {
+                searchString = search;
+                updateListForView();
+            }
+        });
+    }
+
+    private void updateListForView(){
+        if (chatList.size() > 0) chatList.clear();
+        for (Chat c : chatMainList){
+            if (SomethingMethods.isEquals(searchString, c.name)){
+                for (String cat : category){
+                    if (c.category.equals(cat)){
+                        chatList.add(c);
+                    }
+                }
+            }
+        }
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -125,7 +133,6 @@ public class AllChatsFragment extends HubNavigationCommon {
         super.onDestroyView();
         binding = null;
     }
-
     public static void setCallback(AllChatsFragmentCallback callback) {
         AllChatsFragment.callback = callback;
     }

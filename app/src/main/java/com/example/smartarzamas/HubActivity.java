@@ -17,11 +17,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.smartarzamas.databinding.ActivityHubBinding;
-import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Tag;
 import com.example.smartarzamas.ui.DialogAddChat;
 import com.example.smartarzamas.ui.DialogSignOut;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
+import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
 import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragmentCallback;
 import com.example.smartarzamas.ui.hubnavigation.map.MapFragment;
@@ -64,6 +64,7 @@ public class HubActivity extends FirebaseActivity {
         btProfile = binding.btProfile;
         etSearch = binding.etSearch;
         setCallbacks();
+        MyChatsFragment.setUser(user);
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -95,37 +96,37 @@ public class HubActivity extends FirebaseActivity {
                             case R.id.pits_on_roads:
                                 searchingTags.clear();
                                 searchingTags.add(Tag.PITS_ON_ROADS);
-                                CallbackManager.callOnCategoryChange(searchingTags, user);
+                                CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // лужи
                             case R.id.puddles:
                                 searchingTags.clear();
                                 searchingTags.add(Tag.PUDDLES);
-                                CallbackManager.callOnCategoryChange(searchingTags, user);
+                                CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // достопримечатльности
                             case R.id.sights:
                                 searchingTags.clear();
                                 searchingTags.add(Tag.SIGHTS);
-                                CallbackManager.callOnCategoryChange(searchingTags, user);
+                                CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // другое
                             case R.id.other:
                                 searchingTags.clear();
                                 searchingTags.add(Tag.OTHER);
-                                CallbackManager.callOnCategoryChange(searchingTags, user);
+                                CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // снег
                             case R.id.snow:
                                 searchingTags.clear();
                                 searchingTags.add(Tag.SNOW);
-                                CallbackManager.callOnCategoryChange(searchingTags, user);
+                                CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // все
                             case R.id.all:
                                 searchingTags.clear();
                                 searchingTags = Tag.getAllTags();
-                                CallbackManager.callOnCategoryChange(searchingTags, user);
+                                CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                         }
                         return false;
@@ -202,21 +203,21 @@ public class HubActivity extends FirebaseActivity {
 
     private static class CallbackManager{
 
-        public static void callOnCategoryChange(ArrayList<String> categories, User u){
-            if (allChatsActivityCallback != null)
-                allChatsActivityCallback.onCategoryChange(categories, u);
-            if (myChatsActivityCallback != null)
-                myChatsActivityCallback.onCategoryChange(categories, u);
-            if (mapActivityCallback != null)
-                mapActivityCallback.onCategoryChange(categories, u);
+        public static void callOnCategoryChange(ArrayList<String> categories){
+            if (allChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.ALL_CHATS))
+                allChatsActivityCallback.onCategoryChange(categories);
+            if (myChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MY_CHATS))
+                myChatsActivityCallback.onCategoryChange(categories);
+            if (mapActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MAP))
+                mapActivityCallback.onCategoryChange(categories);
         }
 
         public static void callOnSearchStringChange(String search){
-            if (allChatsActivityCallback != null)
+            if (allChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.ALL_CHATS))
                 allChatsActivityCallback.onSearchStringChange(search);
-            if (myChatsActivityCallback != null)
+            if (myChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MY_CHATS))
                 myChatsActivityCallback.onSearchStringChange(search);
-            if (mapActivityCallback != null)
+            if (mapActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MAP))
                 mapActivityCallback.onSearchStringChange(search);
         }
 
