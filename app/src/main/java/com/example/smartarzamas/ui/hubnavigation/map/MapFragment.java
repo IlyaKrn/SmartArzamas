@@ -8,17 +8,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
-import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.SomethingMethods;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
+import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 
-public class MapFragment extends Fragment {
+public class MapFragment extends HubNavigationCommon {
 
     private MapViewModel mapViewModel;
     private NavigationFragmentMapBinding binding;
@@ -38,6 +37,8 @@ public class MapFragment extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        this.currentNavigationFragment = MAP;
         mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
         binding = NavigationFragmentMapBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -73,7 +74,7 @@ public class MapFragment extends Fragment {
                     SomethingMethods.isConnected(MapFragment.this.getActivity().getApplicationContext(), new SomethingMethods.Connection() {
                         @Override
                         public void isConnected() {
-                            Chat.getDatabase().addValueEventListener(new ValueEventListener() {
+                            dbLocates.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                            /*     if (chatList.size() > 0) chatList.clear();
