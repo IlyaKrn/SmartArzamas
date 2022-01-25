@@ -66,7 +66,7 @@ public class MapFragment extends Fragment {
         fabAdd.setOnClickListener(onAddListener);
         fabCancel.setOnClickListener(onAddListener);
 
-        HubActivity.setAllChatsActivityCallback(new HubActivityCallback() {
+        HubActivity.setMapActivityCallback(new HubActivityCallback() {
             @Override
             public void onCategoryChange(ArrayList<String> categories, User user) {
                 if (binding != null) {
