@@ -1,6 +1,7 @@
 package com.example.smartarzamas.ui.hubnavigation;
 
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public abstract class HubNavigationCommon extends Fragment {
 
     public static String currentNavigationFragment;
     protected ArrayList<String> category;
+    protected static ArrayList<String> DEFAULT_CATEGORY;
     protected String searchString;
 
     protected StorageReference firebaseStorage; // хранилище картинок
@@ -40,6 +42,7 @@ public abstract class HubNavigationCommon extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        category = DEFAULT_CATEGORY;
         firebaseStorage = FirebaseStorage.getInstance().getReference();
         dbUsers = User.getDatabase();
         dbChats = Chat.getDatabase();
@@ -58,5 +61,7 @@ public abstract class HubNavigationCommon extends Fragment {
 
     protected abstract void addHubActivityCallback();
 
-
+    public static void setDefaultCategory(ArrayList<String> defaultCategory) {
+        DEFAULT_CATEGORY = defaultCategory;
+    }
 }

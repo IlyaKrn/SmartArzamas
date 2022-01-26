@@ -88,6 +88,7 @@ public class AllChatsFragment extends HubNavigationCommon {
                             assert c != null;
                             chatMainList.add(c);
                         }
+                        updateListForView();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {}

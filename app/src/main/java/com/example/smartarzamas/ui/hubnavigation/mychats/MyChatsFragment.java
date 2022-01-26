@@ -73,6 +73,7 @@ public class MyChatsFragment extends HubNavigationCommon {
 
             }
         });
+        getAllChatList();
         return root;
     }
 
@@ -104,8 +105,13 @@ public class MyChatsFragment extends HubNavigationCommon {
                         for (DataSnapshot ds : snapshot.getChildren()) {
                             Chat c = (Chat) ds.getValue(Chat.class);
                             assert c != null;
-                            chatMainList.add(c);
+                            for (String email : c.membersEmailList){
+                                if (user.email.equals(email)){
+                                    chatMainList.add(c);
+                                }
+                            }
                         }
+                        updateListForView();
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {}

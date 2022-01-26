@@ -65,6 +65,7 @@ public class HubActivity extends FirebaseActivity {
         etSearch = binding.etSearch;
         setCallbacks();
         MyChatsFragment.setUser(user);
+        HubNavigationCommon.setDefaultCategory(Tag.getAllTags());
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
