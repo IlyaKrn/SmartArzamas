@@ -37,13 +37,6 @@ public class MapFragment extends HubNavigationCommon {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        this.currentNavigationFragment = MAP;
-        mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
-        binding = NavigationFragmentMapBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        fabAdd = binding.fabAdd;
-        fabCancel = binding.fabCancel;
 
         View.OnClickListener onAddListener = new View.OnClickListener() {
             @Override
@@ -89,21 +82,7 @@ public class MapFragment extends HubNavigationCommon {
                             dbLocates.addValueEventListener(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                           /*     if (chatList.size() > 0) chatList.clear();
-                                for (DataSnapshot ds : snapshot.getChildren()) {
-                                    Chat c = (Chat) ds.getValue(Chat.class);
-                                    assert c != null;
-                                    for (String cat : categories) {
-                                        if (c.category.equals(cat)) {
-                                            chatList.add(c);
-                                            break;
-                                        }
-                                    }
-                                }
-                                adapter.notifyDataSetChanged();
 
-
-                            */
                                 }
 
                                 @Override
@@ -120,6 +99,17 @@ public class MapFragment extends HubNavigationCommon {
 
             }
         });
+    }
+
+    @Override
+    protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.currentNavigationFragment = MAP;
+        mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
+        binding = NavigationFragmentMapBinding.inflate(inflater, container, false);
+        root = binding.getRoot();
+
+        fabAdd = binding.fabAdd;
+        fabCancel = binding.fabCancel;
     }
 
     @Override

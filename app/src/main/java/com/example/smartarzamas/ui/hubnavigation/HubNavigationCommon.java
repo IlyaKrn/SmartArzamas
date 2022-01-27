@@ -31,6 +31,7 @@ public abstract class HubNavigationCommon extends Fragment {
     protected ArrayList<String> category;
     protected static ArrayList<String> DEFAULT_CATEGORY;
     protected String searchString;
+    protected View root;
 
     protected StorageReference firebaseStorage; // хранилище картинок
     protected DatabaseReference dbUsers;  // бд пользователей (Firebase)
@@ -42,7 +43,8 @@ public abstract class HubNavigationCommon extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        category = DEFAULT_CATEGORY;
+        init(inflater, container, savedInstanceState);
+        //category = DEFAULT_CATEGORY;
         firebaseStorage = FirebaseStorage.getInstance().getReference();
         dbUsers = User.getDatabase();
         dbChats = Chat.getDatabase();
@@ -54,7 +56,6 @@ public abstract class HubNavigationCommon extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         addHubActivityCallback();
     }
 
@@ -64,4 +65,6 @@ public abstract class HubNavigationCommon extends Fragment {
     public static void setDefaultCategory(ArrayList<String> defaultCategory) {
         DEFAULT_CATEGORY = defaultCategory;
     }
+
+    protected abstract void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 }

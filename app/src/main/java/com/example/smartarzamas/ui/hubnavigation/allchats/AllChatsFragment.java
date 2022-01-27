@@ -41,12 +41,7 @@ public class AllChatsFragment extends HubNavigationCommon {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        this.currentNavigationFragment = ALL_CHATS;
-        allChatsViewModel = new ViewModelProvider(this).get(AllChatsViewModel.class);
-        binding = NavigationFragmentAllChatsBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-        fabAddChat = binding.fab;
-        rvChats = binding.rvChats;
+
         adapter = new ChatListAdapter(chatList, new ChatListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(String chatId) {
@@ -106,13 +101,22 @@ public class AllChatsFragment extends HubNavigationCommon {
                 updateListForView();
             }
 
-
             @Override
             public void onSearchStringChange(String search) {
                 searchString = search;
                 updateListForView();
             }
         });
+    }
+
+    @Override
+    protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        currentNavigationFragment = ALL_CHATS;
+        allChatsViewModel = new ViewModelProvider(this).get(AllChatsViewModel.class);
+        binding = NavigationFragmentAllChatsBinding.inflate(inflater, container, false);
+        root = binding.getRoot();
+        fabAddChat = binding.fab;
+        rvChats = binding.rvChats;
     }
 
     private void updateListForView(){

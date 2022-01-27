@@ -43,14 +43,7 @@ public class MyChatsFragment extends HubNavigationCommon {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        this.currentNavigationFragment = MY_CHATS;
-        myChatsViewModel = new ViewModelProvider(this).get(MyChatsViewModel.class);
-        binding = NavigationFragmentMyChatsBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
 
-
-        fabAddChat = binding.fab;
-        rvChats = binding.rvChats;
         adapter = new ChatListAdapter(chatList, new ChatListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(String chatId) {
@@ -93,6 +86,18 @@ public class MyChatsFragment extends HubNavigationCommon {
             }
         });
     }
+
+    @Override
+    protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        this.currentNavigationFragment = MY_CHATS;
+        myChatsViewModel = new ViewModelProvider(this).get(MyChatsViewModel.class);
+        binding = NavigationFragmentMyChatsBinding.inflate(inflater, container, false);
+        root = binding.getRoot();
+
+        fabAddChat = binding.fab;
+        rvChats = binding.rvChats;
+    }
+
     // все чаты
     private void getAllChatList(){
         SomethingMethods.isConnected(getContext(), new SomethingMethods.Connection() {
