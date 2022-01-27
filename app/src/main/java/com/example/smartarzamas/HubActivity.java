@@ -25,6 +25,7 @@ import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
 import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragmentCallback;
 import com.example.smartarzamas.ui.hubnavigation.map.MapFragment;
+import com.example.smartarzamas.ui.hubnavigation.map.MapFragmentCallback;
 import com.example.smartarzamas.ui.hubnavigation.mychats.MyChatsFragment;
 import com.example.smartarzamas.ui.hubnavigation.mychats.MyChatsFragmentCallback;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -65,7 +66,6 @@ public class HubActivity extends FirebaseActivity {
         etSearch = binding.etSearch;
         setCallbacks();
         MyChatsFragment.setUser(user);
-        HubNavigationCommon.setDefaultCategory(Tag.getAllTags());
 
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -178,6 +178,16 @@ public class HubActivity extends FirebaseActivity {
                 DialogAddChat dialog = new DialogAddChat(fragment, user);
                 dialog.create(R.id.fragmentContainerView);
             }
+
+            @Override
+            public void onSearchUpdate(String search) {
+
+            }
+
+            @Override
+            public void onCategoryUpdate(ArrayList<String> category) {
+
+            }
         });
 
         AllChatsFragment.setCallback(new AllChatsFragmentCallback() {
@@ -186,9 +196,29 @@ public class HubActivity extends FirebaseActivity {
                 DialogAddChat dialog = new DialogAddChat(fragment, user);
                 dialog.create(R.id.fragmentContainerView);
             }
+
+            @Override
+            public void onSearchUpdate(String search) {
+
+            }
+
+            @Override
+            public void onCategoryUpdate(ArrayList<String> category) {
+
+            }
         });
 
-        MapFragment.setCallback(null);
+        MapFragment.setCallback(new MapFragmentCallback() {
+            @Override
+            public void onSearchUpdate(String search) {
+
+            }
+
+            @Override
+            public void onCategoryUpdate(ArrayList<String> category) {
+
+            }
+        });
     }
 
 

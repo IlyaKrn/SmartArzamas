@@ -61,10 +61,18 @@ public class MapFragment extends HubNavigationCommon {
 
 
 
-        mapViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        mapViewModel.getSearch().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String s) {
-
+            public void onChanged(String s) {
+                searchString = s;
+                callback.onSearchUpdate(s);
+            }
+        });
+        mapViewModel.getCategory().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> strings) {
+                category = strings;
+                callback.onCategoryUpdate(strings);
             }
         });
         return root;

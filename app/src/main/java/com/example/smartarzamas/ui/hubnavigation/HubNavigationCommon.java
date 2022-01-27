@@ -62,9 +62,5 @@ public abstract class HubNavigationCommon extends Fragment {
 
     protected abstract void addHubActivityCallback();
 
-    public static void setDefaultCategory(ArrayList<String> defaultCategory) {
-        DEFAULT_CATEGORY = defaultCategory;
-    }
-
     protected abstract void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 }

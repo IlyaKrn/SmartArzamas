@@ -60,10 +60,18 @@ public class MyChatsFragment extends HubNavigationCommon {
         rvChats.setAdapter(adapter);
 
 
-        myChatsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        myChatsViewModel.getSearch().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String s) {
-
+            public void onChanged(String s) {
+                searchString = s;
+                callback.onSearchUpdate(s);
+            }
+        });
+        myChatsViewModel.getCategory().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> strings) {
+                category = strings;
+                callback.onCategoryUpdate(strings);
             }
         });
         getAllChatList();

@@ -1,6 +1,7 @@
 package com.example.smartarzamas.ui.hubnavigation.allchats;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class AllChatsFragment extends HubNavigationCommon {
@@ -59,12 +61,21 @@ public class AllChatsFragment extends HubNavigationCommon {
 
 
 
-        allChatsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        allChatsViewModel.getSearch().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
-            public void onChanged(@Nullable String s) {
-
+            public void onChanged(String s) {
+                searchString = s;
+                callback.onSearchUpdate(s);
             }
         });
+        allChatsViewModel.getCategory().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
+            @Override
+            public void onChanged(ArrayList<String> strings) {
+                category = strings;
+                callback.onCategoryUpdate(strings);
+            }
+        });
+
         getAllChatList();
         return root;
     }
@@ -98,12 +109,16 @@ public class AllChatsFragment extends HubNavigationCommon {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
                 AllChatsFragment.this.category = categories;
+                allChatsViewModel.setCategory(category);
+                //callback.onCategoryUpdate(category);
                 updateListForView();
             }
 
             @Override
             public void onSearchStringChange(String search) {
-                searchString = search;
+                AllChatsFragment.this.searchString = search;
+                allChatsViewModel.setSearch(searchString);
+              //  callback.onSearchUpdate(searchString);
                 updateListForView();
             }
         });
@@ -112,7 +127,7 @@ public class AllChatsFragment extends HubNavigationCommon {
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         currentNavigationFragment = ALL_CHATS;
-        allChatsViewModel = new ViewModelProvider(this).get(AllChatsViewModel.class);
+        allChatsViewModel = new ViewModelProvider(this.getActivity()).get(AllChatsViewModel.class);
         binding = NavigationFragmentAllChatsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         fabAddChat = binding.fab;
@@ -131,6 +146,7 @@ public class AllChatsFragment extends HubNavigationCommon {
             }
         }
         adapter.notifyDataSetChanged();
+        Log.d("145 all frag", Arrays.toString(category.toArray()) + ", " + searchString);
     }
 
     @Override
