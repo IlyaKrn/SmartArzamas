@@ -17,6 +17,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.smartarzamas.databinding.ActivityHubBinding;
+import com.example.smartarzamas.support.EditTextSearch;
+import com.example.smartarzamas.support.OnTextChangeListener;
 import com.example.smartarzamas.support.Tag;
 import com.example.smartarzamas.ui.DialogAddChat;
 import com.example.smartarzamas.ui.DialogSignOut;
@@ -37,7 +39,7 @@ public class HubActivity extends FirebaseActivity {
 
     private ActivityHubBinding binding;
     ImageButton btMenu, btProfile;
-    EditText etSearch;
+    EditTextSearch etSearch;
     private ArrayList<String> searchingTags = Tag.getAllTags();
 
     private static HubActivityCallback allChatsActivityCallback;
@@ -67,7 +69,13 @@ public class HubActivity extends FirebaseActivity {
         setCallbacks();
         MyChatsFragment.setUser(user);
 
-        etSearch.addTextChangedListener(new TextWatcher() {
+        etSearch.addTextEditListener(new OnTextChangeListener() {
+            @Override
+            public void onChange(Editable editable) {
+                CallbackManager.callOnSearchStringChange(etSearch.getText().toString());
+
+            }
+        });   /*.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -83,6 +91,8 @@ public class HubActivity extends FirebaseActivity {
                 CallbackManager.callOnSearchStringChange(etSearch.getText().toString());
             }
         });
+
+        */
 
         btMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +146,6 @@ public class HubActivity extends FirebaseActivity {
                 popup.show();
             }
         });
-
         btProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -165,30 +174,9 @@ public class HubActivity extends FirebaseActivity {
             }
         });
 
-
-
-
     }
 
     private void setCallbacks(){
-
-        MyChatsFragment.setCallback(new MyChatsFragmentCallback() {
-            @Override
-            public void onCreateChat(Fragment fragment) {
-                DialogAddChat dialog = new DialogAddChat(fragment, user);
-                dialog.create(R.id.fragmentContainerView);
-            }
-
-            @Override
-            public void onSearchUpdate(String search) {
-
-            }
-
-            @Override
-            public void onCategoryUpdate(ArrayList<String> category) {
-
-            }
-        });
 
         AllChatsFragment.setCallback(new AllChatsFragmentCallback() {
             @Override
@@ -199,7 +187,25 @@ public class HubActivity extends FirebaseActivity {
 
             @Override
             public void onSearchUpdate(String search) {
+                etSearch.setText(search);
+            }
 
+            @Override
+            public void onCategoryUpdate(ArrayList<String> category) {
+
+            }
+        });
+
+        MyChatsFragment.setCallback(new MyChatsFragmentCallback() {
+            @Override
+            public void onCreateChat(Fragment fragment) {
+                DialogAddChat dialog = new DialogAddChat(fragment, user);
+                dialog.create(R.id.fragmentContainerView);
+            }
+
+            @Override
+            public void onSearchUpdate(String search) {
+                etSearch.setText(search);
             }
 
             @Override
@@ -211,7 +217,7 @@ public class HubActivity extends FirebaseActivity {
         MapFragment.setCallback(new MapFragmentCallback() {
             @Override
             public void onSearchUpdate(String search) {
-
+                etSearch.setText(search);
             }
 
             @Override

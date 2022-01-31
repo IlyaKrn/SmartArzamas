@@ -83,23 +83,7 @@ public class MapFragment extends HubNavigationCommon {
         HubActivity.setMapActivityCallback(new HubActivityCallback() {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
-                if (binding != null) {
-                    SomethingMethods.isConnected(MapFragment.this.getActivity().getApplicationContext(), new SomethingMethods.Connection() {
-                        @Override
-                        public void isConnected() {
-                            dbLocates.addValueEventListener(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                }
-
-                                @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
-                                }
-                            });
-                        }
-                    });
-                }
             }
 
             @Override

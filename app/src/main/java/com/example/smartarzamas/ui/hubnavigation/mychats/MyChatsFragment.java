@@ -1,6 +1,7 @@
 package com.example.smartarzamas.ui.hubnavigation.mychats;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.SomethingMethods;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
+import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,6 +66,7 @@ public class MyChatsFragment extends HubNavigationCommon {
             @Override
             public void onChanged(String s) {
                 searchString = s;
+                Log.e("lihkhkggggggggggggg", "lkhlkljkljk    " + s);
                 callback.onSearchUpdate(s);
             }
         });
@@ -84,12 +87,16 @@ public class MyChatsFragment extends HubNavigationCommon {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
                 MyChatsFragment.this.category = categories;
+                myChatsViewModel.setCategory(category);
+                callback.onCategoryUpdate(category);
                 updateListForView();
             }
 
             @Override
             public void onSearchStringChange(String search) {
-                searchString = search;
+                MyChatsFragment.this.searchString = search;
+                myChatsViewModel.setSearch(searchString);
+                callback.onSearchUpdate(searchString);
                 updateListForView();
             }
         });
@@ -98,7 +105,7 @@ public class MyChatsFragment extends HubNavigationCommon {
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         this.currentNavigationFragment = MY_CHATS;
-        myChatsViewModel = new ViewModelProvider(this).get(MyChatsViewModel.class);
+        myChatsViewModel = new ViewModelProvider(this.getActivity()).get(MyChatsViewModel.class);
         binding = NavigationFragmentMyChatsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 

@@ -110,7 +110,7 @@ public class AllChatsFragment extends HubNavigationCommon {
             public void onCategoryChange(ArrayList<String> categories) {
                 AllChatsFragment.this.category = categories;
                 allChatsViewModel.setCategory(category);
-                //callback.onCategoryUpdate(category);
+                callback.onCategoryUpdate(category);
                 updateListForView();
             }
 
@@ -118,7 +118,7 @@ public class AllChatsFragment extends HubNavigationCommon {
             public void onSearchStringChange(String search) {
                 AllChatsFragment.this.searchString = search;
                 allChatsViewModel.setSearch(searchString);
-              //  callback.onSearchUpdate(searchString);
+                callback.onSearchUpdate(searchString);
                 updateListForView();
             }
         });
