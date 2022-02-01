@@ -3,6 +3,7 @@ package com.example.smartarzamas.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Message;
+import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.OnLoadBitmap;
 import com.example.smartarzamas.firebaseobjects.User;
+import com.example.smartarzamas.support.SomethingMethods;
 
 import java.util.ArrayList;
 
@@ -23,12 +26,12 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     private final OnStateClickListener onClickListener;
     ArrayList<Message> messages;
-    ArrayList<User> userList;
+   // ArrayList<User> userList;
     User user;
 
-    public MessageListAdapter(ArrayList<Message> messages, ArrayList<User> userList, User user, OnStateClickListener onClickListener) {
+    public MessageListAdapter(ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
         this.messages = messages;
-        this.userList = userList;
+    //    this.userList = userList;
         this.onClickListener = onClickListener;
         this.user = user;
     }
@@ -56,17 +59,22 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             }
         });
     }
-
+/*
     // получение пользователя по логину
     User getUserByEmail(String email){
+
         for (User u : userList) {
             if (u.email.equals(email))
                 return u;
         }
         return null;
+
+
+
+
     }
 
-
+*/
     @Override
     public int getItemCount() {
         return messages.size();
@@ -104,7 +112,33 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         public void bind(int listIndex){
             m = messages.get(listIndex);
-            u = getUserByEmail(m.userEmail);
+            if (m.userEmail != null) {
+                Log.e("adaptrer n", m.message);
+                User.getUserById(m.userEmail, new OnGetUser() {
+                    @Override
+                    public void onGet(User user) {
+                        Log.e(";pouioykiyhiyhoi", "ligkghkj");
+                        u = user;
+                        tvName.setText(u.name);
+                        tvMessage.setText(m.message);
+                    /*     if (u != null){
+                        tvName.setText(u.name + " " + u.family);
+                        u.getIconAsync(new OnLoadBitmap() {
+                            @Override
+                            public void onLoad(Bitmap bitmap) {
+                                bmIcon.setImageBitmap(bitmap);
+                            }
+                        });
+                    }
+
+                */
+                    }
+                });
+            }
+            else {
+                Log.e("adapter", m.message);
+            }
+          /*  u = getUserByEmail(m.userEmail);
 
             tvMessage.setText(m.message);
             if (u != null){
@@ -115,8 +149,10 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                         bmIcon.setImageBitmap(bitmap);
                     }
                 });
-            }
+            }*/
         }
+
+
 
 
 

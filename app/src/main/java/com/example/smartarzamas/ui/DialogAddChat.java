@@ -79,7 +79,7 @@ public class DialogAddChat extends Dialog {
                     SomethingMethods.isConnected(context, new SomethingMethods.Connection() {
                         @Override
                         public void isConnected() {
-                            Chat.getDatabase().push().setValue(chat);
+                            Chat.getDatabase().child(chatId).setValue(chat);
                             destroy();
                         }
                     });

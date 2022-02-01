@@ -3,6 +3,7 @@ package com.example.smartarzamas;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class ChatActivity extends FirebaseActivity {
         etSend = (EditText)findViewById(R.id.etSend);
         rvMessages = findViewById(R.id.rv_messages);
         rvMessages.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MessageListAdapter(messageList,/* userList,*/new ArrayList<>(),  user, new MessageListAdapter.OnStateClickListener() {
+        adapter = new MessageListAdapter(messageList,/* userList,new ArrayList<>(), */ user, new MessageListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(int messagePosition) {
 
@@ -143,7 +144,7 @@ public class ChatActivity extends FirebaseActivity {
             String massege = etSend.getText().toString();
             if (messageList.get(0).equals(NULL_MESSAGE))
                 messageList.remove(0);
-            messageList.add(new Message(massege,/* user.email*/ null, dbChats.push().getKey(), imagesForSend));
+            messageList.add(new Message(massege, user.id, dbChats.push().getKey(), imagesForSend));
 
             SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
                 @Override

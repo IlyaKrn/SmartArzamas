@@ -22,6 +22,7 @@ import com.example.smartarzamas.support.OnTextChangeListener;
 import com.example.smartarzamas.support.Tag;
 import com.example.smartarzamas.ui.DialogAddChat;
 import com.example.smartarzamas.ui.DialogSignOut;
+import com.example.smartarzamas.ui.hubnavigation.CommonNavigationViewModel;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
@@ -67,7 +68,8 @@ public class HubActivity extends FirebaseActivity {
         btProfile = binding.btProfile;
         etSearch = binding.etSearch;
         setCallbacks();
-        MyChatsFragment.setUser(user);
+        //MyChatsFragment.setUser(user);
+        HubNavigationCommon.setUser(user);
 
         etSearch.addTextEditListener(new OnTextChangeListener() {
             @Override

@@ -53,8 +53,8 @@ public class AllChatsFragment extends HubNavigationCommon {
             @Override
             public void onStateClick(String chatId) {
                 Intent intent = new Intent(AllChatsFragment.this.getActivity(), ChatActivity.class);
-                Log.e("lhkhgkhj", chatId);
                 intent.putExtra(FirebaseActivity.CHAT_ID, chatId);
+                intent.putExtra(FirebaseActivity.USER_INTENT, user);
                 AllChatsFragment.this.getActivity().startActivity(intent);
             }
         });
@@ -138,6 +138,7 @@ public class AllChatsFragment extends HubNavigationCommon {
         allChatsViewModel = new ViewModelProvider(this.getActivity()).get(AllChatsViewModel.class);
         binding = NavigationFragmentAllChatsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
+
         fabAddChat = binding.fab;
         rvChats = binding.rvChats;
     }
@@ -154,7 +155,6 @@ public class AllChatsFragment extends HubNavigationCommon {
             }
         }
         adapter.notifyDataSetChanged();
-        Log.d("145 all frag", Arrays.toString(category.toArray()) + ", " + searchString);
     }
 
     @Override

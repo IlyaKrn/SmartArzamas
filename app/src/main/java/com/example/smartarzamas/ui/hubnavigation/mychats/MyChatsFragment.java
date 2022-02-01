@@ -1,5 +1,6 @@
 package com.example.smartarzamas.ui.hubnavigation.mychats;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartarzamas.ChatActivity;
+import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.adapters.ChatListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentMyChatsBinding;
@@ -28,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MyChatsFragment extends HubNavigationCommon {
@@ -40,7 +44,6 @@ public class MyChatsFragment extends HubNavigationCommon {
     ArrayList<Chat> chatList = new ArrayList<>();
     ChatListAdapter adapter;
     RecyclerView rvChats;
-    static User user;
     FloatingActionButton fabAddChat;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +52,10 @@ public class MyChatsFragment extends HubNavigationCommon {
         adapter = new ChatListAdapter(chatList, new ChatListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(String chatId) {
-
+                Intent intent = new Intent(MyChatsFragment.this.getActivity(), ChatActivity.class);
+                intent.putExtra(FirebaseActivity.CHAT_ID, chatId);
+                intent.putExtra(FirebaseActivity.USER_INTENT, user);
+                MyChatsFragment.this.getActivity().startActivity(intent);
             }
         });
         fabAddChat.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +72,6 @@ public class MyChatsFragment extends HubNavigationCommon {
             @Override
             public void onChanged(String s) {
                 searchString = s;
-                Log.e("lihkhkggggggggggggg", "lkhlkljkljk    " + s);
                 callback.onSearchUpdate(s);
             }
         });
@@ -104,7 +109,7 @@ public class MyChatsFragment extends HubNavigationCommon {
 
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.currentNavigationFragment = MY_CHATS;
+        currentNavigationFragment = MY_CHATS;
         myChatsViewModel = new ViewModelProvider(this.getActivity()).get(MyChatsViewModel.class);
         binding = NavigationFragmentMyChatsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
@@ -164,7 +169,4 @@ public class MyChatsFragment extends HubNavigationCommon {
         MyChatsFragment.callback = callback;
     }
 
-    public static void setUser(User user) {
-        MyChatsFragment.user = user;
-    }
 }

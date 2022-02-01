@@ -38,6 +38,7 @@ public abstract class HubNavigationCommon extends Fragment {
     protected DatabaseReference dbChats;  // бд чатов (Firebase)
     protected DatabaseReference dbLocates;  // бд меток (Firebase)
     protected FirebaseAuth auth; // аутентификация
+    protected static User user;
 
 
     @Nullable
@@ -63,4 +64,8 @@ public abstract class HubNavigationCommon extends Fragment {
     protected abstract void addHubActivityCallback();
 
     protected abstract void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+
+    public static void setUser(User user) {
+        HubNavigationCommon.user = user;
+    }
 }
