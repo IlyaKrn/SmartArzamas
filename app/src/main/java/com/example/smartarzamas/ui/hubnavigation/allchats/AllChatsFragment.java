@@ -1,5 +1,6 @@
 package com.example.smartarzamas.ui.hubnavigation.allchats;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,15 +10,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartarzamas.ChatActivity;
+import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.adapters.ChatListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.support.SomethingMethods;
+import com.example.smartarzamas.ui.hubnavigation.CommonNavigationViewModel;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -47,7 +52,10 @@ public class AllChatsFragment extends HubNavigationCommon {
         adapter = new ChatListAdapter(chatList, new ChatListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(String chatId) {
-
+                Intent intent = new Intent(AllChatsFragment.this.getActivity(), ChatActivity.class);
+                Log.e("lhkhgkhj", chatId);
+                intent.putExtra(FirebaseActivity.CHAT_ID, chatId);
+                AllChatsFragment.this.getActivity().startActivity(intent);
             }
         });
         fabAddChat.setOnClickListener(new View.OnClickListener() {

@@ -68,7 +68,7 @@ public class Chat extends FirebaseObject {
         }
         return false;
     }
-    public static void getUserById(String id, OnGetChat onGetChat){
+    public static void getChatById(String id, OnGetChat onGetChat){
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

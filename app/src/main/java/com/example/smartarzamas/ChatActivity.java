@@ -8,38 +8,32 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.adapters.MessageListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Message;
-import com.example.smartarzamas.firebaseobjects.User;
+import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.support.SomethingMethods;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends FirebaseActivity {
 
-    public static DatabaseReference dbUsers; // бд пользователей (Firebase)
-    public static DatabaseReference dbChats; // бд чатов (Firebase)
-    ArrayList<User> userList;
-    TextView tvName;
-    RecyclerView rvMessages;
-    EditText etSend;
-    ArrayList<Message> messageList;
-    MessageListAdapter adapter;
-    final String NULL_MESSAGE = "";
-    LinearLayoutManager layoutManager;
-    static ArrayList<Integer> selectedIds;
-    String chatId;
-    ArrayList<Bitmap> imagesForSend;
-    User user;
+    private TextView tvName;
+    private RecyclerView rvMessages;
+    private EditText etSend;
+    private ArrayList<Message> messageList  = new ArrayList<>();;
+    private MessageListAdapter adapter;
+    public final String NULL_MESSAGE = "";
+    private static ArrayList<Message> selectedIds  = new ArrayList<>();;
+    private ArrayList<Bitmap> imagesForSend  = new ArrayList<>();
+    Chat chat;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,25 +41,17 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         init();
         getChatData();
-        getUserList();
+     //   getUserList();
     }
 
     // инициализация
     void init(){
-        userList = new ArrayList<>();
-        dbUsers = User.getDatabase();
         imagesForSend = new ArrayList<>();
         tvName = (TextView)findViewById(R.id.tvName);
         etSend = (EditText)findViewById(R.id.etSend);
-        chatId = getIntent().getExtras().getString("chat_id");
-        selectedIds = new ArrayList<>();
-        layoutManager = new LinearLayoutManager(this);
-        user = (User) getIntent().getSerializableExtra("user");
-        dbChats = Chat.getDatabase();
-        messageList = new ArrayList<>();
         rvMessages = findViewById(R.id.rv_messages);
-        rvMessages.setLayoutManager(layoutManager);
-        adapter = new MessageListAdapter(messageList, userList, user, new MessageListAdapter.OnStateClickListener() {
+        rvMessages.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MessageListAdapter(messageList,/* userList,*/new ArrayList<>(),  user, new MessageListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(int messagePosition) {
 
@@ -73,6 +59,8 @@ public class ChatActivity extends AppCompatActivity {
         });
         rvMessages.setAdapter(adapter);
     }
+
+    /*
     // получение списка ползователей
     private void getUserList() {
         SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
@@ -95,11 +83,31 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+
+     */
     // получение информации о чате
     void getChatData(){
         SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
             @Override
             public void isConnected() {
+                String id = getIntent().getStringExtra(CHAT_ID);
+                if (id != null){
+                    Chat.getChatById(id, new OnGetChat() {
+                        @Override
+                        public void onGet(Chat chat) {
+                            ChatActivity.this.chat = chat;
+                            tvName.setText(chat.name);
+                            if (messageList.size() > 0) messageList.clear();
+                            for (int i = 0; i < chat.messages.size(); i++) {
+                                messageList.add(chat.messages.get(i));
+                            }
+                            adapter.notifyDataSetChanged();
+                            rvMessages.scrollToPosition(messageList.size()-1);
+                        }
+                    });
+                }
+
+                /*
                 dbChats.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -108,11 +116,7 @@ public class ChatActivity extends AppCompatActivity {
                             Chat c = ds.getValue(Chat.class);
                             assert c != null;
                             if (c.id.equals(id)) {
-                                tvName.setText(c.name);
-                                if (messageList.size() > 0) messageList.clear();
-                                for (int i = 0; i < c.messages.size(); i++) {
-                                    messageList.add(c.messages.get(i));
-                                }
+
                             }
                         }
                         adapter.notifyDataSetChanged();
@@ -121,6 +125,8 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {}
                 });
+
+                 */
             }
         });
     }
@@ -137,18 +143,23 @@ public class ChatActivity extends AppCompatActivity {
             String massege = etSend.getText().toString();
             if (messageList.get(0).equals(NULL_MESSAGE))
                 messageList.remove(0);
-            messageList.add(new Message(massege, user.email, imagesForSend));
+            messageList.add(new Message(massege,/* user.email*/ null, dbChats.push().getKey(), imagesForSend));
 
             SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
                 @Override
                 public void isConnected() {
-                    dbChats.orderByChild("id").equalTo(chatId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            dataSnapshot.child("messages").getRef().setValue(messageList);
+                            etSend.setText("");
+
+                            /*
                             for (DataSnapshot child : dataSnapshot.getChildren()) {
                                 child.getRef().orderByChild("id").equalTo(getIntent().getExtras().getString("id")).getRef().child("messages").setValue(messageList);
-                                etSend.setText("");
                             }
+
+                             */
                         }
 
                         @Override

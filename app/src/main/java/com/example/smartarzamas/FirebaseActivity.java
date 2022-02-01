@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.smartarzamas.SQLiteDatabase.SQLiteDbManager;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Locate;
+import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -61,6 +62,13 @@ public abstract class FirebaseActivity extends AppCompatActivity {
         if (getIntent().getSerializableExtra(USER_INTENT) != null){
             // получение пользователя из предыдущей активности
             this.user = (User) getIntent().getSerializableExtra(USER_INTENT);
+            User.getUserById(user.id, new OnGetUser() {
+                @Override
+                public void onGet(User user) {
+                    FirebaseActivity.this.user = user;
+                    Log.i(LOG_TAG, "user updated");
+                }
+            });
             Log.i(LOG_TAG, "user email is \"" + user.email + "\"");
         }
         else {

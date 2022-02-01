@@ -68,7 +68,7 @@ public class DialogAddChat extends Dialog {
                 if (name.length() > 0 && category.length() > 0) {
                     Chat chat;
                     ArrayList<Message> messages = new ArrayList<>();
-                    messages.add(new Message(getResources().getString(R.string.default_first_message), null, null));
+                    messages.add(new Message(getResources().getString(R.string.default_first_message), null, Chat.getDatabase().push().getKey(), null));
                     String chatId = Chat.getDatabase().push().getKey();
                     if (description.length() > 0)
                         chat = new Chat(name, description, chatId, messages, category, user);
