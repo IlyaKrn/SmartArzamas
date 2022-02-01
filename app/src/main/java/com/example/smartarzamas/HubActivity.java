@@ -3,10 +3,9 @@ package com.example.smartarzamas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.appcompat.widget.PopupMenu;
@@ -22,7 +21,6 @@ import com.example.smartarzamas.support.OnTextChangeListener;
 import com.example.smartarzamas.support.Tag;
 import com.example.smartarzamas.ui.DialogAddChat;
 import com.example.smartarzamas.ui.DialogSignOut;
-import com.example.smartarzamas.ui.hubnavigation.CommonNavigationViewModel;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
@@ -59,7 +57,7 @@ public class HubActivity extends FirebaseActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_hub, R.id.navigation_dashboard, R.id.navigation_notifications).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_map, R.id.navigation_all_chats, R.id.navigation_my_chats).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_hub);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);

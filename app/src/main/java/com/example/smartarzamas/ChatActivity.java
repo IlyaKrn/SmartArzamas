@@ -133,9 +133,11 @@ public class ChatActivity extends FirebaseActivity {
     }
     // переход к списку чатов
     public void onClose(View view) {
-        Intent intent = new Intent(ChatActivity.this, HubActivity.class);
+   /*     Intent intent = new Intent(ChatActivity.this, HubActivity.class);
         intent.putExtra("user", user);
         startActivity(intent);
+
+    */
         finish();
     }
     // отпрака сообщения

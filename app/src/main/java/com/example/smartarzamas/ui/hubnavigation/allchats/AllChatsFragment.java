@@ -134,7 +134,7 @@ public class AllChatsFragment extends HubNavigationCommon {
 
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        currentNavigationFragment = ALL_CHATS;
+        HubNavigationCommon.currentNavigationFragment = ALL_CHATS;
         allChatsViewModel = new ViewModelProvider(this.getActivity()).get(AllChatsViewModel.class);
         binding = NavigationFragmentAllChatsBinding.inflate(inflater, container, false);
         root = binding.getRoot();

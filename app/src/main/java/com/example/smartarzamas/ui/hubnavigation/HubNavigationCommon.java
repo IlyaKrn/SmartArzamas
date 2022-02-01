@@ -45,7 +45,6 @@ public abstract class HubNavigationCommon extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         init(inflater, container, savedInstanceState);
-        //category = DEFAULT_CATEGORY;
         firebaseStorage = FirebaseStorage.getInstance().getReference();
         dbUsers = User.getDatabase();
         dbChats = Chat.getDatabase();

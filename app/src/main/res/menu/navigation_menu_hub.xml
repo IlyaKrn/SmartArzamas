@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_hub"
+        android:id="@+id/navigation_map"
         android:icon="@android:drawable/ic_dialog_map"
         android:title="@string/title_map" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/navigation_all_chats"
         android:icon="@drawable/ic_chats"
         android:title="@string/title_all_chats" />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_my_chats"
         android:icon="@drawable/ic_notifications_black_24dp"
         android:title="@string/title_my_chats" />
 

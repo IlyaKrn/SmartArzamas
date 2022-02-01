@@ -109,7 +109,7 @@ public class MyChatsFragment extends HubNavigationCommon {
 
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        currentNavigationFragment = MY_CHATS;
+        HubNavigationCommon.currentNavigationFragment = MY_CHATS;
         myChatsViewModel = new ViewModelProvider(this.getActivity()).get(MyChatsViewModel.class);
         binding = NavigationFragmentMyChatsBinding.inflate(inflater, container, false);
         root = binding.getRoot();

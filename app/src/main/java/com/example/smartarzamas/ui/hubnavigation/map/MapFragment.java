@@ -95,7 +95,7 @@ public class MapFragment extends HubNavigationCommon {
 
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.currentNavigationFragment = MAP;
+        HubNavigationCommon.currentNavigationFragment = MAP;
         mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
         binding = NavigationFragmentMapBinding.inflate(inflater, container, false);
         root = binding.getRoot();
