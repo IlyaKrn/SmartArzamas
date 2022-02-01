@@ -2,48 +2,53 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/ripple">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="5dp"
+        android:background="@drawable/round_corner_chat_list_item">
 
         <ImageView
             android:id="@+id/chat_icon"
-            android:layout_width="?android:attr/listPreferredItemHeightSmall"
-            android:layout_height="?android:attr/listPreferredItemHeightSmall" />
+            android:layout_width="@dimen/chat_list_item_height"
+            android:layout_height="@dimen/chat_list_item_height"
+            />
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/chat_list_item_height"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:minHeight="?android:attr/listPreferredItemHeightSmall"
-                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/black"
-                android:background="@drawable/ripple"/>
-            <TextView
-                android:id="@+id/tv_category"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    android:textColor="@color/black"
+                    android:paddingStart="10dp">
+                </TextView>
 
-        </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="italic"
+                    android:textSize="16sp"/>
+
+        </FrameLayout>
 
 
     </LinearLayout>
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="5dp"/>
 
 </LinearLayout>

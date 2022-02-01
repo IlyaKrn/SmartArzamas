@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textColor="@color/err_text_color" />
+                android:textColor="@color/design_default_color_error" />
             <EditText
                 android:id="@+id/et_user_family_up"
                 android:layout_width="match_parent"
@@ -61,7 +61,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textColor="@color/err_text_color" />
+                android:textColor="@color/design_default_color_error" />
 
             <EditText
                 android:id="@+id/et_email_up"
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textColor="@color/err_text_color" />
+                android:textColor="@color/design_default_color_error" />
 
             <EditText
                 android:id="@+id/et_password_up"
@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textColor="@color/err_text_color" />
+                android:textColor="@color/design_default_color_error" />
 
             <EditText
                 android:id="@+id/et_second_password_up"
@@ -101,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textColor="@color/err_text_color" />
+                android:textColor="@color/design_default_color_error" />
 
             <CheckBox
                 android:id="@+id/cb_always_use_up"
@@ -202,7 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textColor="@color/err_text_color"/>
+                android:textColor="@color/design_default_color_error"/>
             <EditText
                 android:id="@+id/et_password_in"
                 android:layout_width="match_parent"
@@ -215,7 +215,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:textColor="@color/err_text_color" />
+                android:textColor="@color/design_default_color_error" />
 
             <CheckBox
                 android:id="@+id/cb_always_use_in"

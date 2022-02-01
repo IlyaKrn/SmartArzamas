@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:textColor="@color/err_text_color" />
+            android:textColor="@color/design_default_color_error" />
         <EditText
             android:id="@+id/et_user_family"
             android:layout_width="match_parent"
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:textColor="@color/err_text_color" />
+            android:textColor="@color/design_default_color_error" />
 
     </LinearLayout>
 

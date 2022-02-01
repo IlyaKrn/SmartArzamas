@@ -13,9 +13,10 @@
     <color name="button">#FF6200EE</color>
     <color name="tool_bar">#8E40FF</color>
     <color name="message_editor">#FFBB86FC</color>
-    <color name="err_text_color">#FF0000</color>
     <color name="message">#FF6200EE</color>
     <color name="hyper_link">#000DFF</color>
     <color name="message_start">#B079FF</color>
     <color name="message_end">#41009E</color>
+    <color name="chat_item_background">#5A5A5A</color>
+    <color name="title_color">#8F8F8F</color>
 </resources>
