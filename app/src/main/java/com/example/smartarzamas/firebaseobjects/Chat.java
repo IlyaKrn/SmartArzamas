@@ -1,9 +1,15 @@
 package com.example.smartarzamas.firebaseobjects;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -36,7 +42,7 @@ public class Chat extends FirebaseObject {
     }
 
     @Override
-    public void getIconAsync(OnLoad onLoad) {
+    public void getIconAsync(OnLoadBitmap onLoadBitmap) {
 
     }
 
@@ -62,4 +68,23 @@ public class Chat extends FirebaseObject {
         }
         return false;
     }
+    public static void getUserById(String id, OnGetChat onGetChat){
+        getDatabase().child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                onGetChat.onGet(snapshot.getValue(Chat.class));
+                if (snapshot.getValue(Chat.class) != null)
+                    Log.e(LOG_TAG, "gotten chat name: " + snapshot.getValue(Chat.class).name);
+                else {
+                    Log.e(LOG_TAG, "gotten chat name: " + "null");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+            }
+        });
+    }
+
 }

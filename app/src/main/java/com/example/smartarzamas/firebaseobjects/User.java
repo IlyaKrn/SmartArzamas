@@ -2,6 +2,7 @@ package com.example.smartarzamas.firebaseobjects;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -49,12 +50,12 @@ public class User extends FirebaseObject implements Serializable {
     }
 
     @Override
-    public void getIconAsync(OnLoad onLoad) {
+    public void getIconAsync(OnLoadBitmap onLoadBitmap) {
         FirebaseStorage.getInstance().getReference().child(iconRef).getBytes(1024 * 1024 * 10234).addOnCompleteListener(new OnCompleteListener<byte[]>() {
             @Override
             public void onComplete(@NonNull Task<byte[]> task) {
                 Bitmap icon = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
-                onLoad.onLoad(icon);
+                onLoadBitmap.onLoad(icon);
             }
         });
     }
@@ -76,6 +77,25 @@ public class User extends FirebaseObject implements Serializable {
     }
     interface OnUpdateUser{
        void onUpdate(User user);
+    }
+
+    public static void getUserById(String id, OnGetUser onGetUser){
+        getDatabase().child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                onGetUser.onGet(snapshot.getValue(User.class));
+                if (snapshot.getValue(User.class) != null)
+                    Log.e(LOG_TAG, "gotten user email: " + snapshot.getValue(User.class).email);
+                else {
+                    Log.e(LOG_TAG, "gotten user email: " + "null");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+            }
+        });
     }
 
 

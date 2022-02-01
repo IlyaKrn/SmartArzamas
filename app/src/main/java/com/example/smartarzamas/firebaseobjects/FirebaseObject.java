@@ -4,6 +4,7 @@ import com.google.firebase.database.DatabaseReference;
 
 public abstract class FirebaseObject {
 
+    public static final String LOG_TAG = "FirebaseObject";
     public String name;
     public String id;
 
@@ -19,5 +20,5 @@ public abstract class FirebaseObject {
         return null;
     }
 
-    public abstract void getIconAsync(OnLoad onLoad);
+    public abstract void getIconAsync(OnLoadBitmap onLoadBitmap);
 }

@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.SomethingMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,7 +44,7 @@ public class AuthActivity extends FirebaseActivity {
         layoutSignIn = (LinearLayout) findViewById(R.id.layout_sign_in);
         layoutSignUp = (LinearLayout) findViewById(R.id.layout_sign_up);
     }
-    // получение пользователя по логину
+   /* // получение пользователя по логину
     private void getUserByEmail(String email, OnGetDataListener onGetDataListener){
         dbUsers.child(SomethingMethods.getKeyString(email)).addValueEventListener(new ValueEventListener() {
             @Override
@@ -59,6 +60,9 @@ public class AuthActivity extends FirebaseActivity {
             }
         });
     }
+
+    */
+
     // finish с проверкой user != null
     @Override
     public void finish() {
@@ -92,10 +96,10 @@ public class AuthActivity extends FirebaseActivity {
         // проверка currentUser
         if (currentUser != null){
             Log.d(LOG_TAG, "current user from SQLite: email is " + currentUser.login + " password is " + currentUser.password);
-            getUserByEmail(currentUser.login, new OnGetDataListener() {
+            User.getUserById(currentUser.id, new OnGetUser() {
                 @Override
-                public void onGetData() {
-
+                public void onGet(User user) {
+                    AuthActivity.this.user = user;
                 }
             });
             etUserEmail.setText(getSQLiteCurrentUser().login);
@@ -126,9 +130,10 @@ public class AuthActivity extends FirebaseActivity {
                                     // если вход прошел успешно
                                     if (task.isSuccessful()){
                                         if (auth.getCurrentUser().isEmailVerified()) {
-                                            getUserByEmail(login, new OnGetDataListener() {
+                                            User.getUserById(SomethingMethods.getKeyString(login), new OnGetUser() {
                                                 @Override
-                                                public void onGetData() {
+                                                public void onGet(User user) {
+                                                    AuthActivity.this.user = user;
                                                     if (cbAlwaysUse.isChecked()) {
                                                         manager.clear();
                                                         manager.insertToDb(login, password, user.id);

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Message;
-import com.example.smartarzamas.firebaseobjects.OnLoad;
+import com.example.smartarzamas.firebaseobjects.OnLoadBitmap;
 import com.example.smartarzamas.firebaseobjects.User;
 
 import java.util.ArrayList;
@@ -109,7 +109,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             tvMessage.setText(m.message);
             if (u != null){
                 tvName.setText(u.name + " " + u.family);
-                u.getIconAsync(new OnLoad() {
+                u.getIconAsync(new OnLoadBitmap() {
                     @Override
                     public void onLoad(Bitmap bitmap) {
                         bmIcon.setImageBitmap(bitmap);
