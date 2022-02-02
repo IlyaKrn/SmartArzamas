@@ -66,7 +66,7 @@ public class DialogAddLocate extends Dialog {
                 if (!name.equals("")){
                     if (!description.equals("")){
                         if (!tag.equals("")){
-                            Locate.getDatabase().push().setValue(new Locate(name, longitude, latitude, null, description, tags, SomethingMethods.getDateString()));
+                            Locate.getDatabase().push().setValue(new Locate(name, longitude, latitude, description, tags, SomethingMethods.getDateString()));
                         }
                         else {
                             SomethingMethods.showWarning(tvCategoryErr, R.string.enter_category);

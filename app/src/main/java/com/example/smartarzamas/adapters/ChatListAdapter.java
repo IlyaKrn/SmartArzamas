@@ -2,6 +2,7 @@ package com.example.smartarzamas.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +14,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Chat;
+import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 
 import java.util.ArrayList;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHolder> {
 
     private final OnStateClickListener onClickListener;
+    private final Context context;
     ArrayList<Chat> chats;
 
-    public ChatListAdapter(ArrayList<Chat> chats, OnStateClickListener onClickListener) {
+    public ChatListAdapter(Context context, ArrayList<Chat> chats, OnStateClickListener onClickListener) {
+        this.context = context;
         this.chats = chats;
         this.onClickListener = onClickListener;
     }
@@ -81,9 +85,12 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
         void bind(int listIndex){
             tvName.setText(chats.get(listIndex).name);
             tvCategory.setText(chats.get(listIndex).category);
-            if (chats.get(listIndex).icon != null)
-                bmIcon.setImageBitmap(chats.get(listIndex).icon);
-
+            chats.get(listIndex).getIconAsync(context, new OnGetIcon() {
+                @Override
+                public void onLoad(Bitmap bitmap) {
+                        bmIcon.setImageBitmap(bitmap);
+                    }
+            });
         }
     }
 }

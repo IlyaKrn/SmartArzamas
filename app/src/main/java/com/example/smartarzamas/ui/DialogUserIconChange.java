@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
-import com.example.smartarzamas.firebaseobjects.OnLoadBitmap;
+import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -47,7 +47,7 @@ public class DialogUserIconChange extends Dialog{
         cancel = rootView.findViewById(R.id.bt_cancel);
         select = rootView.findViewById(R.id.bt_select);
         icon = rootView.findViewById(R.id.icon);
-        user.getIconAsync(new OnLoadBitmap() {
+        user.getIconAsync(context, new OnGetIcon() {
             @Override
             public void onLoad(Bitmap bitmap) {
                 currentIcon = bitmap;

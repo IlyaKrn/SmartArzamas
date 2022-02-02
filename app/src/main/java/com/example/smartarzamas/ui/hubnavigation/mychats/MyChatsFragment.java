@@ -49,7 +49,7 @@ public class MyChatsFragment extends HubNavigationCommon {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        adapter = new ChatListAdapter(chatList, new ChatListAdapter.OnStateClickListener() {
+        adapter = new ChatListAdapter(getActivity().getApplicationContext(), chatList, new ChatListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(String chatId) {
                 Intent intent = new Intent(MyChatsFragment.this.getActivity(), ChatActivity.class);

@@ -2,7 +2,6 @@ package com.example.smartarzamas.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
-import com.example.smartarzamas.firebaseobjects.OnLoadBitmap;
 import com.example.smartarzamas.firebaseobjects.User;
-import com.example.smartarzamas.support.SomethingMethods;
 
 import java.util.ArrayList;
 
@@ -27,9 +24,11 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private final OnStateClickListener onClickListener;
     ArrayList<Message> messages;
    // ArrayList<User> userList;
+    Context context;
     User user;
 
-    public MessageListAdapter(ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
+    public MessageListAdapter(Context context, ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
+        this.context = context;
         this.messages = messages;
     //    this.userList = userList;
         this.onClickListener = onClickListener;
@@ -123,7 +122,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                         tvMessage.setText(m.message);
                     /*     if (u != null){
                         tvName.setText(u.name + " " + u.family);
-                        u.getIconAsync(new OnLoadBitmap() {
+                        u.getIconAsync(new OnGetIcon() {
                             @Override
                             public void onLoad(Bitmap bitmap) {
                                 bmIcon.setImageBitmap(bitmap);
@@ -143,7 +142,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             tvMessage.setText(m.message);
             if (u != null){
                 tvName.setText(u.name + " " + u.family);
-                u.getIconAsync(new OnLoadBitmap() {
+                u.getIconAsync(new OnGetIcon() {
                     @Override
                     public void onLoad(Bitmap bitmap) {
                         bmIcon.setImageBitmap(bitmap);

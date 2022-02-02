@@ -52,7 +52,7 @@ public class ChatActivity extends FirebaseActivity {
         etSend = (EditText)findViewById(R.id.etSend);
         rvMessages = findViewById(R.id.rv_messages);
         rvMessages.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MessageListAdapter(messageList,/* userList,new ArrayList<>(), */ user, new MessageListAdapter.OnStateClickListener() {
+        adapter = new MessageListAdapter(this, messageList,/* userList,new ArrayList<>(), */ user, new MessageListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(int messagePosition) {
 

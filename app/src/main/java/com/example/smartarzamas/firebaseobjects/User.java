@@ -1,11 +1,13 @@
 package com.example.smartarzamas.firebaseobjects;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.smartarzamas.support.SomethingMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -14,18 +16,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.Serializable;
 
 public class User extends FirebaseObject implements Serializable {
 
+    public static final String USER = "user";
     public String email;
     public String family;
-    public String iconRef;
     public String id;
     public boolean isModerator;
     public boolean banned;
-    private static final String DEFAULT_ICON_REF = "default_icon";
 
     public User(String email, String name, String family, String iconRef, String id) {
         super(name, id);
@@ -48,37 +50,10 @@ public class User extends FirebaseObject implements Serializable {
     public static DatabaseReference getDatabase(){
         return FirebaseDatabase.getInstance().getReference("users");
     }
-
     @Override
-    public void getIconAsync(OnLoadBitmap onLoadBitmap) {
-        FirebaseStorage.getInstance().getReference().child(iconRef).getBytes(1024 * 1024 * 10234).addOnCompleteListener(new OnCompleteListener<byte[]>() {
-            @Override
-            public void onComplete(@NonNull Task<byte[]> task) {
-                Bitmap icon = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
-                onLoadBitmap.onLoad(icon);
-            }
-        });
+    protected DatabaseReference getDatabaseChild() {
+        return getDatabase();
     }
-    public void updateData(OnUpdateUser onUpdate){
-        this.getDatabase().child(this.id).getRef().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                name = (String) snapshot.getValue(User.class).name;
-                family = (String) snapshot.getValue(User.class).family;
-                iconRef = (String) snapshot.getValue(User.class).iconRef;
-                onUpdate.onUpdate(User.this);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-    interface OnUpdateUser{
-       void onUpdate(User user);
-    }
-
     public static void getUserById(String id, OnGetUser onGetUser){
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override
@@ -98,7 +73,25 @@ public class User extends FirebaseObject implements Serializable {
         });
     }
 
+    public void updateData(OnUpdateUser onUpdate){
+        this.getDatabase().child(this.id).getRef().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                name = (String) snapshot.getValue(User.class).name;
+                family = (String) snapshot.getValue(User.class).family;
+                iconRef = (String) snapshot.getValue(User.class).iconRef;
+                onUpdate.onUpdate(User.this);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    interface OnUpdateUser{
+        void onUpdate(User user);
+    }
 
 
 }
