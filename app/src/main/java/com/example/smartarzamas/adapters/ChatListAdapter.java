@@ -18,12 +18,17 @@ import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHolder> {
 
     private final OnStateClickListener onClickListener;
     private final Context context;
     ArrayList<Chat> chats;
+
+    private Map<String, Bitmap> savedIcons = new HashMap<>();
+
 
     public ChatListAdapter(Context context, ArrayList<Chat> chats, OnStateClickListener onClickListener) {
         this.context = context;
@@ -76,6 +81,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
         TextView tvName;
         TextView tvCategory;
         ImageView ivIcon;
+        Chat c;
 
         public ChatHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,18 +92,28 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
         }
 
         void bind(int listIndex){
+            c = chats.get(listIndex);
             ivIcon.setVisibility(View.GONE);
             progressImage.setVisibility(View.VISIBLE);
-            tvName.setText(chats.get(listIndex).name);
-            tvCategory.setText(chats.get(listIndex).category);
-            chats.get(listIndex).getIconAsync(context, new OnGetIcon() {
-                @Override
-                public void onLoad(Bitmap bitmap) {
-                    ivIcon.setImageBitmap(bitmap);
-                    ivIcon.setVisibility(View.VISIBLE);
-                    progressImage.setVisibility(View.GONE);
-                }
-            });
+            tvName.setText(c.name);
+            tvCategory.setText(c.category);
+            if (savedIcons.get(c.id) != null){
+                ivIcon.setImageBitmap(savedIcons.get(c.id));
+                ivIcon.setVisibility(View.VISIBLE);
+                progressImage.setVisibility(View.GONE);
+            }
+            else {
+                chats.get(listIndex).getIconAsync(context, new OnGetIcon() {
+                    @Override
+                    public void onLoad(Bitmap bitmap) {
+                        savedIcons.put(c.id, bitmap);
+                        ivIcon.setImageBitmap(bitmap);
+                        ivIcon.setVisibility(View.VISIBLE);
+                        progressImage.setVisibility(View.GONE);
+                    }
+                });
+            }
+
         }
     }
 }

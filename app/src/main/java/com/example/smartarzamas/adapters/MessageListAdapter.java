@@ -21,6 +21,8 @@ import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.MessageHolder> {
 
@@ -28,6 +30,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     ArrayList<Message> messages;
     Context context;
     User user;
+    private Map<String, Bitmap> savedIcons = new HashMap<>();
 
     public MessageListAdapter(Context context, ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
         this.context = context;
@@ -94,20 +97,31 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             if (m.userId != null) {
                 ivIcon.setVisibility(View.GONE);
                 progressImage.setVisibility(View.VISIBLE);
+                tvMessage.setText(m.message);
                 User.getUserById(m.userId, new OnGetUser() {
                     @Override
                     public void onGet(User user) {
                         u = user;
                         tvName.setText(u.name);
-                        tvMessage.setText(m.message);
-                        u.getIconAsync(context, new OnGetIcon() {
-                            @Override
-                            public void onLoad(Bitmap bitmap) {
-                                ivIcon.setImageBitmap(bitmap);
-                                ivIcon.setVisibility(View.VISIBLE);
-                                progressImage.setVisibility(View.GONE);
-                            }
-                        });
+
+                        if (savedIcons.get(user.id) != null){
+                            ivIcon.setImageBitmap(savedIcons.get(user.id));
+                            ivIcon.setVisibility(View.VISIBLE);
+                            progressImage.setVisibility(View.GONE);
+                        }
+                        else {
+                            u.getIconAsync(context, new OnGetIcon() {
+                                @Override
+                                public void onLoad(Bitmap bitmap) {
+                                    savedIcons.put(user.id, bitmap);
+                                    ivIcon.setImageBitmap(bitmap);
+                                    ivIcon.setVisibility(View.VISIBLE);
+                                    progressImage.setVisibility(View.GONE);
+
+                                }
+
+                            });
+                        }
 
                     }
                 });
