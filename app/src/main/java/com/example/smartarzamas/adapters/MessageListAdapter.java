@@ -94,44 +94,42 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         public void bind(int listIndex){
             m = messages.get(listIndex);
+            tvMessage.setText(m.message);
             if (m.userId != null) {
                 ivIcon.setVisibility(View.GONE);
                 progressImage.setVisibility(View.VISIBLE);
-                tvMessage.setText(m.message);
                 User.getUserById(m.userId, new OnGetUser() {
                     @Override
                     public void onGet(User user) {
                         u = user;
-                        tvName.setText(u.name);
-
+                        if (user.id.equals(m.userId))
+                            tvName.setText(user.name);
                         if (savedIcons.get(user.id) != null){
-                            ivIcon.setImageBitmap(savedIcons.get(user.id));
-                            ivIcon.setVisibility(View.VISIBLE);
-                            progressImage.setVisibility(View.GONE);
+                            if (user.id.equals(m.userId)) {
+                                ivIcon.setImageBitmap(savedIcons.get(user.id));
+                                ivIcon.setVisibility(View.VISIBLE);
+                                progressImage.setVisibility(View.GONE);
+                            }
                         }
                         else {
-                            u.getIconAsync(context, new OnGetIcon() {
+                            user.getIconAsync(context, new OnGetIcon() {
                                 @Override
                                 public void onLoad(Bitmap bitmap) {
                                     savedIcons.put(user.id, bitmap);
-                                    ivIcon.setImageBitmap(bitmap);
-                                    ivIcon.setVisibility(View.VISIBLE);
-                                    progressImage.setVisibility(View.GONE);
-
+                                    if (user.id.equals(m.userId)) {
+                                        ivIcon.setImageBitmap(bitmap);
+                                        ivIcon.setVisibility(View.VISIBLE);
+                                        progressImage.setVisibility(View.GONE);
+                                    }
                                 }
-
                             });
                         }
 
                     }
                 });
             }
-            else {
-                tvMessage.setText(m.message);
-            }
 
         }
 
     }
 }
-

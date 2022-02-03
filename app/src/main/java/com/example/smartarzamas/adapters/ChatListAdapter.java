@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Chat;
+import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 
 import java.util.ArrayList;
@@ -97,22 +98,32 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
             progressImage.setVisibility(View.VISIBLE);
             tvName.setText(c.name);
             tvCategory.setText(c.category);
-            if (savedIcons.get(c.id) != null){
-                ivIcon.setImageBitmap(savedIcons.get(c.id));
-                ivIcon.setVisibility(View.VISIBLE);
-                progressImage.setVisibility(View.GONE);
-            }
-            else {
-                chats.get(listIndex).getIconAsync(context, new OnGetIcon() {
-                    @Override
-                    public void onLoad(Bitmap bitmap) {
-                        savedIcons.put(c.id, bitmap);
-                        ivIcon.setImageBitmap(bitmap);
-                        ivIcon.setVisibility(View.VISIBLE);
-                        progressImage.setVisibility(View.GONE);
+            Chat.getChatById(c.id, new OnGetChat() {
+                @Override
+                public void onGet(Chat chat) {
+                    if (savedIcons.get(c.id) != null){
+                        if (chat.id.equals(c.id)) {
+                            ivIcon.setImageBitmap(savedIcons.get(c.id));
+                            ivIcon.setVisibility(View.VISIBLE);
+                            progressImage.setVisibility(View.GONE);
+                        }
                     }
-                });
-            }
+                    else {
+                        chat.getIconAsync(context, new OnGetIcon() {
+                            @Override
+                            public void onLoad(Bitmap bitmap) {
+                                savedIcons.put(c.id, bitmap);
+                                if (chat.id.equals(c.id)) {
+                                    ivIcon.setImageBitmap(bitmap);
+                                    ivIcon.setVisibility(View.VISIBLE);
+                                    progressImage.setVisibility(View.GONE);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
 
         }
     }
