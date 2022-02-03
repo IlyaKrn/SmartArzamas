@@ -2,6 +2,7 @@ package com.example.smartarzamas.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Message;
+import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 
@@ -94,7 +96,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         TextView tvMessage;
         TextView tvName;
-        ImageView bmIcon;
+        ImageView ivIcon;
         TextView tvDate;
         View itemBody;
         User u;
@@ -104,56 +106,34 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             super(itemView);
             tvMessage = this.itemView.findViewById(R.id.tv_message);
             tvName = this.itemView.findViewById(R.id.tv_user_name);
-            bmIcon = this.itemView.findViewById(R.id.user_icon);
+            ivIcon = this.itemView.findViewById(R.id.user_icon);
             tvDate = this.itemView.findViewById(R.id.tv_date);
             itemBody = itemView.findViewById(R.id.message_body);
         }
 
         public void bind(int listIndex){
             m = messages.get(listIndex);
-            if (m.userEmail != null) {
-                Log.e("adaptrer n", m.message);
-                User.getUserById(m.userEmail, new OnGetUser() {
+            if (m.userId != null) {
+                User.getUserById(m.userId, new OnGetUser() {
                     @Override
                     public void onGet(User user) {
-                        Log.e(";pouioykiyhiyhoi", "ligkghkj");
                         u = user;
                         tvName.setText(u.name);
                         tvMessage.setText(m.message);
-                    /*     if (u != null){
-                        tvName.setText(u.name + " " + u.family);
-                        u.getIconAsync(new OnGetIcon() {
+                        u.getIconAsync(context, new OnGetIcon() {
                             @Override
                             public void onLoad(Bitmap bitmap) {
-                                bmIcon.setImageBitmap(bitmap);
+                                ivIcon.setImageBitmap(bitmap);
                             }
                         });
-                    }
-
-                */
                     }
                 });
             }
             else {
-                Log.e("adapter", m.message);
+                tvMessage.setText(m.message);
             }
-          /*  u = getUserByEmail(m.userEmail);
 
-            tvMessage.setText(m.message);
-            if (u != null){
-                tvName.setText(u.name + " " + u.family);
-                u.getIconAsync(new OnGetIcon() {
-                    @Override
-                    public void onLoad(Bitmap bitmap) {
-                        bmIcon.setImageBitmap(bitmap);
-                    }
-                });
-            }*/
         }
-
-
-
-
 
     }
 }

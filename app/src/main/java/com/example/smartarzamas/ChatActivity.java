@@ -1,14 +1,11 @@
 package com.example.smartarzamas;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -42,7 +39,6 @@ public class ChatActivity extends FirebaseActivity {
         setContentView(R.layout.activity_chat);
         init();
         getChatData();
-     //   getUserList();
     }
 
     // инициализация
@@ -61,31 +57,6 @@ public class ChatActivity extends FirebaseActivity {
         rvMessages.setAdapter(adapter);
     }
 
-    /*
-    // получение списка ползователей
-    private void getUserList() {
-        SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
-            @Override
-            public void isConnected() {
-                dbUsers.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot ds : snapshot.getChildren()) {
-                            User u =  ds.getValue(User.class);
-                            assert u != null;
-                            userList.add(u);
-
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
-                });
-            }
-        });
-    }
-
-     */
     // получение информации о чате
     void getChatData(){
         SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
@@ -103,41 +74,16 @@ public class ChatActivity extends FirebaseActivity {
                                 messageList.add(chat.messages.get(i));
                             }
                             adapter.notifyDataSetChanged();
-                            rvMessages.scrollToPosition(messageList.size()-1);
+                            scrollMessages();
                         }
                     });
                 }
 
-                /*
-                dbChats.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot ds : snapshot.getChildren()) {
-                            String id = getIntent().getExtras().getString("chat_id");
-                            Chat c = ds.getValue(Chat.class);
-                            assert c != null;
-                            if (c.id.equals(id)) {
-
-                            }
-                        }
-                        adapter.notifyDataSetChanged();
-                        rvMessages.scrollToPosition(messageList.size()-1);
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
-                });
-
-                 */
             }
         });
     }
     // переход к списку чатов
     public void onClose(View view) {
-   /*     Intent intent = new Intent(ChatActivity.this, HubActivity.class);
-        intent.putExtra("user", user);
-        startActivity(intent);
-
-    */
         finish();
     }
     // отпрака сообщения
@@ -155,14 +101,8 @@ public class ChatActivity extends FirebaseActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             dataSnapshot.child("messages").getRef().setValue(messageList);
+                            scrollMessages();
                             etSend.setText("");
-
-                            /*
-                            for (DataSnapshot child : dataSnapshot.getChildren()) {
-                                child.getRef().orderByChild("id").equalTo(getIntent().getExtras().getString("id")).getRef().child("messages").setValue(messageList);
-                            }
-
-                             */
                         }
 
                         @Override
@@ -173,6 +113,9 @@ public class ChatActivity extends FirebaseActivity {
             });
 
         }
+    }
+    private void scrollMessages(){
+        rvMessages.scrollToPosition(messageList.size()-1);
     }
     // открытие меню чата
     public void onChatMenuOpen(View view) {

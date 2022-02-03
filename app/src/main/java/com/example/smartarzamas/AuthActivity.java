@@ -44,24 +44,6 @@ public class AuthActivity extends FirebaseActivity {
         layoutSignIn = (LinearLayout) findViewById(R.id.layout_sign_in);
         layoutSignUp = (LinearLayout) findViewById(R.id.layout_sign_up);
     }
-   /* // получение пользователя по логину
-    private void getUserByEmail(String email, OnGetDataListener onGetDataListener){
-        dbUsers.child(SomethingMethods.getKeyString(email)).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user = snapshot.getValue(User.class);
-                onGetDataListener.onGetData();
-                Log.d(LOG_TAG, "user " + user.email + " get from database");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e(LOG_TAG, "firebase error: " + error.getDetails());
-            }
-        });
-    }
-
-    */
 
     // finish с проверкой user != null
     @Override
@@ -208,15 +190,20 @@ public class AuthActivity extends FirebaseActivity {
                 SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
                     @Override
                     public void isConnected() {
-                        auth.sendPasswordResetEmail(etUserEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), R.string.email_reset_password, Toast.LENGTH_LONG).show();
-                                    Log.d(LOG_TAG, "email for reset password send on address " + auth.getCurrentUser().getEmail());
+                        if ((!etUserEmail.getText().toString().equals("")) && etUserEmail.getText() != null) {
+                            auth.sendPasswordResetEmail(etUserEmail.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getApplicationContext(), R.string.email_reset_password, Toast.LENGTH_LONG).show();
+                                        Log.d(LOG_TAG, "email for reset password send on address " + auth.getCurrentUser().getEmail());
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
+                        else {
+                            SomethingMethods.showWarning(tvLoginErr, R.string.enter_login);
+                        }
                     }
                 });
 
@@ -284,46 +271,48 @@ public class AuthActivity extends FirebaseActivity {
                                             if (auth.getCurrentUser().isEmailVerified()) {// запись пользователя в бд
                                                 final String id = SomethingMethods.getKeyString(login);
                                                 Log.i(LOG_TAG, "created new key with value " + id);
+                                                /*
                                                 dbUsers.child(id).addValueEventListener(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                        if (snapshot.getValue(User.class) == null){
-                                                            Log.i(LOG_TAG, "key with value " + id + " is unique in users database");
-                                                            user = new User(login, name, family, null, id);
-                                                            dbUsers.child(user.id).setValue(user);
-                                                            Log.i(LOG_TAG, "user was created and written in database");
-                                                            if (cbAlwaysUse.isChecked()) {
-                                                                manager.clear();
-                                                                manager.insertToDb(login, password, user.id);
-                                                                Log.d(LOG_TAG, "new current user was wrote in SQLite: " + currentUser.login + " password: " + currentUser.password);
-                                                            } else if (currentUser != null) {
-                                                                if (currentUser.login.equals(login)) {
-                                                                    manager.clear();
-                                                                    Log.d(LOG_TAG, "SQLite cleaned");
-                                                                }
-                                                            } else if (currentUser == null) {
-                                                                manager.clear();
-                                                                manager.insertToDb(login, password, user.id);
-                                                                currentUser = manager.getCurrentUser();
+
+
+
+                                                 */
+                                                        Log.i(LOG_TAG, "key with value " + id + " is unique in users database");
+                                                        user = new User(login, name, family, null, id);
+                                                        dbUsers.child(user.id).setValue(user);
+                                                        Log.i(LOG_TAG, "user was created and written in database");
+                                                        if (cbAlwaysUse.isChecked()) {
+                                                            manager.clear();
+                                                            manager.insertToDb(login, password, user.id);
+                                                            Log.d(LOG_TAG, "new current user was wrote in SQLite: " + currentUser.login + " password: " + currentUser.password);
+                                                        } else if (currentUser != null) {
+                                                            if (currentUser.login.equals(login)) {
                                                                 manager.clear();
                                                                 Log.d(LOG_TAG, "SQLite cleaned");
                                                             }
-                                                            // передача пользователя и запус следующей активности
-                                                            finish();
+                                                        } else if (currentUser == null) {
+                                                            manager.clear();
+                                                            manager.insertToDb(login, password, user.id);
+                                                            currentUser = manager.getCurrentUser();
+                                                            manager.clear();
+                                                            Log.d(LOG_TAG, "SQLite cleaned");
                                                         }
-                                                        else {
-                                                            Log.wtf(LOG_TAG, "KEY WITH VALUE " + id + " EXISTS IN USERS DATABASE");
-                                                            Toast.makeText(getApplicationContext(), "Неизвестная ошибка!\nПользователь с электронной почтой " + login + " не может быть создан!", Toast.LENGTH_SHORT).show();
-                                                        }
+                                                        // передача пользователя и запуск следующей активности
+                                                      //  dbUsers.removeEventListener(this);
+                                                        finish();
                                                     }
-
+                                            /*
                                                     @Override
                                                     public void onCancelled(@NonNull DatabaseError error) {
                                                         Log.e(LOG_TAG, "checking key was canceled");
+                                                        dbUsers.removeEventListener(this);
                                                     }
                                                 });
-
                                             }
+
+                                             */
                                             else{
                                                 Toast.makeText(getApplicationContext(), R.string.email_no_verificated, Toast.LENGTH_LONG).show();
                                                 Log.e(LOG_TAG, "email " + auth.getCurrentUser().getEmail() + " is not verified");
@@ -396,38 +385,43 @@ public class AuthActivity extends FirebaseActivity {
                 if (login.length() > 0 && password2.length() > 0 && password.length() > 0 && name.length() > 0 && family.length() > 0) {
                     // если первый и второлй пароль совпадают
                     if (password.equals(password2)) {
-                        SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
-                            @Override
-                            public void isConnected() {
-                                auth.createUserWithEmailAndPassword(login, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        // еслм регистрация прошла успешно
-                                        if (task.isSuccessful()) {
-                                            auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if (task.isSuccessful()) {
-                                                        Log.d(LOG_TAG, "email for verification email send on address " + auth.getCurrentUser().getEmail());
-                                                        Toast.makeText(getApplicationContext(), R.string.verefication_email_was_sand, Toast.LENGTH_LONG).show();
-                                                        btSignUp.setVisibility(View.GONE);
-                                                        btResendEmail.setVisibility(View.VISIBLE);
-                                                        btSignInFinally.setVisibility(View.VISIBLE);
+                        if (password.length() > 5) {
+                            SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+                                @Override
+                                public void isConnected() {
+                                    auth.createUserWithEmailAndPassword(login, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            // еслм регистрация прошла успешно
+                                            if (task.isSuccessful()) {
+                                                auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful()) {
+                                                            Log.d(LOG_TAG, "email for verification email send on address " + auth.getCurrentUser().getEmail());
+                                                            Toast.makeText(getApplicationContext(), R.string.verefication_email_was_sand, Toast.LENGTH_LONG).show();
+                                                            btSignUp.setVisibility(View.GONE);
+                                                            btResendEmail.setVisibility(View.VISIBLE);
+                                                            btSignInFinally.setVisibility(View.VISIBLE);
+                                                        }
                                                     }
-                                                }
-                                            });
+                                                });
+                                            } else {
+                                                Log.e(LOG_TAG, "verification email send error");
+                                                Toast.makeText(getApplicationContext(), R.string.error_of_email_send, Toast.LENGTH_LONG).show();
+                                                btSignUp.setVisibility(View.GONE);
+                                                btResendEmail.setVisibility(View.VISIBLE);
+                                                btSignInFinally.setVisibility(View.VISIBLE);
+                                            }
                                         }
-                                        else {
-                                            Log.e(LOG_TAG, "verification email send error");
-                                            Toast.makeText(getApplicationContext(), R.string.error_of_email_send, Toast.LENGTH_LONG).show();
-                                            btSignUp.setVisibility(View.GONE);
-                                            btResendEmail.setVisibility(View.VISIBLE);
-                                            btSignInFinally.setVisibility(View.VISIBLE);
-                                        }
-                                    }
-                                });
-                            }
-                        });
+                                    });
+                                }
+                            });
+                        }
+                        else {
+                            SomethingMethods.showWarning(tvPasswordErr, R.string.short_password);
+                            SomethingMethods.showWarning(tvSecondPasswordErr, R.string.short_password);
+                        }
                     }
                     // вывод предупреждения о различии пароля
                     else {
@@ -495,6 +489,8 @@ public class AuthActivity extends FirebaseActivity {
 
     }
 
-
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

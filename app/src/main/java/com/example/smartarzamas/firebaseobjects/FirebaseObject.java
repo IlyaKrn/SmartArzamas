@@ -12,13 +12,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.UploadTask;
 
 import java.nio.ByteBuffer;
 
 public abstract class FirebaseObject {
 
-    public final String TYPE = "type";
     public static final String LOG_TAG = "FirebaseObject";
     protected static final String DEFAULT_ICON_REF = "def.png";
     public String name;
@@ -54,10 +54,19 @@ public abstract class FirebaseObject {
                     FirebaseStorage.getInstance().getReference().child(iconRef).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
                         @Override
                         public void onComplete(@NonNull Task<byte[]> task) {
-                            if (task.getResult() != null) {
-                                Bitmap icon = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
-                                onGetIcon.onLoad(icon);
-                            } else {
+                            try {
+                                if (task.getResult() != null) {
+                                    Bitmap icon = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+                                    onGetIcon.onLoad(icon);
+                                } else {
+                                    getDefaultIcon(new OnGetIcon() {
+                                        @Override
+                                        public void onLoad(Bitmap bitmap) {
+                                            onGetIcon.onLoad(bitmap);
+                                        }
+                                    });
+                                }
+                            } catch (Exception e){
                                 getDefaultIcon(new OnGetIcon() {
                                     @Override
                                     public void onLoad(Bitmap bitmap) {
@@ -65,6 +74,7 @@ public abstract class FirebaseObject {
                                     }
                                 });
                             }
+
                         }
                     });
                 }
