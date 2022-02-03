@@ -26,14 +26,12 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     private final OnStateClickListener onClickListener;
     ArrayList<Message> messages;
-   // ArrayList<User> userList;
     Context context;
     User user;
 
     public MessageListAdapter(Context context, ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
         this.context = context;
         this.messages = messages;
-    //    this.userList = userList;
         this.onClickListener = onClickListener;
         this.user = user;
     }
@@ -61,22 +59,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             }
         });
     }
-/*
-    // получение пользователя по логину
-    User getUserByEmail(String email){
-
-        for (User u : userList) {
-            if (u.email.equals(email))
-                return u;
-        }
-        return null;
-
-
-
-
-    }
-
-*/
     @Override
     public int getItemCount() {
         return messages.size();
@@ -85,13 +67,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     public interface OnStateClickListener{
         void onStateClick(int messagePosition);
     }
-
-
-
-
-
-
-
 
     class MessageHolder extends RecyclerView.ViewHolder{
 
