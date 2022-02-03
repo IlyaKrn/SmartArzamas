@@ -76,11 +76,13 @@ public class Locate extends FirebaseObject {
                 else {
                     Log.e(LOG_TAG, "gotten locate name: " + "null");
                 }
+                getDatabase().child(id).removeEventListener(this);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                getDatabase().child(id).removeEventListener(this);
             }
         });
     }

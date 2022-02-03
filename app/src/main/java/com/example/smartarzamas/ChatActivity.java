@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,9 @@ public class ChatActivity extends FirebaseActivity {
     public final String NULL_MESSAGE = "";
     private static ArrayList<Message> selectedIds  = new ArrayList<>();;
     private ArrayList<Bitmap> imagesForSend  = new ArrayList<>();
-    Chat chat;
+    private Chat chat;
+
+    private ValueEventListener chatDataListener;
 
 
     @Override
@@ -55,6 +58,26 @@ public class ChatActivity extends FirebaseActivity {
             }
         });
         rvMessages.setAdapter(adapter);
+
+
+        chatDataListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ChatActivity.this.chat = snapshot.getValue(Chat.class);
+                tvName.setText(chat.name);
+                if (messageList.size() > 0) messageList.clear();
+                for (int i = 0; i < chat.messages.size(); i++) {
+                    messageList.add(chat.messages.get(i));
+                }
+                adapter.notifyDataSetChanged();
+                scrollMessages();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
     }
 
     // получение информации о чате
@@ -64,19 +87,7 @@ public class ChatActivity extends FirebaseActivity {
             public void isConnected() {
                 String id = getIntent().getStringExtra(CHAT_ID);
                 if (id != null){
-                    Chat.getChatById(id, new OnGetChat() {
-                        @Override
-                        public void onGet(Chat chat) {
-                            ChatActivity.this.chat = chat;
-                            tvName.setText(chat.name);
-                            if (messageList.size() > 0) messageList.clear();
-                            for (int i = 0; i < chat.messages.size(); i++) {
-                                messageList.add(chat.messages.get(i));
-                            }
-                            adapter.notifyDataSetChanged();
-                            scrollMessages();
-                        }
-                    });
+                    dbChats.child(id).addValueEventListener(chatDataListener);
                 }
 
             }
@@ -121,5 +132,11 @@ public class ChatActivity extends FirebaseActivity {
     public void onChatMenuOpen(View view) {
     }
     public void onAddImage(View view) {
+    }
+
+    @Override
+    protected void onDestroy() {
+        dbChats.child(chat.id).removeEventListener(chatDataListener);
+        super.onDestroy();
     }
 }

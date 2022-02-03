@@ -40,14 +40,38 @@ public class MyChatsFragment extends HubNavigationCommon {
     private NavigationFragmentMyChatsBinding binding;
     private static MyChatsFragmentCallback callback;
 
-    ArrayList<Chat> chatMainList = new ArrayList<>();
-    ArrayList<Chat> chatList = new ArrayList<>();
-    ChatListAdapter adapter;
-    RecyclerView rvChats;
-    FloatingActionButton fabAddChat;
+    private ArrayList<Chat> chatMainList = new ArrayList<>();
+    private ArrayList<Chat> chatList = new ArrayList<>();
+    private ChatListAdapter adapter;
+    private RecyclerView rvChats;
+    private FloatingActionButton fabAddChat;
+
+    private ValueEventListener chatListListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
+        chatListListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (chatMainList.size() > 0) chatMainList.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Chat c = (Chat) ds.getValue(Chat.class);
+                    assert c != null;
+                    for (String email : c.membersEmailList){
+                        if (user.email.equals(email)){
+                            chatMainList.add(c);
+                        }
+                    }
+                }
+                updateListForView();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
 
         adapter = new ChatListAdapter(getActivity().getApplicationContext(), chatList, new ChatListAdapter.OnStateClickListener() {
             @Override
@@ -123,24 +147,7 @@ public class MyChatsFragment extends HubNavigationCommon {
         SomethingMethods.isConnected(getContext(), new SomethingMethods.Connection() {
             @Override
             public void isConnected() {
-                dbChats.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (chatMainList.size() > 0) chatMainList.clear();
-                        for (DataSnapshot ds : snapshot.getChildren()) {
-                            Chat c = (Chat) ds.getValue(Chat.class);
-                            assert c != null;
-                            for (String email : c.membersEmailList){
-                                if (user.email.equals(email)){
-                                    chatMainList.add(c);
-                                }
-                            }
-                        }
-                        updateListForView();
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
-                });
+                dbChats.addValueEventListener(chatListListener);
             }
         });
     }
@@ -163,6 +170,7 @@ public class MyChatsFragment extends HubNavigationCommon {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        dbChats.removeEventListener(chatListListener);
     }
 
     public static void setCallback(MyChatsFragmentCallback callback) {
