@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -71,25 +72,31 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
 
     class ChatHolder extends RecyclerView.ViewHolder{
 
+        ProgressBar progressImage;
         TextView tvName;
         TextView tvCategory;
-        ImageView bmIcon;
+        ImageView ivIcon;
 
         public ChatHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
             tvCategory = itemView.findViewById(R.id.tv_category);
-            bmIcon = itemView.findViewById(R.id.chat_icon);
+            ivIcon = itemView.findViewById(R.id.chat_icon);
+            progressImage = itemView.findViewById(R.id.progress);
         }
 
         void bind(int listIndex){
+            ivIcon.setVisibility(View.GONE);
+            progressImage.setVisibility(View.VISIBLE);
             tvName.setText(chats.get(listIndex).name);
             tvCategory.setText(chats.get(listIndex).category);
             chats.get(listIndex).getIconAsync(context, new OnGetIcon() {
                 @Override
                 public void onLoad(Bitmap bitmap) {
-                        bmIcon.setImageBitmap(bitmap);
-                    }
+                    ivIcon.setImageBitmap(bitmap);
+                    ivIcon.setVisibility(View.VISIBLE);
+                    progressImage.setVisibility(View.GONE);
+                }
             });
         }
     }

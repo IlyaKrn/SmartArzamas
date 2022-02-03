@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -94,6 +95,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     class MessageHolder extends RecyclerView.ViewHolder{
 
+        ProgressBar progressImage;
         TextView tvMessage;
         TextView tvName;
         ImageView ivIcon;
@@ -109,11 +111,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             ivIcon = this.itemView.findViewById(R.id.user_icon);
             tvDate = this.itemView.findViewById(R.id.tv_date);
             itemBody = itemView.findViewById(R.id.message_body);
+            progressImage = itemView.findViewById(R.id.progress);
         }
 
         public void bind(int listIndex){
             m = messages.get(listIndex);
             if (m.userId != null) {
+                ivIcon.setVisibility(View.GONE);
+                progressImage.setVisibility(View.VISIBLE);
                 User.getUserById(m.userId, new OnGetUser() {
                     @Override
                     public void onGet(User user) {
@@ -124,8 +129,11 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                             @Override
                             public void onLoad(Bitmap bitmap) {
                                 ivIcon.setImageBitmap(bitmap);
+                                ivIcon.setVisibility(View.VISIBLE);
+                                progressImage.setVisibility(View.GONE);
                             }
                         });
+
                     }
                 });
             }
