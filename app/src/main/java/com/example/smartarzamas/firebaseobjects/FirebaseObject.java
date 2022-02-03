@@ -20,7 +20,8 @@ import java.nio.ByteBuffer;
 public abstract class FirebaseObject {
 
     public static final String LOG_TAG = "FirebaseObject";
-    protected static final String DEFAULT_ICON_REF = "def.png";
+    public static final String ICONS_REF = "icons/";
+    protected static final String DEFAULT_ICON_REF = ICONS_REF + "default_icon.png";
     public String name;
     public String id;
     public String iconRef;
@@ -85,7 +86,7 @@ public abstract class FirebaseObject {
         SomethingMethods.isConnected(context, new SomethingMethods.Connection() {
             @Override
             public void isConnected() {
-                FirebaseStorage.getInstance().getReference().child(getDatabaseChild().getKey()).child(FirebaseObject.this.id).putBytes(getBytes(bitmap)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                FirebaseStorage.getInstance().getReference().child("icons").child(getDatabaseChild().getKey()).child(FirebaseObject.this.id).putBytes(getBytes(bitmap)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if (task.isSuccessful()) {
