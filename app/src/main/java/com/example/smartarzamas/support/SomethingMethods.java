@@ -83,8 +83,6 @@ public class SomethingMethods {
         sample = sample.toLowerCase(Locale.ROOT);
         child = child.toLowerCase(Locale.ROOT);
 
-        Log.e("ohohoijbv", "[" + sample + " : " + child + "]");
-
         if (sample.equals(""))
             return true;
         if (sample.equals(child)){
