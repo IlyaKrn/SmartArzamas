@@ -80,9 +80,9 @@ public class Chat extends FirebaseObject {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 onGetChat.onGet(snapshot.getValue(Chat.class));
                 if (snapshot.getValue(Chat.class) != null)
-                    Log.e(LOG_TAG, "gotten chat name: " + snapshot.getValue(Chat.class).name);
+                    Log.d(LOG_TAG, "gotten chat: " + snapshot.getValue(Chat.class).name);
                 else {
-                    Log.e(LOG_TAG, "gotten chat name: " + "null");
+                    Log.d(LOG_TAG, "gotten chat name: " + "null");
                 }
                 getDatabase().child(id).removeEventListener(this);
             }

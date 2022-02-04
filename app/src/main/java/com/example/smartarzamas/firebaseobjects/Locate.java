@@ -72,9 +72,9 @@ public class Locate extends FirebaseObject {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 onGetLocate.onGet(snapshot.getValue(Locate.class));
                 if (snapshot.getValue(Locate.class) != null)
-                    Log.e(LOG_TAG, "gotten locate name: " + snapshot.getValue(Locate.class).name);
+                    Log.d(LOG_TAG, "gotten locate: " + snapshot.getValue(Locate.class).name);
                 else {
-                    Log.e(LOG_TAG, "gotten locate name: " + "null");
+                    Log.d(LOG_TAG, "gotten locate: " + "null");
                 }
                 getDatabase().child(id).removeEventListener(this);
             }

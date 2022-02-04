@@ -60,9 +60,9 @@ public class User extends FirebaseObject implements Serializable {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 onGetUser.onGet(snapshot.getValue(User.class));
                 if (snapshot.getValue(User.class) != null)
-                    Log.e(LOG_TAG, "gotten user email: " + snapshot.getValue(User.class).email);
+                    Log.d(LOG_TAG, "gotten user: " + snapshot.getValue(User.class).email);
                 else {
-                    Log.e(LOG_TAG, "gotten user email: " + "null");
+                    Log.d(LOG_TAG, "gotten user: " + "null");
                 }
                 getDatabase().child(id).removeEventListener(this);
             }
