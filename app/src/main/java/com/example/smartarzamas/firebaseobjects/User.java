@@ -75,24 +75,13 @@ public class User extends FirebaseObject implements Serializable {
         });
     }
 
-    public void updateData(OnUpdateUser onUpdate){
-        this.getDatabase().child(this.id).getRef().addValueEventListener(new ValueEventListener() {
+    public void setNewData(User user, OnUpdateUser onUpdateUser){
+        getDatabase().child(this.id).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                name = (String) snapshot.getValue(User.class).name;
-                family = (String) snapshot.getValue(User.class).family;
-                iconRef = (String) snapshot.getValue(User.class).iconRef;
-                onUpdate.onUpdate(User.this);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            public void onComplete(@NonNull Task<Void> task) {
+                onUpdateUser.onUpdate(User.this);
             }
         });
-    }
-    interface OnUpdateUser{
-        void onUpdate(User user);
     }
 
 

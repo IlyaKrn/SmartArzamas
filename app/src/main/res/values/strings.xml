@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">SmartArzamas</string>
     <string name="enter">Вход</string>
-    <string name="registrarion">Регистрация</string>
+    <string name="registration">Регистрация</string>
     <string name="sign_in">Войти</string>
     <string name="sign_up">Зарегистрироваться</string>
     <string name="login">Электронная почта</string>
@@ -44,7 +44,7 @@
     <string name="enter_chat_name">Введте название</string>
     <string name="default_first_message">Добро пожаловать в новый чат</string>
     <string name="default_chat_description">Описание</string>
-    <string name="delite_account">Удалить аккаунт</string>
+    <string name="delete_account">Удалить аккаунт</string>
     <string name="refactor_name_and_family">Изменить имя и фамилию</string>
     <string name="change">Изменить</string>
     <string name="change_name_and_family">Изменить имя\nи фамилию</string>
@@ -55,16 +55,16 @@
     <string name="add_locate_mod_disabled">Режим добавления метки выключен</string>
     <string name="you_sign_in_as">Вы вошли как </string>
     <string name="forgot_password">Забыли пароль?</string>
-    <string name="verefication_email_was_sand">Проверьте почту для подтверждения</string>
+    <string name="verification_email_was_sand">Проверьте почту для подтверждения</string>
     <string name="email_no_verificated">Верифицируйте почту</string>
     <string name="email_reset_password">Провертьте почту для смены пароля</string>
-    <string name="resend_varification_email">Повторить отправку</string>
+    <string name="resend_verification_email">Повторить отправку</string>
     <string name="error">Ошибка</string>
-    <string name="user_settings">Насиройки профиля</string>
+    <string name="user_settings">Настройки профиля</string>
     <string name="user_not_found">Пользователь не найден</string>
     <string name="review_connection">Проверьте подключение к интернету</string>
     <string name="enter_description">Выберите категорию</string>
-    <string name="your_account_has_been_delited">Ваш профиль успешно удален</string>
+    <string name="your_account_has_been_deleted">Ваш профиль успешно удален</string>
     <string name="select_img">Выбрать изображение</string>
     <string name="change_image">Изменить изображение</string>
     <string name="title_activity_hub">HubActivity</string>

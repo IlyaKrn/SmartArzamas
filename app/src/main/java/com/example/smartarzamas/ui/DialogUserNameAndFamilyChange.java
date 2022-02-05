@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
+import com.example.smartarzamas.firebaseobjects.OnUpdateUser;
 import com.example.smartarzamas.support.SomethingMethods;
 import com.example.smartarzamas.firebaseobjects.User;
 
@@ -54,8 +55,8 @@ public class DialogUserNameAndFamilyChange extends Dialog{
             @Override
             public void onClick(View view) {
                 // получение введенных данных
-                String name = etName.getText().toString();
-                String family = etFamily.getText().toString();
+                final String name = etName.getText().toString();
+                final String family = etFamily.getText().toString();
                 // скрытие предупреждений о некорректных данных
                 SomethingMethods.hideWarning(tvNameErr);
                 SomethingMethods.hideWarning(tvFamilyErr);
@@ -64,9 +65,16 @@ public class DialogUserNameAndFamilyChange extends Dialog{
                 etFamily.setText(user.family);
                 // если поля ввода не пустые
                 if (name.length() > 0 && family.length() > 0){
-                    user.name = name;
-                    user.family = family;
-                    destroy();
+                    User buffUser = user;
+                    buffUser.name = name;
+                    buffUser.family = family;
+                    user.setNewData(buffUser, new OnUpdateUser() {
+                        @Override
+                        public void onUpdate(User user) {
+                            destroy();
+
+                        }
+                    });
                 }
                 // вывод предупреждения о пустых полях ввода
                 else {

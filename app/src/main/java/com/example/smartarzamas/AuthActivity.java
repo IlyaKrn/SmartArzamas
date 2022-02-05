@@ -20,9 +20,6 @@ import com.example.smartarzamas.support.SomethingMethods;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 
@@ -142,7 +139,7 @@ public class AuthActivity extends FirebaseActivity {
                                             auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                    Toast.makeText(getApplicationContext(), R.string.verefication_email_was_sand, Toast.LENGTH_LONG).show();
+                                                    Toast.makeText(getApplicationContext(), R.string.verification_email_was_sand, Toast.LENGTH_LONG).show();
                                                     SomethingMethods.showWarning(tvLoginErr, R.string.email_no_verificated);
                                                     Log.e(LOG_TAG, "email " + auth.getCurrentUser().getEmail() + " is not verified");
                                                 }
@@ -399,7 +396,7 @@ public class AuthActivity extends FirebaseActivity {
                                                     public void onComplete(@NonNull Task<Void> task) {
                                                         if (task.isSuccessful()) {
                                                             Log.d(LOG_TAG, "email for verification email send on address " + auth.getCurrentUser().getEmail());
-                                                            Toast.makeText(getApplicationContext(), R.string.verefication_email_was_sand, Toast.LENGTH_LONG).show();
+                                                            Toast.makeText(getApplicationContext(), R.string.verification_email_was_sand, Toast.LENGTH_LONG).show();
                                                             btSignUp.setVisibility(View.GONE);
                                                             btResendEmail.setVisibility(View.VISIBLE);
                                                             btSignInFinally.setVisibility(View.VISIBLE);
@@ -475,7 +472,7 @@ public class AuthActivity extends FirebaseActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(getApplicationContext(), R.string.verefication_email_was_sand, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getApplicationContext(), R.string.verification_email_was_sand, Toast.LENGTH_LONG).show();
                                     btSignUp.setVisibility(View.GONE);
                                     Log.d(LOG_TAG, "email for verification email send on address " + auth.getCurrentUser().getEmail());
                                 }
