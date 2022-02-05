@@ -15,9 +15,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-public abstract class FirebaseObject {
+public abstract class FirebaseObject implements Serializable {
 
     public static final String LOG_TAG = "FirebaseObject";
     public static final String ICONS_REF = "icons/";

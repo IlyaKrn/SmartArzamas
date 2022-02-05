@@ -20,12 +20,11 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.Serializable;
 
-public class User extends FirebaseObject implements Serializable {
+public class User extends FirebaseObject {
 
     public static final String USER = "user";
     public String email;
     public String family;
-    public String id;
     public boolean isModerator;
     public boolean banned;
 
@@ -35,7 +34,6 @@ public class User extends FirebaseObject implements Serializable {
         this.family = family;
         this.isModerator = false;
         this.banned = false;
-        this.id = id;
         if (iconRef == null){
             this.iconRef = DEFAULT_ICON_REF;
         }
