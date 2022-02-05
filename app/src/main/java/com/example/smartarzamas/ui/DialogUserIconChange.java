@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
+import com.example.smartarzamas.firebaseobjects.OnSetIcon;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.google.firebase.storage.FirebaseStorage;
 
@@ -59,15 +60,19 @@ public class DialogUserIconChange extends Dialog{
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseStorage.getInstance().getReference().putBytes(toBytes(bitmap));
-                destroy();
+                user.setIconAsync(context, bitmap, new OnSetIcon() {
+                    @Override
+                    public void onSet(String ref) {
+                        destroy();
+                    }
+                });
             }
         });
         select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
-                getActivity().startActivityForResult(intent, 1);
+                startActivityForResult(intent, 1);
             }
         });
 

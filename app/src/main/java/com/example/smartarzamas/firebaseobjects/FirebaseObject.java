@@ -3,18 +3,22 @@ package com.example.smartarzamas.firebaseobjects;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.example.smartarzamas.support.SomethingMethods;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageException;
+import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 
@@ -87,20 +91,34 @@ public abstract class FirebaseObject implements Serializable {
         SomethingMethods.isConnected(context, new SomethingMethods.Connection() {
             @Override
             public void isConnected() {
-                FirebaseStorage.getInstance().getReference().child("icons").child(getDatabaseChild().getKey()).child(FirebaseObject.this.id).putBytes(getBytes(bitmap)).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                String path = ICONS_REF + getDatabaseChild().getKey() + "/" + FirebaseObject.this.id;
+                final StorageReference uploadRef = FirebaseStorage.getInstance().getReference(path);
+                uploadRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            iconRef = getDatabaseChild().getKey() + "/" + FirebaseObject.this.id;
-                            getDatabaseChild().child(FirebaseObject.this.id).child("iconRef").setValue(iconRef).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()){
-                                        onSetIcon.onSet(iconRef);
-                                    }
+                    public void onComplete(@NonNull Task<Void> task) {
+                        UploadTask uploadTask = uploadRef.putBytes(getBytes(bitmap));
+                        Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                            @Override
+                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                                return uploadRef.getDownloadUrl();
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    iconRef = path;
+                                    getDatabaseChild().child(FirebaseObject.this.id).child("iconRef").setValue(iconRef).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                onSetIcon.onSet(iconRef);
+                                            }
+                                        }
+                                    });
+
                                 }
-                            });
-                        }
+                            }
+                        });
                     }
                 });
             }
@@ -108,10 +126,10 @@ public abstract class FirebaseObject implements Serializable {
     }
 
     protected final byte[] getBytes(Bitmap bitmap){
-        int size = bitmap.getRowBytes() * bitmap.getHeight();
-        ByteBuffer byteBuffer = ByteBuffer.allocate(size);
-        bitmap.copyPixelsToBuffer(byteBuffer);
-        return byteBuffer.array();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
     protected final void getDefaultIcon(OnGetIcon onGetIcon){
         FirebaseStorage.getInstance().getReference().child(DEFAULT_ICON_REF).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
