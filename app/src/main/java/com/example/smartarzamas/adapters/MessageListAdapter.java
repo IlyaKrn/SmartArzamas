@@ -128,6 +128,10 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                     }
                 });
             }
+            else {
+                ivIcon.setVisibility(View.VISIBLE);
+                progressImage.setVisibility(View.GONE);
+            }
 
         }
 
