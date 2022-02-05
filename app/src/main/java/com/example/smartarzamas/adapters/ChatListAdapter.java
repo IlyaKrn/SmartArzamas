@@ -112,7 +112,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
                         chat.getIconAsync(context, new OnGetIcon() {
                             @Override
                             public void onLoad(Bitmap bitmap) {
-                                savedIcons.put(c.id, bitmap);
+                                savedIcons.put(chat.id, bitmap);
                                 if (chat.id.equals(c.id)) {
                                     ivIcon.setImageBitmap(bitmap);
                                     ivIcon.setVisibility(View.VISIBLE);
