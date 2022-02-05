@@ -3,11 +3,11 @@ package com.example.smartarzamas.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,6 +19,7 @@ import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
+import com.example.smartarzamas.support.SomethingMethods;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,66 +74,114 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     class MessageHolder extends RecyclerView.ViewHolder{
 
-        ProgressBar progressImage;
-        TextView tvMessage;
-        TextView tvName;
-        ImageView ivIcon;
-        TextView tvDate;
-        View itemBody;
+        ProgressBar notMy_progressImage;
+        TextView notMy_tvMessage;
+        TextView notMy_tvName;
+        ImageView notMy_ivIcon;
+        TextView notMy_tvDate;
+        View notMy_itemBody;
+
+        View my_itemBody;
+        TextView my_tvMessage;
+        TextView my_tvName;
+        TextView my_tvDate;
+
+        View system_itemBody;
+        TextView system_tvMessage;
+        TextView system_tvDate;
+
         User u;
         Message m;
 
         public MessageHolder(@NonNull View itemView) {
             super(itemView);
-            tvMessage = this.itemView.findViewById(R.id.tv_message);
-            tvName = this.itemView.findViewById(R.id.tv_user_name);
-            ivIcon = this.itemView.findViewById(R.id.user_icon);
-            tvDate = this.itemView.findViewById(R.id.tv_date);
-            itemBody = itemView.findViewById(R.id.message_body);
-            progressImage = itemView.findViewById(R.id.progress);
+
+            notMy_tvMessage = this.itemView.findViewById(R.id.not_my_tv_message);
+            notMy_tvName = this.itemView.findViewById(R.id.not_my_tv_user_name);
+            notMy_ivIcon = this.itemView.findViewById(R.id.not_my_user_icon);
+            notMy_tvDate = this.itemView.findViewById(R.id.not_my_tv_date);
+            notMy_itemBody = this.itemView.findViewById(R.id.not_my_item_body);
+            notMy_progressImage = this.itemView.findViewById(R.id.not_my_progress);
+
+
+            my_itemBody = this.itemView.findViewById(R.id.my_item_body);
+            my_tvMessage = this.itemView.findViewById(R.id.my_tv_message);
+            my_tvName = this.itemView.findViewById(R.id.my_tv_user_name);
+            my_tvDate = this.itemView.findViewById(R.id.my_tv_date);
+
+            system_itemBody = this.itemView.findViewById(R.id.system_item_body);
+            system_tvMessage = this.itemView.findViewById(R.id.system_tv_message);
+            system_tvDate = this.itemView.findViewById(R.id.system_tv_date);
+
         }
 
         public void bind(int listIndex){
             m = messages.get(listIndex);
-            tvMessage.setText(m.message);
             if (m.userId != null) {
-                ivIcon.setVisibility(View.GONE);
-                progressImage.setVisibility(View.VISIBLE);
-                User.getUserById(m.userId, new OnGetUser() {
-                    @Override
-                    public void onGet(User user) {
-                        u = user;
-                        if (user.id.equals(m.userId))
-                            tvName.setText(user.name);
-                        if (savedIcons.get(user.id) != null){
-                            if (user.id.equals(m.userId)) {
-                                ivIcon.setImageBitmap(savedIcons.get(user.id));
-                                ivIcon.setVisibility(View.VISIBLE);
-                                progressImage.setVisibility(View.GONE);
-                            }
-                        }
-                        else {
-                            user.getIconAsync(context, new OnGetIcon() {
-                                @Override
-                                public void onLoad(Bitmap bitmap) {
-                                    savedIcons.put(user.id, bitmap);
-                                    if (user.id.equals(m.userId)) {
-                                        ivIcon.setImageBitmap(bitmap);
-                                        ivIcon.setVisibility(View.VISIBLE);
-                                        progressImage.setVisibility(View.GONE);
-                                    }
+                if (m.userId.equals(user.id)) {
+                    showMyMessage();
+                    my_tvMessage.setText(m.message);
+                    my_tvName.setText(R.string.my_message_name);
+                    my_tvDate.setText(SomethingMethods.getDateString());
+                }
+                else {
+                    showNotMyMessage();
+                    notMy_ivIcon.setVisibility(View.GONE);
+                    notMy_progressImage.setVisibility(View.VISIBLE);
+                    notMy_tvMessage.setText(m.message);
+                    User.getUserById(m.userId, new OnGetUser() {
+                        @Override
+                        public void onGet(User user) {
+                            u = user;
+                            if (user.id.equals(m.userId))
+                                notMy_tvName.setText(user.name);
+                            if (savedIcons.get(user.id) != null){
+                                if (user.id.equals(m.userId)) {
+                                    notMy_ivIcon.setImageBitmap(savedIcons.get(user.id));
+                                    notMy_ivIcon.setVisibility(View.VISIBLE);
+                                    notMy_progressImage.setVisibility(View.GONE);
                                 }
-                            });
-                        }
+                            }
+                            else {
+                                user.getIconAsync(context, new OnGetIcon() {
+                                    @Override
+                                    public void onLoad(Bitmap bitmap) {
+                                        savedIcons.put(user.id, bitmap);
+                                        if (user.id.equals(m.userId)) {
+                                            notMy_ivIcon.setImageBitmap(bitmap);
+                                            notMy_ivIcon.setVisibility(View.VISIBLE);
+                                            notMy_progressImage.setVisibility(View.GONE);
+                                        }
+                                    }
+                                });
+                            }
 
-                    }
-                });
+                        }
+                    });
+                }
+
             }
             else {
-                ivIcon.setVisibility(View.VISIBLE);
-                progressImage.setVisibility(View.GONE);
+                showSystemMessage();
+                system_tvMessage.setText(m.message);
+                system_tvDate.setText(SomethingMethods.getDateString());
             }
 
+        }
+        private void showNotMyMessage(){
+            notMy_itemBody.setVisibility(View.VISIBLE);
+            my_itemBody.setVisibility(View.GONE);
+            system_itemBody.setVisibility(View.GONE);
+        }
+        private void showMyMessage(){
+            notMy_itemBody.setVisibility(View.GONE);
+            my_itemBody.setVisibility(View.VISIBLE);
+            system_itemBody.setVisibility(View.GONE);
+        }
+        private void showSystemMessage(){
+            notMy_itemBody.setVisibility(View.GONE);
+            my_itemBody.setVisibility(View.GONE);
+            system_itemBody.setVisibility(View.VISIBLE);
         }
 
     }

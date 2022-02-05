@@ -73,5 +73,6 @@
     <string name="title_my_chats">My chats</string>
     <string name="error_of_email_send">Ошибка отправки</string>
     <string name="search">Поиск</string>
+    <string name="my_message_name">Вы</string>
 
 </resources>
