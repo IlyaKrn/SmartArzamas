@@ -16,7 +16,7 @@ import androidx.annotation.NonNull;
 
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
-import com.example.smartarzamas.support.SomethingMethods;
+import com.example.smartarzamas.support.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -97,10 +97,10 @@ public class AuthActivity extends FirebaseActivity {
                 final String login = etUserEmail.getText().toString();
                 final String password = etUserPassword.getText().toString();
                 // скрытие предупреждений о некорректных данных
-                SomethingMethods.hideWarning(tvLoginErr, tvPasswordErr);
+                Utils.hideWarning(tvLoginErr, tvPasswordErr);
                 // если поля ввода не пустые
                 if (login.length() > 0 && password.length() > 0){
-                    SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+                    Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                         @Override
                         public void isConnected() {
                             auth.signInWithEmailAndPassword(login, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -109,7 +109,7 @@ public class AuthActivity extends FirebaseActivity {
                                     // если вход прошел успешно
                                     if (task.isSuccessful()){
                                         if (auth.getCurrentUser().isEmailVerified()) {
-                                            User.getUserById(SomethingMethods.getKeyString(login), new OnGetUser() {
+                                            User.getUserById(Utils.getKeyString(login), new OnGetUser() {
                                                 @Override
                                                 public void onGet(User user) {
                                                     AuthActivity.this.user = user;
@@ -140,7 +140,7 @@ public class AuthActivity extends FirebaseActivity {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     Toast.makeText(getApplicationContext(), R.string.verification_email_was_sand, Toast.LENGTH_LONG).show();
-                                                    SomethingMethods.showWarning(tvLoginErr, R.string.email_no_verificated);
+                                                    Utils.showWarning(tvLoginErr, R.string.email_no_verificated);
                                                     Log.e(LOG_TAG, "email " + auth.getCurrentUser().getEmail() + " is not verified");
                                                 }
                                             });
@@ -148,8 +148,8 @@ public class AuthActivity extends FirebaseActivity {
                                     }
                                     else {
                                         // установка предупреждений
-                                        SomethingMethods.showWarning(tvLoginErr, R.string.wrong_login);
-                                        SomethingMethods.showWarning(tvPasswordErr, R.string.wrong_password);
+                                        Utils.showWarning(tvLoginErr, R.string.wrong_login);
+                                        Utils.showWarning(tvPasswordErr, R.string.wrong_password);
                                         Log.e(LOG_TAG, "wrong login or password");
                                     }
                                 }
@@ -161,11 +161,11 @@ public class AuthActivity extends FirebaseActivity {
                 // вывод предупреждения о пустых полях ввода
                 else {
                     if (login.length() == 0){
-                        SomethingMethods.showWarning(tvLoginErr, R.string.enter_login);
+                        Utils.showWarning(tvLoginErr, R.string.enter_login);
                         Log.e(LOG_TAG, "login cannot be a null");
                     }
                     if (password.length() == 0){
-                        SomethingMethods.showWarning(tvPasswordErr, R.string.enter_password);
+                        Utils.showWarning(tvPasswordErr, R.string.enter_password);
                         Log.e(LOG_TAG, "password cannot be a null");
                     }
                 }
@@ -184,7 +184,7 @@ public class AuthActivity extends FirebaseActivity {
             @Override
             public void onClick(View view) {
                 Log.i(LOG_TAG, "onClick btForgotPassword was called");
-                SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+                Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                     @Override
                     public void isConnected() {
                         if ((!etUserEmail.getText().toString().equals("")) && etUserEmail.getText() != null) {
@@ -199,7 +199,7 @@ public class AuthActivity extends FirebaseActivity {
                             });
                         }
                         else {
-                            SomethingMethods.showWarning(tvLoginErr, R.string.enter_login);
+                            Utils.showWarning(tvLoginErr, R.string.enter_login);
                         }
                     }
                 });
@@ -252,13 +252,13 @@ public class AuthActivity extends FirebaseActivity {
                 final String password = etUserPassword.getText().toString();
                 final String password2 = etUserSecondPassword.getText().toString();
                 // скрытие предупреждений о некорректных данных
-                SomethingMethods.hideWarning(tvLoginErr, tvPasswordErr, tvSecondPasswordErr, tvNameErr, tvFamilyErr);
+                Utils.hideWarning(tvLoginErr, tvPasswordErr, tvSecondPasswordErr, tvNameErr, tvFamilyErr);
 
                 // если поля ввода не пустые
                 if (login.length() > 0 && password2.length() > 0 && password.length() > 0 && name.length() > 0 && family.length() > 0) {
                     // если первый и второлй пароль совпадают
                     if (password.equals(password2)) {
-                        SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+                        Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                             @Override
                             public void isConnected() {
                                 auth.signInWithEmailAndPassword(login, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -266,7 +266,7 @@ public class AuthActivity extends FirebaseActivity {
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
                                             if (auth.getCurrentUser().isEmailVerified()) {// запись пользователя в бд
-                                                final String id = SomethingMethods.getKeyString(login);
+                                                final String id = Utils.getKeyString(login);
                                                 Log.i(LOG_TAG, "created new key with value " + id);
                                                 /*
                                                 dbUsers.child(id).addValueEventListener(new ValueEventListener() {
@@ -333,30 +333,30 @@ public class AuthActivity extends FirebaseActivity {
                     }
                     // вывод предупреждения о различии пароля
                     else {
-                        SomethingMethods.showWarning(tvSecondPasswordErr, R.string.wrong_password);
+                        Utils.showWarning(tvSecondPasswordErr, R.string.wrong_password);
                         Log.e(LOG_TAG, "wrong password");
                     }
                 }
                 // вывод предупреждения о пустых полях ввода
                 else {
                     if (login.length() == 0){
-                        SomethingMethods.showWarning(tvLoginErr, R.string.enter_login);
+                        Utils.showWarning(tvLoginErr, R.string.enter_login);
                         Log.e(LOG_TAG, "login cannot be a null");
                     }
                     if (password.length() == 0){
-                        SomethingMethods.showWarning(tvPasswordErr, R.string.enter_password);
+                        Utils.showWarning(tvPasswordErr, R.string.enter_password);
                         Log.e(LOG_TAG, "password cannot be a null");
                     }
                     if (password2.length() == 0){
-                        SomethingMethods.showWarning(tvSecondPasswordErr, R.string.enter_second_password);
+                        Utils.showWarning(tvSecondPasswordErr, R.string.enter_second_password);
                         Log.e(LOG_TAG, "second password cannot be a null");
                     }
                     if (name.length() == 0){
-                        SomethingMethods.showWarning(tvNameErr, R.string.enter_name);
+                        Utils.showWarning(tvNameErr, R.string.enter_name);
                         Log.e(LOG_TAG, "name cannot be a null");
                     }
                     if (family.length() == 0){
-                        SomethingMethods.showWarning(tvFamilyErr, R.string.enter_family);
+                        Utils.showWarning(tvFamilyErr, R.string.enter_family);
                         Log.e(LOG_TAG, "family cannot be a null");
                     }
                 }
@@ -376,14 +376,14 @@ public class AuthActivity extends FirebaseActivity {
                 final String password = etUserPassword.getText().toString();
                 final String password2 = etUserSecondPassword.getText().toString();
                 // скрытие предупреждений о некорректных данных
-                SomethingMethods.hideWarning(tvLoginErr, tvPasswordErr, tvSecondPasswordErr, tvNameErr, tvFamilyErr);
+                Utils.hideWarning(tvLoginErr, tvPasswordErr, tvSecondPasswordErr, tvNameErr, tvFamilyErr);
 
                 // если поля ввода не пустые
                 if (login.length() > 0 && password2.length() > 0 && password.length() > 0 && name.length() > 0 && family.length() > 0) {
                     // если первый и второлй пароль совпадают
                     if (password.equals(password2)) {
                         if (password.length() > 5) {
-                            SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+                            Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                                 @Override
                                 public void isConnected() {
                                     auth.createUserWithEmailAndPassword(login, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -416,36 +416,36 @@ public class AuthActivity extends FirebaseActivity {
                             });
                         }
                         else {
-                            SomethingMethods.showWarning(tvPasswordErr, R.string.short_password);
-                            SomethingMethods.showWarning(tvSecondPasswordErr, R.string.short_password);
+                            Utils.showWarning(tvPasswordErr, R.string.short_password);
+                            Utils.showWarning(tvSecondPasswordErr, R.string.short_password);
                         }
                     }
                     // вывод предупреждения о различии пароля
                     else {
-                        SomethingMethods.showWarning(tvSecondPasswordErr, R.string.wrong_password);
+                        Utils.showWarning(tvSecondPasswordErr, R.string.wrong_password);
                         Log.e(LOG_TAG, "password is different");
                     }
                 }
                 // вывод предупреждения о пустых полях ввода
                 else {
                     if (login.length() == 0) {
-                        SomethingMethods.showWarning(tvLoginErr, R.string.enter_login);
+                        Utils.showWarning(tvLoginErr, R.string.enter_login);
                         Log.e(LOG_TAG, "login cannot be a null");
                     }
                     if (password.length() == 0){
-                        SomethingMethods.showWarning(tvPasswordErr, R.string.enter_password);
+                        Utils.showWarning(tvPasswordErr, R.string.enter_password);
                         Log.e(LOG_TAG, "password cannot be a null");
                     }
                     if (password2.length() == 0){
-                        SomethingMethods.showWarning(tvSecondPasswordErr, R.string.enter_second_password);
+                        Utils.showWarning(tvSecondPasswordErr, R.string.enter_second_password);
                         Log.e(LOG_TAG, "second password cannot be a null");
                     }
                     if (name.length() == 0){
-                        SomethingMethods.showWarning(tvNameErr, R.string.enter_name);
+                        Utils.showWarning(tvNameErr, R.string.enter_name);
                         Log.e(LOG_TAG, "name cannot be a null");
                     }
                     if (family.length() == 0){
-                        SomethingMethods.showWarning(tvFamilyErr, R.string.enter_family);
+                        Utils.showWarning(tvFamilyErr, R.string.enter_family);
                         Log.e(LOG_TAG, "family cannot be a null");
                     }
                 }
@@ -465,7 +465,7 @@ public class AuthActivity extends FirebaseActivity {
             @Override
             public void onClick(View view) {
                 Log.i(LOG_TAG, "onClick btResendEmail in signUp layout called");
-                SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+                Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                     @Override
                     public void isConnected() {
                         auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {

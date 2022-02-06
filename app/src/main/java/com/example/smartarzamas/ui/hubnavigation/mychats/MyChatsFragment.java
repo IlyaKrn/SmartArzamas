@@ -2,7 +2,6 @@ package com.example.smartarzamas.ui.hubnavigation.mychats;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,18 +19,15 @@ import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.adapters.ChatListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentMyChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
-import com.example.smartarzamas.firebaseobjects.User;
-import com.example.smartarzamas.support.SomethingMethods;
+import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
-import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class MyChatsFragment extends HubNavigationCommon {
@@ -144,7 +140,7 @@ public class MyChatsFragment extends HubNavigationCommon {
 
     // все чаты
     private void getAllChatList(){
-        SomethingMethods.isConnected(getContext(), new SomethingMethods.Connection() {
+        Utils.isConnected(getContext(), new Utils.Connection() {
             @Override
             public void isConnected() {
                 dbChats.addValueEventListener(chatListListener);
@@ -155,7 +151,7 @@ public class MyChatsFragment extends HubNavigationCommon {
     private void updateListForView(){
         if (chatList.size() > 0) chatList.clear();
         for (Chat c : chatMainList){
-            if (SomethingMethods.isEquals(searchString, c.name)){
+            if (Utils.isEquals(searchString, c.name)){
                 for (String cat : category){
                     if (c.category.equals(cat)){
                         chatList.add(c);

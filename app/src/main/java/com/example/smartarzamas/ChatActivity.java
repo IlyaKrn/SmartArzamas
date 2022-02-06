@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartarzamas.adapters.MessageListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Message;
-import com.example.smartarzamas.firebaseobjects.OnGetChat;
-import com.example.smartarzamas.support.SomethingMethods;
+import com.example.smartarzamas.support.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -82,7 +81,7 @@ public class ChatActivity extends FirebaseActivity {
 
     // получение информации о чате
     void getChatData(){
-        SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+        Utils.isConnected(getApplicationContext(), new Utils.Connection() {
             @Override
             public void isConnected() {
                 String id = getIntent().getStringExtra(CHAT_ID);
@@ -105,7 +104,7 @@ public class ChatActivity extends FirebaseActivity {
                 messageList.remove(0);
             messageList.add(new Message(massege, user.id, dbChats.push().getKey(), imagesForSend));
 
-            SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+            Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                 @Override
                 public void isConnected() {
                     dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {

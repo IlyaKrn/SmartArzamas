@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.smartarzamas.support.Tag;
+import com.example.smartarzamas.support.Category;
 
 import java.util.ArrayList;
 
@@ -31,7 +31,7 @@ public abstract class CommonNavigationViewModel extends ViewModel {
         category = new MutableLiveData<>();
         search = new MutableLiveData<>();
         search.setValue("");
-        category.setValue(Tag.getAllTags());
+        category.setValue(Category.getAllTags());
 
     }
 

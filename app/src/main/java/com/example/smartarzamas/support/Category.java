@@ -3,7 +3,7 @@ package com.example.smartarzamas.support;
 import java.util.ArrayList;
 
 // класс с категориями
-public class Tag {
+public class Category {
 
     // строки категорий
     public static final String PITS_ON_ROADS = "Ямы на дорогах";

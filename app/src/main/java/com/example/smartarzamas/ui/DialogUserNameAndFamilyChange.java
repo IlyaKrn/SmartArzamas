@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.OnUpdateUser;
-import com.example.smartarzamas.support.SomethingMethods;
+import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.firebaseobjects.User;
 
 public class DialogUserNameAndFamilyChange extends Dialog{
@@ -58,8 +58,8 @@ public class DialogUserNameAndFamilyChange extends Dialog{
                 final String name = etName.getText().toString();
                 final String family = etFamily.getText().toString();
                 // скрытие предупреждений о некорректных данных
-                SomethingMethods.hideWarning(tvNameErr);
-                SomethingMethods.hideWarning(tvFamilyErr);
+                Utils.hideWarning(tvNameErr);
+                Utils.hideWarning(tvFamilyErr);
                 // установка текуцщих значений
                 etName.setText(user.name);
                 etFamily.setText(user.family);
@@ -79,10 +79,10 @@ public class DialogUserNameAndFamilyChange extends Dialog{
                 // вывод предупреждения о пустых полях ввода
                 else {
                     if (name.length() == 0){
-                        SomethingMethods.showWarning(tvNameErr, R.string.enter_new_name);
+                        Utils.showWarning(tvNameErr, R.string.enter_new_name);
                     }
                     if (family.length() == 0){
-                        SomethingMethods.showWarning(tvFamilyErr, R.string.enter_new_family);
+                        Utils.showWarning(tvFamilyErr, R.string.enter_new_family);
                     }
 
                 }

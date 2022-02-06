@@ -2,26 +2,20 @@ package com.example.smartarzamas;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
-import com.example.smartarzamas.support.SomethingMethods;
+import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class UserSettingsActivity extends FirebaseActivity {
@@ -60,7 +54,7 @@ public class UserSettingsActivity extends FirebaseActivity {
     }
     // изменение имени и фамилии
     public void onChangeUserNameAndFamily(View view) {
-        SomethingMethods.isConnected(getApplicationContext(), new SomethingMethods.Connection() {
+        Utils.isConnected(getApplicationContext(), new Utils.Connection() {
             @Override
             public void isConnected() {
                 DialogUserNameAndFamilyChange dialog = new DialogUserNameAndFamilyChange(UserSettingsActivity.this, user);

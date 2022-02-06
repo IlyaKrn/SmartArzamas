@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
-import com.example.smartarzamas.support.SomethingMethods;
-import com.example.smartarzamas.support.Tag;
+import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.firebaseobjects.Locate;
 
 import java.util.ArrayList;
@@ -66,18 +66,18 @@ public class DialogAddLocate extends Dialog {
                 if (!name.equals("")){
                     if (!description.equals("")){
                         if (!tag.equals("")){
-                            Locate.getDatabase().push().setValue(new Locate(name, longitude, latitude, description, tags, SomethingMethods.getDateString()));
+                            Locate.getDatabase().push().setValue(new Locate(name, longitude, latitude, description, tags, Utils.getDateString()));
                         }
                         else {
-                            SomethingMethods.showWarning(tvCategoryErr, R.string.enter_category);
+                            Utils.showWarning(tvCategoryErr, R.string.enter_category);
                         }
                     }
                     else {
-                        SomethingMethods.showWarning(tvDescriptionErr, R.string.enter_description);
+                        Utils.showWarning(tvDescriptionErr, R.string.enter_description);
                     }
                 }
                 else {
-                    SomethingMethods.showWarning(tvNameErr, R.string.enter_category);
+                    Utils.showWarning(tvNameErr, R.string.enter_category);
                 }
                 destroy();
             }
@@ -99,23 +99,23 @@ public class DialogAddLocate extends Dialog {
                         switch (menuItem.getItemId()) {
                             // ямы на дорогах
                             case R.id.pits_on_roads:
-                                tvCategory.setText(Tag.PITS_ON_ROADS);
+                                tvCategory.setText(Category.PITS_ON_ROADS);
                                 break;
                             // лужи
                             case R.id.puddles:
-                                tvCategory.setText(Tag.PUDDLES);
+                                tvCategory.setText(Category.PUDDLES);
                                 break;
                             // достопримечатльности
                             case R.id.sights:
-                                tvCategory.setText(Tag.SIGHTS);
+                                tvCategory.setText(Category.SIGHTS);
                                 break;
                             // другое
                             case R.id.other:
-                                tvCategory.setText(Tag.OTHER);
+                                tvCategory.setText(Category.OTHER);
                                 break;
                             // другое
                             case R.id.snow:
-                                tvCategory.setText(Tag.SNOW);
+                                tvCategory.setText(Category.SNOW);
                                 break;
                         }
                         return false;

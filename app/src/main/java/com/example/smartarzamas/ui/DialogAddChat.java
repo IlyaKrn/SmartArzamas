@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
-import com.example.smartarzamas.support.SomethingMethods;
-import com.example.smartarzamas.support.Tag;
+import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.User;
@@ -62,7 +62,7 @@ public class DialogAddChat extends Dialog {
                 String category = tvCategory.getText().toString();
                 String description = etDescription.getText().toString();
                 // скрытие предупреждений о некорректных данных
-                SomethingMethods.hideWarning(tvNameErr, tvCategoryErr, tvDescriptionErr);
+                Utils.hideWarning(tvNameErr, tvCategoryErr, tvDescriptionErr);
 
                 // если поля ввода не пустые
                 if (name.length() > 0 && category.length() > 0) {
@@ -76,7 +76,7 @@ public class DialogAddChat extends Dialog {
                         chat = new Chat(name, getResources().getString(R.string.default_chat_description), chatId, messages, category, user);
 
 
-                    SomethingMethods.isConnected(context, new SomethingMethods.Connection() {
+                    Utils.isConnected(context, new Utils.Connection() {
                         @Override
                         public void isConnected() {
                             Chat.getDatabase().child(chatId).setValue(chat);
@@ -87,10 +87,10 @@ public class DialogAddChat extends Dialog {
                 // вывод предупреждения о пустых полях ввода
                 else {
                     if (name.length() == 0){
-                        SomethingMethods.showWarning(tvNameErr, R.string.enter_chat_name);
+                        Utils.showWarning(tvNameErr, R.string.enter_chat_name);
                     }
                     if (category.length() == 0){
-                        SomethingMethods.showWarning(tvCategoryErr, R.string.enter_category);
+                        Utils.showWarning(tvCategoryErr, R.string.enter_category);
                     }
 
                 }
@@ -113,23 +113,23 @@ public class DialogAddChat extends Dialog {
                         switch (menuItem.getItemId()) {
                             // ямы на дорогах
                             case R.id.pits_on_roads:
-                                tvCategory.setText(Tag.PITS_ON_ROADS);
+                                tvCategory.setText(Category.PITS_ON_ROADS);
                                 break;
                             // лужи
                             case R.id.puddles:
-                                tvCategory.setText(Tag.PUDDLES);
+                                tvCategory.setText(Category.PUDDLES);
                                 break;
                             // достопримечатльности
                             case R.id.sights:
-                                tvCategory.setText(Tag.SIGHTS);
+                                tvCategory.setText(Category.SIGHTS);
                                 break;
                             // снег
                             case R.id.snow:
-                                tvCategory.setText(Tag.SNOW);
+                                tvCategory.setText(Category.SNOW);
                                 break;
                             // другое
                             case R.id.other:
-                                tvCategory.setText(Tag.OTHER);
+                                tvCategory.setText(Category.OTHER);
                                 break;
                         }
                         return false;

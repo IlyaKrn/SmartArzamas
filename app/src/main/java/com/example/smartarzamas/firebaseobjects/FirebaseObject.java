@@ -4,23 +4,20 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.smartarzamas.support.SomethingMethods;
+import com.example.smartarzamas.support.Utils;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageException;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
-import java.nio.ByteBuffer;
 
 public abstract class FirebaseObject implements Serializable {
 
@@ -45,7 +42,7 @@ public abstract class FirebaseObject implements Serializable {
     protected abstract DatabaseReference getDatabaseChild();
 
     public void getIconAsync(Context context, OnGetIcon onGetIcon){
-        SomethingMethods.isConnected(context, new SomethingMethods.Connection() {
+        Utils.isConnected(context, new Utils.Connection() {
             @Override
             public void isConnected() {
                 if (iconRef == null){
@@ -88,7 +85,7 @@ public abstract class FirebaseObject implements Serializable {
         });
     }
     public void setIconAsync(Context context,Bitmap bitmap, OnSetIcon onSetIcon){
-        SomethingMethods.isConnected(context, new SomethingMethods.Connection() {
+        Utils.isConnected(context, new Utils.Connection() {
             @Override
             public void isConnected() {
                 String path = ICONS_REF + getDatabaseChild().getKey() + "/" + FirebaseObject.this.id;

@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -19,7 +18,7 @@ import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
-import com.example.smartarzamas.support.SomethingMethods;
+import com.example.smartarzamas.support.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -122,7 +121,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                     showMyMessage();
                     my_tvMessage.setText(m.message);
                     my_tvName.setText(R.string.my_message_name);
-                    my_tvDate.setText(SomethingMethods.getDateString());
+                    my_tvDate.setText(Utils.getDateString());
                 }
                 else {
                     showNotMyMessage();
@@ -164,7 +163,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             else {
                 showSystemMessage();
                 system_tvMessage.setText(m.message);
-                system_tvDate.setText(SomethingMethods.getDateString());
+                system_tvDate.setText(Utils.getDateString());
             }
 
         }

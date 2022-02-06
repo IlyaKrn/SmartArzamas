@@ -4,8 +4,6 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,5 +53,9 @@ public class EditTextSearch extends androidx.appcompat.widget.AppCompatEditText 
     }
     public void openTextWatcher() {
         isClosed = false;
+    }
+
+    public interface OnTextChangeListener {
+        void onChange(Editable editable);
     }
 }

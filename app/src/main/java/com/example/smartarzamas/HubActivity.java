@@ -3,7 +3,6 @@ package com.example.smartarzamas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -17,8 +16,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.smartarzamas.databinding.ActivityHubBinding;
 import com.example.smartarzamas.support.EditTextSearch;
-import com.example.smartarzamas.support.OnTextChangeListener;
-import com.example.smartarzamas.support.Tag;
+import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.ui.DialogAddChat;
 import com.example.smartarzamas.ui.DialogSignOut;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
@@ -39,7 +37,7 @@ public class HubActivity extends FirebaseActivity {
     private ActivityHubBinding binding;
     ImageButton btMenu, btProfile;
     EditTextSearch etSearch;
-    private ArrayList<String> searchingTags = Tag.getAllTags();
+    private ArrayList<String> searchingTags = Category.getAllTags();
 
     private static HubActivityCallback allChatsActivityCallback;
     private static HubActivityCallback myChatsActivityCallback;
@@ -51,7 +49,7 @@ public class HubActivity extends FirebaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        searchingTags = Tag.getAllTags();
+        searchingTags = Category.getAllTags();
         binding = ActivityHubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -69,7 +67,7 @@ public class HubActivity extends FirebaseActivity {
         //MyChatsFragment.setUser(user);
         HubNavigationCommon.setUser(user);
 
-        etSearch.addTextEditListener(new OnTextChangeListener() {
+        etSearch.addTextEditListener(new EditTextSearch.OnTextChangeListener() {
             @Override
             public void onChange(Editable editable) {
                 CallbackManager.callOnSearchStringChange(etSearch.getText().toString());
@@ -88,37 +86,37 @@ public class HubActivity extends FirebaseActivity {
                             // ямы на дорогах
                             case R.id.pits_on_roads:
                                 searchingTags.clear();
-                                searchingTags.add(Tag.PITS_ON_ROADS);
+                                searchingTags.add(Category.PITS_ON_ROADS);
                                 CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // лужи
                             case R.id.puddles:
                                 searchingTags.clear();
-                                searchingTags.add(Tag.PUDDLES);
+                                searchingTags.add(Category.PUDDLES);
                                 CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // достопримечатльности
                             case R.id.sights:
                                 searchingTags.clear();
-                                searchingTags.add(Tag.SIGHTS);
+                                searchingTags.add(Category.SIGHTS);
                                 CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // другое
                             case R.id.other:
                                 searchingTags.clear();
-                                searchingTags.add(Tag.OTHER);
+                                searchingTags.add(Category.OTHER);
                                 CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // снег
                             case R.id.snow:
                                 searchingTags.clear();
-                                searchingTags.add(Tag.SNOW);
+                                searchingTags.add(Category.SNOW);
                                 CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                             // все
                             case R.id.all:
                                 searchingTags.clear();
-                                searchingTags = Tag.getAllTags();
+                                searchingTags = Category.getAllTags();
                                 CallbackManager.callOnCategoryChange(searchingTags);
                                 break;
                         }
