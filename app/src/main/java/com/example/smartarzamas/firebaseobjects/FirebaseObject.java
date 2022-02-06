@@ -93,7 +93,7 @@ public abstract class FirebaseObject implements Serializable {
                 uploadRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        UploadTask uploadTask = uploadRef.putBytes(getBytes(bitmap));
+                        UploadTask uploadTask = uploadRef.putBytes(getBytes(Utils.compressBitmapToIcon(bitmap, 300)));
                         Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                             @Override
                             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {

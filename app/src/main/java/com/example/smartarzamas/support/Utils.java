@@ -1,6 +1,7 @@
 package com.example.smartarzamas.support;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -96,5 +97,18 @@ public class Utils {
     // интерфейс подключения
     public interface Connection{
         void isConnected();
+    }
+
+    public static Bitmap compressBitmapToIcon(Bitmap bitmap, int size){
+        int width  = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int newWidth = (height > width) ? width : height;
+        int newHeight = (height > width)? height - ( height - width) : height;
+        int cropW = (width - height) / 2;
+        cropW = (cropW < 0)? 0: cropW;
+        int cropH = (height - width) / 2;
+        cropH = (cropH < 0)? 0: cropH;
+        bitmap = Bitmap.createBitmap(bitmap, cropW, cropH, newWidth, newHeight);
+        return Bitmap.createScaledBitmap(bitmap, size, size, false);
     }
 }
