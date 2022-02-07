@@ -15,7 +15,7 @@ import java.util.Locale;
 
 // класс с различными методами
 
-public class Utils {
+public final class Utils {
 
     // получение строки с текущей датой
     // например 12.12.12 12:12

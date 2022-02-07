@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 public class SQLiteDbManager {
-    
+
     private Context context;  // контекст для SQLiteDbHelper
     private static SQLiteDbHelper myDbHelper; // объект для взаимодейсевия с бд
     private static SQLiteDatabase db; // база данных
@@ -41,7 +41,7 @@ public class SQLiteDbManager {
             onDataChange.onCurrentUserChange(getCurrentUser());
     }
     // проверка наличия содежимого в бд
-    public  boolean isEmpty(){
+    public boolean isEmpty(){
         openDb();
         Cursor cursor = db.query(SQLiteDbConstants.TABLE_NAME, null, null, null, null, null, null);
         while (cursor.moveToNext()){

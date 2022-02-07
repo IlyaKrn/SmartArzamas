@@ -32,16 +32,16 @@ public abstract class FirebaseActivity extends AppCompatActivity implements Swip
 
 
 
-    User user;  // текущий пользователь
-    SQLiteDbManager.SQLUser currentUser; // пользователь SQLite
-    SQLiteDbManager manager;  // бд с пользователями (SQLite)
-    StorageReference firebaseStorage; // хранилище картинок
-    DatabaseReference dbUsers;  // бд пользователей (Firebase)
-    DatabaseReference dbChats;  // бд чатов (Firebase)
-    DatabaseReference dbLocates;  // бд меток (Firebase)
-    FirebaseAuth auth; // аутентификация
+    protected User user;  // текущий пользователь
+    protected SQLiteDbManager.SQLUser currentUser; // пользователь SQLite
+    protected SQLiteDbManager manager;  // бд с пользователями (SQLite)
+    protected StorageReference firebaseStorage; // хранилище картинок
+    protected DatabaseReference dbUsers;  // бд пользователей (Firebase)
+    protected DatabaseReference dbChats;  // бд чатов (Firebase)
+    protected DatabaseReference dbLocates;  // бд меток (Firebase)
+    protected FirebaseAuth auth; // аутентификация
 
-    FragmentContainerView fragmentDefaultContainer;  // контейнер для врагментов
+    protected FragmentContainerView fragmentDefaultContainer;  // контейнер для врагментов
     private SwipeRefreshLayout swipeRefresh;  // обновление данных
 
 
@@ -124,7 +124,7 @@ public abstract class FirebaseActivity extends AppCompatActivity implements Swip
         }
     }
 
-    SQLiteDbManager.SQLUser getSQLiteCurrentUser(){
+    protected SQLiteDbManager.SQLUser getSQLiteCurrentUser(){
         return manager.getCurrentUser();
     }
 }

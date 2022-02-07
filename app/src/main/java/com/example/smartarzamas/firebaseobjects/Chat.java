@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Chat extends FirebaseObject {
 
-    public static final String CHAT = "chat";
+    public static final String CHATS = "chats";
     public String description;
     public ArrayList<Message> messages;
     public ArrayList<User> blackList;
@@ -36,7 +36,7 @@ public class Chat extends FirebaseObject {
 
 
     public static DatabaseReference getDatabase(){
-        return FirebaseDatabase.getInstance().getReference("chats");
+        return FirebaseDatabase.getInstance().getReference(CHATS);
     }
 
     @Override

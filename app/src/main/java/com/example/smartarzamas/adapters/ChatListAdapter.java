@@ -26,7 +26,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
 
     private final OnStateClickListener onClickListener;
     private final Context context;
-    ArrayList<Chat> chats;
+    private final ArrayList<Chat> chats;
 
     private Map<String, Bitmap> savedIcons = new HashMap<>();
 

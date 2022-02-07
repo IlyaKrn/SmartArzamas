@@ -16,7 +16,7 @@ import java.util.Arrays;
 
 public class Locate extends FirebaseObject {
 
-    public final String LOCATE = "locate";
+    public static final String LOCATES = "locates";
     public double longitude;
     public double latitude;
     public String description;
@@ -34,7 +34,7 @@ public class Locate extends FirebaseObject {
     }
 
     public static DatabaseReference getDatabase(){
-        return FirebaseDatabase.getInstance().getReference("locates");
+        return FirebaseDatabase.getInstance().getReference(LOCATES);
     }
     @Override
     protected DatabaseReference getDatabaseChild() {

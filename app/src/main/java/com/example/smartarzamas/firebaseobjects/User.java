@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class User extends FirebaseObject {
 
-    public static final String USER = "user";
+    public static final String USERS = "users";
     public String email;
     public String family;
     public boolean isModerator;
@@ -38,7 +38,7 @@ public class User extends FirebaseObject {
     }
 
     public static DatabaseReference getDatabase(){
-        return FirebaseDatabase.getInstance().getReference("users");
+        return FirebaseDatabase.getInstance().getReference(USERS);
     }
     @Override
     protected DatabaseReference getDatabaseChild() {

@@ -27,9 +27,9 @@ import java.util.Map;
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.MessageHolder> {
 
     private final OnStateClickListener onClickListener;
-    ArrayList<Message> messages;
-    Context context;
-    User user;
+    private final ArrayList<Message> messages;
+    private final Context context;
+    private final User user;
     private Map<String, Bitmap> savedIcons = new HashMap<>();
 
     public MessageListAdapter(Context context, ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
