@@ -74,5 +74,6 @@
     <string name="error_of_email_send">Ошибка отправки</string>
     <string name="search">Поиск</string>
     <string name="my_message_name">Вы</string>
+    <string name="icon_has_been_changed">Изображение изменено</string>
 
 </resources>

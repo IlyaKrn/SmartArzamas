@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +32,7 @@ public class DialogUserIconChange extends Dialog{
     private ImageView icon;
     private Bitmap bitmap;
     private Bitmap currentIcon;
+    private ProgressBar progressBar;
     private User user;
 
     public DialogUserIconChange(AppCompatActivity activity, User user) {
@@ -48,11 +52,18 @@ public class DialogUserIconChange extends Dialog{
         cancel = rootView.findViewById(R.id.bt_cancel);
         select = rootView.findViewById(R.id.bt_select);
         icon = rootView.findViewById(R.id.icon);
+        progressBar = rootView.findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
+        icon.setVisibility(View.GONE);
+
+
         user.getIconAsync(context, new OnGetIcon() {
             @Override
             public void onLoad(Bitmap bitmap) {
                 currentIcon = bitmap;
                 icon.setImageBitmap(currentIcon);
+                progressBar.setVisibility(View.GONE);
+                icon.setVisibility(View.VISIBLE);
             }
         });
 
@@ -60,9 +71,12 @@ public class DialogUserIconChange extends Dialog{
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressBar.setVisibility(View.VISIBLE);
+                icon.setVisibility(View.GONE);
                 user.setIconAsync(context, bitmap, new OnSetIcon() {
                     @Override
                     public void onSet(String ref) {
+                        Toast.makeText(context, getString(R.string.icon_has_been_changed), Toast.LENGTH_SHORT).show();
                         destroy();
                     }
                 });
