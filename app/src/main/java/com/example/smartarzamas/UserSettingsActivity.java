@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,9 +12,12 @@ import androidx.annotation.NonNull;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
+import com.example.smartarzamas.support.IconView;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
+import com.example.smartarzamas.ui.OnDestroyListener;
+import com.example.smartarzamas.ui.OnIconChangeListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -24,6 +28,7 @@ public class UserSettingsActivity extends FirebaseActivity {
     TextView userName;
     TextView userFamily;
     TextView userEmail;
+    ProgressBar progressBar;
     ValueEventListener userListener;
 
     @Override
@@ -51,6 +56,7 @@ public class UserSettingsActivity extends FirebaseActivity {
         userName = findViewById(R.id.user_name);
         userFamily = findViewById(R.id.user_family);
         userEmail = findViewById(R.id.user_email);
+        progressBar = findViewById(R.id.progress);
     }
     // изменение имени и фамилии
     public void onChangeUserNameAndFamily(View view) {
@@ -73,10 +79,20 @@ public class UserSettingsActivity extends FirebaseActivity {
 
     public void onChangeUserIcon(View view) {
         DialogUserIconChange dialog = new DialogUserIconChange(UserSettingsActivity.this, user);
-        getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainerView, dialog).commit();
+        dialog.create(R.id.fragmentContainerView);
+        dialog.setOnIconChangeListener(new OnIconChangeListener() {
+            @Override
+            public void onChange(Bitmap bitmap) {
+                userIcon.setImageBitmap(bitmap);
+            }
+        });
 
     }
     private void updateViewData(){
+        if (userIcon.getDrawable() == null){
+            userIcon.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+        }
         User.getUserById(user.id, new OnGetUser() {
             @Override
             public void onGet(User user) {
@@ -88,6 +104,8 @@ public class UserSettingsActivity extends FirebaseActivity {
                     @Override
                     public void onLoad(Bitmap bitmap) {
                         userIcon.setImageBitmap(bitmap);
+                        userIcon.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
             }

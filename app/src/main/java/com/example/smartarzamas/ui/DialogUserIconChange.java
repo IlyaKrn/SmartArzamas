@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -19,10 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
+import com.example.smartarzamas.firebaseobjects.FirebaseObject;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnSetIcon;
 import com.example.smartarzamas.firebaseobjects.User;
-import com.google.firebase.storage.FirebaseStorage;
+import com.example.smartarzamas.support.Utils;
 
 import java.io.ByteArrayOutputStream;
 
@@ -34,6 +34,7 @@ public class DialogUserIconChange extends Dialog{
     private Bitmap currentIcon;
     private ProgressBar progressBar;
     private User user;
+    private OnIconChangeListener onIconChangeListener;
 
     public DialogUserIconChange(AppCompatActivity activity, User user) {
         super(activity);
@@ -75,8 +76,9 @@ public class DialogUserIconChange extends Dialog{
                 icon.setVisibility(View.GONE);
                 user.setIconAsync(context, bitmap, new OnSetIcon() {
                     @Override
-                    public void onSet(String ref) {
+                    public void onSet(String ref, Bitmap bitmap) {
                         Toast.makeText(context, getString(R.string.icon_has_been_changed), Toast.LENGTH_SHORT).show();
+                        onIconChangeListener.onChange(bitmap);
                         destroy();
                     }
                 });
@@ -100,6 +102,10 @@ public class DialogUserIconChange extends Dialog{
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    public void setOnIconChangeListener(OnIconChangeListener onIconChangeListener) {
+        this.onIconChangeListener = onIconChangeListener;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -108,6 +114,7 @@ public class DialogUserIconChange extends Dialog{
             rootView.findViewById(R.id.change_view_barrier).setVisibility(View.VISIBLE);
             icon.setImageURI(data.getData());
             bitmap = ((BitmapDrawable) icon.getDrawable()).getBitmap();
+            icon.setImageBitmap(Utils.compressBitmapToIcon(bitmap, FirebaseObject.ICON_QUALITY));
         }
     }
     private byte[] toBytes(Bitmap b){

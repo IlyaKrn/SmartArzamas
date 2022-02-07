@@ -24,6 +24,7 @@ public abstract class FirebaseObject implements Serializable {
     public static final String LOG_TAG = "FirebaseObject";
     public static final String ICONS_REF = "icons/";
     protected static final String DEFAULT_ICON_REF = ICONS_REF + "default_icon.png";
+    public static final int ICON_QUALITY = 100;
     public String name;
     public String id;
     public String iconRef;
@@ -93,7 +94,7 @@ public abstract class FirebaseObject implements Serializable {
                 uploadRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        UploadTask uploadTask = uploadRef.putBytes(getBytes(Utils.compressBitmapToIcon(bitmap, 100)));
+                        UploadTask uploadTask = uploadRef.putBytes(getBytes(Utils.compressBitmapToIcon(bitmap, ICON_QUALITY)));
                         Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                             @Override
                             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -108,7 +109,7 @@ public abstract class FirebaseObject implements Serializable {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                onSetIcon.onSet(iconRef);
+                                                onSetIcon.onSet(iconRef, Utils.compressBitmapToIcon(bitmap, ICON_QUALITY));
                                             }
                                         }
                                     });
