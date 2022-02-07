@@ -20,6 +20,8 @@ public abstract class Dialog extends Fragment {
     protected FragmentManager fragmentManager;
     protected Context context;
 
+    private OnDestroyListener onDestroyListener;
+
     public Dialog(AppCompatActivity activity) {
         context = activity.getApplicationContext();
         fragmentManager = activity.getSupportFragmentManager();
@@ -38,7 +40,14 @@ public abstract class Dialog extends Fragment {
     public void create(int containerId){
         fragmentManager.beginTransaction().add(containerId, this).commit();
     }
-    protected void destroy(){
+    public void destroy(){
         fragmentManager.beginTransaction().remove(this).commit();
+        if (onDestroyListener != null) {
+            onDestroyListener.onDestroy();
+        }
+    }
+
+    public void setOnDestroyListener(OnDestroyListener onDestroyListener) {
+        this.onDestroyListener = onDestroyListener;
     }
 }
