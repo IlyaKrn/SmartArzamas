@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
@@ -155,6 +156,14 @@ public class HubActivity extends FirebaseActivity {
         });
 
     }
+
+    @Override
+    public void onRefresh() {
+        super.onRefresh();
+        Toast.makeText(this, "refresh", Toast.LENGTH_SHORT).show();
+        stopRefreshAnimation();
+    }
+
 
     private void setCallbacks(){
 

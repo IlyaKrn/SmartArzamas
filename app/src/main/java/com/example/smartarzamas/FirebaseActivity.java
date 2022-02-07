@@ -22,7 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-public abstract class FirebaseActivity extends AppCompatActivity {
+public abstract class FirebaseActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     // константы для передачи информации между активнотями
     public static final String USER_INTENT = "user";
@@ -40,7 +40,6 @@ public abstract class FirebaseActivity extends AppCompatActivity {
     DatabaseReference dbChats;  // бд чатов (Firebase)
     DatabaseReference dbLocates;  // бд меток (Firebase)
     FirebaseAuth auth; // аутентификация
-    OnRefreshDataListener onRefreshDataListener;
 
     FragmentContainerView fragmentDefaultContainer;  // контейнер для врагментов
     private SwipeRefreshLayout swipeRefresh;  // обновление данных
@@ -99,47 +98,30 @@ public abstract class FirebaseActivity extends AppCompatActivity {
                 FirebaseActivity.this.currentUser = currentUser;
             }
         });
-
     }
 
-    protected void setOnRefreshListener(OnRefreshDataListener listener){
-        this.onRefreshDataListener = listener;
-       // swipeRefresh = findViewById(R.id.swipe_refresh_container);
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setOnRefreshListener();
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+    protected final void stopRefreshAnimation(){
+        swipeRefresh.setRefreshing(false);
+    }
+
+    private void setOnRefreshListener(){
+        swipeRefresh = findViewById(R.id.swipe_refresh_container);
         if (swipeRefresh != null){
-            swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    refresh();
-                    swipeRefresh.setRefreshing(false);
-                }
-            });
+            swipeRefresh.setOnRefreshListener(this);
         }
         else {
             Log.e(LOG_TAG, "SwipeRefreshLayout has not been received");
         }
-    }
-    protected void refresh(){
-        dbUsers.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (user != null)
-                    user = snapshot.getValue(User.class);
-                onRefreshDataListener.onRefresh();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        onRefreshDataListener.onRefresh();
-    }
-
-    interface OnGetDataListener{
-        public void onGetData();
-    }
-    interface OnRefreshDataListener{
-        public void onRefresh();
     }
 
     SQLiteDbManager.SQLUser getSQLiteCurrentUser(){
