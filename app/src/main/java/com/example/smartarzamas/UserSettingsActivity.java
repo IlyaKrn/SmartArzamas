@@ -98,7 +98,7 @@ public class UserSettingsActivity extends FirebaseActivity {
             public void onGet(User user) {
                 UserSettingsActivity.this.user = user;
                 userName.setText(user.name);
-                userFamily.setText(" " + user.family);
+                userFamily.setText(user.family);
                 userEmail.setText(user.email);
                 user.getIconAsync(UserSettingsActivity.this.getApplicationContext(), new OnGetIcon() {
                     @Override
