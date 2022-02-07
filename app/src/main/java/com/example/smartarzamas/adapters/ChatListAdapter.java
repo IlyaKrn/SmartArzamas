@@ -17,6 +17,7 @@ import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
+import com.example.smartarzamas.support.IconView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,7 +82,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
         ProgressBar progressImage;
         TextView tvName;
         TextView tvCategory;
-        ImageView ivIcon;
+        IconView ivIcon;
         Chat c;
 
         public ChatHolder(@NonNull View itemView) {

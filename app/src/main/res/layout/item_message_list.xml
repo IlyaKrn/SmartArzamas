@@ -22,7 +22,7 @@
             android:layout_marginHorizontal="1dp"
             android:orientation="vertical">
 
-            <ImageView
+            <com.example.smartarzamas.support.IconView
                 android:id="@+id/not_my_user_icon"
                 android:visibility="visible"
                 android:layout_height="match_parent"

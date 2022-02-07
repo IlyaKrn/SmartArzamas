@@ -19,7 +19,7 @@
             android:orientation="vertical">
 
 
-            <ImageView
+            <com.example.smartarzamas.support.IconView
                 android:id="@+id/chat_icon"
                 android:visibility="visible"
                 android:layout_width="match_parent"

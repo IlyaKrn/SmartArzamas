@@ -18,6 +18,7 @@ import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
+import com.example.smartarzamas.support.IconView;
 import com.example.smartarzamas.support.Utils;
 
 import java.util.ArrayList;
@@ -76,7 +77,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         ProgressBar notMy_progressImage;
         TextView notMy_tvMessage;
         TextView notMy_tvName;
-        ImageView notMy_ivIcon;
+        IconView notMy_ivIcon;
         TextView notMy_tvDate;
         View notMy_itemBody;
 
