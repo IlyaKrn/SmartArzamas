@@ -120,13 +120,13 @@
 
     </ScrollView>
 
-
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:layout_width="@dimen/dialog_width"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainerView"
+            android:layout_width="@dimen/dialog_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dialog_margin_tool_bar"
+            android:layout_marginBottom="@dimen/dialog_margin_no_tool_bar"/>
 
 
 </FrameLayout>

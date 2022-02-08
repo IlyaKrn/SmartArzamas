@@ -1,107 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:background="@drawable/round_corner_dialog">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/round_corner_dialog">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/new_locate"
-            android:textSize="48sp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
-
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="20sp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/et_locate_name"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:hint="@string/chat_name" />
             <TextView
-                android:id="@+id/tv_locate_name_err"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:textColor="@color/design_default_color_error" />
-            <EditText
-                android:id="@+id/tv_locate_category"
-                android:textSize="18sp"
-                android:editable="false"
-                android:paddingLeft="4dp"
-                android:elegantTextHeight="true"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="60dp"
-                android:hint="@string/chat_category" />
-            <TextView
-                android:id="@+id/tv_category_err"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:textColor="@color/design_default_color_error" />
+                android:layout_gravity="center_horizontal"
+                android:text="@string/new_locate"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                android:textAlignment="center" />
 
-            <EditText
-                android:id="@+id/et_locate_description"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:hint="@string/description" />
 
-            <TextView
-                android:id="@+id/tv_description_err"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:textColor="@color/design_default_color_error" />
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="20sp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_locate_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="@string/chat_name" />
+                <TextView
+                    android:id="@+id/tv_locate_name_err"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:textColor="@color/design_default_color_error" />
+                <EditText
+                    android:id="@+id/tv_locate_category"
+                    android:textSize="18sp"
+                    android:editable="false"
+                    android:paddingLeft="4dp"
+                    android:elegantTextHeight="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="@string/chat_category" />
+                <TextView
+                    android:id="@+id/tv_category_err"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:textColor="@color/design_default_color_error" />
+
+                <EditText
+                    android:id="@+id/et_locate_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:hint="@string/description" />
+
+                <TextView
+                    android:id="@+id/tv_description_err"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:textColor="@color/design_default_color_error" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp">
+
+                <Button
+                    android:id="@+id/bt_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/cancel"
+                    android:background="@drawable/round_corner_button"
+                    android:onClick="onCancel"
+                    android:textSize="14sp"/>
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"/>
+
+                <Button
+                    android:id="@+id/bt_create"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/create"
+                    android:background="@drawable/round_corner_button"
+                    android:onClick="onAddNewLocate"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="30dp"
-            android:layout_gravity="right"
-            android:layout_marginBottom="10dp">
-
-            <Button
-                android:id="@+id/bt_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/cancel"
-                android:background="@drawable/round_corner_button"
-                android:onClick="onCancel"
-                android:textSize="14sp"/>
-
-            <View
-                android:layout_width="30dp"
-                android:layout_height="match_parent"/>
-
-            <Button
-                android:id="@+id/bt_create"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/create"
-                android:background="@drawable/round_corner_button"
-                android:onClick="onAddNewLocate"
-                android:textSize="14sp" />
-
-        </LinearLayout>
+    </ScrollView>
 
 
-    </LinearLayout>
 
-</ScrollView>
+
+</LinearLayout>

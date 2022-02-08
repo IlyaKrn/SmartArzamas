@@ -1,67 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:background="@drawable/round_corner_dialog">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@drawable/round_corner_dialog">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/exit"
-            android:textSize="48sp"
-            android:textStyle="bold"
-            android:textAlignment="center" />
-
-        <TextView
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/realy_exit"
-            android:textSize="24sp"
-            android:layout_marginHorizontal="20sp"
-            android:textAlignment="center"/>
+            android:orientation="vertical">
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginHorizontal="30dp"
-            android:layout_gravity="right"
-            android:layout_marginBottom="10dp">
-
-            <Button
-                android:id="@+id/bt_cancel"
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/cancel"
-                android:background="@drawable/round_corner_button"
-                android:onClick="onCancel"
-                android:textSize="14sp"/>
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/exit"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                android:textAlignment="center" />
 
-            <View
-                android:layout_width="30dp"
-                android:layout_height="match_parent"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/realy_exit"
+                android:textSize="24sp"
+                android:layout_marginHorizontal="20sp"
+                android:textAlignment="center"/>
 
-            <Button
-                android:id="@+id/bt_sign_out"
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="@string/sign_out"
-                android:background="@drawable/round_corner_button"
-                android:onClick="onSignOut"
-                android:textSize="14sp" />
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp">
+
+                <Button
+                    android:id="@+id/bt_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/cancel"
+                    android:background="@drawable/round_corner_button"
+                    android:onClick="onCancel"
+                    android:textSize="14sp"/>
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"/>
+
+                <Button
+                    android:id="@+id/bt_sign_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/sign_out"
+                    android:background="@drawable/round_corner_button"
+                    android:onClick="onSignOut"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
 
 
 
-    </LinearLayout>
 
-</ScrollView>
+
+</LinearLayout>

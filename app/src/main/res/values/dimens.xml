@@ -8,4 +8,7 @@
     <dimen name="dialog_width">350dp</dimen>
     <dimen name="chat_list_item_height">84dp</dimen>
     <dimen name="chat_list_item_corner_left_radius">1000dp</dimen>
+    <dimen name="dialog_margin_tool_bar">60dp</dimen>
+    <dimen name="dialog_margin_no_tool_bar">30dp</dimen>
+    <dimen name="dialog_margin_no_tool_bar_1">4dp</dimen>
 </resources>
