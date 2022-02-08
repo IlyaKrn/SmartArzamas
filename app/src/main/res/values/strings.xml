@@ -75,5 +75,6 @@
     <string name="search">Поиск</string>
     <string name="my_message_name">Вы</string>
     <string name="icon_has_been_changed">Изображение изменено</string>
+    <string name="chat_settings">О чате</string>
 
 </resources>
