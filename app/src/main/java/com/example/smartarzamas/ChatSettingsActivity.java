@@ -17,6 +17,7 @@ import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogChatDescriptionChange;
+import com.example.smartarzamas.ui.DialogChatIconChange;
 import com.example.smartarzamas.ui.DialogChatNameChange;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.OnIconChangeListener;
@@ -73,7 +74,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
         btChangeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogUserIconChange dialog = new DialogUserIconChange(ChatSettingsActivity.this, user);
+                DialogChatIconChange dialog = new DialogChatIconChange(ChatSettingsActivity.this, user, chat);
                 dialog.create(R.id.fragmentContainerView);
                 dialog.setOnIconChangeListener(new OnIconChangeListener() {
                     @Override

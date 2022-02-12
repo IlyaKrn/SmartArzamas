@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/round_corner_dialog">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/change_image"
+                android:textSize="48sp"
+                android:textStyle="bold"
+                android:textAlignment="center" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dialog_width"
+                android:layout_marginHorizontal="20sp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_launcher_background"
+                    android:visibility="visible" />
+                <ProgressBar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:id="@+id/progress"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="30dp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="10dp">
+
+                <Button
+                    android:id="@+id/bt_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/cancel"
+                    android:background="@drawable/round_corner_button"
+                    android:onClick="onCancel"
+                    android:textSize="14sp"/>
+
+                <View
+                    android:id="@+id/change_view_barrier"
+                    android:layout_width="30dp"
+                    android:visibility="gone"
+                    android:layout_height="match_parent"/>
+
+                <Button
+                    android:id="@+id/bt_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/change"
+                    android:visibility="gone"
+                    android:background="@drawable/round_corner_button"
+                    android:onClick="onAddNewLocate"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"/>
+
+                <Button
+                    android:id="@+id/bt_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/select_img"
+                    android:background="@drawable/round_corner_button"
+                    android:onClick="onAddNewLocate"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+</LinearLayout>

@@ -82,5 +82,6 @@
     <string name="user_change_description_neme">изменил описание чата с</string>
     <string name="change_description">Изменить описание</string>
     <string name="chat_desription">Описание</string>
+    <string name="user_change_chat_image">изменил изображение</string>
 
 </resources>
