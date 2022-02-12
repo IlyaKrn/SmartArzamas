@@ -68,9 +68,9 @@
     <string name="select_img">Выбрать изображение</string>
     <string name="change_image">Изменить изображение</string>
     <string name="title_activity_hub">HubActivity</string>
-    <string name="title_map">Map</string>
-    <string name="title_all_chats">All chats</string>
-    <string name="title_my_chats">My chats</string>
+    <string name="title_map">Карта</string>
+    <string name="title_all_chats">Все чаты</string>
+    <string name="title_my_chats">Мои чаты</string>
     <string name="error_of_email_send">Ошибка отправки</string>
     <string name="search">Поиск</string>
     <string name="my_message_name">Вы</string>

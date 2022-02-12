@@ -45,6 +45,10 @@ public class DialogUserNameAndFamilyChange extends Dialog{
         etName = rootView.findViewById(R.id.et_user_name);
         etFamily = rootView.findViewById(R.id.et_user_family);
 
+        // установка текуцщих значений
+        etName.setText(user.name);
+        etFamily.setText(user.family);
+
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,9 +64,6 @@ public class DialogUserNameAndFamilyChange extends Dialog{
                 // скрытие предупреждений о некорректных данных
                 Utils.hideWarning(tvNameErr);
                 Utils.hideWarning(tvFamilyErr);
-                // установка текуцщих значений
-                etName.setText(user.name);
-                etFamily.setText(user.family);
                 // если поля ввода не пустые
                 if (name.length() > 0 && family.length() > 0){
                     User buffUser = user;
