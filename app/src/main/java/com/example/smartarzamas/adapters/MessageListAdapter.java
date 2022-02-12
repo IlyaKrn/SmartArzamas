@@ -3,11 +3,13 @@ package com.example.smartarzamas.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
+import com.example.smartarzamas.firebaseobjects.OnGetIcons;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
@@ -74,6 +77,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     class MessageHolder extends RecyclerView.ViewHolder{
 
+        TableLayout notMy_tlImages;
         ProgressBar notMy_progressImage;
         TextView notMy_tvMessage;
         TextView notMy_tvName;
@@ -81,6 +85,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         TextView notMy_tvDate;
         View notMy_itemBody;
 
+        TableLayout my_tlImages;
         View my_itemBody;
         TextView my_tvMessage;
         TextView my_tvName;
@@ -102,12 +107,13 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             notMy_tvDate = this.itemView.findViewById(R.id.not_my_tv_date);
             notMy_itemBody = this.itemView.findViewById(R.id.not_my_item_body);
             notMy_progressImage = this.itemView.findViewById(R.id.not_my_progress);
-
+            notMy_tlImages = itemView.findViewById(R.id.not_my_lv_images);
 
             my_itemBody = this.itemView.findViewById(R.id.my_item_body);
             my_tvMessage = this.itemView.findViewById(R.id.my_tv_message);
             my_tvName = this.itemView.findViewById(R.id.my_tv_user_name);
             my_tvDate = this.itemView.findViewById(R.id.my_tv_date);
+            my_tlImages = itemView.findViewById(R.id.my_lv_images);
 
             system_itemBody = this.itemView.findViewById(R.id.system_item_body);
             system_tvMessage = this.itemView.findViewById(R.id.system_tv_message);
@@ -117,6 +123,18 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         public void bind(int listIndex){
             m = messages.get(listIndex);
+            if (m.imageRefs != null){
+                m.getIconsAsync(context, new OnGetIcons() {
+                    @Override
+                    public void onGet(ArrayList<Bitmap> bitmaps) {
+
+                    }
+                });
+
+            }
+
+
+
             if (m.userId != null) {
                 if (m.userId.equals(user.id)) {
                     showMyMessage();

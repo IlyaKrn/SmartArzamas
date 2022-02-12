@@ -4,6 +4,7 @@ import static com.example.smartarzamas.firebaseobjects.FirebaseObject.ICONS_REF;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,43 @@ public class Message implements Serializable {
     }
 
     public Message() {
+    }
+
+    public void getIconsAsync(Context context, OnGetIcons onGetIcon){
+        if (imageRefs == null){
+            onGetIcon.onGet(null);
+        }
+        else {
+            Utils.isConnected(context, new Utils.Connection() {
+                @Override
+                public void isConnected() {
+                    ArrayList<Bitmap> bitmaps = new ArrayList<>();
+                    final int[] count = {0};
+                    for (int i = 0; i < imageRefs.size(); i++) {
+                        FirebaseStorage.getInstance().getReference().child(imageRefs.get(i)).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
+                            @Override
+                            public void onComplete(@NonNull Task<byte[]> task) {
+                                try {
+                                    count[0]++;
+                                    if (task.getResult() != null) {
+                                        Bitmap b = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+                                        bitmaps.add(b);
+                                        if (count[0] == imageRefs.size()){
+                                            onGetIcon.onGet(bitmaps);
+                                        }
+                                    }
+                                } catch (Exception e){
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+                    }
+
+                }
+            });
+        }
+
     }
 
 
