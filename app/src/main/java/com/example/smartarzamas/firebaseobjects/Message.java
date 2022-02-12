@@ -2,9 +2,10 @@ package com.example.smartarzamas.firebaseobjects;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Message {
+public class Message implements Serializable {
     public String id;
     public String message;
     public String userId;

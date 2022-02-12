@@ -121,7 +121,7 @@ public class ChatActivity extends FirebaseActivity {
                             // ямы на дорогах
                             case R.id.chat_settings:
                                 Intent intent = new Intent(ChatActivity.this, ChatSettingsActivity.class);
-                                intent.putExtra(CHAT_ID, chat.id);
+                                intent.putExtra(CHAT_ID, chat);
                                 intent.putExtra(USER_INTENT, user);
                                 startActivity(intent);
                                 break;
