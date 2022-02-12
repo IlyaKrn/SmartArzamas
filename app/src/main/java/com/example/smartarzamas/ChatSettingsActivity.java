@@ -16,9 +16,9 @@ import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.ui.DialogChatDescriptionChange;
 import com.example.smartarzamas.ui.DialogChatNameChange;
 import com.example.smartarzamas.ui.DialogUserIconChange;
-import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
 import com.example.smartarzamas.ui.OnIconChangeListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,7 +29,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
     private ImageButton btClose;
     private Button btChangeName;
     private Button btChangeIcon;
-    private Button btDeleteChat;
+    private Button btChangedescription;
     private ImageView chatIcon;
     private TextView tvChatName;
     private TextView tvChatDescription;
@@ -57,10 +57,11 @@ public class ChatSettingsActivity extends FirebaseActivity {
         };
         dbChats.child(chat.id).addValueEventListener(chatListener);
 
-        btDeleteChat.setOnClickListener(new View.OnClickListener() {
+        btChangedescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                DialogChatDescriptionChange dialog = new DialogChatDescriptionChange(ChatSettingsActivity.this, user, chat);
+                dialog.create(R.id.fragmentContainerView);
             }
         });
         btClose.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +107,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
         rvMembers = findViewById(R.id.rv_members);
         btChangeIcon = findViewById(R.id.bt_change_chat_icon);
         btChangeName = findViewById(R.id.bt_change_chat_name);
-        btDeleteChat = findViewById(R.id.bt_delete_chat);
+        btChangedescription = findViewById(R.id.bt_change_chat_description);
         btClose = findViewById(R.id.bt_close);
     }
     private void updateViewData(){

@@ -98,25 +98,4 @@ public class Chat extends FirebaseObject {
             }
         });
     }
-
-    public void addMessage(Context context, ArrayList<Message> messages, OnAddMessage onAddMessage){
-        Utils.isConnected(context, new Utils.Connection() {
-            @Override
-            public void isConnected() {
-                getDatabase().child(Chat.this.id).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        dataSnapshot.child("messages").getRef().setValue(messages);
-                        onAddMessage.onAdd();
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-            }
-        });
-
-    }
-
 }

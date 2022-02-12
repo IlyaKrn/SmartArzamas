@@ -153,8 +153,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/black"
                 android:layout_gravity="center"
-                android:textAlignment="center"
-                android:background="@drawable/ripple"/>
+                android:textAlignment="center"/>
 
             <LinearLayout
                 android:id="@+id/system_lv_images"
