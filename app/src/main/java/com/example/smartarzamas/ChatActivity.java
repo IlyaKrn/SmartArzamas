@@ -86,32 +86,56 @@ public class ChatActivity extends FirebaseActivity {
                     if (messageList.get(0).equals(NULL_MESSAGE))
                         messageList.remove(0);
                     Message m = new Message(massege, user.id, dbChats.push().getKey(), null);
-                    final int[] count = {0};
-                    for (int i = 0; i < imagesForSend.size(); i++) {
-                        m.addImageAsync(getApplicationContext(), chat, imagesForSend.get(i), new OnSetIcon() {
-                            @Override
-                            public void onSet(String ref, Bitmap bitmap) {
-                                count[0]++;
-                                if (count[0] == imagesForSend.size()){
-                                    messageList.add(m);
-                                    Utils.isConnected(getApplicationContext(), new Utils.Connection() {
-                                        @Override
-                                        public void isConnected() {
-                                            dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                @Override
-                                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                                    dataSnapshot.child("messages").getRef().setValue(messageList);
-                                                    scrollMessages();
-                                                    etSend.setText("");
-                                                }
+                    if (imagesForSend.size() > 0) {
+                        final int[] count = {0};
+                        for (int i = 0; i < imagesForSend.size(); i++) {
+                            m.addImageAsync(getApplicationContext(), chat, imagesForSend.get(i), new OnSetIcon() {
+                                @Override
+                                public void onSet(String ref, Bitmap bitmap) {
+                                    count[0]++;
+                                    if (count[0] == imagesForSend.size()) {
+                                        messageList.add(m);
+                                        Utils.isConnected(getApplicationContext(), new Utils.Connection() {
+                                            @Override
+                                            public void isConnected() {
+                                                dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                                        dataSnapshot.child("messages").getRef().setValue(messageList);
+                                                        scrollMessages();
+                                                        etSend.setText("");
+                                                        imagesForSend.clear();
+                                                    }
 
-                                                @Override
-                                                public void onCancelled(DatabaseError databaseError) {
-                                                }
-                                            });
-                                        }
-                                    });
+                                                    @Override
+                                                    public void onCancelled(DatabaseError databaseError) {
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
                                 }
+                            });
+                        }
+                    }
+                    else {
+                        messageList.add(m);
+                        Utils.isConnected(getApplicationContext(), new Utils.Connection() {
+                            @Override
+                            public void isConnected() {
+                                dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        dataSnapshot.child("messages").getRef().setValue(messageList);
+                                        scrollMessages();
+                                        etSend.setText("");
+                                        imagesForSend.clear();
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                    }
+                                });
                             }
                         });
                     }
