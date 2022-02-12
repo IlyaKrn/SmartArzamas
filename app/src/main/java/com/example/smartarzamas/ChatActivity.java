@@ -2,21 +2,26 @@ package com.example.smartarzamas;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.adapters.MessageListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
+import com.example.smartarzamas.firebaseobjects.FirebaseObject;
 import com.example.smartarzamas.firebaseobjects.Message;
+import com.example.smartarzamas.firebaseobjects.OnSetIcon;
 import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.support.Utils;
 import com.google.firebase.database.DataSnapshot;
@@ -80,33 +85,44 @@ public class ChatActivity extends FirebaseActivity {
                     String massege = etSend.getText().toString();
                     if (messageList.get(0).equals(NULL_MESSAGE))
                         messageList.remove(0);
-                    messageList.add(new Message(massege, user.id, dbChats.push().getKey(), imagesForSend));
+                    Message m = new Message(massege, user.id, dbChats.push().getKey(), null);
+                    final int[] count = {0};
+                    for (int i = 0; i < imagesForSend.size(); i++) {
+                        m.addImageAsync(getApplicationContext(), chat, imagesForSend.get(i), new OnSetIcon() {
+                            @Override
+                            public void onSet(String ref, Bitmap bitmap) {
+                                count[0]++;
+                                if (count[0] == imagesForSend.size()){
+                                    messageList.add(m);
+                                    Utils.isConnected(getApplicationContext(), new Utils.Connection() {
+                                        @Override
+                                        public void isConnected() {
+                                            dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    dataSnapshot.child("messages").getRef().setValue(messageList);
+                                                    scrollMessages();
+                                                    etSend.setText("");
+                                                }
 
-                    Utils.isConnected(getApplicationContext(), new Utils.Connection() {
-                        @Override
-                        public void isConnected() {
-                            dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    dataSnapshot.child("messages").getRef().setValue(messageList);
-                                    scrollMessages();
-                                    etSend.setText("");
+                                                @Override
+                                                public void onCancelled(DatabaseError databaseError) {
+                                                }
+                                            });
+                                        }
+                                    });
                                 }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                }
-                            });
-                        }
-                    });
-
+                            }
+                        });
+                    }
                 }
             }
         });
         btAddImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
             }
         });
         btChatSettings.setOnClickListener(new View.OnClickListener() {
@@ -180,5 +196,14 @@ public class ChatActivity extends FirebaseActivity {
     protected void onDestroy() {
         dbChats.child(chat.id).removeEventListener(chatDataListener);
         super.onDestroy();
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && data.getData() != null && requestCode == 1){
+            ImageView iv = new ImageView(this);
+            iv.setImageURI(data.getData());
+            imagesForSend.add(((BitmapDrawable) iv.getDrawable()).getBitmap());
+        }
     }
 }
