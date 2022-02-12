@@ -76,5 +76,8 @@
     <string name="my_message_name">Вы</string>
     <string name="icon_has_been_changed">Изображение изменено</string>
     <string name="chat_settings">О чате</string>
+    <string name="user_change_chat_neme">изменил название чата с</string>
+    <string name="on">на</string>
+    <string name="change_name">Изменить название</string>
 
 </resources>

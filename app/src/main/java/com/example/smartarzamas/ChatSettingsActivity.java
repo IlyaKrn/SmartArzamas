@@ -16,6 +16,7 @@ import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.ui.DialogChatNameChange;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
 import com.example.smartarzamas.ui.OnIconChangeListener;
@@ -87,7 +88,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
                 Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                     @Override
                     public void isConnected() {
-                        DialogUserNameAndFamilyChange dialog = new DialogUserNameAndFamilyChange(ChatSettingsActivity.this, user);
+                        DialogChatNameChange dialog = new DialogChatNameChange(ChatSettingsActivity.this, user, chat);
                         dialog.create(R.id.fragmentContainerView);
                     }
                 });

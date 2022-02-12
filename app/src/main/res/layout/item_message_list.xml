@@ -147,12 +147,13 @@
                 android:id="@+id/system_tv_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical"
                 android:minHeight="?android:attr/listPreferredItemHeightSmall"
                 android:paddingStart="?android:attr/listPreferredItemPaddingStart"
                 android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/black"
+                android:layout_gravity="center"
+                android:textAlignment="center"
                 android:background="@drawable/ripple"/>
 
             <LinearLayout

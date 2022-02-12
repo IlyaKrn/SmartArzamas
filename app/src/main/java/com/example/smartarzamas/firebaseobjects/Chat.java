@@ -1,9 +1,13 @@
 package com.example.smartarzamas.firebaseobjects;
 
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.smartarzamas.support.Utils;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -84,6 +88,35 @@ public class Chat extends FirebaseObject {
                 getDatabase().child(id).removeEventListener(this);
             }
         });
+    }
+
+    public void setNewData(Chat chat, OnUpdateChat onUpdateChat){
+        getDatabase().child(this.id).setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                onUpdateChat.onUpdate(Chat.this);
+            }
+        });
+    }
+
+    public void addMessage(Context context, ArrayList<Message> messages, OnAddMessage onAddMessage){
+        Utils.isConnected(context, new Utils.Connection() {
+            @Override
+            public void isConnected() {
+                getDatabase().child(Chat.this.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        dataSnapshot.child("messages").getRef().setValue(messages);
+                        onAddMessage.onAdd();
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+            }
+        });
+
     }
 
 }
