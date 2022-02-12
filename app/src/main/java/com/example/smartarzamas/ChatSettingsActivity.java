@@ -3,17 +3,18 @@ package com.example.smartarzamas;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
-import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
@@ -24,16 +25,22 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ChatSettingsActivity extends FirebaseActivity {
 
+    private ImageButton btClose;
+    private Button btChangeName;
+    private Button btChangeIcon;
+    private Button btDeleteChat;
     private ImageView chatIcon;
-    private TextView chatName;
+    private TextView tvChatName;
+    private TextView tvChatDescription;
     private ProgressBar progressBar;
+    private RecyclerView rvMembers;
     private ValueEventListener chatListener;
     private Chat chat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_settings);
+        setContentView(R.layout.activity_chat_settings);
         init();
         updateViewData();
         chatListener = new ValueEventListener() {
@@ -48,43 +55,58 @@ public class ChatSettingsActivity extends FirebaseActivity {
             }
         };
         dbChats.child(chat.id).addValueEventListener(chatListener);
+
+        btDeleteChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        btClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        btChangeIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DialogUserIconChange dialog = new DialogUserIconChange(ChatSettingsActivity.this, user);
+                dialog.create(R.id.fragmentContainerView);
+                dialog.setOnIconChangeListener(new OnIconChangeListener() {
+                    @Override
+                    public void onChange(Bitmap bitmap) {
+                        chatIcon.setImageBitmap(bitmap);
+                    }
+                });
+            }
+        });
+        btChangeName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Utils.isConnected(getApplicationContext(), new Utils.Connection() {
+                    @Override
+                    public void isConnected() {
+                        DialogUserNameAndFamilyChange dialog = new DialogUserNameAndFamilyChange(ChatSettingsActivity.this, user);
+                        dialog.create(R.id.fragmentContainerView);
+                    }
+                });
+            }
+        });
+
     }
     // инициализация
     void init(){
         chat = (Chat) getIntent().getSerializableExtra(CHAT_ID);
-        chatIcon = findViewById(R.id.user_icon);
-        chatName = findViewById(R.id.user_name);
+        chatIcon = findViewById(R.id.chat_icon);
+        tvChatName = findViewById(R.id.chat_name);
+        tvChatDescription = findViewById(R.id.chat_description);
         progressBar = findViewById(R.id.progress);
-    }
-    // изменение имени и фамилии
-    public void onChangeUserNameAndFamily(View view) {
-        Utils.isConnected(getApplicationContext(), new Utils.Connection() {
-            @Override
-            public void isConnected() {
-                DialogUserNameAndFamilyChange dialog = new DialogUserNameAndFamilyChange(ChatSettingsActivity.this, user);
-                dialog.create(R.id.fragmentContainerView);
-            }
-        });
-    }
-    // закрытие активности
-    public void onCloseInfo(View view) {
-        finish();
-    }
-
-    public void onDeleteAccount(View view) {
-
-    }
-
-    public void onChangeUserIcon(View view) {
-        DialogUserIconChange dialog = new DialogUserIconChange(ChatSettingsActivity.this, user);
-        dialog.create(R.id.fragmentContainerView);
-        dialog.setOnIconChangeListener(new OnIconChangeListener() {
-            @Override
-            public void onChange(Bitmap bitmap) {
-                chatIcon.setImageBitmap(bitmap);
-            }
-        });
-
+        rvMembers = findViewById(R.id.rv_members);
+        btChangeIcon = findViewById(R.id.bt_change_chat_icon);
+        btChangeName = findViewById(R.id.bt_change_chat_name);
+        btDeleteChat = findViewById(R.id.bt_delete_chat);
+        btClose = findViewById(R.id.bt_close);
     }
     private void updateViewData(){
         if (chatIcon.getDrawable() == null){
@@ -95,7 +117,8 @@ public class ChatSettingsActivity extends FirebaseActivity {
             @Override
             public void onGet(Chat chat) {
                 ChatSettingsActivity.this.chat = chat;
-                chatName.setText(chat.name);
+                tvChatName.setText(chat.name);
+                tvChatDescription.setText(chat.description);
                 chat.getIconAsync(ChatSettingsActivity.this.getApplicationContext(), new OnGetIcon() {
                     public void onLoad(Bitmap bitmap) {
                         chatIcon.setImageBitmap(bitmap);
