@@ -27,6 +27,7 @@ import com.example.smartarzamas.support.IconView;
 import com.example.smartarzamas.support.TableImages;
 import com.example.smartarzamas.support.Utils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +39,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private final Context context;
     private final User user;
     private Map<String, Bitmap> savedIcons = new HashMap<>();
+    private Map<String, ArrayList<Bitmap>> savedImages = new HashMap<>();
+
 
     public MessageListAdapter(Context context, ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
         this.context = context;
@@ -133,25 +136,42 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             my_tlImages.removeBitmaps();
 
             if (m.imageRefs != null){
-                m.getIconsAsync(context, new OnGetIcons() {
-                    @Override
-                    public void onGet(ArrayList<Bitmap> bitmaps, Message message) {
-                        if (m.equals(message)) {
-                            if (m.userId != null){
-                                if (m.userId.equals(user.id)){
-                                    my_tlImages.setBitmaps(bitmaps);
-                                }
-                                else {
-                                    notMy_tlImages.setBitmaps(bitmaps);
-                                }
-                            }
-                            else {
-                                system_tlImages.setBitmaps(bitmaps);
-                            }
+                if (savedImages.get(m.id) != null){
+                    ArrayList<Bitmap> bitmaps = savedImages.get(m.id);
+                    if (m.userId != null){
+                        if (m.userId.equals(user.id)){
+                            my_tlImages.setBitmaps(bitmaps);
+                        }
+                        else {
+                            notMy_tlImages.setBitmaps(bitmaps);
                         }
                     }
-                });
+                    else {
+                        system_tlImages.setBitmaps(bitmaps);
+                    }
+                }
+                else {
+                    m.getIconsAsync(context, new OnGetIcons() {
+                        @Override
+                        public void onGet(ArrayList<Bitmap> bitmaps, Message message) {
+                            savedImages.put(message.id, bitmaps);
+                            if (m.equals(message)) {
+                                if (m.userId != null){
+                                    if (m.userId.equals(user.id)){
+                                        my_tlImages.setBitmaps(bitmaps);
+                                    }
+                                    else {
+                                        notMy_tlImages.setBitmaps(bitmaps);
+                                    }
+                                }
+                                else {
+                                    system_tlImages.setBitmaps(bitmaps);
+                                }
+                            }
+                        }
+                    });
 
+                }
             }
             else {
                 system_tlImages.removeBitmaps();
