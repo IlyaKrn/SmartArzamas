@@ -127,21 +127,36 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         public void bind(int listIndex){
             m = messages.get(listIndex);
+
+            system_tlImages.removeBitmaps();
+            notMy_tlImages.removeBitmaps();
+            my_tlImages.removeBitmaps();
+
             if (m.imageRefs != null){
                 m.getIconsAsync(context, new OnGetIcons() {
                     @Override
                     public void onGet(ArrayList<Bitmap> bitmaps, Message message) {
                         if (m.equals(message)) {
-                            my_itemBody.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
-                            notMy_itemBody.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
-                            system_itemBody.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
-                            system_tlImages.setBitmaps(bitmaps);
-                            notMy_tlImages.setBitmaps(bitmaps);
-                            my_tlImages.setBitmaps(bitmaps);
+                            if (m.userId != null){
+                                if (m.userId.equals(user.id)){
+                                    my_tlImages.setBitmaps(bitmaps);
+                                }
+                                else {
+                                    notMy_tlImages.setBitmaps(bitmaps);
+                                }
+                            }
+                            else {
+                                system_tlImages.setBitmaps(bitmaps);
+                            }
                         }
                     }
                 });
 
+            }
+            else {
+                system_tlImages.removeBitmaps();
+                notMy_tlImages.removeBitmaps();
+                my_tlImages.removeBitmaps();
             }
 
 
@@ -152,6 +167,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                     my_tvMessage.setText(m.message);
                     my_tvName.setText(R.string.my_message_name);
                     my_tvDate.setText(Utils.getDateString());
+
                 }
                 else {
                     showNotMyMessage();

@@ -31,8 +31,6 @@ public class TableImages extends TableLayout {
         this.bitmaps = bitmaps;
         if (bitmaps.size() > 0){
             fillTable();
-            setVisibility(VISIBLE);
-            setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
 
     }
@@ -61,6 +59,10 @@ public class TableImages extends TableLayout {
         }
 
 
+    }
+
+    public void removeBitmaps(){
+        removeAllViews();
     }
 
 
