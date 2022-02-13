@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,6 +24,7 @@ import com.example.smartarzamas.firebaseobjects.OnGetIcons;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
+import com.example.smartarzamas.support.TableImages;
 import com.example.smartarzamas.support.Utils;
 
 import java.util.ArrayList;
@@ -77,7 +80,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     class MessageHolder extends RecyclerView.ViewHolder{
 
-        TableLayout notMy_tlImages;
+        TableImages notMy_tlImages;
         ProgressBar notMy_progressImage;
         TextView notMy_tvMessage;
         TextView notMy_tvName;
@@ -85,7 +88,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         TextView notMy_tvDate;
         View notMy_itemBody;
 
-        TableLayout my_tlImages;
+        TableImages my_tlImages;
         View my_itemBody;
         TextView my_tvMessage;
         TextView my_tvName;
@@ -94,6 +97,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         View system_itemBody;
         TextView system_tvMessage;
         TextView system_tvDate;
+        TableImages system_tlImages;
 
         User u;
         Message m;
@@ -118,7 +122,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             system_itemBody = this.itemView.findViewById(R.id.system_item_body);
             system_tvMessage = this.itemView.findViewById(R.id.system_tv_message);
             system_tvDate = this.itemView.findViewById(R.id.system_tv_date);
-
+            system_tlImages = itemView.findViewById(R.id.system_lv_images);
         }
 
         public void bind(int listIndex){
@@ -126,8 +130,15 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             if (m.imageRefs != null){
                 m.getIconsAsync(context, new OnGetIcons() {
                     @Override
-                    public void onGet(ArrayList<Bitmap> bitmaps) {
-
+                    public void onGet(ArrayList<Bitmap> bitmaps, Message message) {
+                        if (m.equals(message)) {
+                            my_itemBody.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+                            notMy_itemBody.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+                            system_itemBody.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT));
+                            system_tlImages.setBitmaps(bitmaps);
+                            notMy_tlImages.setBitmaps(bitmaps);
+                            my_tlImages.setBitmaps(bitmaps);
+                        }
                     }
                 });
 

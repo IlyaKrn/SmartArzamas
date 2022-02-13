@@ -64,10 +64,10 @@
                 android:textColor="@color/black"
                 android:background="@drawable/ripple"/>
 
-            <TableLayout
+            <com.example.smartarzamas.support.TableImages
                 android:id="@+id/not_my_lv_images"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"/>
 
             <TextView
@@ -117,10 +117,10 @@
                 android:textColor="@color/black"
                 android:background="@drawable/ripple"/>
 
-            <TableLayout
+            <com.example.smartarzamas.support.TableImages
                 android:id="@+id/my_lv_images"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"/>
 
             <TextView
@@ -155,10 +155,10 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"/>
 
-            <LinearLayout
+            <com.example.smartarzamas.support.TableImages
                 android:id="@+id/system_lv_images"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"/>
 
             <TextView

@@ -6,5 +6,5 @@ import java.util.ArrayList;
 import java.util.BitSet;
 
 public interface OnGetIcons {
-    void onGet(ArrayList<Bitmap> bitmaps);
+    void onGet(ArrayList<Bitmap> bitmaps, Message message);
 }

@@ -40,7 +40,7 @@ public class Message implements Serializable {
 
     public void getIconsAsync(Context context, OnGetIcons onGetIcon){
         if (imageRefs == null){
-            onGetIcon.onGet(null);
+            onGetIcon.onGet(null, this);
         }
         else {
             Utils.isConnected(context, new Utils.Connection() {
@@ -58,7 +58,7 @@ public class Message implements Serializable {
                                         Bitmap b = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
                                         bitmaps.add(b);
                                         if (count[0] == imageRefs.size()){
-                                            onGetIcon.onGet(bitmaps);
+                                            onGetIcon.onGet(bitmaps, Message.this);
                                         }
                                     }
                                 } catch (Exception e){
