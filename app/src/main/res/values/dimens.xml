@@ -11,4 +11,7 @@
     <dimen name="dialog_margin_tool_bar">60dp</dimen>
     <dimen name="dialog_margin_no_tool_bar">30dp</dimen>
     <dimen name="dialog_margin_no_tool_bar_1">4dp</dimen>
+    <dimen name="margin_user_message">100dp</dimen>
+    <dimen name="margin_system_message">15dp</dimen>
+    <dimen name="margin_parent_message_layout">40dp</dimen>
 </resources>

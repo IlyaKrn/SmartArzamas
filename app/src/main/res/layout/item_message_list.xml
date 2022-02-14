@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginRight="40dp"
+    android:layout_marginHorizontal="@dimen/margin_parent_message_layout"
     android:layout_margin="3dp">
 
     <LinearLayout
@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginRight="100dp"
+        android:layout_marginEnd="@dimen/margin_user_message"
         android:background="@drawable/round_corner_message">
 
         <LinearLayout
@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="end"
-        android:layout_marginLeft="100dp"
+        android:layout_marginStart="@dimen/margin_user_message"
         android:background="@drawable/round_corner_message">
 
 
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="bottom|center"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginHorizontal="@dimen/margin_system_message"
         android:background="@color/invisible">
 
             <TextView
