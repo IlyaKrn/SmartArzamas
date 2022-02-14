@@ -16,8 +16,8 @@
         android:background="@drawable/round_corner_message">
 
         <LinearLayout
-            android:layout_width="?android:attr/listPreferredItemHeightSmall"
-            android:layout_height="?android:attr/listPreferredItemHeightSmall"
+            android:layout_width="@dimen/icon_message"
+            android:layout_height="@dimen/icon_message"
             android:layout_marginHorizontal="1dp"
             android:layout_marginVertical="20dp"
             android:layout_gravity="top"

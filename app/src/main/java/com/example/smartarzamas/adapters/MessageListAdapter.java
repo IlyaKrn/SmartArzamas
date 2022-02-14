@@ -140,14 +140,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                     ArrayList<Bitmap> bitmaps = savedImages.get(m.id);
                     if (m.userId != null){
                         if (m.userId.equals(user.id)){
-                            my_tlImages.setBitmaps(bitmaps);
+                            my_tlImages.setBitmaps(bitmaps, TableImages.RIGHT);
                         }
                         else {
-                            notMy_tlImages.setBitmaps(bitmaps);
+                            notMy_tlImages.setBitmaps(bitmaps, TableImages.LEFT);
                         }
                     }
                     else {
-                        system_tlImages.setBitmaps(bitmaps);
+                        system_tlImages.setBitmaps(bitmaps, TableImages.CENTER);
                     }
                 }
                 else {
@@ -158,14 +158,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                             if (m.equals(message)) {
                                 if (m.userId != null){
                                     if (m.userId.equals(user.id)){
-                                        my_tlImages.setBitmaps(bitmaps);
+                                        my_tlImages.setBitmaps(bitmaps, TableImages.RIGHT);
                                     }
                                     else {
-                                        notMy_tlImages.setBitmaps(bitmaps);
+                                        notMy_tlImages.setBitmaps(bitmaps, TableImages.LEFT);
                                     }
                                 }
                                 else {
-                                    system_tlImages.setBitmaps(bitmaps);
+                                    system_tlImages.setBitmaps(bitmaps, TableImages.CENTER);
                                 }
                             }
                         }

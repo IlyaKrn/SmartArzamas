@@ -14,4 +14,5 @@
     <dimen name="margin_user_message">100dp</dimen>
     <dimen name="margin_system_message">15dp</dimen>
     <dimen name="margin_parent_message_layout">40dp</dimen>
+    <dimen name="icon_message">48dp</dimen>
 </resources>
