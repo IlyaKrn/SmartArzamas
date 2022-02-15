@@ -65,11 +65,12 @@
                 android:textColor="@color/black"
                 android:background="@drawable/ripple"/>
 
-            <com.example.smartarzamas.support.TableImages
+            <com.example.smartarzamas.support.TableMessageImages
                 android:id="@+id/not_my_lv_images"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal"
+                app:messageType="not_my"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -118,11 +119,12 @@
                 android:textColor="@color/black"
                 android:background="@drawable/ripple"/>
 
-            <com.example.smartarzamas.support.TableImages
+            <com.example.smartarzamas.support.TableMessageImages
                 android:id="@+id/my_lv_images"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal"
+                app:messageType="my"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -156,11 +158,12 @@
                 android:layout_gravity="center"
                 android:textAlignment="center"/>
 
-            <com.example.smartarzamas.support.TableImages
+            <com.example.smartarzamas.support.TableMessageImages
                 android:id="@+id/system_lv_images"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"/>
+                android:orientation="horizontal"
+                app:messageType="system"/>
 
             <TextView
                 android:layout_width="match_parent"
