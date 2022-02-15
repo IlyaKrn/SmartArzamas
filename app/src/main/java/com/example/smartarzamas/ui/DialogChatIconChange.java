@@ -89,7 +89,9 @@ public class DialogChatIconChange extends Dialog{
                         onIconChangeListener.onChange(bitmap);
                         Chat buffChat = chat;
                         String message = user.name + " " + user.family + " " + getString(R.string.user_change_chat_image);
-                        buffChat.messages.add(new Message(message, null, Chat.getDatabase().push().getKey(), null));
+                        ArrayList<String> icon = new ArrayList<>();
+                        icon.add(ref);
+                        buffChat.messages.add(new Message(message, null, Chat.getDatabase().push().getKey(), icon));
 
                         chat.setNewData(buffChat, new OnUpdateChat() {
                             @Override
