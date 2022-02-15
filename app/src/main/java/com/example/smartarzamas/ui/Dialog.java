@@ -2,6 +2,7 @@ package com.example.smartarzamas.ui;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,9 +50,13 @@ public abstract class Dialog extends Fragment {
         currentDialogs.add(this);
     }
     public void destroy(){
-        fragmentManager.beginTransaction().remove(this).commit();
-        if (onDestroyListener != null) {
-            onDestroyListener.onDestroy();
+        try {
+            fragmentManager.beginTransaction().remove(this).commit();
+            if (onDestroyListener != null) {
+                onDestroyListener.onDestroy();
+            }
+        } catch (Exception e){
+            Log.w(LOG_TAG, e.getMessage());
         }
     }
 
