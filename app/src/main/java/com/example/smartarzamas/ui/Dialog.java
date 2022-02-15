@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.ArrayList;
+
 public abstract class Dialog extends Fragment {
 
     public static final String LOG_TAG = "FragmentTag";
@@ -19,6 +21,8 @@ public abstract class Dialog extends Fragment {
     protected View rootView;
     protected FragmentManager fragmentManager;
     protected Context context;
+
+    private static ArrayList<Dialog> currentDialogs = new ArrayList<>();
 
     private OnDestroyListener onDestroyListener;
 
@@ -38,7 +42,11 @@ public abstract class Dialog extends Fragment {
 
     }
     public void create(int containerId){
+        for (Dialog d : currentDialogs) {
+            d.destroy();
+        }
         fragmentManager.beginTransaction().add(containerId, this).commit();
+        currentDialogs.add(this);
     }
     public void destroy(){
         fragmentManager.beginTransaction().remove(this).commit();
@@ -50,4 +58,6 @@ public abstract class Dialog extends Fragment {
     public void setOnDestroyListener(OnDestroyListener onDestroyListener) {
         this.onDestroyListener = onDestroyListener;
     }
+    protected void freeze(){}
+    protected void defreeze(){}
 }

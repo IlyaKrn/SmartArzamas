@@ -79,6 +79,7 @@ public class DialogChatIconChange extends Dialog{
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                freeze();
                 progressBar.setVisibility(View.VISIBLE);
                 icon.setVisibility(View.GONE);
                 chat.setIconAsync(context, bitmap, new OnSetIcon() {
@@ -88,8 +89,6 @@ public class DialogChatIconChange extends Dialog{
                         onIconChangeListener.onChange(bitmap);
                         Chat buffChat = chat;
                         String message = user.name + " " + user.family + " " + getString(R.string.user_change_chat_image);
-                       // ArrayList<Bitmap> newIcon = new ArrayList<>();
-                     //   newIcon.add(bitmap);
                         buffChat.messages.add(new Message(message, null, Chat.getDatabase().push().getKey(), null));
 
                         chat.setNewData(buffChat, new OnUpdateChat() {
@@ -140,5 +139,20 @@ public class DialogChatIconChange extends Dialog{
         b.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] byteArray = stream.toByteArray();
         return byteArray;
+    }
+
+    @Override
+    protected void freeze() {
+        super.freeze();
+        change.setClickable(false);
+        cancel.setClickable(false);
+        select.setClickable(false);
+    }
+    @Override
+    protected void defreeze() {
+        super.freeze();
+        change.setClickable(true);
+        cancel.setClickable(true);
+        select.setClickable(true);
     }
 }

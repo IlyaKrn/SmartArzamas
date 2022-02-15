@@ -65,6 +65,7 @@ public class DialogChatNameChange extends Dialog{
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                freeze();
                 // получение введенных данных
                 final String name = etName.getText().toString();
                 final String preName = chat.name;
@@ -89,6 +90,7 @@ public class DialogChatNameChange extends Dialog{
                 // вывод предупреждения о пустых полях ввода
                 else {
                     Utils.showWarning(tvNameErr, R.string.enter_new_name);
+                    defreeze();
                 }
             }
         });
@@ -96,5 +98,19 @@ public class DialogChatNameChange extends Dialog{
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    @Override
+    protected void freeze() {
+        super.freeze();
+        change.setClickable(false);
+        cancel.setClickable(false);
+        etName.setClickable(false);
+    }
+    @Override
+    protected void defreeze() {
+        super.freeze();
+        change.setClickable(true);
+        cancel.setClickable(true);
+        etName.setClickable(true);
+    }
 
 }
