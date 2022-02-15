@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TableMessageImages">
+        <attr name="messageType" format="flags">
+            <flag name="system" value="1"/>
+            <flag name="my" value="2"/>
+            <flag name="not_my" value="3"/>
+        </attr>
+
+    </declare-styleable>
+
+</resources>

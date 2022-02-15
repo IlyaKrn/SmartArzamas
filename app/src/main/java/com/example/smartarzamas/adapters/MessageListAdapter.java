@@ -3,15 +3,10 @@ package com.example.smartarzamas.adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,10 +19,9 @@ import com.example.smartarzamas.firebaseobjects.OnGetIcons;
 import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
-import com.example.smartarzamas.support.TableImages;
+import com.example.smartarzamas.support.TableMessageImages;
 import com.example.smartarzamas.support.Utils;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,7 +77,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     class MessageHolder extends RecyclerView.ViewHolder{
 
-        TableImages notMy_tlImages;
+        TableMessageImages notMy_tlImages;
         ProgressBar notMy_progressImage;
         TextView notMy_tvMessage;
         TextView notMy_tvName;
@@ -91,7 +85,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         TextView notMy_tvDate;
         View notMy_itemBody;
 
-        TableImages my_tlImages;
+        TableMessageImages my_tlImages;
         View my_itemBody;
         TextView my_tvMessage;
         TextView my_tvName;
@@ -100,7 +94,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
         View system_itemBody;
         TextView system_tvMessage;
         TextView system_tvDate;
-        TableImages system_tlImages;
+        TableMessageImages system_tlImages;
 
         User u;
         Message m;
@@ -140,14 +134,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                     ArrayList<Bitmap> bitmaps = savedImages.get(m.id);
                     if (m.userId != null){
                         if (m.userId.equals(user.id)){
-                            my_tlImages.setBitmaps(bitmaps, TableImages.RIGHT);
+                            my_tlImages.setBitmaps(bitmaps);
                         }
                         else {
-                            notMy_tlImages.setBitmaps(bitmaps, TableImages.LEFT);
+                            notMy_tlImages.setBitmaps(bitmaps);
                         }
                     }
                     else {
-                        system_tlImages.setBitmaps(bitmaps, TableImages.CENTER);
+                        system_tlImages.setBitmaps(bitmaps);
                     }
                 }
                 else {
@@ -158,14 +152,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                             if (m.equals(message)) {
                                 if (m.userId != null){
                                     if (m.userId.equals(user.id)){
-                                        my_tlImages.setBitmaps(bitmaps, TableImages.RIGHT);
+                                        my_tlImages.setBitmaps(bitmaps);
                                     }
                                     else {
-                                        notMy_tlImages.setBitmaps(bitmaps, TableImages.LEFT);
+                                        notMy_tlImages.setBitmaps(bitmaps);
                                     }
                                 }
                                 else {
-                                    system_tlImages.setBitmaps(bitmaps, TableImages.CENTER);
+                                    system_tlImages.setBitmaps(bitmaps);
                                 }
                             }
                         }
