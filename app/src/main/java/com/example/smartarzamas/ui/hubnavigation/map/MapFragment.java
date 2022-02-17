@@ -1,6 +1,7 @@
 package com.example.smartarzamas.ui.hubnavigation.map;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +17,21 @@ import com.example.smartarzamas.R;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
 
-public class MapFragment extends HubNavigationCommon {
+public class MapFragment extends HubNavigationCommon implements OnMapReadyCallback {
 
     private MapViewModel mapViewModel;
     private NavigationFragmentMapBinding binding;
     private static MapFragmentCallback callback;
+    private SupportMapFragment mapView;
+    private GoogleMap googleMap;
 
     private FloatingActionButton fabAdd, fabCancel; // кнопки для взаимодействия с картой
     private boolean isAdd = false; // true = режим добавления метки
@@ -95,7 +101,8 @@ public class MapFragment extends HubNavigationCommon {
         mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
         binding = NavigationFragmentMapBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
+        mapView = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
+        mapView.getMapAsync(this);
         fabAdd = binding.fabAdd;
         fabCancel = binding.fabCancel;
     }
@@ -111,4 +118,9 @@ public class MapFragment extends HubNavigationCommon {
     }
 
 
+    @Override
+    public void onMapReady(@NonNull GoogleMap gMap) {
+        googleMap = gMap;
+        Log.e("dfgdfg", "fdgdfgdf");
+    }
 }
