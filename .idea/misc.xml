@@ -4,6 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable-v24/ic_profile.xml" value="0.1" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable-v24/ripple.xml" value="0.16296296296296298" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable/corner_default_button.xml" value="0.17962962962962964" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable/corner_default_dialog.xml" value="0.3828125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable/corner_grey_button.xml" value="0.3828125" />
+        <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable/corner_red_button.xml" value="0.3828125" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable/ic_baseline_message_24.xml" value="0.3828125" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable/ic_chats.xml" value="0.3828125" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.3828125" />
