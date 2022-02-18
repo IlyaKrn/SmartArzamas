@@ -22,11 +22,9 @@
             android:layout_gravity="center">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/registration"
-                android:textSize="48sp"
-                android:textStyle="bold" />
+                style="@style/default_title"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -152,11 +150,9 @@
             android:background="@color/invisible">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/enter"
-                android:textSize="48sp"
-                android:textStyle="bold" />
+                style="@style/default_title" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

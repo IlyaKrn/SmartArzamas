@@ -27,12 +27,7 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:textAlignment="viewStart"
-            android:textSize="30sp" />
+            style="@style/default_title_default_toolbar"/>
 
         <ImageButton
             android:id="@+id/bt_chat_menu"

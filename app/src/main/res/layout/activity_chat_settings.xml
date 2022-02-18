@@ -25,13 +25,8 @@
             app:srcCompat="?attr/actionModeCloseDrawable"/>
 
         <TextView
-            android:textSize="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAlignment="viewStart"
             android:text="@string/about_chat"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp" />
+            style="@style/default_title_default_toolbar" />
 
     </androidx.appcompat.widget.Toolbar>
 

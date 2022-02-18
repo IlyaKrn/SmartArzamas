@@ -26,12 +26,7 @@
             style="@style/default_toolbar_default_button"/>
 
         <TextView
-            android:textSize="30sp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAlignment="viewStart"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
+            style="@style/default_title_default_toolbar"
             android:text="@string/user_settings"/>
 
     </androidx.appcompat.widget.Toolbar>
