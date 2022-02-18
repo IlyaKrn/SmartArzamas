@@ -11,13 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleY="3"
-            android:src="@drawable/arzamas_background_auth_1"
-            android:visibility="gone"/>
+
         <LinearLayout
             android:visibility="visible"
             android:id="@+id/layout_sign_up"
@@ -118,15 +112,14 @@
                     android:layout_height="match_parent"
                     android:text="@string/sign_up"
                     android:visibility="gone"
-                    android:background="@drawable/round_corner_button"
-                    android:textSize="14sp" />
+                    style="@style/default_button"/>
                 <Button
                     android:id="@+id/bt_sign_up_up"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/sign_up"
-                    android:background="@drawable/round_corner_button"
-                    android:textSize="14sp" />
+
+                    style="@style/default_button"/>
                 <Button
                     android:id="@+id/bt_resend_varification_email_up"
                     android:layout_width="wrap_content"
@@ -215,10 +208,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/sign_in"
                     android:layout_gravity="center"
-                    android:background="@drawable/round_corner_button"
-                    android:onClick="onSignIn"
-                    android:textSize="14sp"
-                    tools:ignore="OnClick" />
+                    style="@style/default_button"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

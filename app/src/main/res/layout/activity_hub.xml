@@ -7,21 +7,20 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
+        style="@style/default_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/tool_bar"
-        android:contentInsetStart="0dp"
-        android:contentInsetLeft="0dp"
         android:elevation="4dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp">
+        android:contentInsetStart="4dp"
+        android:contentInsetLeft="4dp"
+        app:contentInsetEnd="4dp"
+        app:contentInsetRight="4dp"
+        app:contentInsetLeft="4dp"
+        app:contentInsetStart="4dp">
 
         <ImageButton
             android:id="@+id/bt_menu"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@android:drawable/ic_menu_sort_by_size"
-            android:background="@drawable/round_corner_button" />
+            style="@style/default_toolbar_default_button"
+            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
         <com.example.smartarzamas.support.EditTextSearch
             android:id="@+id/et_search"
@@ -29,27 +28,14 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:hint="@string/search"
-            android:textSize="23sp"/>
+            android:textSize="23sp" />
 
         <ImageButton
             android:id="@+id/bt_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            style="@style/default_toolbar_default_button"
             android:layout_gravity="end"
-            android:background="@drawable/round_corner_button"
-            app:srcCompat="@drawable/ic_profile"
-            android:scaleType="centerInside"/>
-
-        <ImageButton
-            android:id="@+id/bt_search"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="end"
-            app:srcCompat="@android:drawable/ic_menu_search"
-            android:background="@drawable/round_corner_button"  />
-
-
-
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_profile" />
 
 
     </androidx.appcompat.widget.Toolbar>
@@ -75,7 +61,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
-            android:background="?android:attr/windowBackground"
+            android:background="@color/tool_bar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

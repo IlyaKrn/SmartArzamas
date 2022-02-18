@@ -7,47 +7,40 @@
     tools:context=".ChatActivity"
     android:orientation="vertical">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"
+        style="@style/default_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/tool_bar"
-        android:contentInsetStart="0dp"
-        android:contentInsetLeft="0dp"
         android:elevation="4dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp">
+        android:contentInsetStart="4dp"
+        android:contentInsetLeft="4dp"
+        app:contentInsetEnd="4dp"
+        app:contentInsetRight="4dp"
+        app:contentInsetLeft="4dp"
+        app:contentInsetStart="4dp">
 
         <ImageButton
             android:id="@+id/bt_close"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="?attr/actionModeCloseDrawable"
-            android:onClick="onClose"
-            tools:ignore="OnClick"
-            android:background="@drawable/round_corner_button"/>
+            style="@style/default_toolbar_default_button"
+            app:srcCompat="?attr/actionModeCloseDrawable" />
 
         <TextView
             android:id="@+id/tv_name"
-            android:textSize="30sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textAlignment="viewStart"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:textAlignment="viewStart"
+            android:textSize="30sp" />
 
         <ImageButton
             android:id="@+id/bt_chat_menu"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            style="@style/default_toolbar_default_button"
             android:layout_gravity="end"
-            android:background="@drawable/round_corner_button"
-            android:onClick="onChatMenuOpen"
-            app:srcCompat="@android:drawable/ic_menu_sort_by_size"
-            tools:ignore="OnClick" />
+            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
     </androidx.appcompat.widget.Toolbar>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_messages"
@@ -58,22 +51,24 @@
         android:layout_marginBottom="50dp"
         android:transcriptMode="alwaysScroll" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/tool_bar"
+        style="@style/default_toolbar"
         android:layout_gravity="bottom"
-        android:orientation="horizontal"
-        android:background="@color/tool_bar">
+        android:layout_width="match_parent"
+        android:elevation="4dp"
+        android:contentInsetStart="4dp"
+        android:contentInsetLeft="4dp"
+        app:contentInsetEnd="4dp"
+        app:contentInsetRight="4dp"
+        app:contentInsetLeft="4dp"
+        app:contentInsetStart="4dp">
 
         <ImageButton
             android:id="@+id/bt_set_image"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            android:onClick="onAddImage"
-            android:background="@drawable/round_corner_button"
-            app:srcCompat="@android:drawable/ic_menu_add"
-            tools:ignore="OnClick" />
+            style="@style/default_toolbar_default_button"
+            android:layout_weight="1"
+            app:srcCompat="@android:drawable/ic_menu_add" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -85,7 +80,6 @@
                 android:id="@+id/et_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:maxHeight="120dp"
                 android:hint="Написать сообщение" />
 
@@ -94,15 +88,12 @@
 
         <ImageButton
             android:id="@+id/bt_send"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:onClick="onSend"
-            android:layout_gravity="bottom"
-            android:background="@drawable/round_corner_button"
-            app:srcCompat="@android:drawable/ic_menu_send"
-            tools:ignore="OnClick" />
+            android:layout_gravity="end"
+            android:layout_weight="1"
+            style="@style/default_toolbar_default_button"
+            app:srcCompat="@android:drawable/ic_menu_send" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
 
 </FrameLayout>

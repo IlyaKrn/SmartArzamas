@@ -9,21 +9,20 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"
+        style="@style/default_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/tool_bar"
-        android:contentInsetStart="0dp"
-        android:contentInsetLeft="0dp"
         android:elevation="4dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp">
+        android:contentInsetStart="4dp"
+        android:contentInsetLeft="4dp"
+        app:contentInsetEnd="4dp"
+        app:contentInsetRight="4dp"
+        app:contentInsetLeft="4dp"
+        app:contentInsetStart="4dp">
 
         <ImageButton
             android:id="@+id/bt_close"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="?attr/actionModeCloseDrawable"
-            android:background="@drawable/round_corner_button"/>
+            style="@style/default_toolbar_default_button"
+            app:srcCompat="?attr/actionModeCloseDrawable"/>
 
         <TextView
             android:textSize="30sp"
@@ -91,19 +90,19 @@
                     android:id="@+id/bt_change_chat_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round_corner_button"
+                    style="@style/default_button"
                     android:text="@string/refactor_image"/>
                 <Button
                     android:id="@+id/bt_change_chat_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round_corner_button"
+                    style="@style/default_button"
                     android:text="@string/refactor_name"/>
                 <Button
                     android:id="@+id/bt_change_chat_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/round_corner_button"
+                    style="@style/default_button"
                     android:text="@string/refactor_description"/>
             </LinearLayout>
 
