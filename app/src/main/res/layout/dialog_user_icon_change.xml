@@ -14,13 +14,9 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="120dp"
-                android:layout_gravity="center_horizontal"
-                android:text="@string/change_image"
-                android:textSize="48sp"
-                android:textStyle="bold"
-                android:textAlignment="center" />
+                style="@style/default_title"
+
+                android:text="@string/change_image"/>
 
 
             <LinearLayout
