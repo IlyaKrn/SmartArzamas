@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/round_corner_dialog">
+    style="@style/default_dialog">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -56,9 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/cancel"
-                    android:background="@drawable/round_corner_button"
-                    android:onClick="onCancel"
-                    android:textSize="14sp"/>
+                    style="@style/default_button"/>
 
                 <View
                     android:id="@+id/change_view_barrier"
@@ -72,9 +70,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/change"
                     android:visibility="gone"
-                    android:background="@drawable/round_corner_button"
-                    android:onClick="onAddNewLocate"
-                    android:textSize="14sp" />
+                    style="@style/default_button" />
 
                 <View
                     android:layout_width="30dp"
@@ -85,9 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/select_img"
-                    android:background="@drawable/round_corner_button"
-                    android:onClick="onAddNewLocate"
-                    android:textSize="14sp" />
+                    style="@style/default_button" />
 
             </LinearLayout>
 

@@ -65,9 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/cancel"
-                    android:background="@drawable/round_corner_button"
-                    android:onClick="onCancel"
-                    android:textSize="14sp"/>
+                    style="@style/default_button"/>
 
                 <View
                     android:layout_width="30dp"
@@ -78,9 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/change"
-                    android:background="@drawable/round_corner_button"
-                    android:onClick="onChange"
-                    android:textSize="14sp" />
+                    style="@style/default_button"/>
 
             </LinearLayout>
 
