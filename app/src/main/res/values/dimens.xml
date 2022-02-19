@@ -5,7 +5,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="default_material_barrier">4dp</dimen>
-    <dimen name="default_button_text_size">4dp</dimen>
+    <dimen name="default_button_text_size">16sp</dimen>
 
     <dimen name="dialog_width">350dp</dimen>
     <dimen name="chat_list_item_height">84dp</dimen>
