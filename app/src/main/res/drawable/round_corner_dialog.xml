@@ -2,9 +2,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android" >
     <stroke
         android:width="0dp"
-        android:color="@color/dialog_corner_background" />
+        android:color="@color/dialog_default_corner_background" />
 
-    <solid android:color="@color/dialog_corner_background" />
+    <solid android:color="@color/dialog_default_corner_background" />
 
     <padding
         android:left="0dp"

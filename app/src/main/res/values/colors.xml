@@ -1,17 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+
+
+    <color name="purple_100">#D1C4E9</color>
+    <color name="purple_200">#B39DDB</color>
+    <color name="purple_300">#9575CD</color>
+    <color name="purple_400">#7E57C2</color>
+    <color name="purple_500">#673AB7</color>
+    <color name="purple_600">#5E35B1</color>
+    <color name="purple_700">#512DA8</color>
+    <color name="purple_800">#4527A0</color>
+    <color name="purple_900">#311B92</color>
+
+    <color name="red_100">#F8BBD0</color>
+    <color name="red_200">#F48FB1</color>
+    <color name="red_300">#F06292</color>
+    <color name="red_400">#EC407A</color>
+    <color name="red_500">#E91E63</color>
+    <color name="red_600">#D81B60</color>
+    <color name="red_700">#C2185B</color>
+    <color name="red_800">#AD1457</color>
+    <color name="red_900">#880E4F</color>
+
+    <color name="grey_100">#F8BBD0</color>
+    <color name="grey_200">#F48FB1</color>
+    <color name="grey_300">#F06292</color>
+    <color name="grey_400">#EC407A</color>
+    <color name="grey_500">#E91E63</color>
+    <color name="grey_600">#D81B60</color>
+    <color name="grey_700">#C2185B</color>
+    <color name="grey_800">#AD1457</color>
+    <color name="grey_900">#880E4F</color>
+
     <color name="black">#000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="first_activity_button_text_color">#000000</color>
     <color name="invisible">#00FFFFFF</color>
-    <color name="dialog_corner_background">#AA00FF</color>
-    <color name="button">#FF6200EE</color>
-    <color name="tool_bar">#8E40FF</color>
+
+
+
+
+    <color name="button_default_text_color">@color/black</color>
+
+    <color name="default_button_color">@color/purple_500</color>
+    <color name="red_button_color">@color/red_500</color>
+    <color name="grey_button_color">@color/grey_500</color>
+
+    <color name="default_recycler_view_background">@color/white</color>
+
+    <color name="dialog_default_corner_background">@color/purple_500</color>
+
+    <color name="tool_bar">@color/purple_300</color>
+
+
     <color name="message_editor">#FFBB86FC</color>
     <color name="message">#FF6200EE</color>
     <color name="hyper_link">#000DFF</color>
