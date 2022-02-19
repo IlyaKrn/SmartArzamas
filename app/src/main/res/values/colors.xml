@@ -47,7 +47,7 @@
 
     <color name="default_recycler_view_background">@color/white</color>
 
-    <color name="dialog_default_corner_background">@color/purple_500</color>
+    <color name="dialog_default_corner_background">@color/purple_300</color>
 
     <color name="tool_bar">@color/purple_300</color>
 
