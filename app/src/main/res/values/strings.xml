@@ -83,5 +83,9 @@
     <string name="change_description">Изменить описание</string>
     <string name="chat_desription">Описание</string>
     <string name="user_change_chat_image">изменил изображение</string>
+    <string name="title_activity_admin_hub">AdminHubActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>

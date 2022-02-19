@@ -9,18 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-
+        <activity
+            android:name=".AdminHubActivity"
+            android:exported="true"
+            android:label="@string/title_activity_admin_hub"
+            android:theme="@style/Theme.Design" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-
         <activity
             android:name=".HubActivity"
-            android:theme="@style/Theme.Design"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.Design" />
         <activity
             android:name=".UserSettingsActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
