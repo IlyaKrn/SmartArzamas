@@ -30,6 +30,14 @@
         <item name="android:textColor">@color/button_default_text_color</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="link_button">
+        <item name="android:background">@color/invisible</item>
+        <item name="android:padding">@dimen/default_material_barrier</item>
+        <item name="android:layout_margin">@dimen/default_material_barrier</item>
+        <item name="android:textSize">@dimen/link_button_text_size</item>
+        <item name="android:textColor">@color/hyper_link</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
 
 
 
@@ -81,4 +89,5 @@
         <item name="android:transcriptMode">alwaysScroll</item>
     </style>
 
+    <dimen name="link_button_text_size">14sp</dimen>
 </resources>
