@@ -4,6 +4,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="default_material_barrier">4dp</dimen>
+    <dimen name="default_button_text_size">4dp</dimen>
 
     <dimen name="dialog_width">350dp</dimen>
     <dimen name="chat_list_item_height">84dp</dimen>
@@ -15,4 +17,5 @@
     <dimen name="margin_system_message">15dp</dimen>
     <dimen name="margin_parent_message_layout">40dp</dimen>
     <dimen name="icon_message">48dp</dimen>
+    <dimen name="button_corner_default_radius">8dp</dimen>
 </resources>
