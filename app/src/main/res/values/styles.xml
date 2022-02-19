@@ -90,5 +90,17 @@
         <item name="android:transcriptMode">alwaysScroll</item>
     </style>
 
-    <dimen name="link_button_text_size">14sp</dimen>
+    <style name="default_message_list_item">
+        <item name="android:background">@drawable/corner_default_message_list_item</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+    <style name="system_message_list_item">
+        <item name="android:background">@color/invisible</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+
 </resources>

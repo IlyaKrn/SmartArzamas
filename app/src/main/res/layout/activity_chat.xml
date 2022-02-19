@@ -43,7 +43,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="?attr/actionBarSize"
         android:transcriptMode="alwaysScroll" />
 
     <androidx.appcompat.widget.Toolbar

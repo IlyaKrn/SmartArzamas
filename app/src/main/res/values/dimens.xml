@@ -6,6 +6,7 @@
 
     <dimen name="default_material_barrier">4dp</dimen>
     <dimen name="default_button_text_size">16sp</dimen>
+    <dimen name="link_button_text_size">14sp</dimen>
 
     <dimen name="dialog_width">350dp</dimen>
     <dimen name="chat_list_item_height">84dp</dimen>
@@ -18,4 +19,6 @@
     <dimen name="margin_parent_message_layout">40dp</dimen>
     <dimen name="icon_message">48dp</dimen>
     <dimen name="button_corner_default_radius">8dp</dimen>
+    <dimen name="corner_message_default_radius">8dp</dimen>
+    <dimen name="default_message_item_margin">@dimen/default_material_barrier</dimen>
 </resources>
