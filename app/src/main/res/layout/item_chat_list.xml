@@ -35,8 +35,13 @@
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/chat_list_item_height"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/chat_list_item_height"
+                android:orientation="vertical"
+                android:layout_marginEnd="30dp">
 
                 <TextView
                     android:id="@+id/tv_name"
@@ -60,7 +65,19 @@
                     android:textStyle="italic"
                     android:textSize="16sp"/>
 
+            </FrameLayout>
+
+
+            <ImageButton
+                android:id="@+id/bt_item_menu"
+                android:layout_width="30dp"
+                android:layout_height="80dp"
+                android:background="@color/white"
+                android:layout_gravity="end"/>
+
         </FrameLayout>
+
+
 
 
     </LinearLayout>

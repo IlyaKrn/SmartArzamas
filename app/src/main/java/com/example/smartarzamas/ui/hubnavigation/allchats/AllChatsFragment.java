@@ -65,7 +65,7 @@ public class AllChatsFragment extends HubNavigationCommon {
             }
         };
 
-        adapter = new ChatListAdapter(getActivity().getApplicationContext(), chatList, new ChatListAdapter.OnStateClickListener() {
+        adapter = new ChatListAdapter(getActivity().getApplicationContext(), chatList, user, new ChatListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(String chatId) {
                 Intent intent = new Intent(AllChatsFragment.this.getActivity(), ChatActivity.class);

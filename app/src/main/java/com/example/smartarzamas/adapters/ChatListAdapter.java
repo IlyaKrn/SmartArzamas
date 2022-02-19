@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
+import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
 
 import java.util.ArrayList;
@@ -28,11 +31,13 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
     private final OnStateClickListener onClickListener;
     private final Context context;
     private final ArrayList<Chat> chats;
+    private User user;
 
     private Map<String, Bitmap> savedIcons = new HashMap<>();
 
 
-    public ChatListAdapter(Context context, ArrayList<Chat> chats, OnStateClickListener onClickListener) {
+    public ChatListAdapter(Context context, ArrayList<Chat> chats, User user, OnStateClickListener onClickListener) {
+        this.user = user;
         this.context = context;
         this.chats = chats;
         this.onClickListener = onClickListener;
@@ -79,6 +84,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
 
     class ChatHolder extends RecyclerView.ViewHolder{
 
+        ImageButton btMenu;
         ProgressBar progressImage;
         TextView tvName;
         TextView tvCategory;
@@ -91,6 +97,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
             tvCategory = itemView.findViewById(R.id.tv_category);
             ivIcon = itemView.findViewById(R.id.chat_icon);
             progressImage = itemView.findViewById(R.id.progress);
+            btMenu = itemView.findViewById(R.id.bt_item_menu);
         }
 
         void bind(int listIndex){
@@ -99,6 +106,18 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
             progressImage.setVisibility(View.VISIBLE);
             tvName.setText(c.name);
             tvCategory.setText(c.category);
+            btMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                }
+            });
+            if (user.isModerator){
+                btMenu.setVisibility(View.VISIBLE);
+            }
+            else {
+                btMenu.setVisibility(View.GONE);
+            }
             Chat.getChatById(c.id, new OnGetChat() {
                 @Override
                 public void onGet(Chat chat) {

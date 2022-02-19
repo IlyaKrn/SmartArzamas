@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -77,6 +78,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     class MessageHolder extends RecyclerView.ViewHolder{
 
+        ImageButton btMenu;
         TableMessageImages notMy_tlImages;
         ProgressBar notMy_progressImage;
         TextView notMy_tvMessage;
@@ -101,6 +103,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         public MessageHolder(@NonNull View itemView) {
             super(itemView);
+
+            btMenu = itemView.findViewById(R.id.bt_item_menu);
 
             notMy_tvMessage = this.itemView.findViewById(R.id.not_my_tv_message);
             notMy_tvName = this.itemView.findViewById(R.id.not_my_tv_user_name);
@@ -128,7 +132,18 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             system_tlImages.removeBitmaps();
             notMy_tlImages.removeBitmaps();
             my_tlImages.removeBitmaps();
+            btMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
+                }
+            });
+            if (user.isModerator){
+                btMenu.setVisibility(View.VISIBLE);
+            }
+            else {
+                btMenu.setVisibility(View.GONE);
+            }
             if (m.imageRefs != null){
                 if (savedImages.get(m.id) != null){
                     ArrayList<Bitmap> bitmaps = savedImages.get(m.id);
