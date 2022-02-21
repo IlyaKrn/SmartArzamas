@@ -20,17 +20,17 @@ public class Locate extends FirebaseObject {
     public double longitude;
     public double latitude;
     public String description;
-    public ArrayList<String> tags;
+    public String category;
 
     public Locate() {
     }
 
-    public Locate(String name, double longitude, double latitude, String description, ArrayList<String> tags, String date) {
+    public Locate(String name, double longitude, double latitude, String description, String category, String date) {
         super(name, null);
         this.longitude = longitude;
         this.latitude = latitude;
         this.description = description;
-        this.tags = tags;
+        this.category = category;
     }
 
     public static DatabaseReference getDatabase(){
@@ -44,20 +44,6 @@ public class Locate extends FirebaseObject {
         return new LatLng(latitude, longitude);
     }
 
-    public boolean isThisLocateTags(ArrayList<String> tags){
-        if (this.tags != null && this.tags.size() > 0 && tags.size() > 0) {
-            Log.e(null, Arrays.toString(this.tags.toArray()) + " " + Arrays.toString(tags.toArray()));
-            for (String tagA : this.tags) {
-                for (String tagB : tags) {
-                    Log.e(null, tagA + " " + tagB);
-                    if (tagA.equals(tagB)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
     public static void getLocateById(String id, OnGetLocate onGetLocate){
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override

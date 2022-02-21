@@ -3,6 +3,7 @@ package com.example.smartarzamas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -20,7 +21,9 @@ import com.example.smartarzamas.databinding.ActivityHubBinding;
 import com.example.smartarzamas.support.EditTextSearch;
 import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.ui.DialogAddChat;
+import com.example.smartarzamas.ui.DialogAddLocate;
 import com.example.smartarzamas.ui.DialogSignOut;
+import com.example.smartarzamas.ui.OnDestroyListener;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
@@ -29,6 +32,7 @@ import com.example.smartarzamas.ui.hubnavigation.map.MapFragment;
 import com.example.smartarzamas.ui.hubnavigation.map.MapFragmentCallback;
 import com.example.smartarzamas.ui.hubnavigation.mychats.MyChatsFragment;
 import com.example.smartarzamas.ui.hubnavigation.mychats.MyChatsFragmentCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
@@ -212,6 +216,19 @@ public class HubActivity extends FirebaseActivity {
 
             @Override
             public void onCategoryUpdate(ArrayList<String> category) {
+
+            }
+
+            @Override
+            public void onCreateLocate(Fragment fragment, LatLng latLng) {
+                DialogAddLocate dialog = new DialogAddLocate(fragment, latLng.longitude, latLng.latitude);
+                dialog.create(R.id.fragmentContainerView);
+                dialog.setOnDestroyListener(new OnDestroyListener() {
+                    @Override
+                    public void onDestroy() {
+                        Log.e("'lk'lk", ";lk;l");
+                    }
+                });
 
             }
         });

@@ -1,6 +1,7 @@
 package com.example.smartarzamas.ui;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.example.smartarzamas.R;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.firebaseobjects.Locate;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -59,14 +62,17 @@ public class DialogAddLocate extends Dialog {
             public void onClick(View view) {
                 String name = etName.getText().toString();
                 String description = etDescription.getText().toString();
-                String tag = tvCategory.getText().toString();
-                ArrayList<String> tags = new ArrayList<>();
-                tags.add(tag);
+                String cat = tvCategory.getText().toString();
 
                 if (!name.equals("")){
                     if (!description.equals("")){
-                        if (!tag.equals("")){
-                            Locate.getDatabase().push().setValue(new Locate(name, longitude, latitude, description, tags, Utils.getDateString()));
+                        if (!cat.equals("")){
+                            Locate.getDatabase().push().setValue(new Locate(name, longitude, latitude, description, cat, Utils.getDateString())).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    destroy();
+                                }
+                            });
                         }
                         else {
                             Utils.showWarning(tvCategoryErr, R.string.enter_category);
@@ -79,7 +85,6 @@ public class DialogAddLocate extends Dialog {
                 else {
                     Utils.showWarning(tvNameErr, R.string.enter_category);
                 }
-                destroy();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -126,5 +131,11 @@ public class DialogAddLocate extends Dialog {
         });
 
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.e(String.valueOf(rootView.getHeight()), String.valueOf(rootView.getWidth()));
     }
 }

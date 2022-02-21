@@ -15,14 +15,24 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
+import com.example.smartarzamas.firebaseobjects.Chat;
+import com.example.smartarzamas.firebaseobjects.Locate;
+import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.ui.DialogAddLocate;
+import com.example.smartarzamas.ui.OnDestroyListener;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
+import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -35,12 +45,36 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     private SupportMapFragment mapView;
     private GoogleMap googleMap;
 
+    private ArrayList<Locate> locateMainList = new ArrayList<>();
+    private ArrayList<Locate> locateList = new ArrayList<>();
+
     private FloatingActionButton fabAdd, fabCancel; // кнопки для взаимодействия с картой
     private boolean isAdd = false; // true = режим добавления метки
 
+    private ValueEventListener locatesListener;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+
+        locatesListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (locateMainList.size() > 0) locateMainList.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Locate l = (Locate) ds.getValue(Locate.class);
+                    assert l != null;
+                    locateMainList.add(l);
+                }
+                updateMapForView();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+        dbLocates.addValueEventListener(locatesListener);
 
         View.OnClickListener onAddListener = new View.OnClickListener() {
             @Override
@@ -82,17 +116,43 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
         return root;
     }
 
+    private void updateMapForView() {
+        if (locateList.size() > 0) locateList.clear();
+        for (Locate l : locateMainList){
+            if (Utils.isEquals(searchString, l.name)){
+                for (String cat : category){
+                    if (l.category.equals(cat)){
+                        locateList.add(l);
+                    }
+                }
+            }
+        }
+        if (googleMap != null) {
+            for (Locate l : locateList){
+                if (googleMap != null) {
+                    googleMap.addMarker(new MarkerOptions().title(l.name).position(l.getLocate()));
+                }
+            }
+        }
+    }
+
     @Override
     protected void addHubActivityCallback() {
         HubActivity.setMapActivityCallback(new HubActivityCallback() {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
-
+                MapFragment.this.category = categories;
+                mapViewModel.setCategory(category);
+                callback.onCategoryUpdate(category);
+                updateMapForView();
             }
 
             @Override
             public void onSearchStringChange(String search) {
-
+                MapFragment.this.searchString = search;
+                mapViewModel.setSearch(searchString);
+                callback.onSearchUpdate(searchString);
+                updateMapForView();
             }
         });
     }
@@ -112,6 +172,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        dbLocates.removeEventListener(locatesListener);
         binding = null;
     }
 
@@ -124,5 +185,13 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     public void onMapReady(@NonNull GoogleMap gMap) {
         googleMap = gMap;
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(55.400135, 43.828324), 11));
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                if (isAdd) {
+                    callback.onCreateLocate(MapFragment.this, latLng);
+                }
+            }
+        });
     }
 }
