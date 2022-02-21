@@ -79,9 +79,10 @@
 
         <ImageButton
             android:id="@+id/bt_item_menu"
-            android:layout_width="30dp"
-            android:layout_height="80dp"
-            android:background="@color/white"/>
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_menu_spots"/>
     </LinearLayout>
 
     <LinearLayout
