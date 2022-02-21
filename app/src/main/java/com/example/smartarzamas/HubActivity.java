@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+
 import com.example.smartarzamas.databinding.ActivityHubBinding;
 import com.example.smartarzamas.support.EditTextSearch;
 import com.example.smartarzamas.support.Category;
@@ -52,12 +53,13 @@ public class HubActivity extends FirebaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         searchingTags = Category.getAllTags();
+        HubNavigationCommon.setUser(user);
         binding = ActivityHubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_map, R.id.navigation_all_chats, R.id.navigation_my_chats).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_all_chats, R.id.navigation_my_chats, R.id.navigation_map).build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_hub);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
@@ -66,8 +68,6 @@ public class HubActivity extends FirebaseActivity {
         btProfile = binding.btProfile;
         etSearch = binding.etSearch;
         setCallbacks();
-        //MyChatsFragment.setUser(user);
-        HubNavigationCommon.setUser(user);
 
         etSearch.addTextEditListener(new EditTextSearch.OnTextChangeListener() {
             @Override
