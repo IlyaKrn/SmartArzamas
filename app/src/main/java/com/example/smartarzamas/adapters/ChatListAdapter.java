@@ -106,10 +106,6 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
             progressImage.setVisibility(View.VISIBLE);
             tvName.setText(c.name);
             tvCategory.setText(c.category);
-            if (user.isModerator)
-                btMenu.setVisibility(View.VISIBLE);
-            else
-                btMenu.setVisibility(View.GONE);
             btMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

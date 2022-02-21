@@ -132,10 +132,6 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             system_tlImages.removeBitmaps();
             notMy_tlImages.removeBitmaps();
             my_tlImages.removeBitmaps();
-            if (user.isModerator)
-                btMenu.setVisibility(View.VISIBLE);
-            else
-                btMenu.setVisibility(View.GONE);
             btMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
