@@ -17,9 +17,11 @@ import com.example.smartarzamas.R;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -121,6 +123,6 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     @Override
     public void onMapReady(@NonNull GoogleMap gMap) {
         googleMap = gMap;
-        Log.e("dfgdfg", "fdgdfgdf");
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(55.400135, 43.828324), 11));
     }
 }
