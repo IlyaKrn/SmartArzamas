@@ -47,6 +47,7 @@ public class HubActivity extends FirebaseActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
