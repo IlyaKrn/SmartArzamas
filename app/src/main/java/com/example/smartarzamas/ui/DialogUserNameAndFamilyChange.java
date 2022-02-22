@@ -66,6 +66,7 @@ public class DialogUserNameAndFamilyChange extends Dialog{
                 Utils.hideWarning(tvFamilyErr);
                 // если поля ввода не пустые
                 if (name.length() > 0 && family.length() > 0){
+                    freeze();
                     User buffUser = user;
                     buffUser.name = name;
                     buffUser.family = family;

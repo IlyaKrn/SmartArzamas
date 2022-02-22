@@ -21,6 +21,8 @@ import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -66,6 +68,7 @@ public class DialogAddChat extends Dialog {
 
                 // если поля ввода не пустые
                 if (name.length() > 0 && category.length() > 0) {
+                    freeze();
                     Chat chat;
                     ArrayList<Message> messages = new ArrayList<>();
                     messages.add(new Message(getResources().getString(R.string.default_first_message), null, Chat.getDatabase().push().getKey(), null));
@@ -79,8 +82,12 @@ public class DialogAddChat extends Dialog {
                     Utils.isConnected(context, new Utils.Connection() {
                         @Override
                         public void isConnected() {
-                            Chat.getDatabase().child(chatId).setValue(chat);
-                            destroy();
+                            Chat.getDatabase().child(chatId).setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    destroy();
+                                }
+                            });
                         }
                     });
                 }

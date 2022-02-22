@@ -88,6 +88,7 @@ public class DialogAddLocate extends Dialog {
 
                 if (!name.equals("")){
                     if (!cat.equals("")){
+                        freeze();
                         String id = Locate.getDatabase().push().getKey();
                         if (description.equals("")) {
                             description = "Описание";
@@ -108,6 +109,9 @@ public class DialogAddLocate extends Dialog {
                                             });
                                         }
                                     });
+                                }
+                                else {
+                                    destroy();
                                 }
                             }
                         });

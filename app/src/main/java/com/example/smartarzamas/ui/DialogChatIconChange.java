@@ -142,19 +142,4 @@ public class DialogChatIconChange extends Dialog{
         byte[] byteArray = stream.toByteArray();
         return byteArray;
     }
-
-    @Override
-    protected void freeze() {
-        super.freeze();
-        change.setClickable(false);
-        cancel.setClickable(false);
-        select.setClickable(false);
-    }
-    @Override
-    protected void defreeze() {
-        super.freeze();
-        change.setClickable(true);
-        cancel.setClickable(true);
-        select.setClickable(true);
-    }
 }

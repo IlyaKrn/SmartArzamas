@@ -37,6 +37,7 @@ public class DialogSignOut extends Dialog {
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                freeze();
                 SQLiteDbManager manager = new SQLiteDbManager(context);
                 manager.clear();
                 Intent intent = new Intent(getActivity(), AuthActivity.class);

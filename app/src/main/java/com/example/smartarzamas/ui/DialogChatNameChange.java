@@ -65,7 +65,6 @@ public class DialogChatNameChange extends Dialog{
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                freeze();
                 // получение введенных данных
                 final String name = etName.getText().toString();
                 final String preName = chat.name;
@@ -73,6 +72,7 @@ public class DialogChatNameChange extends Dialog{
                 Utils.hideWarning(tvNameErr);
                 // если поля ввода не пустые
                 if (name.length() > 0){
+                    freeze();
                     Chat buffChat = chat;
                     buffChat.name = name;
                     String message = user.name + " " + user.family + " " + getString(R.string.user_change_chat_neme) + " \"" + preName + "\" " + getString(R.string.on) + " \"" + chat.name + "\"";
@@ -90,7 +90,6 @@ public class DialogChatNameChange extends Dialog{
                 // вывод предупреждения о пустых полях ввода
                 else {
                     Utils.showWarning(tvNameErr, R.string.enter_new_name);
-                    defreeze();
                 }
             }
         });

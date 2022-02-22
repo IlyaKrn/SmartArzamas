@@ -69,6 +69,7 @@ public class DialogChatDescriptionChange extends Dialog{
                 Utils.hideWarning(tvDescriptionErr);
                 // если поля ввода не пустые
                 if (description.length() > 0){
+                    freeze();
                     Chat buffChat = chat;
                     buffChat.description = description;
                     String message = user.name + " " + user.family + " " + getString(R.string.user_change_description_neme) + " \"" + preDescription + "\" " + getString(R.string.on) + " \"" + chat.description + "\"";

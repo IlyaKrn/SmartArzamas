@@ -72,6 +72,7 @@ public class DialogUserIconChange extends Dialog{
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                freeze();
                 progressBar.setVisibility(View.VISIBLE);
                 icon.setVisibility(View.GONE);
                 user.setIconAsync(context, bitmap, new OnSetIcon() {
