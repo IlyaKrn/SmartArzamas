@@ -67,7 +67,7 @@ public class DialogAddLocate extends Dialog {
                 if (!name.equals("")){
                     if (!cat.equals("")){
                         String id = Locate.getDatabase().push().getKey();
-                        if (description == null) {
+                        if (description.equals("")) {
                             description = "Описание";
                         }
                         Locate.getDatabase().child(id).setValue(new Locate(name, id, longitude, latitude, description, cat)).addOnCompleteListener(new OnCompleteListener<Void>() {
