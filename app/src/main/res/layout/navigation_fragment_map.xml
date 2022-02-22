@@ -31,6 +31,11 @@
         android:onClick="onAddLocate"
         android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
@@ -39,12 +44,5 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dialog_margin_no_tool_bar"
         android:layout_marginBottom="@dimen/dialog_margin_tool_bar" />
-
-
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
 </FrameLayout>
