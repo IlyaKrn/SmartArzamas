@@ -194,6 +194,9 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
             public void onMapClick(@NonNull LatLng latLng) {
                 if (isAdd) {
                     callback.onCreateLocate(MapFragment.this, latLng);
+                    isAdd = false;
+                    fabCancel.setVisibility(View.GONE);
+                    fabAdd.setVisibility(View.VISIBLE);
                 }
             }
         });
