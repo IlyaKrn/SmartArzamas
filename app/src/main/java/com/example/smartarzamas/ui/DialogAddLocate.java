@@ -65,25 +65,24 @@ public class DialogAddLocate extends Dialog {
                 String cat = tvCategory.getText().toString();
 
                 if (!name.equals("")){
-                    if (!description.equals("")){
-                        if (!cat.equals("")){
-                            Locate.getDatabase().push().setValue(new Locate(name, longitude, latitude, description, cat, Utils.getDateString())).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    destroy();
-                                }
-                            });
+                    if (!cat.equals("")){
+                        String id = Locate.getDatabase().push().getKey();
+                        if (description == null) {
+                            description = "Описание";
                         }
-                        else {
-                            Utils.showWarning(tvCategoryErr, R.string.enter_category);
-                        }
+                        Locate.getDatabase().child(id).setValue(new Locate(name, id, longitude, latitude, description, cat)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                destroy();
+                            }
+                        });
                     }
                     else {
-                        Utils.showWarning(tvDescriptionErr, R.string.enter_description);
+                        Utils.showWarning(tvCategoryErr, R.string.enter_category);
                     }
                 }
                 else {
-                    Utils.showWarning(tvNameErr, R.string.enter_category);
+                    Utils.showWarning(tvNameErr, R.string.enter_locate_name);
                 }
             }
         });

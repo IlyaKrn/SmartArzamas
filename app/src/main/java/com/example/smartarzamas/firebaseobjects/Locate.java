@@ -25,8 +25,8 @@ public class Locate extends FirebaseObject {
     public Locate() {
     }
 
-    public Locate(String name, double longitude, double latitude, String description, String category, String date) {
-        super(name, null);
+    public Locate(String name, String id, double longitude, double latitude, String description, String category) {
+        super(name, id);
         this.longitude = longitude;
         this.latitude = latitude;
         this.description = description;

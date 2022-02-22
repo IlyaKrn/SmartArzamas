@@ -88,5 +88,6 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="all_uses">Все пользователи</string>
+    <string name="enter_locate_name">Введите название</string>
 
 </resources>
