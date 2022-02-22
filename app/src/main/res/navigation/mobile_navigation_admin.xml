@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation2"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_admin_home">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.smartarzamas.ui.adminhubnavigation.home.HomeFragment"
-        android:label="@string/map"
-        tools:layout="@layout/fragment_home" />
-
-    <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.smartarzamas.ui.adminhubnavigation.dashboard.DashboardFragment"
+        android:id="@+id/navigation_admin_home"
+        android:name="com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragment"
         android:label="@string/all_chats"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/navigation_admin_fragment_all_chats" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.smartarzamas.ui.adminhubnavigation.notifications.NotificationsFragment"
+        android:id="@+id/navigation_admin_dashboard"
+        android:name="com.example.smartarzamas.ui.adminhubnavigation.adminallusers.AdminAllUsersFragment"
         android:label="@string/all_uses"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/navigation_admin_fragment_all_users" />
+
+    <fragment
+        android:id="@+id/navigation_admin_notifications"
+        android:name="com.example.smartarzamas.ui.adminhubnavigation.adminmap.AdminMapFragment"
+        android:label="@string/map"
+        tools:layout="@layout/navigation_admin_fragment_map" />
 </navigation>
