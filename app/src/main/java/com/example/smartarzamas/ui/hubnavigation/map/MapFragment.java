@@ -160,7 +160,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         HubNavigationCommon.currentNavigationFragment = MAP;
-        mapViewModel = new ViewModelProvider(this).get(MapViewModel.class);
+        mapViewModel = new ViewModelProvider(this.getActivity()).get(MapViewModel.class);
         binding = NavigationFragmentMapBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         mapView = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
