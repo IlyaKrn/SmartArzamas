@@ -1,5 +1,8 @@
 package com.example.smartarzamas.ui;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -17,20 +21,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
+import com.example.smartarzamas.firebaseobjects.FirebaseObject;
+import com.example.smartarzamas.firebaseobjects.OnGetLocate;
+import com.example.smartarzamas.firebaseobjects.OnSetIcon;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.firebaseobjects.Locate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class DialogAddLocate extends Dialog {
 
-    private Button addLocate, cancel;
+    private Button addLocate, cancel, setIcon;
     private EditText etName, etDescription;
     private TextView tvCategory, tvNameErr, tvCategoryErr, tvDescriptionErr;
     private double longitude, latitude;
+    private ImageView icon;
+    private Bitmap bitmap;
 
     public DialogAddLocate(AppCompatActivity activity, double longitude, double latitude) {
         super(activity);
@@ -56,6 +68,16 @@ public class DialogAddLocate extends Dialog {
         tvDescriptionErr = rootView.findViewById(R.id.tv_description_err);
         tvNameErr = rootView.findViewById(R.id.tv_locate_name_err);
         tvCategory = rootView.findViewById(R.id.tv_locate_category);
+        setIcon = rootView.findViewById(R.id.bt_set_icon);
+        icon = rootView.findViewById(R.id.icon);
+
+        setIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent().setType("image/*").setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, 1);
+            }
+        });
 
         addLocate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,10 +92,23 @@ public class DialogAddLocate extends Dialog {
                         if (description.equals("")) {
                             description = "Описание";
                         }
+
                         Locate.getDatabase().child(id).setValue(new Locate(name, id, longitude, latitude, description, cat)).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                destroy();
+                                if (bitmap != null) {
+                                    Locate.getLocateById(id, new OnGetLocate() {
+                                        @Override
+                                        public void onGet(Locate locate) {
+                                            locate.setIconAsync(getActivity().getApplicationContext(), bitmap, new OnSetIcon() {
+                                                @Override
+                                                public void onSet(String ref, Bitmap bitmap) {
+                                                    destroy();
+                                                }
+                                            });
+                                        }
+                                    });
+                                }
                             }
                         });
                     }
@@ -136,5 +171,16 @@ public class DialogAddLocate extends Dialog {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.e(String.valueOf(rootView.getHeight()), String.valueOf(rootView.getWidth()));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && data.getData() != null && requestCode == 1){
+            rootView.findViewById(R.id.iv).setVisibility(View.VISIBLE);
+            icon.setImageURI(data.getData());
+            bitmap = ((BitmapDrawable) icon.getDrawable()).getBitmap();
+            icon.setImageBitmap(Utils.compressBitmapToIcon(bitmap, FirebaseObject.ICON_QUALITY));
+        }
     }
 }

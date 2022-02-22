@@ -64,6 +64,38 @@
                     android:visibility="gone"
                     android:textColor="@color/design_default_color_error" />
 
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dialog_width"
+                    android:layout_marginHorizontal="20sp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_launcher_background"
+                        android:visibility="visible" />
+                    <ProgressBar
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:id="@+id/progress"/>
+
+                </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/bt_set_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_icon"
+                    android:layout_gravity="center"
+                    style="@style/default_button"/>
+
             </LinearLayout>
 
             <LinearLayout
