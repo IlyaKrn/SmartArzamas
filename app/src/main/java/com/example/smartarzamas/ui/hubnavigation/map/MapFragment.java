@@ -123,11 +123,13 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
                 for (String cat : category){
                     if (l.category.equals(cat)){
                         locateList.add(l);
+                        continue;
                     }
                 }
             }
         }
         if (googleMap != null) {
+            googleMap.clear();
             for (Locate l : locateList){
                 if (googleMap != null) {
                     googleMap.addMarker(new MarkerOptions().title(l.name).position(l.getLocate()));
@@ -193,5 +195,6 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
                 }
             }
         });
+        updateMapForView();
     }
 }
