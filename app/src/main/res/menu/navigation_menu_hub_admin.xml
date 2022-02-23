@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@android:drawable/ic_dialog_map"
-        android:title="@string/map" />
+        android:icon="@drawable/ic_chats"
+        android:title="@string/all_chats"  />
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_chats"
-        android:title="@string/all_chats" />
+        android:icon="@drawable/ic_my_chats"
+        android:title="@string/all_uses"/>
 
     <item
         android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_my_chats"
-        android:title="@string/all_uses" />
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="@string/map" />
 
 </menu>
