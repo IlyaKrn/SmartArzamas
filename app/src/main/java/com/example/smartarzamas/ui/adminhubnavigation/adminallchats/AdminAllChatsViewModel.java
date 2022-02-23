@@ -4,16 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AdminAllChatsViewModel extends ViewModel {
+import com.example.smartarzamas.ui.hubnavigation.CommonNavigationViewModel;
 
-    private MutableLiveData<String> mText;
+public class AdminAllChatsViewModel extends CommonNavigationViewModel {
 
     public AdminAllChatsViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
+        super();
     }
 }

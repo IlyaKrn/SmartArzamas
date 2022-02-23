@@ -55,11 +55,11 @@ public abstract class AdminHubNavigationCommon extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        addHubActivityCallback();
+        addAdminHubActivityCallback();
     }
 
 
-    protected abstract void addHubActivityCallback();
+    protected abstract void addAdminHubActivityCallback();
 
     protected abstract void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 

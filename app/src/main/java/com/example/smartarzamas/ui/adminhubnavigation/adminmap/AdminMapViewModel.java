@@ -4,16 +4,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AdminMapViewModel extends ViewModel {
+import com.example.smartarzamas.ui.hubnavigation.CommonNavigationViewModel;
 
-    private MutableLiveData<String> mText;
+public class AdminMapViewModel extends CommonNavigationViewModel {
 
     public AdminMapViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
-    }
-
-    public LiveData<String> getText() {
-        return mText;
+        super();
     }
 }
