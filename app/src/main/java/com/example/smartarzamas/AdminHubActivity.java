@@ -12,6 +12,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.smartarzamas.databinding.ActivityAdminHubBinding;
 
+import java.util.Objects;
+
 public class AdminHubActivity extends AppCompatActivity {
 
     private ActivityAdminHubBinding binding;
@@ -30,6 +32,8 @@ public class AdminHubActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_admin_hub);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+        Objects.requireNonNull(getSupportActionBar()).hide();
+
     }
 
 }

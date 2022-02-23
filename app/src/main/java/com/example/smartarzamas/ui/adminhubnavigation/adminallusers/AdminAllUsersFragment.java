@@ -1,28 +1,25 @@
-package com.example.smartarzamas.ui.adminhubnavigation.home;
+package com.example.smartarzamas.ui.adminhubnavigation.adminallusers;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.smartarzamas.databinding.FragmentHomeBinding;
+import com.example.smartarzamas.databinding.FragmentDashboardBinding;
 
-public class HomeFragment extends Fragment {
+public class AdminAllUsersFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private AdminAllUsersViewModel adminAllUsersViewModel;
+    private FragmentDashboardBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        adminAllUsersViewModel = new ViewModelProvider(this).get(AdminAllUsersViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         return root;
