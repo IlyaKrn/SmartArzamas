@@ -197,52 +197,6 @@ public class AdminHubActivity extends FirebaseActivity {
 
             }
         });
-
-     /*   AdminAllUsersFragment.setCallback(new MyChatsFragmentCallback() {
-            @Override
-            public void onCreateChat(Fragment fragment) {
-                DialogAddChat dialog = new DialogAddChat(fragment, user);
-                dialog.create(R.id.fragmentContainerView);
-            }
-
-            @Override
-            public void onSearchUpdate(String search) {
-                etSearch.setText(search);
-            }
-
-            @Override
-            public void onCategoryUpdate(ArrayList<String> category) {
-
-            }
-        });
-
-
-
-        AdminMapFragment.setCallback(new MapFragmentCallback() {
-            @Override
-            public void onSearchUpdate(String search) {
-                etSearch.setText(search);
-            }
-
-            @Override
-            public void onCategoryUpdate(ArrayList<String> category) {
-
-            }
-
-            @Override
-            public void onCreateLocate(Fragment fragment, LatLng latLng) {
-                DialogAddLocate dialog = new DialogAddLocate(fragment, latLng.longitude, latLng.latitude);
-                dialog.create(R.id.fragmentContainerView);
-                dialog.setOnDestroyListener(new OnDestroyListener() {
-                    @Override
-                    public void onDestroy() {
-                        Log.e("'lk'lk", ";lk;l");
-                    }
-                });
-
-            }
-        });
-        */
     }
 
 
