@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.smartarzamas.AdminHubActivity;
@@ -33,7 +32,7 @@ public class AdminAllUsersFragment extends AdminHubNavigationCommon {
 
     @Override
     protected void addAdminHubActivityCallback() {
-        AdminHubActivity.setMyChatsActivityCallback(new AdminHubActivityCallback() {
+        AdminHubActivity.setAdminMyChatsActivityCallback(new AdminHubActivityCallback() {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
 

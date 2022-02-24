@@ -21,6 +21,7 @@ import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChat
 import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragmentCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallusers.AdminAllUsersFragment;
 import com.example.smartarzamas.ui.adminhubnavigation.adminmap.AdminMapFragment;
+import com.example.smartarzamas.ui.adminhubnavigation.adminmap.AdminMapFragmentCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
@@ -197,16 +198,40 @@ public class AdminHubActivity extends FirebaseActivity {
 
             }
         });
+        AdminMapFragment.setCallback(new AdminMapFragmentCallback() {
+            @Override
+            public void onSearchUpdate(String search) {
+                etSearch.setText(search);
+            }
+
+            @Override
+            public void onCategoryUpdate(ArrayList<String> category) {
+
+            }
+
+            @Override
+            public void onCreateLocate(Fragment fragment, LatLng latLng) {
+                DialogAddLocate dialog = new DialogAddLocate(fragment, latLng.longitude, latLng.latitude);
+                dialog.create(R.id.fragmentContainerView);
+                dialog.setOnDestroyListener(new OnDestroyListener() {
+                    @Override
+                    public void onDestroy() {
+                        Log.e("'lk'lk", ";lk;l");
+                    }
+                });
+
+            }
+        });
     }
 
 
-    public static void setAllChatsActivityCallback(AdminHubActivityCallback allChatsActivityCallback) {
+    public static void setAdminAllChatsActivityCallback(AdminHubActivityCallback allChatsActivityCallback) {
         AdminHubActivity.allChatsActivityCallback = allChatsActivityCallback;
     }
-    public static void setMyChatsActivityCallback(AdminHubActivityCallback myChatsActivityCallback) {
+    public static void setAdminMyChatsActivityCallback(AdminHubActivityCallback myChatsActivityCallback) {
         AdminHubActivity.myChatsActivityCallback = myChatsActivityCallback;
     }
-    public static void setMapActivityCallback(AdminHubActivityCallback mapActivityCallback) {
+    public static void setAdminMapActivityCallback(AdminHubActivityCallback mapActivityCallback) {
         AdminHubActivity.mapActivityCallback = mapActivityCallback;
     }
 
