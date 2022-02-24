@@ -10,33 +10,41 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetChat;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
+import com.example.smartarzamas.firebaseobjects.OnGetUser;
+import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogChatDescriptionChange;
 import com.example.smartarzamas.ui.DialogChatIconChange;
 import com.example.smartarzamas.ui.DialogChatNameChange;
-import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.OnIconChangeListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ChatSettingsActivity extends FirebaseActivity {
 
     private ImageButton btClose;
     private Button btChangeName;
     private Button btChangeIcon;
-    private Button btChangedescription;
+    private Button btChangedDescription;
     private ImageView chatIcon;
     private TextView tvChatName;
     private TextView tvChatDescription;
     private ProgressBar progressBar;
     private RecyclerView rvMembers;
+    private ArrayList<User> members = new ArrayList<User>();
+    private UserListAdapter adapter;
     private ValueEventListener chatListener;
+    private ValueEventListener usersListener;
     private Chat chat;
 
     @Override
@@ -58,7 +66,25 @@ public class ChatSettingsActivity extends FirebaseActivity {
         };
         dbChats.child(chat.id).addValueEventListener(chatListener);
 
-        btChangedescription.setOnClickListener(new View.OnClickListener() {
+        usersListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot s : snapshot.getChildren()){
+                    User u = (User) s.getValue(User.class);
+                    assert u != null;
+                    if(chat.isMember(u))
+                        members.add(u);
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        dbUsers.addValueEventListener(usersListener);
+        btChangedDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DialogChatDescriptionChange dialog = new DialogChatDescriptionChange(ChatSettingsActivity.this, user, chat);
@@ -108,8 +134,16 @@ public class ChatSettingsActivity extends FirebaseActivity {
         rvMembers = findViewById(R.id.rv_members);
         btChangeIcon = findViewById(R.id.bt_change_chat_icon);
         btChangeName = findViewById(R.id.bt_change_chat_name);
-        btChangedescription = findViewById(R.id.bt_change_chat_description);
+        btChangedDescription = findViewById(R.id.bt_change_chat_description);
         btClose = findViewById(R.id.bt_close);
+        rvMembers.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new UserListAdapter(this, members, user, new UserListAdapter.OnStateClickListener() {
+            @Override
+            public void onStateClick(int messagePosition) {
+
+            }
+        });
+        rvMembers.setAdapter(adapter);
     }
     private void updateViewData(){
         if (chatIcon.getDrawable() == null){
@@ -129,14 +163,17 @@ public class ChatSettingsActivity extends FirebaseActivity {
                         progressBar.setVisibility(View.GONE);
                     }
                 });
+                adapter.notifyDataSetChanged();
             }
         });
+
 
     }
 
     @Override
     protected void onDestroy() {
         dbChats.removeEventListener(chatListener);
+        dbUsers.removeEventListener(usersListener);
         super.onDestroy();
     }
 }
