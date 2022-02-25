@@ -20,6 +20,7 @@ import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragment;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragmentCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallusers.AdminAllUsersFragment;
+import com.example.smartarzamas.ui.adminhubnavigation.adminallusers.AdminAllUsersFragmentCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.adminmap.AdminMapFragment;
 import com.example.smartarzamas.ui.adminhubnavigation.adminmap.AdminMapFragmentCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
@@ -191,6 +192,17 @@ public class AdminHubActivity extends FirebaseActivity {
             @Override
             public void onSearchUpdate(String search) {
                 etSearch.setText(search);
+            }
+
+            @Override
+            public void onCategoryUpdate(ArrayList<String> category) {
+
+            }
+        });
+        AdminAllUsersFragment.setCallback(new AdminAllUsersFragmentCallback() {
+            @Override
+            public void onSearchUpdate(String search) {
+
             }
 
             @Override
