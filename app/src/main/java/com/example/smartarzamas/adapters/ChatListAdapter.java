@@ -31,12 +31,14 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
     private final OnStateClickListener onClickListener;
     private final Context context;
     private final ArrayList<Chat> chats;
+    private final boolean isAdmin;
     private User user;
 
     private Map<String, Bitmap> savedIcons = new HashMap<>();
 
 
-    public ChatListAdapter(Context context, ArrayList<Chat> chats, User user, OnStateClickListener onClickListener) {
+    public ChatListAdapter(Context context, ArrayList<Chat> chats, User user, boolean isAdmin, OnStateClickListener onClickListener) {
+        this.isAdmin = isAdmin;
         this.user = user;
         this.context = context;
         this.chats = chats;
@@ -112,7 +114,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
 
                 }
             });
-            if (user.isModerator){
+            if (isAdmin){
                 btMenu.setVisibility(View.VISIBLE);
             }
             else {

@@ -70,7 +70,7 @@ public class ChatActivity extends FirebaseActivity {
         btChatSettings = findViewById(R.id.bt_chat_menu);
         btClose = findViewById(R.id.bt_close);
         rvMessages.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MessageListAdapter(this, messageList,/* userList,new ArrayList<>(), */ user, new MessageListAdapter.OnStateClickListener() {
+        adapter = new MessageListAdapter(this, messageList,/* userList,new ArrayList<>(), */ user, false, new MessageListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(int messagePosition) {
 

@@ -137,7 +137,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
         btChangedDescription = findViewById(R.id.bt_change_chat_description);
         btClose = findViewById(R.id.bt_close);
         rvMembers.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UserListAdapter(this, members, user, new UserListAdapter.OnStateClickListener() {
+        adapter = new UserListAdapter(this, members, user, false, new UserListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(int messagePosition) {
 

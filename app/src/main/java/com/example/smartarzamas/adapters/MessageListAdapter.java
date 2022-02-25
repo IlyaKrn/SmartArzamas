@@ -33,11 +33,13 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private final ArrayList<Message> messages;
     private final Context context;
     private final User user;
+    private final boolean isAdmin;
     private Map<String, Bitmap> savedIcons = new HashMap<>();
     private Map<String, ArrayList<Bitmap>> savedImages = new HashMap<>();
 
 
-    public MessageListAdapter(Context context, ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
+    public MessageListAdapter(Context context, ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, boolean isAdmin, OnStateClickListener onClickListener) {
+        this.isAdmin = isAdmin;
         this.context = context;
         this.messages = messages;
         this.onClickListener = onClickListener;
@@ -138,7 +140,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
                 }
             });
-            if (user.isModerator){
+            if (isAdmin){
                 btMenu.setVisibility(View.VISIBLE);
             }
             else {

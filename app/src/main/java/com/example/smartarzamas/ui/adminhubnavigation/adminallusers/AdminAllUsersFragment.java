@@ -60,7 +60,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
             }
         };
 
-        adapter = new UserListAdapter(getActivity().getApplicationContext(), chatList, user, new UserListAdapter.OnStateClickListener() {
+        adapter = new UserListAdapter(getActivity().getApplicationContext(), chatList, user, true, new UserListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(int messagePosition) {
 

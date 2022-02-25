@@ -32,11 +32,13 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
     private final ArrayList<User> users;
     private final Context context;
     private final User user;
+    private final boolean isAdmin;
     private Map<String, Bitmap> savedIcons = new HashMap<>();
     private Map<String, ArrayList<Bitmap>> savedImages = new HashMap<>();
 
 
-    public UserListAdapter(Context context, ArrayList<User> users,/* ArrayList<User>  userList,*/ User user, OnStateClickListener onClickListener) {
+    public UserListAdapter(Context context, ArrayList<User> users,/* ArrayList<User>  userList,*/ User user, boolean isAdmin, OnStateClickListener onClickListener) {
+        this.isAdmin = isAdmin;
         this.context = context;
         this.users = users;
         this.onClickListener = onClickListener;
@@ -107,7 +109,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
 
                 }
             });
-            if (user.isModerator) {
+            if (isAdmin) {
                 btMenu.setVisibility(View.VISIBLE);
             } else {
                 btMenu.setVisibility(View.GONE);
