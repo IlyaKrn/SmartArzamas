@@ -90,5 +90,6 @@
     <string name="all_uses">Все пользователи</string>
     <string name="enter_locate_name">Введите название</string>
     <string name="set_icon">Добавить изображение</string>
+    <string name="delete_chat">Удалить чат</string>
 
 </resources>

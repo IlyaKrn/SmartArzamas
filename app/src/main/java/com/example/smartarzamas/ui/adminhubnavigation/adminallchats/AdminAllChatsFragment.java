@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartarzamas.AdminChatActivity;
 import com.example.smartarzamas.ChatActivity;
 import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.HubActivity;
@@ -68,7 +69,7 @@ public class AdminAllChatsFragment extends HubNavigationCommon {
         adapter = new ChatListAdapter(getActivity().getApplicationContext(), chatList, user, true, new ChatListAdapter.OnStateClickListener() {
             @Override
             public void onStateClick(String chatId) {
-                Intent intent = new Intent(AdminAllChatsFragment.this.getActivity(), ChatActivity.class);
+                Intent intent = new Intent(AdminAllChatsFragment.this.getActivity(), AdminChatActivity.class);
                 intent.putExtra(FirebaseActivity.CHAT_ID, chatId);
                 intent.putExtra(FirebaseActivity.USER_INTENT, user);
                 AdminAllChatsFragment.this.getActivity().startActivity(intent);
