@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity
+            android:name=".AdminUserSettingsActivity"
+            android:exported="true" />
+        <activity
             android:name=".AdminChatActivity"
             android:exported="true" />
         <activity
