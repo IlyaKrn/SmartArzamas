@@ -92,5 +92,8 @@
     <string name="set_icon">Добавить изображение</string>
     <string name="delete_chat">Удалить чат</string>
     <string name="rejection_admin_account">Отказаться от прав администратора</string>
+    <string name="realy_reject">Вы действительно хотите отказаться от прав администратора?</string>
+    <string name="reject">Отказаться</string>
+    <string name="rejection">Отказ</string>
 
 </resources>

@@ -107,6 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/red_button"
+                        android:onClick="onRejection"
                         android:text="@string/rejection_admin_account"/>
                     <Button
                         android:layout_width="wrap_content"

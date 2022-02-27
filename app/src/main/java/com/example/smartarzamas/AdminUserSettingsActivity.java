@@ -14,6 +14,7 @@ import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
 import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.ui.DialogAdminAccountReject;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
 import com.example.smartarzamas.ui.OnDestroyListener;
@@ -117,5 +118,10 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
     protected void onDestroy() {
         dbUsers.removeEventListener(userListener);
         super.onDestroy();
+    }
+
+    public void onRejection(View view) {
+        DialogAdminAccountReject dialog = new DialogAdminAccountReject(this, user);
+        dialog.create(R.id.fragmentContainerView);
     }
 }
