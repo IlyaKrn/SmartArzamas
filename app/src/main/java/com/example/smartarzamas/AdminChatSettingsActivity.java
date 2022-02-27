@@ -42,7 +42,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
     private TextView tvChatDescription;
     private ProgressBar progressBar;
     private RecyclerView rvMembers;
-    private ArrayList<User> members = new ArrayList<User>();
+    private ArrayList<User> members = new ArrayList<>();
     private UserListAdapter adapter;
     private ValueEventListener chatListener;
     private ValueEventListener usersListener;
@@ -70,6 +70,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
         usersListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (members.size() > 0)members.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
                     User u = (User) s.getValue(User.class);
                     assert u != null;

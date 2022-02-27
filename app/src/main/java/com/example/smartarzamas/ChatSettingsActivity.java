@@ -69,6 +69,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
         usersListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (members.size() > 0)members.clear();
                 for (DataSnapshot s : snapshot.getChildren()){
                     User u = (User) s.getValue(User.class);
                     assert u != null;
