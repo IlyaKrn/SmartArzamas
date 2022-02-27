@@ -153,7 +153,7 @@ public class AdminHubActivity extends FirebaseActivity {
                         switch (menuItem.getItemId()) {
                             // настройкм профиля
                             case R.id.profil_settings:
-                                Intent intent = new Intent(AdminHubActivity.this, UserSettingsActivity.class);
+                                Intent intent = new Intent(AdminHubActivity.this, AdminUserSettingsActivity.class);
                                 intent.putExtra(USER_INTENT, user);
                                 startActivity(intent);
                                 break;

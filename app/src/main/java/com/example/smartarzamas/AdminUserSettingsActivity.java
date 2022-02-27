@@ -34,7 +34,7 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_settings);
+        setContentView(R.layout.activity_admin_user_settings);
         init();
         updateViewData();
         userListener = new ValueEventListener() {
