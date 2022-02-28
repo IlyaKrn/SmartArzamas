@@ -24,6 +24,7 @@ import com.example.smartarzamas.firebaseobjects.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 public class DialogAddChat extends Dialog {
@@ -88,6 +89,7 @@ public class DialogAddChat extends Dialog {
                                     destroy();
                                 }
                             });
+
                         }
                     });
                 }

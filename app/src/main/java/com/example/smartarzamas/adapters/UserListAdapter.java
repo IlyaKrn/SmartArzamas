@@ -14,13 +14,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
-import com.example.smartarzamas.firebaseobjects.Message;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
-import com.example.smartarzamas.firebaseobjects.OnGetIcons;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
-import com.example.smartarzamas.support.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -114,10 +111,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
             } else {
                 btMenu.setVisibility(View.GONE);
             }
-            User.getUserById(u.id, new OnGetUser() {
+            User.getUserById(u.id, new OnGetDataListener<User>() {
                 @Override
-                public void onGet(User user) {
-                    u = user;
+                public void onGetData(User data) {
+                    u = data;
                     if (user.id.equals(u.id))
                         tvName.setText(user.name);
                     if (savedIcons.get(user.id) != null) {
@@ -139,6 +136,21 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
                             }
                         });
                     }
+                }
+
+                @Override
+                public void onVoidData() {
+
+                }
+
+                @Override
+                public void onNoConnection() {
+
+                }
+
+                @Override
+                public void onCanceled() {
+
                 }
             });
         }

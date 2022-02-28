@@ -6,9 +6,7 @@ import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -17,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Chat;
-import com.example.smartarzamas.firebaseobjects.OnGetChat;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
@@ -120,22 +118,22 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
             else {
                 btMenu.setVisibility(View.GONE);
             }
-            Chat.getChatById(c.id, new OnGetChat() {
+            Chat.getChatById(c.id, new OnGetDataListener<Chat>() {
                 @Override
-                public void onGet(Chat chat) {
+                public void onGetData(Chat data) {
                     if (savedIcons.get(c.id) != null){
-                        if (chat.id.equals(c.id)) {
+                        if (data.id.equals(c.id)) {
                             ivIcon.setImageBitmap(savedIcons.get(c.id));
                             ivIcon.setVisibility(View.VISIBLE);
                             progressImage.setVisibility(View.GONE);
                         }
                     }
                     else {
-                        chat.getIconAsync(context, new OnGetIcon() {
+                        data.getIconAsync(context, new OnGetIcon() {
                             @Override
                             public void onLoad(Bitmap bitmap) {
-                                savedIcons.put(chat.id, bitmap);
-                                if (chat.id.equals(c.id)) {
+                                savedIcons.put(data.id, bitmap);
+                                if (data.id.equals(c.id)) {
                                     ivIcon.setImageBitmap(bitmap);
                                     ivIcon.setVisibility(View.VISIBLE);
                                     progressImage.setVisibility(View.GONE);
@@ -143,6 +141,21 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ChatHo
                             }
                         });
                     }
+                }
+
+                @Override
+                public void onVoidData() {
+
+                }
+
+                @Override
+                public void onNoConnection() {
+
+                }
+
+                @Override
+                public void onCanceled() {
+
                 }
             });
 

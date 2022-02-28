@@ -22,18 +22,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.FirebaseObject;
-import com.example.smartarzamas.firebaseobjects.OnGetLocate;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnSetIcon;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.firebaseobjects.Locate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
 
 public class DialogAddLocate extends Dialog {
 
@@ -98,15 +93,30 @@ public class DialogAddLocate extends Dialog {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (bitmap != null) {
-                                    Locate.getLocateById(id, new OnGetLocate() {
+                                    Locate.getLocateById(id, new OnGetDataListener<Locate>() {
                                         @Override
-                                        public void onGet(Locate locate) {
-                                            locate.setIconAsync(getActivity().getApplicationContext(), bitmap, new OnSetIcon() {
+                                        public void onGetData(Locate data) {
+                                            data.setIconAsync(getActivity().getApplicationContext(), bitmap, new OnSetIcon() {
                                                 @Override
                                                 public void onSet(String ref, Bitmap bitmap) {
                                                     destroy();
                                                 }
                                             });
+                                        }
+
+                                        @Override
+                                        public void onVoidData() {
+
+                                        }
+
+                                        @Override
+                                        public void onNoConnection() {
+
+                                        }
+
+                                        @Override
+                                        public void onCanceled() {
+
                                         }
                                     });
                                 }

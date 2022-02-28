@@ -15,9 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
-import com.example.smartarzamas.firebaseobjects.OnGetChat;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogChatDescriptionChange;
@@ -162,10 +161,11 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
             chatIcon.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }
-        Chat.getChatById(chat.id, new OnGetChat() {
+        Chat.getChatById(chat.id, new OnGetDataListener<Chat>() {
+
             @Override
-            public void onGet(Chat chat) {
-                AdminChatSettingsActivity.this.chat = chat;
+            public void onGetData(Chat data) {
+                AdminChatSettingsActivity.this.chat = data;
                 tvChatName.setText(chat.name);
                 tvChatDescription.setText(chat.description);
                 chat.getIconAsync(AdminChatSettingsActivity.this.getApplicationContext(), new OnGetIcon() {
@@ -176,6 +176,21 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
                     }
                 });
                 adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onVoidData() {
+
+            }
+
+            @Override
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled() {
+
             }
         });
 

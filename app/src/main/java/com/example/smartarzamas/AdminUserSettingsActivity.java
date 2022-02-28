@@ -6,18 +6,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
-import com.example.smartarzamas.support.IconView;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogAdminAccountReject;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
-import com.example.smartarzamas.ui.OnDestroyListener;
 import com.example.smartarzamas.ui.OnIconChangeListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -94,10 +93,10 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
             userIcon.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }
-        User.getUserById(user.id, new OnGetUser() {
+        User.getUserById(user.id, new OnGetDataListener<User>() {
             @Override
-            public void onGet(User user) {
-                AdminUserSettingsActivity.this.user = user;
+            public void onGetData(User data) {
+                AdminUserSettingsActivity.this.user = data;
                 userName.setText(user.name);
                 userFamily.setText(user.family);
                 userEmail.setText(user.email);
@@ -110,8 +109,22 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
                     }
                 });
             }
-        });
 
+            @Override
+            public void onVoidData() {
+                Toast.makeText(AdminUserSettingsActivity.this, getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled() {
+                Toast.makeText(AdminUserSettingsActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

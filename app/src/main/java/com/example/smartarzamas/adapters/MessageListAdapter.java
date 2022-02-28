@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Message;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetIcons;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
 import com.example.smartarzamas.support.TableMessageImages;
@@ -205,10 +205,10 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                     notMy_ivIcon.setVisibility(View.GONE);
                     notMy_progressImage.setVisibility(View.VISIBLE);
                     notMy_tvMessage.setText(m.message);
-                    User.getUserById(m.userId, new OnGetUser() {
+                    User.getUserById(m.userId, new OnGetDataListener<User>() {
                         @Override
-                        public void onGet(User user) {
-                            u = user;
+                        public void onGetData(User data) {
+                            u = data;
                             if (user.id.equals(m.userId))
                                 notMy_tvName.setText(user.name);
                             if (savedIcons.get(user.id) != null){
@@ -231,6 +231,20 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                                     }
                                 });
                             }
+                        }
+
+                        @Override
+                        public void onVoidData() {
+
+                        }
+
+                        @Override
+                        public void onNoConnection() {
+
+                        }
+
+                        @Override
+                        public void onCanceled() {
 
                         }
                     });

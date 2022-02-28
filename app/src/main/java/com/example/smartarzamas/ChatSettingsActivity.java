@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
-import com.example.smartarzamas.firebaseobjects.OnGetChat;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogChatDescriptionChange;
@@ -151,10 +151,10 @@ public class ChatSettingsActivity extends FirebaseActivity {
             chatIcon.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }
-        Chat.getChatById(chat.id, new OnGetChat() {
+        Chat.getChatById(chat.id, new OnGetDataListener<Chat>() {
             @Override
-            public void onGet(Chat chat) {
-                ChatSettingsActivity.this.chat = chat;
+            public void onGetData(Chat data) {
+                ChatSettingsActivity.this.chat = data;
                 tvChatName.setText(chat.name);
                 tvChatDescription.setText(chat.description);
                 chat.getIconAsync(ChatSettingsActivity.this.getApplicationContext(), new OnGetIcon() {
@@ -166,9 +166,22 @@ public class ChatSettingsActivity extends FirebaseActivity {
                 });
                 adapter.notifyDataSetChanged();
             }
+
+            @Override
+            public void onVoidData() {
+                Toast.makeText(ChatSettingsActivity.this, getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled() {
+                Toast.makeText(ChatSettingsActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+            }
         });
-
-
     }
 
     @Override

@@ -1,16 +1,11 @@
 package com.example.smartarzamas.ui;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,17 +14,10 @@ import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.AuthActivity;
 import com.example.smartarzamas.R;
-import com.example.smartarzamas.firebaseobjects.FirebaseObject;
-import com.example.smartarzamas.firebaseobjects.OnGetIcon;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
-import com.example.smartarzamas.firebaseobjects.OnSetIcon;
 import com.example.smartarzamas.firebaseobjects.User;
-import com.example.smartarzamas.support.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
-
-import java.io.ByteArrayOutputStream;
 
 public class DialogAdminAccountReject extends Dialog{
 

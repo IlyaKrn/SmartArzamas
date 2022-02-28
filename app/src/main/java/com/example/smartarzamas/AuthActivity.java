@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -86,10 +86,25 @@ public class AuthActivity extends FirebaseActivity {
         // проверка currentUser
         if (currentUser != null){
             Log.d(LOG_TAG, "current user from SQLite: email is " + currentUser.login + " password is " + currentUser.password);
-            User.getUserById(currentUser.id, new OnGetUser() {
+            User.getUserById(currentUser.id, new OnGetDataListener<User>() {
                 @Override
-                public void onGet(User user) {
-                    AuthActivity.this.user = user;
+                public void onGetData(User data) {
+                    AuthActivity.this.user = data;
+                }
+
+                @Override
+                public void onVoidData() {
+
+                }
+
+                @Override
+                public void onNoConnection() {
+
+                }
+
+                @Override
+                public void onCanceled() {
+                    Toast.makeText(AuthActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
                 }
             });
             etUserEmail.setText(getSQLiteCurrentUser().login);
@@ -120,10 +135,10 @@ public class AuthActivity extends FirebaseActivity {
                                     // если вход прошел успешно
                                     if (task.isSuccessful()){
                                         if (auth.getCurrentUser().isEmailVerified()) {
-                                            User.getUserById(Utils.getKeyString(login), new OnGetUser() {
+                                            User.getUserById(Utils.getKeyString(login), new OnGetDataListener<User>() {
                                                 @Override
-                                                public void onGet(User user) {
-                                                    AuthActivity.this.user = user;
+                                                public void onGetData(User data) {
+                                                    AuthActivity.this.user = data;
                                                     if (cbAlwaysUse.isChecked()) {
                                                         manager.clear();
                                                         manager.insertToDb(login, password, user.id);
@@ -143,6 +158,21 @@ public class AuthActivity extends FirebaseActivity {
                                                     }
                                                     // передача пользователя и запуск следующей активности
                                                     finish();
+                                                }
+
+                                                @Override
+                                                public void onVoidData() {
+                                                    Toast.makeText(AuthActivity.this, getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
+                                                }
+
+                                                @Override
+                                                public void onNoConnection() {
+
+                                                }
+
+                                                @Override
+                                                public void onCanceled() {
+                                                    Toast.makeText(AuthActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
                                                 }
                                             });
                                         }

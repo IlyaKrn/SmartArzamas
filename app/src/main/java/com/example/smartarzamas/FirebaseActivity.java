@@ -1,9 +1,10 @@
 package com.example.smartarzamas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentContainerView;
@@ -12,13 +13,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.smartarzamas.SQLiteDatabase.SQLiteDbManager;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Locate;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -61,11 +59,29 @@ public abstract class FirebaseActivity extends AppCompatActivity implements Swip
         if (getIntent().getSerializableExtra(USER_INTENT) != null){
             // получение пользователя из предыдущей активности
             this.user = (User) getIntent().getSerializableExtra(USER_INTENT);
-            User.getUserById(user.id, new OnGetUser() {
+            User.getUserById(user.id, new OnGetDataListener<User>() {
                 @Override
-                public void onGet(User user) {
-                    FirebaseActivity.this.user = user;
+                public void onGetData(User data) {
+                    FirebaseActivity.this.user = data;
                     Log.i(LOG_TAG, "user updated");
+                }
+
+                @Override
+                public void onVoidData() {
+                    Toast.makeText(getApplicationContext(), getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(FirebaseActivity.this, AuthActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onNoConnection() {
+
+                }
+
+                @Override
+                public void onCanceled() {
+                    Toast.makeText(getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
                 }
             });
             Log.i(LOG_TAG, "user email is \"" + user.email + "\"");

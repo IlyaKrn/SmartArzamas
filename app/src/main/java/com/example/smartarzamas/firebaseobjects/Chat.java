@@ -48,9 +48,11 @@ public class Chat extends FirebaseObject {
         return getDatabase();
     }
 
+    @Deprecated
     public void addMember(User user){
         membersEmailList.add(user.email);
     }
+    @Deprecated
     public void removeMember(User user){
         for (int i = 0; i < membersEmailList.size(); i++){
             if (membersEmailList.get(i).equals(user.email)){
@@ -69,14 +71,16 @@ public class Chat extends FirebaseObject {
         }
         return false;
     }
-    public static void getChatById(String id, OnGetChat onGetChat){
+    public static void getChatById(String id, OnGetDataListener<Chat> onGetDataListener){
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                onGetChat.onGet(snapshot.getValue(Chat.class));
-                if (snapshot.getValue(Chat.class) != null)
+                if (snapshot.getValue(Chat.class) != null) {
+                    onGetDataListener.onGetData(snapshot.getValue(Chat.class));
                     Log.d(LOG_TAG, "gotten chat: " + snapshot.getValue(Chat.class).name);
+                }
                 else {
+                    onGetDataListener.onVoidData();
                     Log.d(LOG_TAG, "gotten chat name: " + "null");
                 }
                 getDatabase().child(id).removeEventListener(this);
@@ -85,6 +89,7 @@ public class Chat extends FirebaseObject {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                onGetDataListener.onCanceled();
                 getDatabase().child(id).removeEventListener(this);
             }
         });

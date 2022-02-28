@@ -44,15 +44,17 @@ public class Locate extends FirebaseObject {
         return new LatLng(latitude, longitude);
     }
 
-    public static void getLocateById(String id, OnGetLocate onGetLocate){
+    public static void getLocateById(String id, OnGetDataListener<Locate> onGetDataListener){
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                onGetLocate.onGet(snapshot.getValue(Locate.class));
-                if (snapshot.getValue(Locate.class) != null)
-                    Log.d(LOG_TAG, "gotten locate: " + snapshot.getValue(Locate.class).name);
+                if (snapshot.getValue(Locate.class) != null) {
+                    onGetDataListener.onGetData(snapshot.getValue(Locate.class));
+                    Log.d(LOG_TAG, "gotten locate: " + snapshot.getValue(Chat.class).name);
+                }
                 else {
-                    Log.d(LOG_TAG, "gotten locate: " + "null");
+                    onGetDataListener.onVoidData();
+                    Log.d(LOG_TAG, "gotten locate name: " + "null");
                 }
                 getDatabase().child(id).removeEventListener(this);
             }
@@ -60,6 +62,7 @@ public class Locate extends FirebaseObject {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                onGetDataListener.onCanceled();
                 getDatabase().child(id).removeEventListener(this);
             }
         });

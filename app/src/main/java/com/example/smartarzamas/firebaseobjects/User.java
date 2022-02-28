@@ -44,15 +44,17 @@ public class User extends FirebaseObject {
     protected DatabaseReference getDatabaseChild() {
         return getDatabase();
     }
-    public static void getUserById(String id, OnGetUser onGetUser){
+    public static void getUserById(String id, OnGetDataListener<User> onGetDataListener){
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                onGetUser.onGet(snapshot.getValue(User.class));
-                if (snapshot.getValue(User.class) != null)
+                if (snapshot.getValue(User.class) != null) {
+                    onGetDataListener.onGetData(snapshot.getValue(User.class));
                     Log.d(LOG_TAG, "gotten user: " + snapshot.getValue(User.class).email);
+                }
                 else {
-                    Log.d(LOG_TAG, "gotten user: " + "null");
+                    onGetDataListener.onVoidData();
+                    Log.d(LOG_TAG, "gotten user name: " + "null");
                 }
                 getDatabase().child(id).removeEventListener(this);
             }
@@ -60,6 +62,7 @@ public class User extends FirebaseObject {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                onGetDataListener.onCanceled();
                 getDatabase().child(id).removeEventListener(this);
             }
         });

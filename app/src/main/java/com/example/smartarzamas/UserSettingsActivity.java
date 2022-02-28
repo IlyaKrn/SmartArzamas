@@ -9,14 +9,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
-import com.example.smartarzamas.firebaseobjects.OnGetUser;
 import com.example.smartarzamas.firebaseobjects.User;
-import com.example.smartarzamas.support.IconView;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
-import com.example.smartarzamas.ui.OnDestroyListener;
 import com.example.smartarzamas.ui.OnIconChangeListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -93,10 +91,10 @@ public class UserSettingsActivity extends FirebaseActivity {
             userIcon.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }
-        User.getUserById(user.id, new OnGetUser() {
+        User.getUserById(user.id, new OnGetDataListener<User>() {
             @Override
-            public void onGet(User user) {
-                UserSettingsActivity.this.user = user;
+            public void onGetData(User data) {
+                UserSettingsActivity.this.user = data;
                 userName.setText(user.name);
                 userFamily.setText(user.family);
                 userEmail.setText(user.email);
@@ -108,6 +106,21 @@ public class UserSettingsActivity extends FirebaseActivity {
                         progressBar.setVisibility(View.GONE);
                     }
                 });
+            }
+
+            @Override
+            public void onVoidData() {
+
+            }
+
+            @Override
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled() {
+
             }
         });
 

@@ -95,5 +95,7 @@
     <string name="realy_reject">Вы действительно хотите отказаться от прав администратора?</string>
     <string name="reject">Отказаться</string>
     <string name="rejection">Отказ</string>
+    <string name="databese_request_canceled">Доступ запрещен</string>
+    <string name="data_not_find">Данные не найдены</string>
 
 </resources>

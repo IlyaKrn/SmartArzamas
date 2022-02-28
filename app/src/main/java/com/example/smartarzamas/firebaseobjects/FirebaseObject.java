@@ -152,7 +152,4 @@ public abstract class FirebaseObject implements Serializable {
             }
         });
     }
-    public DatabaseReference getDatabaseReference(){
-        return getDatabase().child(id);
-    }
 }
