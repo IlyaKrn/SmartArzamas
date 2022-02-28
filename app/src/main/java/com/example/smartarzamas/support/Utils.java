@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.smartarzamas.R;
 
+import java.io.ByteArrayOutputStream;
 import java.util.Locale;
 
 // класс с различными методами
@@ -104,6 +105,14 @@ public final class Utils {
     public interface Connection{
         void isConnected();
     }
+
+    public static byte[] getBytesFromBitmap(Bitmap bitmap){
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+    }
+
 
     public static Bitmap compressBitmapToIcon(Bitmap bitmap, int size){
         int width  = bitmap.getWidth();

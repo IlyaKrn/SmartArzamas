@@ -40,7 +40,6 @@ public abstract class FirebaseObject implements Serializable {
         this.name = name;
         this.id = id;
     }
-
     public FirebaseObject() {
     }
 
@@ -48,7 +47,6 @@ public abstract class FirebaseObject implements Serializable {
         return null;
     }
     protected abstract DatabaseReference getDatabaseChild();
-
     public void getIconAsync(Context context, OnGetIcon onGetIcon){
         Utils.isConnected(context, new Utils.Connection() {
             @Override
@@ -101,7 +99,7 @@ public abstract class FirebaseObject implements Serializable {
                 uploadRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        UploadTask uploadTask = uploadRef.putBytes(getBytes(Utils.compressBitmapToIcon(bitmap, ICON_QUALITY)));
+                        UploadTask uploadTask = uploadRef.putBytes(Utils.getBytesFromBitmap(Utils.compressBitmapToIcon(bitmap, ICON_QUALITY)));
                         Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                             @Override
                             public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
@@ -129,13 +127,6 @@ public abstract class FirebaseObject implements Serializable {
             }
         });
     }
-
-    protected final byte[] getBytes(Bitmap bitmap){
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
-    }
     protected final void getDefaultIcon(OnGetIcon onGetIcon){
         FirebaseStorage.getInstance().getReference().child(DEFAULT_ICON_REF).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
             @Override
@@ -147,12 +138,16 @@ public abstract class FirebaseObject implements Serializable {
             }
         });
     }
-
-    public void delete(OnDelete onDelete){
+    public void removeFromDatabase(OnDeleteDataListener onDeleteDataListener){
         getDatabase().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                onDelete.onDelete();
+                if (task.isSuccessful()){
+                    onDeleteDataListener.onDataDelete();
+                }
+                else {
+                    onDeleteDataListener.onCanceled();
+                }
             }
         });
     }
