@@ -27,7 +27,6 @@ public class UserSettingsActivity extends FirebaseActivity {
     TextView userFamily;
     TextView userEmail;
     ProgressBar progressBar;
-    ValueEventListener userListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,18 +34,27 @@ public class UserSettingsActivity extends FirebaseActivity {
         setContentView(R.layout.activity_user_settings);
         init();
         updateViewData();
-        userListener = new ValueEventListener() {
+        user.addUserListener("14", new OnGetDataListener<User>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onGetData(User data) {
                 updateViewData();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onVoidData() {
 
             }
-        };
-        dbUsers.child(user.id).addValueEventListener(userListener);
+
+            @Override
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled() {
+
+            }
+        });
     }
     // инициализация
     void init(){
@@ -128,7 +136,7 @@ public class UserSettingsActivity extends FirebaseActivity {
 
     @Override
     protected void onDestroy() {
-        dbUsers.removeEventListener(userListener);
+        user.removeObjectDataListener("14");
         super.onDestroy();
     }
 }

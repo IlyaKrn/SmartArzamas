@@ -97,7 +97,7 @@ public class Locate extends FirebaseObject {
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseListeners.put(key, this);
+                databaseObjectListeners.put(key, this);
                 if (snapshot.getValue(Chat.class) != null) {
                     Locate locate = snapshot.getValue(Locate.class);
                     onGetDataListener.onGetData(locate);
@@ -109,7 +109,7 @@ public class Locate extends FirebaseObject {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                databaseListeners.put(key, this);
+                databaseObjectListeners.put(key, this);
                 Log.e(LOG_TAG, "firebase error: " + error.getDetails());
                 onGetDataListener.onCanceled();
             }
@@ -117,5 +117,8 @@ public class Locate extends FirebaseObject {
     }
     public static void removeDataListener(String key){
         getDatabase().removeEventListener(databaseListeners.get(key));
+    }
+    public void removeObjectDataListener(String key){
+        getDatabase().child(id).removeEventListener(databaseObjectListeners.get(key));
     }
 }

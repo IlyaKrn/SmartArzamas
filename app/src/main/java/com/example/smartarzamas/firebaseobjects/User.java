@@ -105,11 +105,11 @@ public class User extends FirebaseObject {
             }
         });
     }
-    public void addLocateListener(String key, OnGetDataListener<User> onGetDataListener){
+    public void addUserListener(String key, OnGetDataListener<User> onGetDataListener){
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseListeners.put(key, this);
+                databaseObjectListeners.put(key, this);
                 if (snapshot.getValue(Chat.class) != null) {
                     User user = snapshot.getValue(User.class);
                     onGetDataListener.onGetData(user);
@@ -121,7 +121,7 @@ public class User extends FirebaseObject {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                databaseListeners.put(key, this);
+                databaseObjectListeners.put(key, this);
                 Log.e(LOG_TAG, "firebase error: " + error.getDetails());
                 onGetDataListener.onCanceled();
             }
@@ -129,5 +129,8 @@ public class User extends FirebaseObject {
     }
     public static void removeDataListener(String key){
         getDatabase().removeEventListener(databaseListeners.get(key));
+    }
+    public void removeObjectDataListener(String key){
+        getDatabase().child(id).removeEventListener(databaseObjectListeners.get(key));
     }
 }

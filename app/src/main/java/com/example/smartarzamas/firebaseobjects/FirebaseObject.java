@@ -35,6 +35,7 @@ public abstract class FirebaseObject implements Serializable {
     public String iconRef;
 
     protected static Map<String, ValueEventListener> databaseListeners = new HashMap<>();
+    protected static Map<String, ValueEventListener> databaseObjectListeners = new HashMap<>();
 
     public FirebaseObject(String name, String id) {
         this.name = name;

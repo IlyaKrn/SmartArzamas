@@ -133,7 +133,7 @@ public class Chat extends FirebaseObject {
         getDatabase().child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                databaseListeners.put(key, this);
+                databaseObjectListeners.put(key, this);
                 if (snapshot.getValue(Chat.class) != null) {
                     Chat chat = snapshot.getValue(Chat.class);
                     onGetDataListener.onGetData(chat);
@@ -145,7 +145,7 @@ public class Chat extends FirebaseObject {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                databaseListeners.put(key, this);
+                databaseObjectListeners.put(key, this);
                 Log.e(LOG_TAG, "firebase error: " + error.getDetails());
                 onGetDataListener.onCanceled();
             }
@@ -154,5 +154,8 @@ public class Chat extends FirebaseObject {
 
     public static void removeDataListener(String key){
         getDatabase().removeEventListener(databaseListeners.get(key));
+    }
+    public void removeObjectDataListener(String key){
+        getDatabase().child(id).removeEventListener(databaseObjectListeners.get(key));
     }
 }

@@ -17,6 +17,7 @@ import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
+import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogChatDescriptionChange;
@@ -43,8 +44,6 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
     private RecyclerView rvMembers;
     private ArrayList<User> members = new ArrayList<>();
     private UserListAdapter adapter;
-    private ValueEventListener chatListener;
-    private ValueEventListener usersListener;
     private Chat chat;
 
     @Override
@@ -53,26 +52,32 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
         setContentView(R.layout.activity_admin_chat_settings);
         init();
         updateViewData();
-        chatListener = new ValueEventListener() {
+        chat.addChatListener("9", new OnGetDataListener<Chat>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onGetData(Chat data) {
                 updateViewData();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onVoidData() {
 
             }
-        };
-        dbChats.child(chat.id).addValueEventListener(chatListener);
 
-        usersListener = new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled() {
+
+            }
+        });
+        User.addUserListListener("10", new OnGetListDataListener<User>() {
+            @Override
+            public void onGetData(ArrayList<User> data) {
                 if (members.size() > 0)members.clear();
-                for (DataSnapshot s : snapshot.getChildren()){
-                    User u = (User) s.getValue(User.class);
-                    assert u != null;
+                for (User u : data){
                     if(chat.isMember(u))
                         members.add(u);
                 }
@@ -80,11 +85,20 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onVoidData() {
 
             }
-        };
-        dbUsers.addValueEventListener(usersListener);
+
+            @Override
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled() {
+
+            }
+        });
         btChangedDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -199,8 +213,8 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
 
     @Override
     protected void onDestroy() {
-        dbChats.removeEventListener(chatListener);
-        dbUsers.removeEventListener(usersListener);
+        chat.removeObjectDataListener("9");
+        User.removeDataListener("10");
         super.onDestroy();
     }
 }
