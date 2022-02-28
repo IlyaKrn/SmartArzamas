@@ -17,6 +17,7 @@ import com.example.smartarzamas.R;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Locate;
+import com.example.smartarzamas.firebaseobjects.OnGetListDataCheckListener;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogAddLocate;
 import com.example.smartarzamas.ui.OnDestroyListener;
@@ -53,31 +54,32 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     private FloatingActionButton fabAdd, fabCancel; // кнопки для взаимодействия с картой
     private boolean isAdd = false; // true = режим добавления метки
 
-    private ValueEventListener locatesListener;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        locatesListener = new ValueEventListener() {
+        Locate.getLocateList("1", new OnGetListDataCheckListener<Locate>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onGetData(ArrayList<Locate> data) {
                 if (locateMainList.size() > 0) locateMainList.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Locate l = (Locate) ds.getValue(Locate.class);
-                    assert l != null;
-                    locateMainList.add(l);
-                }
+                locateMainList.addAll(data);
                 updateMapForView();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onVoidData() {
 
             }
-        };
 
-        dbLocates.addValueEventListener(locatesListener);
+            @Override
+            public void onNoConnection() {
 
+            }
+
+            @Override
+            public void onCanceled() {
+
+            }
+        });
         View.OnClickListener onAddListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,7 +178,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        dbLocates.removeEventListener(locatesListener);
+        Locate.removeDataListener("1");
         binding = null;
     }
 

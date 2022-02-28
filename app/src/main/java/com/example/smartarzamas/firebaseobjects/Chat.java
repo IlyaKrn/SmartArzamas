@@ -95,6 +95,34 @@ public class Chat extends FirebaseObject {
         });
     }
 
+    public static void getChatList(String key, OnGetListDataCheckListener<Chat> onGetDataListener){
+        getDatabase().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseListeners.put(key, this);
+                if (snapshot.getValue(Chat.class) != null) {
+                    ArrayList<Chat> chats = new ArrayList<>();
+                    for (DataSnapshot s : snapshot.getChildren()){
+                        Chat c = s.getValue(Chat.class);
+                        assert c != null;
+                        chats.add(c);
+                    }
+                    onGetDataListener.onGetData(chats);
+                }
+                else {
+                    onGetDataListener.onVoidData();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                databaseListeners.put(key, this);
+                Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                onGetDataListener.onCanceled();
+            }
+        });
+    }
+
     public void setNewData(Chat chat, OnUpdateChat onUpdateChat){
         getDatabase().child(this.id).setValue(chat).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -102,5 +130,9 @@ public class Chat extends FirebaseObject {
                 onUpdateChat.onUpdate(Chat.this);
             }
         });
+    }
+
+    public static void removeDataListener(String key){
+        getDatabase().removeEventListener(databaseListeners.get(key));
     }
 }

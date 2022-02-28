@@ -67,5 +67,34 @@ public class Locate extends FirebaseObject {
             }
         });
     }
+    public static void getLocateList(String key, OnGetListDataCheckListener<Locate> onGetDataListener){
+        getDatabase().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseListeners.put(key, this);
+                if (snapshot.getValue(Chat.class) != null) {
+                    ArrayList<Locate> locates = new ArrayList<>();
+                    for (DataSnapshot s : snapshot.getChildren()){
+                        Locate l = s.getValue(Locate.class);
+                        assert l != null;
+                        locates.add(l);
+                    }
+                    onGetDataListener.onGetData(locates);
+                }
+                else {
+                    onGetDataListener.onVoidData();
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                databaseListeners.put(key, this);
+                Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                onGetDataListener.onCanceled();
+            }
+        });
+    }
+    public static void removeDataListener(String key){
+        getDatabase().removeEventListener(databaseListeners.get(key));
+    }
 }

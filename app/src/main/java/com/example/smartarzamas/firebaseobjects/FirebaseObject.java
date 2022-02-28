@@ -21,6 +21,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class FirebaseObject implements Serializable {
 
@@ -31,6 +33,8 @@ public abstract class FirebaseObject implements Serializable {
     public String name;
     public String id;
     public String iconRef;
+
+    protected static Map<String, ValueEventListener> databaseListeners = new HashMap<>();
 
     public FirebaseObject(String name, String id) {
         this.name = name;

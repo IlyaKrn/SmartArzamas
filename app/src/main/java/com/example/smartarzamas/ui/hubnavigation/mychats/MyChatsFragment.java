@@ -19,6 +19,7 @@ import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.adapters.ChatListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentMyChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
+import com.example.smartarzamas.firebaseobjects.OnGetListDataCheckListener;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
@@ -42,18 +43,14 @@ public class MyChatsFragment extends HubNavigationCommon {
     private RecyclerView rvChats;
     private FloatingActionButton fabAddChat;
 
-    private ValueEventListener chatListListener;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        chatListListener = new ValueEventListener() {
+        Chat.getChatList("2", new OnGetListDataCheckListener<Chat>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onGetData(ArrayList<Chat> data) {
                 if (chatMainList.size() > 0) chatMainList.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Chat c = (Chat) ds.getValue(Chat.class);
-                    assert c != null;
+                for (Chat c : data){
                     for (String email : c.membersEmailList){
                         if (user.email.equals(email)){
                             chatMainList.add(c);
@@ -64,10 +61,20 @@ public class MyChatsFragment extends HubNavigationCommon {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onVoidData() {
 
             }
-        };
+
+            @Override
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled() {
+
+            }
+        });
 
         adapter = new ChatListAdapter(getActivity().getApplicationContext(), chatList, user, false, new ChatListAdapter.OnStateClickListener() {
             @Override
@@ -102,7 +109,6 @@ public class MyChatsFragment extends HubNavigationCommon {
                 callback.onCategoryUpdate(strings);
             }
         });
-        getAllChatList();
         return root;
     }
 
@@ -138,16 +144,6 @@ public class MyChatsFragment extends HubNavigationCommon {
         rvChats = binding.rvChats;
     }
 
-    // все чаты
-    private void getAllChatList(){
-        Utils.isConnected(getContext(), new Utils.Connection() {
-            @Override
-            public void isConnected() {
-                dbChats.addValueEventListener(chatListListener);
-            }
-        });
-    }
-
     private void updateListForView(){
         if (chatList.size() > 0) chatList.clear();
         for (Chat c : chatMainList){
@@ -166,7 +162,7 @@ public class MyChatsFragment extends HubNavigationCommon {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        dbChats.removeEventListener(chatListListener);
+        Chat.removeDataListener("2");
     }
 
     public static void setCallback(MyChatsFragmentCallback callback) {

@@ -12,6 +12,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class User extends FirebaseObject {
 
     public static final String USERS = "users";
@@ -76,6 +78,34 @@ public class User extends FirebaseObject {
             }
         });
     }
+    public static void getUserList(String key, OnGetListDataCheckListener<User> onGetDataListener){
+        getDatabase().addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseListeners.put(key, this);
+                if (snapshot.getValue(Chat.class) != null) {
+                    ArrayList<User> users = new ArrayList<>();
+                    for (DataSnapshot s : snapshot.getChildren()){
+                        User u = s.getValue(User.class);
+                        assert u != null;
+                        users.add(u);
+                    }
+                    onGetDataListener.onGetData(users);
+                }
+                else {
+                    onGetDataListener.onVoidData();
+                }
+            }
 
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                databaseListeners.put(key, this);
+                Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                onGetDataListener.onCanceled();
+            }
+        });
+    }
+    public static void removeDataListener(String key){
+        getDatabase().removeEventListener(databaseListeners.get(key));
+    }
 }
