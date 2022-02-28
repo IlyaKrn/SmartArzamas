@@ -12,7 +12,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Locate extends FirebaseObject {
 
@@ -67,7 +66,7 @@ public class Locate extends FirebaseObject {
             }
         });
     }
-    public static void getLocateList(String key, OnGetListDataCheckListener<Locate> onGetDataListener){
+    public static void addLocateListListener(String key, OnGetListDataListener<Locate> onGetDataListener){
         getDatabase().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -80,6 +79,28 @@ public class Locate extends FirebaseObject {
                         locates.add(l);
                     }
                     onGetDataListener.onGetData(locates);
+                }
+                else {
+                    onGetDataListener.onVoidData();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                databaseListeners.put(key, this);
+                Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                onGetDataListener.onCanceled();
+            }
+        });
+    }
+    public void addLocateListener(String key, OnGetDataListener<Locate> onGetDataListener){
+        getDatabase().child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseListeners.put(key, this);
+                if (snapshot.getValue(Chat.class) != null) {
+                    Locate locate = snapshot.getValue(Locate.class);
+                    onGetDataListener.onGetData(locate);
                 }
                 else {
                     onGetDataListener.onVoidData();

@@ -19,14 +19,11 @@ import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.adapters.ChatListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentMyChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
-import com.example.smartarzamas.firebaseobjects.OnGetListDataCheckListener;
+import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -46,7 +43,7 @@ public class MyChatsFragment extends HubNavigationCommon {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        Chat.getChatList("2", new OnGetListDataCheckListener<Chat>() {
+        Chat.addChatListListener("2", new OnGetListDataListener<Chat>() {
             @Override
             public void onGetData(ArrayList<Chat> data) {
                 if (chatMainList.size() > 0) chatMainList.clear();

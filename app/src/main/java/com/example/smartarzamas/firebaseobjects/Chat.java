@@ -1,11 +1,9 @@
 package com.example.smartarzamas.firebaseobjects;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.smartarzamas.support.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -95,7 +93,7 @@ public class Chat extends FirebaseObject {
         });
     }
 
-    public static void getChatList(String key, OnGetListDataCheckListener<Chat> onGetDataListener){
+    public static void addChatListListener(String key, OnGetListDataListener<Chat> onGetDataListener){
         getDatabase().addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -128,6 +126,28 @@ public class Chat extends FirebaseObject {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 onUpdateChat.onUpdate(Chat.this);
+            }
+        });
+    }
+    public void addChatListener(String key, OnGetDataListener<Chat> onGetDataListener){
+        getDatabase().child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseListeners.put(key, this);
+                if (snapshot.getValue(Chat.class) != null) {
+                    Chat chat = snapshot.getValue(Chat.class);
+                    onGetDataListener.onGetData(chat);
+                }
+                else {
+                    onGetDataListener.onVoidData();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                databaseListeners.put(key, this);
+                Log.e(LOG_TAG, "firebase error: " + error.getDetails());
+                onGetDataListener.onCanceled();
             }
         });
     }
