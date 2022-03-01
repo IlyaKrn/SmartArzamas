@@ -1,5 +1,6 @@
 package com.example.smartarzamas;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
+import com.example.smartarzamas.firebaseobjects.OnDeleteDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
@@ -24,9 +26,14 @@ import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogChatDescriptionChange;
 import com.example.smartarzamas.ui.DialogChatIconChange;
 import com.example.smartarzamas.ui.DialogChatNameChange;
+import com.example.smartarzamas.ui.DialogConfirm;
+import com.example.smartarzamas.ui.OnConfirmListener;
 import com.example.smartarzamas.ui.OnIconChangeListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -144,12 +151,52 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
         btDeleteChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                DialogConfirm dialog = new DialogConfirm(AdminChatSettingsActivity.this, getString(R.string.delete_chat), getString(R.string.delete), getString(R.string.realy_delete_chat), new OnConfirmListener() {
+                    @Override
+                    public void onConfirm(DialogConfirm d) {
+                        d.freeze();
+                        chat.removeFromDatabase(new OnDeleteDataListener() {
+                            @Override
+                            public void onDataDelete(DatabaseReference deleteRef){
+                                chat.removeFromDatabase(new OnDeleteDataListener() {
+                                    @Override
+                                    public void onDataDelete(DatabaseReference deleteRef) {
+                                        Toast.makeText(getApplicationContext(), getString(R.string.delete_account_succesful), Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
 
+                                    @Override
+                                    public void onNoConnection() {
+
+                                    }
+
+                                    @Override
+                                    public void onCanceled() {
+                                        Toast.makeText(AdminChatSettingsActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onNoConnection() {
+
+                            }
+
+                            @Override
+                            public void onCanceled() {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancel(DialogConfirm d) {
+                        d.destroy();
+                    }
+                });
+                dialog.create(R.id.fragmentContainerView);
             }
         });
-
-
-
     }
     // инициализация
     void init(){
@@ -197,7 +244,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onVoidData() {
-
+                Toast.makeText(AdminChatSettingsActivity.this, getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -207,7 +254,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onCanceled() {
-
+                Toast.makeText(AdminChatSettingsActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
             }
         });
 

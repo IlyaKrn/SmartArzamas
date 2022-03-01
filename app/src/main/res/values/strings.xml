@@ -97,5 +97,10 @@
     <string name="rejection">Отказ</string>
     <string name="databese_request_canceled">Доступ запрещен</string>
     <string name="data_not_find">Данные не найдены</string>
+    <string name="delete">Удалить</string>
+    <string name="realy_delete_account">Вы действительно хотите удалить аккаунт без возможности восстановления?</string>
+    <string name="delete_account_error">Ошибка при удалении аккаунта</string>
+    <string name="delete_account_succesful">Аккаунт удален</string>
+    <string name="realy_delete_chat">Вы действительно хотите удалить чат без возможности восстановления?</string>
 
 </resources>
