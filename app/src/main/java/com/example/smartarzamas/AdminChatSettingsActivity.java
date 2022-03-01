@@ -60,7 +60,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onVoidData() {
-
+                finish();
             }
 
             @Override
@@ -70,7 +70,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onCanceled() {
-
+                finish();
             }
         });
         User.addUserListListener("10", new OnGetListDataListener<User>() {

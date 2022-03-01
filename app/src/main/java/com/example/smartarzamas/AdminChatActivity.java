@@ -21,6 +21,7 @@ import com.example.smartarzamas.adapters.MessageListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.FirebaseObject;
 import com.example.smartarzamas.firebaseobjects.Message;
+import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnSetIcon;
 import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.support.Utils;
@@ -48,16 +49,55 @@ public class AdminChatActivity extends FirebaseActivity {
     private ImageButton btClose;
 
 
-    private ValueEventListener chatDataListener;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_chat);
         init();
-        getChatData();
-    }
+        Chat.getChatById(getIntent().getStringExtra(CHAT_ID), new OnGetDataListener<Chat>() {
+            @Override
+            public void onGetData(Chat data) {
+                AdminChatActivity.this.chat = data;
+                updateViewData();
+                chat.addChatListener("16", new OnGetDataListener<Chat>() {
+                    @Override
+                    public void onGetData(Chat data) {
+                        AdminChatActivity.this.chat = data;
+                        updateViewData();
+                    }
+
+                    @Override
+                    public void onVoidData() {
+                        finish();
+                    }
+
+                    @Override
+                    public void onNoConnection() {
+
+                    }
+
+                    @Override
+                    public void onCanceled() {
+                        finish();
+                    }
+                });
+            }
+
+            @Override
+            public void onVoidData() {
+                finish();
+            }
+
+            @Override
+            public void onNoConnection() {
+
+            }
+
+            @Override
+            public void onCanceled(){
+                finish();
+            }
+        });    }
 
     // инициализация
     void init(){
@@ -178,47 +218,24 @@ public class AdminChatActivity extends FirebaseActivity {
                 finish();
             }
         });
-
-        chatDataListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                AdminChatActivity.this.chat = snapshot.getValue(Chat.class);
-                tvName.setText(chat.name);
-                if (messageList.size() > 0) messageList.clear();
-                for (int i = 0; i < chat.messages.size(); i++) {
-                    messageList.add(chat.messages.get(i));
-                }
-                adapter.notifyDataSetChanged();
-                scrollMessages();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
+    }
+    private void updateViewData(){
+        tvName.setText(chat.name);
+        if (messageList.size() > 0) messageList.clear();
+        for (int i = 0; i < chat.messages.size(); i++) {
+            messageList.add(chat.messages.get(i));
+        }
+        adapter.notifyDataSetChanged();
+        scrollMessages();
     }
 
-    // получение информации о чате
-    void getChatData(){
-        Utils.isConnected(getApplicationContext(), new Utils.Connection() {
-            @Override
-            public void isConnected() {
-                String id = getIntent().getStringExtra(CHAT_ID);
-                if (id != null){
-                    dbChats.child(id).addValueEventListener(chatDataListener);
-                }
-
-            }
-        });
-    }
     private void scrollMessages(){
         rvMessages.scrollToPosition(messageList.size()-1);
     }
 
     @Override
     protected void onDestroy() {
-        dbChats.child(chat.id).removeEventListener(chatDataListener);
+        chat.removeObjectDataListener("16");
         super.onDestroy();
     }
     @Override

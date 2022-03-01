@@ -184,6 +184,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
             @Override
             public void onVoidData() {
                 Toast.makeText(ChatSettingsActivity.this, getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
+                finish();
             }
 
             @Override
@@ -194,6 +195,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
             @Override
             public void onCanceled() {
                 Toast.makeText(ChatSettingsActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

@@ -67,7 +67,7 @@ public class ChatActivity extends FirebaseActivity {
 
                     @Override
                     public void onVoidData() {
-
+                        finish();
                     }
 
                     @Override
@@ -77,14 +77,14 @@ public class ChatActivity extends FirebaseActivity {
 
                     @Override
                     public void onCanceled() {
-
+                        finish();
                     }
                 });
             }
 
             @Override
             public void onVoidData() {
-
+                finish();
             }
 
             @Override
@@ -93,8 +93,8 @@ public class ChatActivity extends FirebaseActivity {
             }
 
             @Override
-            public void onCanceled() {
-
+            public void onCanceled(){
+                finish();
             }
         });
     }
