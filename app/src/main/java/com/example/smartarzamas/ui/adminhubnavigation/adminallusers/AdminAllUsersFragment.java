@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
+import com.example.smartarzamas.adapters.OnStateClickListener;
 import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
@@ -71,9 +72,14 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
             }
         });
 
-        adapter = new UserListAdapter(getActivity().getApplicationContext(), chatList, user, true, new UserListAdapter.OnStateClickListener() {
+        adapter = new UserListAdapter(getActivity().getApplicationContext(), user, true, chatList, new OnStateClickListener<User>() {
             @Override
-            public void onStateClick(int messagePosition) {
+            public void onClick(User item) {
+
+            }
+
+            @Override
+            public void onLongClick(User item) {
 
             }
         });

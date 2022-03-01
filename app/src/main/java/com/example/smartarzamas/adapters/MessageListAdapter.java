@@ -27,85 +27,46 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.MessageHolder> {
+public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdapter.MessageHolder> {
 
-    private final OnStateClickListener onClickListener;
-    private final ArrayList<Message> messages;
-    private final Context context;
-    private final User user;
-    private final boolean isAdmin;
     private Map<String, Bitmap> savedIcons = new HashMap<>();
     private Map<String, ArrayList<Bitmap>> savedImages = new HashMap<>();
 
-
-    public MessageListAdapter(Context context, ArrayList<Message> messages,/* ArrayList<User>  userList,*/ User user, boolean isAdmin, OnStateClickListener onClickListener) {
-        this.isAdmin = isAdmin;
-        this.context = context;
-        this.messages = messages;
-        this.onClickListener = onClickListener;
-        this.user = user;
-    }
-
-    @NonNull
-    @Override
-    public MessageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_message_list, parent, false);
-
-        MessageHolder holder = new MessageHolder(view);
-        return holder;
-
+    public MessageListAdapter(Context context, User user, boolean isAdmin, ArrayList<Message> items, OnStateClickListener<Message> onItemClickListener) {
+        super(context, user, isAdmin, items, onItemClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.bind(position);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                onClickListener.onStateClick(position);
-            }
-        });
-    }
-    @Override
-    public int getItemCount() {
-        return messages.size();
+    protected MessageHolder onCreateHolder(@NonNull ViewGroup parent, int viewType) {
+        return new MessageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_list, parent, false));
     }
 
-    public interface OnStateClickListener{
-        void onStateClick(int messagePosition);
-    }
+    public class MessageHolder extends FirebaseHolder<Message>{
 
-    class MessageHolder extends RecyclerView.ViewHolder{
+        private final ImageButton btMenu;
+        private final TableMessageImages notMy_tlImages;
+        private final ProgressBar notMy_progressImage;
+        private final TextView notMy_tvMessage;
+        private final TextView notMy_tvName;
+        private final IconView notMy_ivIcon;
+        private final TextView notMy_tvDate;
+        private final View notMy_itemBody;
 
-        ImageButton btMenu;
-        TableMessageImages notMy_tlImages;
-        ProgressBar notMy_progressImage;
-        TextView notMy_tvMessage;
-        TextView notMy_tvName;
-        IconView notMy_ivIcon;
-        TextView notMy_tvDate;
-        View notMy_itemBody;
+        private final TableMessageImages my_tlImages;
+        private final View my_itemBody;
+        private final TextView my_tvMessage;
+        private final TextView my_tvName;
+        private final TextView my_tvDate;
 
-        TableMessageImages my_tlImages;
-        View my_itemBody;
-        TextView my_tvMessage;
-        TextView my_tvName;
-        TextView my_tvDate;
-
-        View system_itemBody;
-        TextView system_tvMessage;
-        TextView system_tvDate;
-        TableMessageImages system_tlImages;
+        private final View system_itemBody;
+        private final TextView system_tvMessage;
+        private final TextView system_tvDate;
+        private final TableMessageImages system_tlImages;
 
         User u;
-        Message m;
 
         public MessageHolder(@NonNull View itemView) {
             super(itemView);
-
             btMenu = itemView.findViewById(R.id.bt_item_menu);
 
             notMy_tvMessage = this.itemView.findViewById(R.id.not_my_tv_message);
@@ -128,8 +89,9 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             system_tlImages = itemView.findViewById(R.id.system_lv_images);
         }
 
-        public void bind(int listIndex){
-            m = messages.get(listIndex);
+        @Override
+        public void bind(int position) {
+            item = getItem(position);
 
             system_tlImages.removeBitmaps();
             notMy_tlImages.removeBitmaps();
@@ -146,11 +108,11 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             else {
                 btMenu.setVisibility(View.GONE);
             }
-            if (m.imageRefs != null){
-                if (savedImages.get(m.id) != null){
-                    ArrayList<Bitmap> bitmaps = savedImages.get(m.id);
-                    if (m.userId != null){
-                        if (m.userId.equals(user.id)){
+            if (item.imageRefs != null){
+                if (savedImages.get(item.id) != null){
+                    ArrayList<Bitmap> bitmaps = savedImages.get(item.id);
+                    if (item.userId != null){
+                        if (item.userId.equals(user.id)){
                             my_tlImages.setBitmaps(bitmaps);
                         }
                         else {
@@ -162,13 +124,13 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                     }
                 }
                 else {
-                    m.getIconsAsync(context, new OnGetIcons() {
+                    item.getIconsAsync(context, new OnGetIcons() {
                         @Override
                         public void onGet(ArrayList<Bitmap> bitmaps, Message message) {
                             savedImages.put(message.id, bitmaps);
-                            if (m.equals(message)) {
-                                if (m.userId != null){
-                                    if (m.userId.equals(user.id)){
+                            if (item.equals(message)) {
+                                if (item.userId != null){
+                                    if (item.userId.equals(user.id)){
                                         my_tlImages.setBitmaps(bitmaps);
                                     }
                                     else {
@@ -192,10 +154,10 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
 
 
-            if (m.userId != null) {
-                if (m.userId.equals(user.id)) {
+            if (item.userId != null) {
+                if (item.userId.equals(user.id)) {
                     showMyMessage();
-                    my_tvMessage.setText(m.message);
+                    my_tvMessage.setText(item.message);
                     my_tvName.setText(R.string.my_message_name);
                     my_tvDate.setText(Utils.getDateString());
 
@@ -204,15 +166,15 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                     showNotMyMessage();
                     notMy_ivIcon.setVisibility(View.GONE);
                     notMy_progressImage.setVisibility(View.VISIBLE);
-                    notMy_tvMessage.setText(m.message);
-                    User.getUserById(m.userId, new OnGetDataListener<User>() {
+                    notMy_tvMessage.setText(item.message);
+                    User.getUserById(item.userId, new OnGetDataListener<User>() {
                         @Override
                         public void onGetData(User data) {
                             u = data;
-                            if (user.id.equals(m.userId))
+                            if (user.id.equals(item.userId))
                                 notMy_tvName.setText(user.name);
                             if (savedIcons.get(user.id) != null){
-                                if (user.id.equals(m.userId)) {
+                                if (user.id.equals(item.userId)) {
                                     notMy_ivIcon.setImageBitmap(savedIcons.get(user.id));
                                     notMy_ivIcon.setVisibility(View.VISIBLE);
                                     notMy_progressImage.setVisibility(View.GONE);
@@ -223,7 +185,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
                                     @Override
                                     public void onLoad(Bitmap bitmap) {
                                         savedIcons.put(user.id, bitmap);
-                                        if (user.id.equals(m.userId)) {
+                                        if (user.id.equals(item.userId)) {
                                             notMy_ivIcon.setImageBitmap(bitmap);
                                             notMy_ivIcon.setVisibility(View.VISIBLE);
                                             notMy_progressImage.setVisibility(View.GONE);
@@ -253,9 +215,13 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             }
             else {
                 showSystemMessage();
-                system_tvMessage.setText(m.message);
+                system_tvMessage.setText(item.message);
                 system_tvDate.setText(Utils.getDateString());
             }
+        }
+
+        @Override
+        public void bindAdmin(int position) {
 
         }
         private void showNotMyMessage(){
@@ -273,6 +239,5 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             my_itemBody.setVisibility(View.GONE);
             system_itemBody.setVisibility(View.VISIBLE);
         }
-
     }
 }

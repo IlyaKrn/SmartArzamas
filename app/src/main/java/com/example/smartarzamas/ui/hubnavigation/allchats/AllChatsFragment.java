@@ -20,6 +20,7 @@ import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.ChatListAdapter;
+import com.example.smartarzamas.adapters.OnStateClickListener;
 import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
@@ -73,13 +74,18 @@ public class AllChatsFragment extends HubNavigationCommon {
             }
         });
 
-        adapter = new ChatListAdapter(getActivity().getApplicationContext(), chatList, user, false, new ChatListAdapter.OnStateClickListener() {
+        adapter = new ChatListAdapter(getActivity().getApplicationContext(), user, false, chatList, new OnStateClickListener<Chat>() {
             @Override
-            public void onStateClick(String chatId) {
+            public void onClick(Chat item) {
                 Intent intent = new Intent(AllChatsFragment.this.getActivity(), ChatActivity.class);
-                intent.putExtra(FirebaseActivity.CHAT_ID, chatId);
+                intent.putExtra(FirebaseActivity.CHAT_ID, item.id);
                 intent.putExtra(FirebaseActivity.USER_INTENT, user);
                 AllChatsFragment.this.getActivity().startActivity(intent);
+            }
+
+            @Override
+            public void onLongClick(Chat item) {
+
             }
         });
         fabAddChat.setOnClickListener(new View.OnClickListener() {

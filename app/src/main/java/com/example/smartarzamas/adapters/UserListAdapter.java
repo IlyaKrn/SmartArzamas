@@ -23,82 +23,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHolder> {
+public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserHolder> {
 
-    private final OnStateClickListener onClickListener;
-    private final ArrayList<User> users;
-    private final Context context;
-    private final User user;
-    private final boolean isAdmin;
     private Map<String, Bitmap> savedIcons = new HashMap<>();
     private Map<String, ArrayList<Bitmap>> savedImages = new HashMap<>();
 
-
-    public UserListAdapter(Context context, ArrayList<User> users,/* ArrayList<User>  userList,*/ User user, boolean isAdmin, OnStateClickListener onClickListener) {
-        this.isAdmin = isAdmin;
-        this.context = context;
-        this.users = users;
-        this.onClickListener = onClickListener;
-        this.user = user;
-    }
-
-    @NonNull
-    @Override
-    public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.item_user_list, parent, false);
-
-        UserHolder holder = new UserHolder(view);
-        return holder;
-
+    public UserListAdapter(Context context, User user, boolean isAdmin, ArrayList<User> items, OnStateClickListener<User> onItemClickListener) {
+        super(context, user, isAdmin, items, onItemClickListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.bind(position);
-
-        holder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                onClickListener.onStateClick(position);
-            }
-        });
-    }
-    @Override
-    public int getItemCount() {
-        return users.size();
+    protected UserHolder onCreateHolder(@NonNull ViewGroup parent, int viewType) {
+        return new UserHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user_list, parent, false));
     }
 
-    public interface OnStateClickListener{
-        void onStateClick(int messagePosition);
-    }
+    public class UserHolder extends FirebaseHolder<User>{
 
-    class UserHolder extends RecyclerView.ViewHolder {
-
-        ImageButton btMenu;
-        ProgressBar progressImage;
-        TextView tvName;
-        IconView ivIcon;
-        TextView tvDate;
-        View itemBody;
-
-        User u;
+        private final ImageButton btMenu;
+        private final ProgressBar progressImage;
+        private final TextView tvName;
+        private final IconView ivIcon;
+        private final View itemBody;
 
         public UserHolder(@NonNull View itemView) {
             super(itemView);
-
             btMenu = itemView.findViewById(R.id.bt_item_menu);
-
-            tvName = this.itemView.findViewById(R.id.tv_user_name);
-            ivIcon = this.itemView.findViewById(R.id.user_icon);
-            itemBody = this.itemView.findViewById(R.id.item_body);
-            progressImage = this.itemView.findViewById(R.id.progress);
-
+            tvName = itemView.findViewById(R.id.tv_user_name);
+            ivIcon = itemView.findViewById(R.id.user_icon);
+            itemBody = itemView.findViewById(R.id.item_body);
+            progressImage = itemView.findViewById(R.id.progress);
         }
 
-        public void bind(int listIndex) {
-            u = users.get(listIndex);
+        @Override
+        public void bind(int position) {
+            item = getItem(position);
 
             btMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -111,14 +69,14 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
             } else {
                 btMenu.setVisibility(View.GONE);
             }
-            User.getUserById(u.id, new OnGetDataListener<User>() {
+            User.getUserById(item.id, new OnGetDataListener<User>() {
                 @Override
                 public void onGetData(User data) {
-                    u = data;
-                    if (user.id.equals(u.id))
+                    item = data;
+                    if (user.id.equals(item.id))
                         tvName.setText(user.name);
                     if (savedIcons.get(user.id) != null) {
-                        if (user.id.equals(u.id)) {
+                        if (user.id.equals(item.id)) {
                             ivIcon.setImageBitmap(savedIcons.get(user.id));
                             ivIcon.setVisibility(View.VISIBLE);
                             progressImage.setVisibility(View.GONE);
@@ -128,7 +86,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
                             @Override
                             public void onLoad(Bitmap bitmap) {
                                 savedIcons.put(user.id, bitmap);
-                                if (user.id.equals(u.id)) {
+                                if (user.id.equals(item.id)) {
                                     ivIcon.setImageBitmap(bitmap);
                                     ivIcon.setVisibility(View.VISIBLE);
                                     progressImage.setVisibility(View.GONE);
@@ -153,6 +111,11 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserHo
 
                 }
             });
+        }
+
+        @Override
+        public void bindAdmin(int position) {
+
         }
     }
 }

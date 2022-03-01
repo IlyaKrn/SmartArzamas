@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.adapters.MessageListAdapter;
+import com.example.smartarzamas.adapters.OnStateClickListener;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.FirebaseObject;
 import com.example.smartarzamas.firebaseobjects.Message;
@@ -113,9 +114,14 @@ public class AdminChatActivity extends FirebaseActivity {
         btChatSettings = findViewById(R.id.bt_chat_menu);
         btClose = findViewById(R.id.bt_close);
         rvMessages.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MessageListAdapter(this, messageList,/* userList,new ArrayList<>(), */ user, true, new MessageListAdapter.OnStateClickListener() {
+        adapter = new MessageListAdapter(this, user, true, messageList, new OnStateClickListener<Message>() {
             @Override
-            public void onStateClick(int messagePosition) {
+            public void onClick(Message item) {
+
+            }
+
+            @Override
+            public void onLongClick(Message item) {
 
             }
         });
