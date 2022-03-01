@@ -140,11 +140,11 @@ public abstract class FirebaseObject implements Serializable {
         });
     }
     public void removeFromDatabase(OnDeleteDataListener onDeleteDataListener){
-        getDatabase().removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+        getDatabaseChild().child(id).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    onDeleteDataListener.onDataDelete();
+                    onDeleteDataListener.onDataDelete(getDatabaseChild().child(id).getRef());
                 }
                 else {
                     onDeleteDataListener.onCanceled();
