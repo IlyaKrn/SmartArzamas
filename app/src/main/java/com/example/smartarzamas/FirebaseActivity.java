@@ -20,6 +20,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 public abstract class FirebaseActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     // константы для передачи информации между активнотями
@@ -41,13 +46,19 @@ public abstract class FirebaseActivity extends AppCompatActivity implements Swip
 
     protected FragmentContainerView fragmentDefaultContainer;  // контейнер для врагментов
     private SwipeRefreshLayout swipeRefresh;  // обновление данных
+    protected Set<FirebaseActivity> activities = new HashSet<>();
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        for (FirebaseActivity a : activities){
+            if (a instanceof AuthActivity || this instanceof AuthActivity)
+                a.finish();
+        }
 
+        activities.add(this);
         // получение контейнера для фрагментов
         try {
             fragmentDefaultContainer = findViewById(R.id.fragmentContainerView);
