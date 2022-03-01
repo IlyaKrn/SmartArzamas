@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -60,6 +61,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onVoidData() {
+                Toast.makeText(AdminChatSettingsActivity.this, getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
                 finish();
             }
 
@@ -70,6 +72,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onCanceled() {
+                Toast.makeText(AdminChatSettingsActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

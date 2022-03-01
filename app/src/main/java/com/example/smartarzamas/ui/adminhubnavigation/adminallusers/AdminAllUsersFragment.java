@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.HubActivity;
+import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
+import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
@@ -37,28 +40,36 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
     private UserListAdapter adapter;
     private RecyclerView rvUsers;
 
-    private ValueEventListener userListListener;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        userListListener = new ValueEventListener() {
+        User.addUserListListener("20", new OnGetListDataListener<User>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onGetData(ArrayList<User> data) {
                 if (userMainList.size() > 0) userMainList.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    User u = (User) ds.getValue(User.class);
-                    assert u != null;
+                for (User u : data) {
                     userMainList.add(u);
                 }
                 updateListForView();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onVoidData() {
+                if (userMainList.size() > 0) userMainList.clear();
+                updateListForView();
+            }
+
+            @Override
+            public void onNoConnection() {
 
             }
-        };
+
+            @Override
+            public void onCanceled() {
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+            }
+        });
 
         adapter = new UserListAdapter(getActivity().getApplicationContext(), chatList, user, true, new UserListAdapter.OnStateClickListener() {
             @Override
@@ -86,18 +97,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
             }
         });
 
-        getAllChatList();
         return root;
-    }
-
-    // все чаты
-    private void getAllChatList(){
-        Utils.isConnected(getContext(), new Utils.Connection() {
-            @Override
-            public void isConnected() {
-                dbUsers.addValueEventListener(userListListener);
-            }
-        });
     }
 
     @Override
@@ -145,7 +145,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        dbUsers.removeEventListener(userListListener);
+        User.removeDataListener("20");
     }
     public static void setCallback(AdminAllUsersFragmentCallback callback) {
         AdminAllUsersFragment.callback = callback;

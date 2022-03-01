@@ -41,12 +41,16 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
         user.addUserListener("7", new OnGetDataListener<User>() {
             @Override
             public void onGetData(User data) {
+                AdminUserSettingsActivity.this.user = data;
                 updateViewData();
             }
 
             @Override
             public void onVoidData() {
-
+                Toast.makeText(getApplicationContext(), getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AdminUserSettingsActivity.this, AuthActivity.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override
@@ -56,7 +60,8 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onCanceled() {
-
+                Toast.makeText(getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
@@ -103,38 +108,18 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
             userIcon.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }
-        User.getUserById(user.id, new OnGetDataListener<User>() {
+        userName.setText(user.name);
+        userFamily.setText(user.family);
+        userEmail.setText(user.email);
+        user.getIconAsync(AdminUserSettingsActivity.this.getApplicationContext(), new OnGetIcon() {
             @Override
-            public void onGetData(User data) {
-                AdminUserSettingsActivity.this.user = data;
-                userName.setText(user.name);
-                userFamily.setText(user.family);
-                userEmail.setText(user.email);
-                user.getIconAsync(AdminUserSettingsActivity.this.getApplicationContext(), new OnGetIcon() {
-                    @Override
-                    public void onLoad(Bitmap bitmap) {
-                        userIcon.setImageBitmap(bitmap);
-                        userIcon.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.GONE);
-                    }
-                });
-            }
-
-            @Override
-            public void onVoidData() {
-                Toast.makeText(AdminUserSettingsActivity.this, getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNoConnection() {
-
-            }
-
-            @Override
-            public void onCanceled() {
-                Toast.makeText(AdminUserSettingsActivity.this, getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+            public void onLoad(Bitmap bitmap) {
+                userIcon.setImageBitmap(bitmap);
+                userIcon.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         });
+
     }
 
     @Override

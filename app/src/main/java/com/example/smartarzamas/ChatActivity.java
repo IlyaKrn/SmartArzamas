@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -77,6 +78,7 @@ public class ChatActivity extends FirebaseActivity {
 
                     @Override
                     public void onCanceled() {
+                        Toast.makeText(getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
                         finish();
                     }
                 });
@@ -84,6 +86,7 @@ public class ChatActivity extends FirebaseActivity {
 
             @Override
             public void onVoidData() {
+                Toast.makeText(getApplicationContext(), getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
                 finish();
             }
 
@@ -94,6 +97,7 @@ public class ChatActivity extends FirebaseActivity {
 
             @Override
             public void onCanceled(){
+                Toast.makeText(getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

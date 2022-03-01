@@ -1,11 +1,13 @@
 package com.example.smartarzamas;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -37,12 +39,16 @@ public class UserSettingsActivity extends FirebaseActivity {
         user.addUserListener("14", new OnGetDataListener<User>() {
             @Override
             public void onGetData(User data) {
+                UserSettingsActivity.this.user = data;
                 updateViewData();
             }
 
             @Override
             public void onVoidData() {
-
+                Toast.makeText(getApplicationContext(), getString(R.string.data_not_find), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(UserSettingsActivity.this, AuthActivity.class);
+                startActivity(intent);
+                finish();
             }
 
             @Override
@@ -52,7 +58,8 @@ public class UserSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onCanceled() {
-
+                Toast.makeText(getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }
@@ -99,36 +106,15 @@ public class UserSettingsActivity extends FirebaseActivity {
             userIcon.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }
-        User.getUserById(user.id, new OnGetDataListener<User>() {
+        userName.setText(user.name);
+        userFamily.setText(user.family);
+        userEmail.setText(user.email);
+        user.getIconAsync(UserSettingsActivity.this.getApplicationContext(), new OnGetIcon() {
             @Override
-            public void onGetData(User data) {
-                UserSettingsActivity.this.user = data;
-                userName.setText(user.name);
-                userFamily.setText(user.family);
-                userEmail.setText(user.email);
-                user.getIconAsync(UserSettingsActivity.this.getApplicationContext(), new OnGetIcon() {
-                    @Override
-                    public void onLoad(Bitmap bitmap) {
-                        userIcon.setImageBitmap(bitmap);
-                        userIcon.setVisibility(View.VISIBLE);
-                        progressBar.setVisibility(View.GONE);
-                    }
-                });
-            }
-
-            @Override
-            public void onVoidData() {
-
-            }
-
-            @Override
-            public void onNoConnection() {
-
-            }
-
-            @Override
-            public void onCanceled() {
-
+            public void onLoad(Bitmap bitmap) {
+                userIcon.setImageBitmap(bitmap);
+                userIcon.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
             }
         });
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.smartarzamas.ChatActivity;
 import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.HubActivity;
+import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.ChatListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentMyChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
@@ -59,7 +61,8 @@ public class MyChatsFragment extends HubNavigationCommon {
 
             @Override
             public void onVoidData() {
-
+                if (chatMainList.size() > 0) chatMainList.clear();
+                updateListForView();
             }
 
             @Override
@@ -69,7 +72,8 @@ public class MyChatsFragment extends HubNavigationCommon {
 
             @Override
             public void onCanceled() {
-
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }
         });
 

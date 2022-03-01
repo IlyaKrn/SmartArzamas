@@ -18,6 +18,7 @@ import com.example.smartarzamas.R;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Locate;
+import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.DialogAddLocate;
 import com.example.smartarzamas.ui.OnDestroyListener;
@@ -56,30 +57,34 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
     private FloatingActionButton fabAdd, fabCancel; // кнопки для взаимодействия с картой
     private boolean isAdd = false; // true = режим добавления метки
 
-    private ValueEventListener locatesListener;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        locatesListener = new ValueEventListener() {
+        Locate.addLocateListListener("22", new OnGetListDataListener<Locate>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+            public void onGetData(ArrayList<Locate> data) {
                 if (locateMainList.size() > 0) locateMainList.clear();
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Locate l = (Locate) ds.getValue(Locate.class);
-                    assert l != null;
-                    locateMainList.add(l);
-                }
+                locateMainList.addAll(data);
                 updateMapForView();
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onVoidData() {
+                if (locateMainList.size() > 0) locateMainList.clear();
+                updateMapForView();
+            }
+
+            @Override
+            public void onNoConnection() {
 
             }
-        };
 
-        dbLocates.addValueEventListener(locatesListener);
+            @Override
+            public void onCanceled() {
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+            }
+        });
 
         View.OnClickListener onAddListener = new View.OnClickListener() {
             @Override
@@ -179,7 +184,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        dbLocates.removeEventListener(locatesListener);
+        Locate.removeDataListener("22");
         binding = null;
     }
 

@@ -67,7 +67,8 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
 
             @Override
             public void onCanceled() {
-
+                Toast.makeText(getActivity().getApplicationContext(), getString(R.string.databese_request_canceled), Toast.LENGTH_SHORT).show();
+                getActivity().finish();
             }
         });
         View.OnClickListener onAddListener = new View.OnClickListener() {
