@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.smartarzamas.databinding.ActivityHubBinding;
 import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.support.EditTextSearch;
 import com.example.smartarzamas.ui.DialogAddChat;
 import com.example.smartarzamas.ui.DialogAddLocate;
-import com.example.smartarzamas.ui.DialogSignOut;
+import com.example.smartarzamas.ui.DialogConfirm;
+import com.example.smartarzamas.ui.OnConfirmListener;
 import com.example.smartarzamas.ui.OnDestroyListener;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragment;
@@ -23,18 +23,10 @@ import com.example.smartarzamas.ui.adminhubnavigation.adminallusers.AdminAllUser
 import com.example.smartarzamas.ui.adminhubnavigation.adminallusers.AdminAllUsersFragmentCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.adminmap.AdminMapFragment;
 import com.example.smartarzamas.ui.adminhubnavigation.adminmap.AdminMapFragmentCallback;
-import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
-import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
-import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragmentCallback;
-import com.example.smartarzamas.ui.hubnavigation.map.MapFragment;
-import com.example.smartarzamas.ui.hubnavigation.map.MapFragmentCallback;
-import com.example.smartarzamas.ui.hubnavigation.mychats.MyChatsFragment;
-import com.example.smartarzamas.ui.hubnavigation.mychats.MyChatsFragmentCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -159,7 +151,22 @@ public class AdminHubActivity extends FirebaseActivity {
                                 break;
                             // выход из аккаунта
                             case R.id.sign_out:
-                                DialogSignOut dialog = new DialogSignOut(AdminHubActivity.this);
+                                DialogConfirm dialog = new DialogConfirm(AdminHubActivity.this, getString(R.string.exit), getString(R.string.sign_out), getString(R.string.realy_exit), new OnConfirmListener() {
+                                    @Override
+                                    public void onConfirm(DialogConfirm d) {
+                                        d.freeze();
+                                        manager.clear();
+                                        Intent intent = new Intent(AdminHubActivity.this, AuthActivity.class);
+                                        startActivity(intent);
+                                        d.destroy();
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void onCancel(DialogConfirm d) {
+                                        d.destroy();
+                                    }
+                                });
                                 dialog.create(R.id.fragmentContainerView);
                                 break;
                         }

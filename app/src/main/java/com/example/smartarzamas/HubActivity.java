@@ -22,7 +22,8 @@ import com.example.smartarzamas.support.EditTextSearch;
 import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.ui.DialogAddChat;
 import com.example.smartarzamas.ui.DialogAddLocate;
-import com.example.smartarzamas.ui.DialogSignOut;
+import com.example.smartarzamas.ui.DialogConfirm;
+import com.example.smartarzamas.ui.OnConfirmListener;
 import com.example.smartarzamas.ui.OnDestroyListener;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
@@ -149,7 +150,22 @@ public class HubActivity extends FirebaseActivity {
                                 break;
                             // выход из аккаунта
                             case R.id.sign_out:
-                                DialogSignOut dialog = new DialogSignOut(HubActivity.this);
+                                DialogConfirm dialog = new DialogConfirm(HubActivity.this, getString(R.string.exit), getString(R.string.sign_out), getString(R.string.realy_exit), new OnConfirmListener() {
+                                    @Override
+                                    public void onConfirm(DialogConfirm d) {
+                                        d.freeze();
+                                        manager.clear();
+                                        Intent intent = new Intent(HubActivity.this, AuthActivity.class);
+                                        startActivity(intent);
+                                        d.destroy();
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void onCancel(DialogConfirm d) {
+                                        d.destroy();
+                                    }
+                                });
                                 dialog.create(R.id.fragmentContainerView);
                                 break;
                         }

@@ -1,5 +1,6 @@
 package com.example.smartarzamas;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -14,9 +15,10 @@ import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
-import com.example.smartarzamas.ui.DialogAdminAccountReject;
+import com.example.smartarzamas.ui.DialogConfirm;
 import com.example.smartarzamas.ui.DialogUserIconChange;
 import com.example.smartarzamas.ui.DialogUserNameAndFamilyChange;
+import com.example.smartarzamas.ui.OnConfirmListener;
 import com.example.smartarzamas.ui.OnIconChangeListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -142,7 +144,31 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
     }
 
     public void onRejection(View view) {
-        DialogAdminAccountReject dialog = new DialogAdminAccountReject(this, user);
+        DialogConfirm dialog = new DialogConfirm(this, getString(R.string.rejection), getString(R.string.reject), getString(R.string.realy_reject), new OnConfirmListener() {
+            @Override
+            public void onConfirm(DialogConfirm d) {
+                d.freeze();
+                User.getDatabase().child(user.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        snapshot.child("isModerator").getRef().setValue(false);
+                        Intent intent = new Intent(AdminUserSettingsActivity.this, AuthActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancel(DialogConfirm d) {
+                d.destroy();
+            }
+        });
         dialog.create(R.id.fragmentContainerView);
     }
 }

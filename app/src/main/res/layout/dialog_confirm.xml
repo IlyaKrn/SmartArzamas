@@ -14,13 +14,13 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/default_title"
-                android:text="@string/rejection" />
+                android:id="@+id/tv_title"
+                style="@style/default_title" />
 
             <TextView
+                android:id="@+id/tv_data"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/realy_reject"
                 android:textSize="24sp"
                 android:layout_marginHorizontal="20sp"
                 android:textAlignment="center"/>
@@ -45,10 +45,9 @@
                     android:layout_height="match_parent"/>
 
                 <Button
-                    android:id="@+id/bt_reject"
+                    android:id="@+id/bt_confirm"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/reject"
                     style="@style/red_button" />
 
             </LinearLayout>

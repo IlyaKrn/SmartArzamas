@@ -63,7 +63,7 @@ public abstract class Dialog extends Fragment {
     public void setOnDestroyListener(OnDestroyListener onDestroyListener) {
         this.onDestroyListener = onDestroyListener;
     }
-    protected void freeze(){
+    public void freeze(){
         setClickable((ViewGroup) rootView, false);
     }
 

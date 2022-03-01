@@ -96,20 +96,4 @@ public class DialogChatNameChange extends Dialog{
 
         return super.onCreateView(inflater, container, savedInstanceState);
     }
-
-    @Override
-    protected void freeze() {
-        super.freeze();
-        change.setClickable(false);
-        cancel.setClickable(false);
-        etName.setClickable(false);
-    }
-    @Override
-    protected void defreeze() {
-        super.freeze();
-        change.setClickable(true);
-        cancel.setClickable(true);
-        etName.setClickable(true);
-    }
-
 }
