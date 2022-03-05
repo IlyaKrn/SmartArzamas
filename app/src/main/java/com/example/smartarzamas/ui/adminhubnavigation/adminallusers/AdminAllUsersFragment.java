@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
-import com.example.smartarzamas.adapters.OnStateClickListener;
+import com.example.smartarzamas.adapters.FirebaseAdapter;
 import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
@@ -23,9 +23,6 @@ import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -72,7 +69,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
             }
         });
 
-        adapter = new UserListAdapter(getActivity().getApplicationContext(), user, true, chatList, new OnStateClickListener<User>() {
+        adapter = new UserListAdapter(getActivity().getApplicationContext(), user, true, chatList, new FirebaseAdapter.OnStateClickListener<User>() {
             @Override
             public void onClick(User item) {
 

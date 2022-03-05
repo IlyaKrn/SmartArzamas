@@ -15,12 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.AdminChatActivity;
-import com.example.smartarzamas.ChatActivity;
 import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.ChatListAdapter;
-import com.example.smartarzamas.adapters.OnStateClickListener;
+import com.example.smartarzamas.adapters.FirebaseAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
@@ -28,9 +27,6 @@ import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -76,7 +72,7 @@ public class AdminAllChatsFragment extends HubNavigationCommon {
             }
         });
 
-        adapter = new ChatListAdapter(getActivity().getApplicationContext(), user, true, chatList, new OnStateClickListener<Chat>() {
+        adapter = new ChatListAdapter(getActivity().getApplicationContext(), user, true, chatList, new FirebaseAdapter.OnStateClickListener<Chat>() {
             @Override
             public void onClick(Chat item) {
                 Intent intent = new Intent(AdminAllChatsFragment.this.getActivity(), AdminChatActivity.class);

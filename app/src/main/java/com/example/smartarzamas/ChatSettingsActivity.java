@@ -10,11 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.smartarzamas.adapters.OnStateClickListener;
+import com.example.smartarzamas.adapters.FirebaseAdapter;
 import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
@@ -26,9 +25,6 @@ import com.example.smartarzamas.ui.DialogChatDescriptionChange;
 import com.example.smartarzamas.ui.DialogChatIconChange;
 import com.example.smartarzamas.ui.DialogChatNameChange;
 import com.example.smartarzamas.ui.OnIconChangeListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -157,7 +153,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
         btChangedDescription = findViewById(R.id.bt_change_chat_description);
         btClose = findViewById(R.id.bt_close);
         rvMembers.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UserListAdapter(this, user, false, members, new OnStateClickListener<User>() {
+        adapter = new UserListAdapter(this, user, false, members, new FirebaseAdapter.OnStateClickListener<User>() {
             @Override
             public void onClick(User item) {
 

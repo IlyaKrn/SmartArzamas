@@ -60,18 +60,9 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
             progressImage.setVisibility(View.VISIBLE);
             tvName.setText(item.name);
             tvCategory.setText(item.category);
-            btMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            btMenu.setVisibility(View.GONE);
 
-                }
-            });
-            if (isAdmin){
-                btMenu.setVisibility(View.VISIBLE);
-            }
-            else {
-                btMenu.setVisibility(View.GONE);
-            }
+
             Chat.getChatById(item.id, new OnGetDataListener<Chat>() {
                 @Override
                 public void onGetData(Chat data) {
@@ -116,7 +107,13 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
 
         @Override
         public void bindAdmin(int position) {
+            btMenu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                    }
+                });
+            btMenu.setVisibility(View.VISIBLE);
         }
     }
 }

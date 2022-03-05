@@ -1,6 +1,5 @@
 package com.example.smartarzamas.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Message;
@@ -92,22 +90,11 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
         @Override
         public void bind(int position) {
             item = getItem(position);
+            btMenu.setVisibility(View.GONE);
 
             system_tlImages.removeBitmaps();
             notMy_tlImages.removeBitmaps();
             my_tlImages.removeBitmaps();
-            btMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-            if (isAdmin){
-                btMenu.setVisibility(View.VISIBLE);
-            }
-            else {
-                btMenu.setVisibility(View.GONE);
-            }
             if (item.imageRefs != null){
                 if (savedImages.get(item.id) != null){
                     ArrayList<Bitmap> bitmaps = savedImages.get(item.id);
@@ -222,8 +209,17 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
 
         @Override
         public void bindAdmin(int position) {
+            btMenu.setVisibility(View.VISIBLE);
+            btMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
+                }
+            });
         }
+
+
+
         private void showNotMyMessage(){
             notMy_itemBody.setVisibility(View.VISIBLE);
             my_itemBody.setVisibility(View.GONE);

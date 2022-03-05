@@ -1,6 +1,5 @@
 package com.example.smartarzamas.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -11,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
@@ -26,7 +24,6 @@ import java.util.Map;
 public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserHolder> {
 
     private Map<String, Bitmap> savedIcons = new HashMap<>();
-    private Map<String, ArrayList<Bitmap>> savedImages = new HashMap<>();
 
     public UserListAdapter(Context context, User user, boolean isAdmin, ArrayList<User> items, OnStateClickListener<User> onItemClickListener) {
         super(context, user, isAdmin, items, onItemClickListener);
@@ -43,32 +40,20 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
         private final ProgressBar progressImage;
         private final TextView tvName;
         private final IconView ivIcon;
-        private final View itemBody;
 
         public UserHolder(@NonNull View itemView) {
             super(itemView);
             btMenu = itemView.findViewById(R.id.bt_item_menu);
             tvName = itemView.findViewById(R.id.tv_user_name);
             ivIcon = itemView.findViewById(R.id.user_icon);
-            itemBody = itemView.findViewById(R.id.item_body);
             progressImage = itemView.findViewById(R.id.progress);
         }
 
         @Override
         public void bind(int position) {
             item = getItem(position);
+            btMenu.setVisibility(View.GONE);
 
-            btMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
-            if (isAdmin) {
-                btMenu.setVisibility(View.VISIBLE);
-            } else {
-                btMenu.setVisibility(View.GONE);
-            }
             User.getUserById(item.id, new OnGetDataListener<User>() {
                 @Override
                 public void onGetData(User data) {
@@ -115,7 +100,13 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
 
         @Override
         public void bindAdmin(int position) {
+            btMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
+                }
+            });
+            btMenu.setVisibility(View.VISIBLE);
         }
     }
 }

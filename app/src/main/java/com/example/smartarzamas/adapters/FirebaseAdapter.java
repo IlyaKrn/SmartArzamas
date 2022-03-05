@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.smartarzamas.firebaseobjects.FirebaseObject;
 import com.example.smartarzamas.firebaseobjects.User;
 
 import java.util.ArrayList;
 
-public abstract class FirebaseAdapter<T, VH extends FirebaseHolder> extends RecyclerView.Adapter<VH> {
+public abstract class FirebaseAdapter<T, VH extends FirebaseAdapter.FirebaseHolder> extends RecyclerView.Adapter<VH> {
 
     protected boolean isAdmin;
     protected Context context;
@@ -61,5 +60,22 @@ public abstract class FirebaseAdapter<T, VH extends FirebaseHolder> extends Recy
     protected abstract VH onCreateHolder(@NonNull ViewGroup parent, int viewType);
     protected final T getItem(int position){
         return items.get(position);
+    }
+
+    public abstract static class FirebaseHolder<T> extends RecyclerView.ViewHolder {
+
+        protected T item;
+
+        public FirebaseHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+
+        public abstract void bind(int position);
+        public abstract void bindAdmin(int position);
+    }
+
+    public interface OnStateClickListener<T> {
+        void onClick(T item);
+        void onLongClick(T item);
     }
 }

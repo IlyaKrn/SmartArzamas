@@ -12,20 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartarzamas.adapters.FirebaseAdapter;
 import com.example.smartarzamas.adapters.MessageListAdapter;
-import com.example.smartarzamas.adapters.OnStateClickListener;
 import com.example.smartarzamas.firebaseobjects.Chat;
-import com.example.smartarzamas.firebaseobjects.FirebaseObject;
 import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnSetIcon;
-import com.example.smartarzamas.support.Category;
 import com.example.smartarzamas.support.Utils;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -114,7 +111,7 @@ public class AdminChatActivity extends FirebaseActivity {
         btChatSettings = findViewById(R.id.bt_chat_menu);
         btClose = findViewById(R.id.bt_close);
         rvMessages.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MessageListAdapter(this, user, true, messageList, new OnStateClickListener<Message>() {
+        adapter = new MessageListAdapter(this, user, true, messageList, new FirebaseAdapter.OnStateClickListener<Message>() {
             @Override
             public void onClick(Message item) {
 

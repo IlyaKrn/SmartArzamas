@@ -14,13 +14,12 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.smartarzamas.AuthActivity;
 import com.example.smartarzamas.ChatActivity;
 import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.ChatListAdapter;
-import com.example.smartarzamas.adapters.OnStateClickListener;
+import com.example.smartarzamas.adapters.FirebaseAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
@@ -74,7 +73,7 @@ public class AllChatsFragment extends HubNavigationCommon {
             }
         });
 
-        adapter = new ChatListAdapter(getActivity().getApplicationContext(), user, false, chatList, new OnStateClickListener<Chat>() {
+        adapter = new ChatListAdapter(getActivity().getApplicationContext(), user, false, chatList, new FirebaseAdapter.OnStateClickListener<Chat>() {
             @Override
             public void onClick(Chat item) {
                 Intent intent = new Intent(AllChatsFragment.this.getActivity(), ChatActivity.class);

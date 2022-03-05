@@ -1,6 +1,5 @@
 package com.example.smartarzamas;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -11,11 +10,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.smartarzamas.adapters.OnStateClickListener;
+import com.example.smartarzamas.adapters.FirebaseAdapter;
 import com.example.smartarzamas.adapters.UserListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnDeleteDataListener;
@@ -30,12 +28,7 @@ import com.example.smartarzamas.ui.DialogChatNameChange;
 import com.example.smartarzamas.ui.DialogConfirm;
 import com.example.smartarzamas.ui.OnConfirmListener;
 import com.example.smartarzamas.ui.OnIconChangeListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -213,7 +206,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
         btChangedDescription = findViewById(R.id.bt_change_chat_description);
         btClose = findViewById(R.id.bt_close);
         rvMembers.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UserListAdapter(this, user, false, members, new OnStateClickListener<User>() {
+        adapter = new UserListAdapter(this, user, false, members, new FirebaseAdapter.OnStateClickListener<User>() {
             @Override
             public void onClick(User item) {
 
