@@ -158,11 +158,11 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
                         @Override
                         public void onGetData(User data) {
                             u = data;
-                            if (user.id.equals(item.userId))
+                            if (u.id.equals(item.userId))
                                 notMy_tvName.setText(user.name);
-                            if (savedIcons.get(user.id) != null){
-                                if (user.id.equals(item.userId)) {
-                                    notMy_ivIcon.setImageBitmap(savedIcons.get(user.id));
+                            if (savedIcons.get(u.id) != null){
+                                if (u.id.equals(item.userId)) {
+                                    notMy_ivIcon.setImageBitmap(savedIcons.get(u.id));
                                     notMy_ivIcon.setVisibility(View.VISIBLE);
                                     notMy_progressImage.setVisibility(View.GONE);
                                 }
@@ -171,8 +171,8 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
                                 user.getIconAsync(context, new OnGetIcon() {
                                     @Override
                                     public void onLoad(Bitmap bitmap) {
-                                        savedIcons.put(user.id, bitmap);
-                                        if (user.id.equals(item.userId)) {
+                                        savedIcons.put(u.id, bitmap);
+                                        if (u.id.equals(item.userId)) {
                                             notMy_ivIcon.setImageBitmap(bitmap);
                                             notMy_ivIcon.setVisibility(View.VISIBLE);
                                             notMy_progressImage.setVisibility(View.GONE);

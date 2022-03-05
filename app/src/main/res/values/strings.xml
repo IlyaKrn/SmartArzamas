@@ -102,5 +102,6 @@
     <string name="delete_account_error">Ошибка при удалении аккаунта</string>
     <string name="delete_account_succesful">Аккаунт удален</string>
     <string name="realy_delete_chat">Вы действительно хотите удалить чат без возможности восстановления?</string>
+    <string name="delete_chat_succesful">Чат удалён</string>
 
 </resources>

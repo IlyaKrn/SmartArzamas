@@ -155,7 +155,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
                                 chat.removeFromDatabase(new OnDeleteDataListener() {
                                     @Override
                                     public void onDataDelete(DatabaseReference deleteRef) {
-                                        Toast.makeText(getApplicationContext(), getString(R.string.delete_account_succesful), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(getApplicationContext(), getString(R.string.delete_chat_succesful), Toast.LENGTH_SHORT).show();
                                         finish();
                                     }
 
