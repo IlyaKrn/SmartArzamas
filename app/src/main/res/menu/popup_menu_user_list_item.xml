@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/view_profile"
+        android:title="Профиль"/>
+    <item android:id="@+id/set_admin"
+        android:title="Сделать администратором"/>
+    <item android:id="@+id/remove_admin"
+        android:title="Сделать пользователем"/>
+    <item android:id="@+id/ban"
+        android:title="Заблокировать"/>
+    <item android:id="@+id/unban"
+        android:title="Разблокировать"/>
+</menu>

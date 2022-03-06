@@ -103,5 +103,6 @@
     <string name="delete_account_succesful">Аккаунт удален</string>
     <string name="realy_delete_chat">Вы действительно хотите удалить чат без возможности восстановления?</string>
     <string name="delete_chat_succesful">Чат удалён</string>
+    <string name="you_banned">Вы заблокированы</string>
 
 </resources>

@@ -138,26 +138,30 @@ public class AuthActivity extends FirebaseActivity {
                                             User.getUserById(Utils.getKeyString(login), new OnGetDataListener<User>() {
                                                 @Override
                                                 public void onGetData(User data) {
-                                                    AuthActivity.this.user = data;
-                                                    if (cbAlwaysUse.isChecked()) {
-                                                        manager.clear();
-                                                        manager.insertToDb(login, password, user.id);
-                                                        Log.d(LOG_TAG, "new current user was wrote in SQLite: " + currentUser.login + " password: " + currentUser.password);
-                                                    }
-                                                    else if (currentUser != null) {
-                                                        if (currentUser.login.equals(login)) {
+                                                    if (!data.banned) {
+                                                        AuthActivity.this.user = data;
+                                                        if (cbAlwaysUse.isChecked()) {
+                                                            manager.clear();
+                                                            manager.insertToDb(login, password, user.id);
+                                                            Log.d(LOG_TAG, "new current user was wrote in SQLite: " + currentUser.login + " password: " + currentUser.password);
+                                                        } else if (currentUser != null) {
+                                                            if (currentUser.login.equals(login)) {
+                                                                manager.clear();
+                                                                Log.d(LOG_TAG, "SQLite cleaned");
+                                                            }
+                                                        } else if (currentUser == null) {
+                                                            manager.clear();
+                                                            manager.insertToDb(login, password, user.id);
+                                                            currentUser = manager.getCurrentUser();
                                                             manager.clear();
                                                             Log.d(LOG_TAG, "SQLite cleaned");
                                                         }
-                                                    } else if (currentUser == null) {
-                                                        manager.clear();
-                                                        manager.insertToDb(login, password, user.id);
-                                                        currentUser = manager.getCurrentUser();
-                                                        manager.clear();
-                                                        Log.d(LOG_TAG, "SQLite cleaned");
+                                                        // передача пользователя и запуск следующей активности
+                                                        finish();
                                                     }
-                                                    // передача пользователя и запуск следующей активности
-                                                    finish();
+                                                    else {
+                                                        Toast.makeText(AuthActivity.this, getString(R.string.you_banned), Toast.LENGTH_SHORT).show();
+                                                    }
                                                 }
 
                                                 @Override
