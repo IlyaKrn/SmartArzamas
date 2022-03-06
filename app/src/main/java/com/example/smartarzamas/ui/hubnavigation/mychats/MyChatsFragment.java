@@ -81,10 +81,15 @@ public class MyChatsFragment extends HubNavigationCommon {
         adapter = new ChatListAdapter(getActivity().getApplicationContext(), user, false, chatList, new FirebaseAdapter.OnStateClickListener<Chat>() {
             @Override
             public void onClick(Chat item) {
-                Intent intent = new Intent(MyChatsFragment.this.getActivity(), ChatActivity.class);
-                intent.putExtra(FirebaseActivity.CHAT_ID, item.id);
-                intent.putExtra(FirebaseActivity.USER_INTENT, user);
-                MyChatsFragment.this.getActivity().startActivity(intent);
+                if (!item.banned) {
+                    Intent intent = new Intent(MyChatsFragment.this.getActivity(), ChatActivity.class);
+                    intent.putExtra(FirebaseActivity.CHAT_ID, item.id);
+                    intent.putExtra(FirebaseActivity.USER_INTENT, user);
+                    MyChatsFragment.this.getActivity().startActivity(intent);
+                }
+                else {
+                    Toast.makeText(getContext(), getString(R.string.chat_banned), Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

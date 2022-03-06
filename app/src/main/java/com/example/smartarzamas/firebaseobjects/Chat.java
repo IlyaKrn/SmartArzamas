@@ -22,12 +22,14 @@ public class Chat extends FirebaseObject {
     public ArrayList<User> blackList;
     public String category;
     public ArrayList<String> membersEmailList;
+    public boolean banned;
 
     public Chat() {
     }
 
     public Chat(String name, String description, String id, ArrayList<Message> messages, String category, User user) {
         super(name, id);
+        this.banned = false;
         this.description = description;
         this.messages = messages;
         this.category = category;
