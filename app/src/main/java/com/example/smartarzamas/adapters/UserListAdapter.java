@@ -58,20 +58,20 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
                 @Override
                 public void onGetData(User data) {
                     item = data;
-                    if (user.id.equals(item.id))
-                        tvName.setText(user.name);
-                    if (savedIcons.get(user.id) != null) {
-                        if (user.id.equals(item.id)) {
-                            ivIcon.setImageBitmap(savedIcons.get(user.id));
+                    if (data.id.equals(item.id))
+                        tvName.setText(item.name);
+                    if (savedIcons.get(item.id) != null) {
+                        if (data.id.equals(item.id)) {
+                            ivIcon.setImageBitmap(savedIcons.get(item.id));
                             ivIcon.setVisibility(View.VISIBLE);
                             progressImage.setVisibility(View.GONE);
                         }
                     } else {
-                        user.getIconAsync(context, new OnGetIcon() {
+                        data.getIconAsync(context, new OnGetIcon() {
                             @Override
                             public void onLoad(Bitmap bitmap) {
-                                savedIcons.put(user.id, bitmap);
-                                if (user.id.equals(item.id)) {
+                                savedIcons.put(data.id, bitmap);
+                                if (data.id.equals(item.id)) {
                                     ivIcon.setImageBitmap(bitmap);
                                     ivIcon.setVisibility(View.VISIBLE);
                                     progressImage.setVisibility(View.GONE);
