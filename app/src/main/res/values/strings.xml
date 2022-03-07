@@ -105,5 +105,6 @@
     <string name="delete_chat_succesful">Чат удалён</string>
     <string name="you_banned">Вы заблокированы</string>
     <string name="chat_banned">Чат заблокирован</string>
+    <string name="go_to_chat">Перейти к чату</string>
 
 </resources>

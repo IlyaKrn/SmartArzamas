@@ -21,4 +21,5 @@
     <dimen name="button_corner_default_radius">8dp</dimen>
     <dimen name="corner_message_default_radius">8dp</dimen>
     <dimen name="default_message_item_margin">@dimen/default_material_barrier</dimen>
+    <dimen name="map_icon_nwidth">100dp</dimen>
 </resources>

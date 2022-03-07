@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.smartarzamas.AdminHubActivity;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
+import com.example.smartarzamas.adapters.MapInfoWindowAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Locate;
@@ -50,6 +51,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
     private static AdminMapFragmentCallback callback;
     private SupportMapFragment mapView;
     private GoogleMap googleMap;
+    private MapInfoWindowAdapter mapAdapter;
 
     private ArrayList<Locate> locateMainList = new ArrayList<>();
     private ArrayList<Locate> locateList = new ArrayList<>();
@@ -123,6 +125,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
                 callback.onCategoryUpdate(strings);
             }
         });
+        mapAdapter = new MapInfoWindowAdapter(getContext(), user, locateList);
         return root;
     }
 
@@ -142,7 +145,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
             googleMap.clear();
             for (Locate l : locateList){
                 if (googleMap != null) {
-                    googleMap.addMarker(new MarkerOptions().title(l.name).snippet(l.description).position(l.getLocate()));
+                    googleMap.addMarker(new MarkerOptions().position(l.getLocate()));
                 }
             }
         }
@@ -196,6 +199,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
     @Override
     public void onMapReady(@NonNull GoogleMap gMap) {
         googleMap = gMap;
+        googleMap.setInfoWindowAdapter(mapAdapter);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(55.400135, 43.828324), 11));
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
