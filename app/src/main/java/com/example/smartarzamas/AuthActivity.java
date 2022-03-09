@@ -313,48 +313,30 @@ public class AuthActivity extends FirebaseActivity {
                                             if (auth.getCurrentUser().isEmailVerified()) {// запись пользователя в бд
                                                 final String id = Utils.getKeyString(login);
                                                 Log.i(LOG_TAG, "created new key with value " + id);
-                                                /*
-                                                dbUsers.child(id).addValueEventListener(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-
-
-                                                 */
-                                                        Log.i(LOG_TAG, "key with value " + id + " is unique in users database");
-                                                        user = new User(login, name, family, null, id);
-                                                        dbUsers.child(user.id).setValue(user);
-                                                        Log.i(LOG_TAG, "user was created and written in database");
-                                                        if (cbAlwaysUse.isChecked()) {
-                                                            manager.clear();
-                                                            manager.insertToDb(login, password, user.id);
-                                                            Log.d(LOG_TAG, "new current user was wrote in SQLite: " + currentUser.login + " password: " + currentUser.password);
-                                                        } else if (currentUser != null) {
-                                                            if (currentUser.login.equals(login)) {
-                                                                manager.clear();
-                                                                Log.d(LOG_TAG, "SQLite cleaned");
-                                                            }
-                                                        } else if (currentUser == null) {
-                                                            manager.clear();
-                                                            manager.insertToDb(login, password, user.id);
-                                                            currentUser = manager.getCurrentUser();
-                                                            manager.clear();
-                                                            Log.d(LOG_TAG, "SQLite cleaned");
-                                                        }
-                                                        // передача пользователя и запуск следующей активности
-                                                      //  dbUsers.removeEventListener(this);
-                                                        finish();
+                                                Log.i(LOG_TAG, "key with value " + id + " is unique in users database");
+                                                user = new User(login, name, family, null, id);
+                                            //    user.isAdmin = true;
+                                                dbUsers.child(user.id).setValue(user);
+                                                Log.i(LOG_TAG, "user was created and written in database");
+                                                if (cbAlwaysUse.isChecked()) {
+                                                    manager.clear();
+                                                    manager.insertToDb(login, password, user.id);
+                                                    Log.d(LOG_TAG, "new current user was wrote in SQLite: " + currentUser.login + " password: " + currentUser.password);
+                                                } else if (currentUser != null) {
+                                                    if (currentUser.login.equals(login)) {
+                                                        manager.clear();
+                                                        Log.d(LOG_TAG, "SQLite cleaned");
                                                     }
-                                            /*
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError error) {
-                                                        Log.e(LOG_TAG, "checking key was canceled");
-                                                        dbUsers.removeEventListener(this);
+                                                } else if (currentUser == null) {
+                                                    manager.clear();
+                                                    manager.insertToDb(login, password, user.id);
+                                                    currentUser = manager.getCurrentUser();
+                                                    manager.clear();
+                                                    Log.d(LOG_TAG, "SQLite cleaned");
+                                                }
+                                                // передача пользователя и запуск следующей активности
+                                                finish();
                                                     }
-                                                });
-                                            }
-
-                                             */
                                             else{
                                                 Toast.makeText(getApplicationContext(), R.string.email_no_verificated, Toast.LENGTH_LONG).show();
                                                 Log.e(LOG_TAG, "email " + auth.getCurrentUser().getEmail() + " is not verified");
