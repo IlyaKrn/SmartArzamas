@@ -19,14 +19,14 @@ public class User extends FirebaseObject {
     public static final String USERS = "users";
     public String email;
     public String family;
-    public boolean isModerator;
+    public boolean isAdmin;
     public boolean banned;
 
     public User(String email, String name, String family, String iconRef, String id) {
         super(name, id);
         this.email = email;
         this.family = family;
-        this.isModerator = false;
+        this.isAdmin = false;
         this.banned = false;
         if (iconRef == null){
             this.iconRef = DEFAULT_ICON_REF;

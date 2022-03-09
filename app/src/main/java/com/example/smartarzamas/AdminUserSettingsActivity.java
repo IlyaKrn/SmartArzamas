@@ -195,7 +195,7 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
                 User.getDatabase().child(user.id).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        snapshot.child("isModerator").getRef().setValue(false);
+                        snapshot.child("isAdmin").getRef().setValue(false);
                         Intent intent = new Intent(AdminUserSettingsActivity.this, AuthActivity.class);
                         startActivity(intent);
                         finish();

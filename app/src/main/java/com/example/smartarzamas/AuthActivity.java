@@ -47,7 +47,7 @@ public class AuthActivity extends FirebaseActivity {
     public void finish() {
         if (user != null) {
             // передача пользователя и запуск следующей активности
-            if (user.isModerator) {
+            if (user.isAdmin) {
                 Intent intent = new Intent(AuthActivity.this, AdminHubActivity.class);
                 intent.putExtra("user", (Serializable) user);
                 Toast.makeText(getApplicationContext(), getString(R.string.you_sign_in_as) + " " + user.name + " " + user.family, Toast.LENGTH_LONG).show();

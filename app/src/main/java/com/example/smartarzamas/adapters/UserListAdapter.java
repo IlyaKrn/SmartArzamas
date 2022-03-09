@@ -13,17 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 
-import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnUpdateUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
-import com.example.smartarzamas.ui.DialogConfirm;
-import com.google.android.gms.common.internal.DialogRedirect;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -121,7 +117,7 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
                                 case R.id.view_profile:
                                     break;
                                 case R.id.set_admin:
-                                    item.isModerator = true;
+                                    item.isAdmin = true;
                                     item.setNewData(item, new OnUpdateUser() {
                                         @Override
                                         public void onUpdate(User user) {
@@ -130,7 +126,7 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
                                     });
                                     break;
                                 case R.id.remove_admin:
-                                    item.isModerator = false;
+                                    item.isAdmin = false;
                                     item.setNewData(item, new OnUpdateUser() {
                                         @Override
                                         public void onUpdate(User user) {
