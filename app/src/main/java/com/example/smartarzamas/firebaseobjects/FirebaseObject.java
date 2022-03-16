@@ -144,7 +144,21 @@ public abstract class FirebaseObject implements Serializable {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-                    onDeleteDataListener.onDataDelete(getDatabaseChild().child(id).getRef());
+                    if (iconRef != null && !iconRef.equals(DEFAULT_ICON_REF)) {
+                        FirebaseStorage.getInstance().getReference().child(iconRef).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    onDeleteDataListener.onDataDelete(getDatabaseChild().child(id).getRef());
+                                } else {
+                                    onDeleteDataListener.onCanceled();
+                                }
+                            }
+                        });
+                    }
+                    else {
+                        onDeleteDataListener.onDataDelete(getDatabaseChild().child(id).getRef());
+                    }
                 }
                 else {
                     onDeleteDataListener.onCanceled();
