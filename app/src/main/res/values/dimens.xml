@@ -29,4 +29,6 @@
 
     <dimen name="recyclerView_elevation">4dp</dimen>
 
+    <dimen name="text_padding">4dp</dimen>
+
 </resources>

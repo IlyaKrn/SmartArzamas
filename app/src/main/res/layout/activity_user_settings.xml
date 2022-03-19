@@ -26,9 +26,7 @@
             style="@style/button.toolbar.default"/>
 
         <TextView
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            style="@style/default_title_default_toolbar"
+            style="@style/text.title.second"
             android:text="@string/user_settings"/>
 
     </androidx.appcompat.widget.Toolbar>

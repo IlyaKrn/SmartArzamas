@@ -131,6 +131,65 @@
                 <item name="android:background">@color/recyclerViewItem_gray_background</item>
             </style>
 
+    <!--TEXT STYLES-->
+    <style name="text">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/text_padding</item>
+    </style>
+        <!--TYPES-->
+        <style name="text.title">
+
+        </style>
+            <!--FONTS-->
+            <style name="text.title.main" parent="text.title">
+                <item name="android:textSize">48sp</item>
+                <item name="android:textStyle">bold</item>
+                <item name="android:textColor">@color/text_title_main_color</item>
+            </style>
+            <style name="text.title.second" parent="text.title">
+                <item name="android:textSize">20sp</item>
+                <item name="android:textStyle">normal</item>
+                <item name="android:textColor">@color/text_title_second_color</item>
+            </style>
+
+        <style name="text.span">
+
+        </style>
+            <!--FONTS-->
+            <style name="text.span.main" parent="text.span">
+                <item name="android:textSize">16sp</item>
+                <item name="android:textStyle">bold</item>
+                <item name="android:textColor">@color/text_span_main_color</item>
+            </style>
+            <style name="text.span.second" parent="text.span">
+                <item name="android:textSize">12sp</item>
+                <item name="android:textStyle">normal</item>
+                <item name="android:textColor">@color/text_span_second_color</item>
+            </style>
+
+
+        <style name="text.paragraph">
+
+        </style>
+            <!--FONTS-->
+            <style name="text.paragraph.main" parent="text.paragraph">
+                <item name="android:textSize">16sp</item>
+                <item name="android:textStyle">normal</item>
+                <item name="android:textColor">@color/text_paragraph_main_color</item>
+            </style>
+            <style name="text.paragraph.second" parent="text.paragraph">
+                <item name="android:textSize">14sp</item>
+                <item name="android:textStyle">normal</item>
+                <item name="android:textColor">@color/text_paragraph_second_color</item>
+            </style>
+
+
+
+
+
 
 
     <!--FONTS-->
@@ -173,7 +232,6 @@
         <style name="font.overline" parent="TextAppearance.MaterialComponents.Overline">
             <item name="android:textSize">10sp</item>
         </style>
-
 
 
 

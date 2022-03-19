@@ -96,6 +96,12 @@
     <color name="recyclerViewItem_red_text_color">@color/black</color>
     <color name="recyclerViewItem_gray_text_color">@color/black</color>
 
+    <color name="text_title_main_color">@color/black</color>
+    <color name="text_title_second_color">@color/black</color>
+    <color name="text_span_main_color">@color/black</color>
+    <color name="text_span_second_color">@color/black</color>
+    <color name="text_paragraph_main_color">@color/black</color>
+    <color name="text_paragraph_second_color">@color/black</color>
 
 
 

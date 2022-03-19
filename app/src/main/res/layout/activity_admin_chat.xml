@@ -27,9 +27,7 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_height="match_parent"
-            android:layout_width="wrap_content"
-            style="@style/default_title_bdefault_toolbar"/>
+            style="@style/text.title"/>
 
         <ImageButton
             android:id="@+id/bt_chat_menu"
