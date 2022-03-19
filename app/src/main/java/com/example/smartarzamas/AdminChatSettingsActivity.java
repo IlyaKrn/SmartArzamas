@@ -54,7 +54,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
         setContentView(R.layout.activity_admin_chat_settings);
         init();
         updateViewData();
-        chat.addChatListener("9", new OnGetDataListener<Chat>() {
+        chat.addChatListener(this, "9", new OnGetDataListener<Chat>() {
             @Override
             public void onGetData(Chat data) {
                 updateViewData();
@@ -137,6 +137,11 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
                     public void isConnected() {
                         DialogChatNameChange dialog = new DialogChatNameChange(AdminChatSettingsActivity.this, user, chat);
                         dialog.create(R.id.fragmentContainerView);
+                    }
+
+                    @Override
+                    public void isNotConnected() {
+
                     }
                 });
             }
@@ -224,7 +229,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
             chatIcon.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }
-        Chat.getChatById(chat.id, new OnGetDataListener<Chat>() {
+        Chat.getChatById(this, chat.id, new OnGetDataListener<Chat>() {
 
             @Override
             public void onGetData(Chat data) {

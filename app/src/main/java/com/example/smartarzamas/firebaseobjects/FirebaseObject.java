@@ -49,86 +49,74 @@ public abstract class FirebaseObject implements Serializable {
     }
     protected abstract DatabaseReference getDatabaseChild();
     public void getIconAsync(Context context, OnGetIcon onGetIcon){
-        Utils.isConnected(context, new Utils.Connection() {
-            @Override
-            public void isConnected() {
-                if (iconRef == null){
-                    getDefaultIcon(new OnGetIcon() {
-                        @Override
-                        public void onLoad(Bitmap bitmap) {
-                            onGetIcon.onLoad(bitmap);
-                        }
-                    });
+        if (iconRef == null){
+            getDefaultIcon(context, new OnGetIcon() {
+                @Override
+                public void onLoad(Bitmap bitmap) {
+                    onGetIcon.onLoad(bitmap);
                 }
-                else {
-                    FirebaseStorage.getInstance().getReference().child(iconRef).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
-                        @Override
-                        public void onComplete(@NonNull Task<byte[]> task) {
-                            try {
-                                if (task.getResult() != null) {
-                                    Bitmap icon = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
-                                    onGetIcon.onLoad(icon);
-                                } else {
-                                    getDefaultIcon(new OnGetIcon() {
-                                        @Override
-                                        public void onLoad(Bitmap bitmap) {
-                                            onGetIcon.onLoad(bitmap);
-                                        }
-                                    });
+            });
+        }
+        else {
+            FirebaseStorage.getInstance().getReference().child(iconRef).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
+                @Override
+                public void onComplete(@NonNull Task<byte[]> task) {
+                    try {
+                        if (task.getResult() != null) {
+                            Bitmap icon = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+                            onGetIcon.onLoad(icon);
+                        } else {
+                            getDefaultIcon(context, new OnGetIcon() {
+                                @Override
+                                public void onLoad(Bitmap bitmap) {
+                                    onGetIcon.onLoad(bitmap);
                                 }
-                            } catch (Exception e){
-                                getDefaultIcon(new OnGetIcon() {
-                                    @Override
-                                    public void onLoad(Bitmap bitmap) {
-                                        onGetIcon.onLoad(bitmap);
-                                    }
-                                });
-                            }
-
+                            });
                         }
-                    });
-                }
-            }
-        });
-    }
-    public void setIconAsync(Context context,Bitmap bitmap, OnSetIcon onSetIcon){
-        Utils.isConnected(context, new Utils.Connection() {
-            @Override
-            public void isConnected() {
-                String path = ICONS_REF + getDatabaseChild().getKey() + "/" + FirebaseObject.this.id;
-                final StorageReference uploadRef = FirebaseStorage.getInstance().getReference(path);
-                uploadRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        UploadTask uploadTask = uploadRef.putBytes(Utils.getBytesFromBitmap(Utils.compressBitmapToIcon(bitmap, ICON_QUALITY)));
-                        Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    } catch (Exception e){
+                        getDefaultIcon(context, new OnGetIcon() {
                             @Override
-                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                return uploadRef.getDownloadUrl();
-                            }
-                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()) {
-                                    iconRef = path;
-                                    getDatabaseChild().child(FirebaseObject.this.id).child("iconRef").setValue(iconRef).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                onSetIcon.onSet(iconRef, Utils.compressBitmapToIcon(bitmap, ICON_QUALITY));
-                                            }
-                                        }
-                                    });
-
-                                }
+                            public void onLoad(Bitmap bitmap) {
+                                onGetIcon.onLoad(bitmap);
                             }
                         });
+                    }
+                }
+            });
+        }
+    }
+    public void setIconAsync(Context context,Bitmap bitmap, OnSetIcon onSetIcon){
+        String path = ICONS_REF + getDatabaseChild().getKey() + "/" + FirebaseObject.this.id;
+        final StorageReference uploadRef = FirebaseStorage.getInstance().getReference(path);
+        uploadRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                UploadTask uploadTask = uploadRef.putBytes(Utils.getBytesFromBitmap(Utils.compressBitmapToIcon(bitmap, ICON_QUALITY)));
+                Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        return uploadRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            iconRef = path;
+                            getDatabaseChild().child(FirebaseObject.this.id).child("iconRef").setValue(iconRef).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        onSetIcon.onSet(iconRef, Utils.compressBitmapToIcon(bitmap, ICON_QUALITY));
+                                    }
+                                }
+                            });
+                        }
                     }
                 });
             }
         });
     }
-    protected final void getDefaultIcon(OnGetIcon onGetIcon){
+    protected final void getDefaultIcon(Context context, OnGetIcon onGetIcon){
         FirebaseStorage.getInstance().getReference().child(DEFAULT_ICON_REF).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
             @Override
             public void onComplete(@NonNull Task<byte[]> task) {

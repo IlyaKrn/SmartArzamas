@@ -52,12 +52,12 @@ public class ChatActivity extends FirebaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         init();
-        Chat.getChatById(getIntent().getStringExtra(CHAT_ID), new OnGetDataListener<Chat>() {
+        Chat.getChatById(this, getIntent().getStringExtra(CHAT_ID), new OnGetDataListener<Chat>() {
             @Override
             public void onGetData(Chat data) {
                 ChatActivity.this.chat = data;
                 updateViewData();
-                chat.addChatListener("11", new OnGetDataListener<Chat>() {
+                chat.addChatListener(ChatActivity.this, "11", new OnGetDataListener<Chat>() {
                     @Override
                     public void onGetData(Chat data) {
                         ChatActivity.this.chat = data;
@@ -159,6 +159,11 @@ public class ChatActivity extends FirebaseActivity {
                                                     }
                                                 });
                                             }
+
+                                            @Override
+                                            public void isNotConnected() {
+
+                                            }
                                         });
                                     }
                                 }
@@ -183,6 +188,11 @@ public class ChatActivity extends FirebaseActivity {
                                     public void onCancelled(DatabaseError databaseError) {
                                     }
                                 });
+                            }
+
+                            @Override
+                            public void isNotConnected() {
+
                             }
                         });
                     }

@@ -16,12 +16,9 @@ import androidx.fragment.app.Fragment;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Message;
-import com.example.smartarzamas.firebaseobjects.OnAddMessage;
-import com.example.smartarzamas.firebaseobjects.OnUpdateChat;
+import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
-
-import java.util.ArrayList;
 
 public class DialogChatNameChange extends Dialog{
 
@@ -78,14 +75,22 @@ public class DialogChatNameChange extends Dialog{
                     String message = user.name + " " + user.family + " " + getString(R.string.user_change_chat_neme) + " \"" + preName + "\" " + getString(R.string.on) + " \"" + chat.name + "\"";
                     buffChat.messages.add(new Message(message, null, Chat.getDatabase().push().getKey(), null));
 
-                    chat.setNewData(buffChat, new OnUpdateChat() {
+                    chat.setNewData(getContext(), buffChat, new OnSetDataListener<Chat>() {
                         @Override
-                        public void onUpdate(Chat chat) {
+                        public void onSetData(Chat data) {
                             destroy();
                         }
+
+                        @Override
+                        public void onNoConnection() {
+
+                        }
+
+                        @Override
+                        public void onCanceled() {
+
+                        }
                     });
-
-
                 }
                 // вывод предупреждения о пустых полях ввода
                 else {

@@ -49,7 +49,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
         setContentView(R.layout.activity_chat_settings);
         init();
         updateViewData();
-        chat.addChatListener("12", new OnGetDataListener<Chat>() {
+        chat.addChatListener(this, "12", new OnGetDataListener<Chat>() {
             @Override
             public void onGetData(Chat data) {
                 updateViewData();
@@ -135,6 +135,11 @@ public class ChatSettingsActivity extends FirebaseActivity {
                         DialogChatNameChange dialog = new DialogChatNameChange(ChatSettingsActivity.this, user, chat);
                         dialog.create(R.id.fragmentContainerView);
                     }
+
+                    @Override
+                    public void isNotConnected() {
+
+                    }
                 });
             }
         });
@@ -171,7 +176,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
             chatIcon.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
         }
-        Chat.getChatById(chat.id, new OnGetDataListener<Chat>() {
+        Chat.getChatById(this, chat.id, new OnGetDataListener<Chat>() {
             @Override
             public void onGetData(Chat data) {
                 ChatSettingsActivity.this.chat = data;

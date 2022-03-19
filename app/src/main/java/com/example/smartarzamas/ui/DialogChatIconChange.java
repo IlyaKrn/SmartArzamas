@@ -22,8 +22,8 @@ import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.FirebaseObject;
 import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
+import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnSetIcon;
-import com.example.smartarzamas.firebaseobjects.OnUpdateChat;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 
@@ -93,10 +93,20 @@ public class DialogChatIconChange extends Dialog{
                         icon.add(ref);
                         buffChat.messages.add(new Message(message, null, Chat.getDatabase().push().getKey(), icon));
 
-                        chat.setNewData(buffChat, new OnUpdateChat() {
+                        chat.setNewData(getContext(), buffChat, new OnSetDataListener<Chat>() {
                             @Override
-                            public void onUpdate(Chat chat) {
+                            public void onSetData(Chat data) {
                                 destroy();
+                            }
+
+                            @Override
+                            public void onNoConnection() {
+
+                            }
+
+                            @Override
+                            public void onCanceled() {
+
                             }
                         });
                     }

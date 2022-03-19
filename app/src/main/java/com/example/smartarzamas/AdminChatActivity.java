@@ -53,12 +53,12 @@ public class AdminChatActivity extends FirebaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_chat);
         init();
-        Chat.getChatById(getIntent().getStringExtra(CHAT_ID), new OnGetDataListener<Chat>() {
+        Chat.getChatById(this, getIntent().getStringExtra(CHAT_ID), new OnGetDataListener<Chat>() {
             @Override
             public void onGetData(Chat data) {
                 AdminChatActivity.this.chat = data;
                 updateViewData();
-                chat.addChatListener("16", new OnGetDataListener<Chat>() {
+                chat.addChatListener(AdminChatActivity.this, "16", new OnGetDataListener<Chat>() {
                     @Override
                     public void onGetData(Chat data) {
                         AdminChatActivity.this.chat = data;
@@ -158,6 +158,11 @@ public class AdminChatActivity extends FirebaseActivity {
                                                     }
                                                 });
                                             }
+
+                                            @Override
+                                            public void isNotConnected() {
+
+                                            }
                                         });
                                     }
                                 }
@@ -182,6 +187,11 @@ public class AdminChatActivity extends FirebaseActivity {
                                     public void onCancelled(DatabaseError databaseError) {
                                     }
                                 });
+                            }
+
+                            @Override
+                            public void isNotConnected() {
+
                             }
                         });
                     }

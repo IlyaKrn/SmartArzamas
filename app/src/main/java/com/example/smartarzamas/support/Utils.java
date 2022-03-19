@@ -62,12 +62,12 @@ public final class Utils {
     }
     //  проверка наличия подключения к интернету с выведением предупреждения в случае его отсутствия
     // если подключение есть, то выполняется метод task.isConnected()
-    public static void isConnected(Context applicationContext, Connection task) {
-        if (hasConnection(applicationContext)){
+    public static void isConnected(Context context, Connection task) {
+        if (hasConnection(context)){
             task.isConnected();
         }
         else {
-            Toast.makeText(applicationContext, R.string.review_connection, Toast.LENGTH_LONG).show();
+            task.isNotConnected();
         }
     }
     // методы для отображения и скрытия TextView с предупреждениями
@@ -104,6 +104,7 @@ public final class Utils {
     // интерфейс подключения
     public interface Connection{
         void isConnected();
+        void isNotConnected();
     }
 
     public static byte[] getBytesFromBitmap(Bitmap bitmap){

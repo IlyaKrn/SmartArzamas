@@ -1,7 +1,6 @@
 package com.example.smartarzamas.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,17 +14,13 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.smartarzamas.ChatActivity;
-import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
-import com.example.smartarzamas.firebaseobjects.OnUpdateChat;
-import com.example.smartarzamas.firebaseobjects.OnUpdateUser;
+import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
-import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -72,7 +67,7 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
             btMenu.setVisibility(View.GONE);
 
 
-            Chat.getChatById(item.id, new OnGetDataListener<Chat>() {
+            Chat.getChatById(context, item.id, new OnGetDataListener<Chat>() {
                 @Override
                 public void onGetData(Chat data) {
                     if (savedIcons.get(item.id) != null){
@@ -129,19 +124,39 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
                                         break;
                                     case R.id.ban:
                                         item.banned = true;
-                                        item.setNewData(item, new OnUpdateChat() {
+                                        item.setNewData(context, item, new OnSetDataListener<Chat>() {
                                             @Override
-                                            public void onUpdate(Chat chat) {
-                                                Toast.makeText(context, "Чат " + chat.name + " разблокирован", Toast.LENGTH_SHORT).show();
+                                            public void onSetData(Chat data) {
+                                                Toast.makeText(context, "Чат " + data.name + " разблокирован", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            @Override
+                                            public void onNoConnection() {
+
+                                            }
+
+                                            @Override
+                                            public void onCanceled() {
+
                                             }
                                         });
                                         break;
                                     case R.id.unban:
                                         item.banned = false;
-                                        item.setNewData(item, new OnUpdateChat() {
+                                        item.setNewData(context, item, new OnSetDataListener<Chat>() {
                                             @Override
-                                            public void onUpdate(Chat chat) {
-                                                Toast.makeText(context, "Чат " + chat.name + " заблокирован", Toast.LENGTH_SHORT).show();
+                                            public void onSetData(Chat data) {
+                                                Toast.makeText(context, "Чат " + data.name + " заблокирован", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            @Override
+                                            public void onNoConnection() {
+
+                                            }
+
+                                            @Override
+                                            public void onCanceled() {
+
                                             }
                                         });
                                         break;
