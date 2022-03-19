@@ -57,6 +57,10 @@
     <color name="button_red_background">@color/red_500</color>
     <color name="button_gray_background">@color/grey_500</color>
 
+    <color name="button_fab_default_background">@color/white</color>
+    <color name="button_fab_red_background">@color/red_500</color>
+    <color name="button_fab_gray_background">@color/grey_500</color>
+
     <color name="toolbar_default_background">@color/white</color>
     <color name="toolbar_red_background">@color/red_200</color>
     <color name="toolbar_gray_background">@color/grey_500</color>

@@ -16,6 +16,8 @@
     <dimen name="button_cornerRadius">8dp</dimen>
     <dimen name="button_toolbarHeightAndWidth">48dp</dimen>
     <dimen name="button_toolbarMargin">0dp</dimen>
+    <dimen name="button_fabMargin">56dp</dimen>
+    <dimen name="button_fabPadding">0dp</dimen>
 
     <dimen name="dialog_padding">4dp</dimen>
     <dimen name="dialog_elevation">4dp</dimen>
