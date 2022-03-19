@@ -48,6 +48,9 @@ public class TableMessageImages extends GridLayout {
         this.bitmaps = bitmaps;
         if (bitmaps.size() > 0){
 
+            // hard set image width
+            // overwrite when message layout will be exists
+            /*
             if (type == SYSTEM_MESSAGE)
                 width = (int) (getRootView().getWidth() - (getResources().getDimension(R.dimen.margin_system_message) * 2));
             else if (type == MY_MESSAGE)
@@ -55,7 +58,9 @@ public class TableMessageImages extends GridLayout {
             else if (type == NOT_MY_MESSAGE)
                 width = (int) (getRootView().getWidth() - getResources().getDimension(R.dimen.margin_user_message) - getResources().getDimension(R.dimen.icon_message));
 
-            getLayoutParams().width = width;
+
+             */
+            getLayoutParams().width = 100;// width;
 
             ArrayList<ImageView> imageViews = new ArrayList<>();
 
