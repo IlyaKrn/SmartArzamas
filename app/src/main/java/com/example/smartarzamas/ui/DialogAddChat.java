@@ -91,6 +91,11 @@ public class DialogAddChat extends Dialog {
                             });
 
                         }
+
+                        @Override
+                        public void isNotConnected() {
+
+                        }
                     });
                 }
                 // вывод предупреждения о пустых полях ввода
