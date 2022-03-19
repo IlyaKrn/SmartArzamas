@@ -47,7 +47,7 @@ public class AllChatsFragment extends HubNavigationCommon {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        Chat.addChatListListener("1", new OnGetListDataListener<Chat>() {
+        Chat.addChatListListener(getContext(), "1", new OnGetListDataListener<Chat>() {
             @Override
             public void onGetData(ArrayList<Chat> data) {
                 if (chatMainList.size() > 0) chatMainList.clear();

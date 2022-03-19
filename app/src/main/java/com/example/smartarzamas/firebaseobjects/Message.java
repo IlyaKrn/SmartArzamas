@@ -43,68 +43,56 @@ public class Message implements Serializable {
             onGetIcon.onGet(null, this);
         }
         else {
-            Utils.isConnected(context, new Utils.Connection() {
-                @Override
-                public void isConnected() {
-                    ArrayList<Bitmap> bitmaps = new ArrayList<>();
-                    final int[] count = {0};
-                    for (int i = 0; i < imageRefs.size(); i++) {
-                        FirebaseStorage.getInstance().getReference().child(imageRefs.get(i)).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
-                            @Override
-                            public void onComplete(@NonNull Task<byte[]> task) {
-                                try {
-                                    count[0]++;
-                                    if (task.getResult() != null) {
-                                        Bitmap b = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
-                                        bitmaps.add(b);
-                                        if (count[0] == imageRefs.size()){
-                                            onGetIcon.onGet(bitmaps, Message.this);
-                                        }
-                                    }
-                                } catch (Exception e){
-                                    e.printStackTrace();
+            ArrayList<Bitmap> bitmaps = new ArrayList<>();
+            final int[] count = {0};
+            for (int i = 0; i < imageRefs.size(); i++) {
+                FirebaseStorage.getInstance().getReference().child(imageRefs.get(i)).getBytes(1024 * 1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
+                    @Override
+                    public void onComplete(@NonNull Task<byte[]> task) {
+                        try {
+                            count[0]++;
+                            if (task.getResult() != null) {
+                                Bitmap b = BitmapFactory.decodeByteArray(task.getResult(), 0, task.getResult().length);
+                                bitmaps.add(b);
+                                if (count[0] == imageRefs.size()){
+                                    onGetIcon.onGet(bitmaps, Message.this);
                                 }
-
                             }
-                        });
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
-
-                }
-            });
+                });
+            }
         }
 
     }
 
 
     public void addImageAsync(Context context, Chat chat, Bitmap bitmap, OnSetIcon onSetIcon){
-        Utils.isConnected(context, new Utils.Connection() {
+        String path = ICONS_REF + "messages/" + chat.id + "_" + chat.name + "/" + Message.this.id + "/" + Chat.getDatabase().push().getKey();
+        final StorageReference uploadRef = FirebaseStorage.getInstance().getReference(path);
+        uploadRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
-            public void isConnected() {
-                String path = ICONS_REF + "messages/" + chat.id + "_" + chat.name + "/" + Message.this.id + "/" + Chat.getDatabase().push().getKey();
-                final StorageReference uploadRef = FirebaseStorage.getInstance().getReference(path);
-                uploadRef.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            public void onComplete(@NonNull Task<Void> task) {
+                UploadTask uploadTask = uploadRef.putBytes(getBytes(Utils.compressBitmapToIcon(bitmap, ICON_QUALITY)));
+                Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                     @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        UploadTask uploadTask = uploadRef.putBytes(getBytes(Utils.compressBitmapToIcon(bitmap, ICON_QUALITY)));
-                        Task<Uri> uriTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                            @Override
-                            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                                return uploadRef.getDownloadUrl();
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        return uploadRef.getDownloadUrl();
+                    }
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            String iconRef = path;
+                            if (task.isSuccessful()) {
+                                if (Message.this.imageRefs == null)
+                                    Message.this.imageRefs = new ArrayList<>();
+                                Message.this.imageRefs.add(path);
+                                onSetIcon.onSet(iconRef, Utils.compressBitmapToIcon(bitmap, ICON_QUALITY));
                             }
-                        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()) {
-                                    String iconRef = path;
-                                    if (task.isSuccessful()) {
-                                        if (Message.this.imageRefs == null)
-                                            Message.this.imageRefs = new ArrayList<>();
-                                        Message.this.imageRefs.add(path);
-                                        onSetIcon.onSet(iconRef, Utils.compressBitmapToIcon(bitmap, ICON_QUALITY));
-                                    }
-                                }
-                            }
-                        });
+                        }
                     }
                 });
             }

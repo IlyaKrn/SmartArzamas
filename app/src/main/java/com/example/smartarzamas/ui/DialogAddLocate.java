@@ -93,7 +93,7 @@ public class DialogAddLocate extends Dialog {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (bitmap != null) {
-                                    Locate.getLocateById(id, new OnGetDataListener<Locate>() {
+                                    Locate.getLocateById(context, id, new OnGetDataListener<Locate>() {
                                         @Override
                                         public void onGetData(Locate data) {
                                             data.setIconAsync(getActivity().getApplicationContext(), bitmap, new OnSetIcon() {

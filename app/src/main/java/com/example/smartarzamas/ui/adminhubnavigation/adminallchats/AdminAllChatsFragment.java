@@ -46,7 +46,7 @@ public class AdminAllChatsFragment extends HubNavigationCommon {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        Chat.addChatListListener("19", new OnGetListDataListener<Chat>() {
+        Chat.addChatListListener(getContext(), "19", new OnGetListDataListener<Chat>() {
             @Override
             public void onGetData(ArrayList<Chat> data) {
                 if (chatMainList.size() > 0) chatMainList.clear();

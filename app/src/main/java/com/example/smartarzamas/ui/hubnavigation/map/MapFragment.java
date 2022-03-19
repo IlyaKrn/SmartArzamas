@@ -47,7 +47,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        Locate.addLocateListListener("1", new OnGetListDataListener<Locate>() {
+        Locate.addLocateListListener(getContext(), "1", new OnGetListDataListener<Locate>() {
             @Override
             public void onGetData(ArrayList<Locate> data) {
                 if (locateMainList.size() > 0) locateMainList.clear();
@@ -127,7 +127,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
             googleMap.clear();
             for (Locate l : locateList){
                 if (googleMap != null) {
-                    googleMap.addMarker(new MarkerOptions().title(l.name).snippet(l.description).position(l.getLocate()));
+                    googleMap.addMarker(new MarkerOptions().title(l.name).snippet(l.description).position(l.locate()));
                 }
             }
         }

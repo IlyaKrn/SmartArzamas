@@ -47,7 +47,7 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         progress = rootView.findViewById(R.id.progress);
 
         for(Locate l : locates){
-            if (marker.getPosition().equals(l.getLocate())){
+            if (marker.getPosition().equals(l.locate())){
                 title.setText(l.name);
                 snippet.setText(l.description);
                 progress.setVisibility(View.VISIBLE);

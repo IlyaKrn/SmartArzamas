@@ -1,7 +1,6 @@
 package com.example.smartarzamas.ui.adminhubnavigation.adminmap;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,33 +12,22 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.smartarzamas.AdminHubActivity;
-import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.MapInfoWindowAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
-import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Locate;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
-import com.example.smartarzamas.ui.DialogAddLocate;
-import com.example.smartarzamas.ui.OnDestroyListener;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubNavigationCommon;
-import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
-import com.example.smartarzamas.ui.hubnavigation.allchats.AllChatsFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -62,7 +50,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        Locate.addLocateListListener("22", new OnGetListDataListener<Locate>() {
+        Locate.addLocateListListener(getContext(), "22", new OnGetListDataListener<Locate>() {
             @Override
             public void onGetData(ArrayList<Locate> data) {
                 if (locateMainList.size() > 0) locateMainList.clear();
@@ -145,7 +133,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
             googleMap.clear();
             for (Locate l : locateList){
                 if (googleMap != null) {
-                    googleMap.addMarker(new MarkerOptions().position(l.getLocate()));
+                    googleMap.addMarker(new MarkerOptions().position(l.locate()));
                 }
             }
         }
