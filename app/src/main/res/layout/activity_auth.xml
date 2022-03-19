@@ -105,30 +105,27 @@
                     android:layout_height="match_parent"
                     android:text="@string/sign_up"
                     android:visibility="gone"
-                    style="@style/default_button"/>
+                    style="@style/button.default"/>
                 <Button
                     android:id="@+id/bt_sign_up_up"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/sign_up"
-                    style="@style/default_button"/>
+                    style="@style/button.default"/>
                 <Button
                     android:id="@+id/bt_resend_varification_email_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textStyle="bold"
-                    android:textColor="@color/hyper_link"
                     android:visibility="gone"
-                    android:textSize="14sp"
-                    android:background="@color/invisible"
+                    style="@style/button.default"
                     android:text="@string/resend_verification_email"/>
                 <Button
                     android:id="@+id/bt_sign_in_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    style="@style/link_button"
+                    style="@style/button.default"
                     android:text="@string/sign_in"/>
             </LinearLayout>
         </LinearLayout>
@@ -138,9 +135,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:visibility="visible"
+            android:visibility="gone"
             android:background="@color/invisible">
             <TextView
+                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/enter"
@@ -194,20 +192,20 @@
                     android:layout_height="match_parent"
                     android:text="@string/sign_in"
                     android:layout_gravity="center"
-                    style="@style/default_button"/>
+                    style="@style/button.default"/>
                 <Button
                     android:id="@+id/bt_forgot_password_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    style="@style/link_button"
+                    style="@style/button.default"
                     android:text="@string/forgot_password"/>
                 <Button
                     android:id="@+id/bt_sign_up_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    style="@style/link_button"
+                    style="@style/button.default"
                     android:text="@string/sign_up"/>
             </LinearLayout>
         </LinearLayout>

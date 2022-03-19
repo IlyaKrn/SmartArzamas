@@ -39,10 +39,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:layout_width="@dimen/dialog_width"
+        android:layout_marginHorizontal="24dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dialog_margin_no_tool_bar"
-        android:layout_marginBottom="@dimen/dialog_margin_tool_bar" />
+        android:layout_gravity="center" />
 
 </FrameLayout>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    style="@style/default_dialog">
+    style="@style/dialog.default">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,6 +14,8 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 style="@style/default_title"
                 android:text="@string/change_name"/>
 
@@ -47,7 +49,7 @@
                     android:id="@+id/bt_cancel"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    style="@style/default_button"
+                    style="@style/button.default"
                     android:text="@string/cancel" />
 
                 <View
@@ -59,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/change"
-                    style="@style/default_button" />
+                    style="@style/button.default" />
 
             </LinearLayout>
 

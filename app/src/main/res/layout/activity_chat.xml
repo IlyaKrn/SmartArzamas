@@ -10,7 +10,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"
-        style="@style/default_toolbar"
+        style="@style/toolbar.default"
         android:layout_width="match_parent"
         android:elevation="4dp"
         android:contentInsetStart="4dp"
@@ -22,16 +22,18 @@
 
         <ImageButton
             android:id="@+id/bt_close"
-            style="@style/default_toolbar_default_button"
+            style="@style/button.toolbar.default"
             app:srcCompat="?attr/actionModeCloseDrawable" />
 
         <TextView
             android:id="@+id/tv_name"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             style="@style/default_title_default_toolbar"/>
 
         <ImageButton
             android:id="@+id/bt_chat_menu"
-            style="@style/default_toolbar_default_button"
+            style="@style/button.toolbar.default"
             android:layout_gravity="end"
             app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
@@ -42,13 +44,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="?attr/actionBarSize"
-        android:transcriptMode="alwaysScroll" />
+        style="@style/recyclerView.default"
+        android:layout_marginVertical="?attr/actionBarSize" />
 
     <androidx.appcompat.widget.Toolbar
-        android:background="@color/tool_bar"
-        style="@style/default_toolbar"
+        style="@style/toolbar.default"
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:elevation="4dp"
@@ -61,14 +61,13 @@
 
         <ImageButton
             android:id="@+id/bt_set_image"
-            style="@style/default_toolbar_default_button"
+            style="@style/button.toolbar.default"
             android:layout_weight="1"
             app:srcCompat="@android:drawable/ic_menu_add" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/message_editor"
             android:layout_weight="1"
             android:maxHeight="120dp">
 
@@ -85,7 +84,7 @@
             android:id="@+id/bt_send"
             android:layout_gravity="end"
             android:layout_weight="1"
-            style="@style/default_toolbar_default_button"
+            style="@style/button.toolbar.default"
             app:srcCompat="@android:drawable/ic_menu_send" />
 
     </androidx.appcompat.widget.Toolbar>

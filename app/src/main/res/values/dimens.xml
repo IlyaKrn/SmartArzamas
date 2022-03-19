@@ -4,22 +4,27 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="default_material_barrier">4dp</dimen>
-    <dimen name="default_button_text_size">16sp</dimen>
-    <dimen name="link_button_text_size">14sp</dimen>
 
-    <dimen name="dialog_width">350dp</dimen>
-    <dimen name="chat_list_item_height">84dp</dimen>
-    <dimen name="chat_list_item_corner_left_radius">1000dp</dimen>
-    <dimen name="dialog_margin_tool_bar">60dp</dimen>
-    <dimen name="dialog_margin_no_tool_bar">30dp</dimen>
-    <dimen name="dialog_margin_no_tool_bar_1">4dp</dimen>
-    <dimen name="margin_user_message">100dp</dimen>
-    <dimen name="margin_system_message">15dp</dimen>
-    <dimen name="margin_parent_message_layout">40dp</dimen>
-    <dimen name="icon_message">48dp</dimen>
-    <dimen name="button_corner_default_radius">8dp</dimen>
-    <dimen name="corner_message_default_radius">8dp</dimen>
-    <dimen name="default_message_item_margin">@dimen/default_material_barrier</dimen>
-    <dimen name="map_icon_nwidth">100dp</dimen>
+
+
+    <!--LAYOUT PARAMS-->
+
+    <dimen name="button_text_size">16dp</dimen>
+    <dimen name="button_padding">4dp</dimen>
+    <dimen name="button_margin">4dp</dimen>
+    <dimen name="button_elevation">4dp</dimen>
+    <dimen name="button_cornerRadius">8dp</dimen>
+    <dimen name="button_toolbarHeightAndWidth">48dp</dimen>
+    <dimen name="button_toolbarMargin">0dp</dimen>
+
+    <dimen name="dialog_padding">4dp</dimen>
+    <dimen name="dialog_elevation">4dp</dimen>
+    <dimen name="dialog_margin">4dp</dimen>
+    <dimen name="dialog_corneradius">16dp</dimen>
+
+    <dimen name="toolbar_padding">4dp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+
+    <dimen name="recyclerView_elevation">4dp</dimen>
+
 </resources>

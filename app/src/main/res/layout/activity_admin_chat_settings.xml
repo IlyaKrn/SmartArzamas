@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"
-        style="@style/default_toolbar"
+        style="@style/toolbar.default"
         android:layout_width="match_parent"
         android:elevation="4dp"
         android:contentInsetStart="4dp"
@@ -21,11 +21,13 @@
 
         <ImageButton
             android:id="@+id/bt_close"
-            style="@style/default_toolbar_default_button"
+            style="@style/button.toolbar.default"
             app:srcCompat="?attr/actionModeCloseDrawable"/>
 
         <TextView
             android:text="@string/about_chat"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
             style="@style/default_title_default_toolbar" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -85,25 +87,25 @@
                     android:id="@+id/bt_change_chat_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/default_button"
+                    style="@style/button.default"
                     android:text="@string/refactor_image"/>
                 <Button
                     android:id="@+id/bt_change_chat_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/default_button"
+                    style="@style/button.default"
                     android:text="@string/refactor_name"/>
                 <Button
                     android:id="@+id/bt_change_chat_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/default_button"
+                    style="@style/button.default"
                     android:text="@string/refactor_description"/>
                 <Button
                     android:id="@+id/bt_delete_chat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/red_button"
+                    style="@style/button.red"
                     android:text="@string/delete_chat"/>
 
             </LinearLayout>
@@ -112,6 +114,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                style="@style/recyclerView.default"
                 android:id="@+id/rv_members"/>
 
         </LinearLayout>
@@ -120,9 +123,9 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:layout_width="@dimen/dialog_width"
+        android:layout_marginHorizontal="24dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginVertical="@dimen/dialog_margin_tool_bar" />
+        android:layout_gravity="center" />
 
 </FrameLayout>

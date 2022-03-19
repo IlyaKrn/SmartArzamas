@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="teal_100">#B2EBF2</color>
+    <color name="teal_200">#80DEEA</color>
+    <color name="teal_300">#4DD0E1</color>
+    <color name="teal_400">#26C6DA</color>
+    <color name="teal_500">#00BCD4</color>
+    <color name="teal_600">#00ACC1</color>
+    <color name="teal_700">#0097A7</color>
+    <color name="teal_800">#00838F</color>
+    <color name="teal_900">#006064</color>
 
     <color name="purple_100">#D1C4E9</color>
     <color name="purple_200">#B39DDB</color>
@@ -11,6 +20,8 @@
     <color name="purple_700">#512DA8</color>
     <color name="purple_800">#4527A0</color>
     <color name="purple_900">#311B92</color>
+
+
 
     <color name="red_100">#F8BBD0</color>
     <color name="red_200">#F48FB1</color>
@@ -39,25 +50,50 @@
 
 
 
+
+    <!--BACKGROUND-->
+
+    <color name="button_default_background">@color/white</color>
+    <color name="button_red_background">@color/red_500</color>
+    <color name="button_gray_background">@color/grey_500</color>
+
+    <color name="toolbar_default_background">@color/white</color>
+    <color name="toolbar_red_background">@color/red_200</color>
+    <color name="toolbar_gray_background">@color/grey_500</color>
+
+    <color name="dialog_default_background">@color/white</color>
+    <color name="dialog_red_background">@color/red_200</color>
+    <color name="dialog_gray_background">@color/grey_200</color>
+
+    <color name="recyclerView_default_background">@color/white</color>
+    <color name="recyclerView_red_background">@color/red_200</color>
+    <color name="recyclerView_gray_background">@color/grey_200</color>
+
+    <color name="recyclerViewItem_default_background">@color/white</color>
+    <color name="recyclerViewItem_red_background">@color/red_200</color>
+    <color name="recyclerViewItem_gray_background">@color/grey_200</color>
+
+
+    <!--TEXT COLOR-->
+
     <color name="button_default_text_color">@color/black</color>
+    <color name="button_red_text_color">@color/black</color>
+    <color name="button_gray_text_color">@color/black</color>
 
-    <color name="default_button_color">@color/purple_500</color>
-    <color name="red_button_color">@color/red_500</color>
-    <color name="grey_button_color">@color/grey_500</color>
+    <color name="toolbar_default_text_color">@color/black</color>
+    <color name="toolbar_red_text_color">@color/black</color>
+    <color name="toolbar_gray_text_color">@color/black</color>
 
-    <color name="default_recycler_view_background">@color/white</color>
+    <color name="dialog_default_text_color">@color/black</color>
+    <color name="dialog_red_text_color">@color/black</color>
+    <color name="dialog_gray_text_color">@color/black</color>
 
-    <color name="dialog_default_corner_background">@color/purple_300</color>
+    <color name="recyclerViewItem_default_text_color">@color/black</color>
+    <color name="recyclerViewItem_red_text_color">@color/black</color>
+    <color name="recyclerViewItem_gray_text_color">@color/black</color>
 
-    <color name="tool_bar">@color/purple_300</color>
 
-    <color name="default_title_color">@color/grey_900</color>
 
-    <color name="message_editor">#FFBB86FC</color>
-    <color name="message">#FF6200EE</color>
-    <color name="hyper_link">#000DFF</color>
-    <color name="message_start">#B079FF</color>
-    <color name="message_end">#41009E</color>
-    <color name="chat_item_background">#5A5A5A</color>
-    <color name="title_color">#8F8F8F</color>
+
+
 </resources>

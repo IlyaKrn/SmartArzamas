@@ -7,7 +7,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_main"
-        style="@style/default_toolbar"
+        style="@style/toolbar.default"
         android:layout_width="match_parent"
         android:elevation="4dp"
         android:contentInsetStart="4dp"
@@ -19,7 +19,7 @@
 
         <ImageButton
             android:id="@+id/bt_menu"
-            style="@style/default_toolbar_default_button"
+            style="@style/button.toolbar.default"
             app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
 
         <com.example.smartarzamas.support.EditTextSearch
@@ -32,7 +32,7 @@
 
         <ImageButton
             android:id="@+id/bt_profile"
-            style="@style/default_toolbar_default_button"
+            style="@style/button.toolbar.default"
             android:layout_gravity="end"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/ic_profile" />
@@ -57,14 +57,9 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/nav_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="0dp"
-            android:background="@color/tool_bar"
+            android:layout_width="match_parent"
+            style="@style/toolbar.default"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/navigation_menu_hub" />
 
         <fragment
@@ -83,9 +78,9 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragmentContainerView"
-            android:layout_width="@dimen/dialog_width"
+            android:layout_marginHorizontal="24dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginVertical="@dimen/dialog_margin_tool_bar" />
+            android:layout_gravity="center" />
 
 </FrameLayout>

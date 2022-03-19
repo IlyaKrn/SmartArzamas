@@ -5,102 +5,172 @@
     </style>
 
 
-    <style name="default_button">
-        <item name="android:background">@drawable/corner_default_button</item>
-        <item name="android:padding">@dimen/default_material_barrier</item>
-        <item name="android:layout_margin">@dimen/default_material_barrier</item>
-        <item name="android:textSize">@dimen/default_button_text_size</item>
-        <item name="android:textColor">@color/button_default_text_color</item>
-        <item name="android:textStyle">bold</item>
+    <!--BUTTONS-->
+    <style name="button">
+        <item name="android:padding">@dimen/button_padding</item>
+        <item name="android:layout_margin">@dimen/button_margin</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="elevation">@dimen/button_elevation</item>
+    </style>
+        <!--DRG-->
+        <style name="button.default" parent="button">
+            <item name="android:background">@drawable/corner_button_default</item>
+            <item name="android:textColor">@color/button_default_text_color</item>
+        </style>
+        <style name="button.red" parent="button">
+            <item name="android:background">@drawable/corner_button_red</item>
+            <item name="android:textColor">@color/button_red_text_color</item>
+        </style>
+        <style name="button.gray" parent="button">
+            <item name="android:background">@drawable/corner_button_gray</item>
+            <item name="android:textColor">@color/button_gray_text_color</item>
+        </style>
+        <!--TOOLBAR BUTTONS-->
+        <style name="button.toolbar" parent="button">
+            <item name="android:layout_height">@dimen/button_toolbarHeightAndWidth</item>
+            <item name="android:layout_width">@dimen/button_toolbarHeightAndWidth</item>
+            <item name="android:layout_margin">@dimen/button_toolbarMargin</item>
+        </style>
+            <!--DRG-->
+            <style name="button.toolbar.default" parent="button.toolbar">
+                <item name="android:background">@drawable/corner_button_default</item>
+                <item name="android:textColor">@color/button_default_text_color</item>
+            </style>
+            <style name="button.toolbar.red" parent="button.toolbar">
+                <item name="android:background">@drawable/corner_button_red</item>
+                <item name="android:textColor">@color/button_red_text_color</item>
+            </style>
+            <style name="button.toolbar.gray" parent="button.toolbar">
+                <item name="android:background">@drawable/corner_button_gray</item>
+                <item name="android:textColor">@color/button_gray_text_color</item>
+            </style>
+        <!--FAB BUTTONS-->
+        <style name="button.fab" parent="button">
+            <item name="android:layout_height">@dimen/button_toolbarHeightAndWidth</item>
+            <item name="android:layout_width">@dimen/button_toolbarHeightAndWidth</item>
+            <item name="android:layout_margin">@dimen/button_toolbarMargin</item>
+        </style>
+            <!--DRG-->
+            <style name="button.fab.default" parent="button.fab">
+                <item name="android:background">@color/button_default_background</item>
+            </style>
+            <style name="button.fab.red" parent="button.fab">
+                <item name="android:background">@color/button_red_background</item>
+            </style>
+            <style name="button.fab.gray" parent="button.fab">
+        <item name="android:background">@color/button_gray_background</item>
     </style>
 
-    <style name="red_button">
-        <item name="android:background">@drawable/corner_red_button</item>
-        <item name="android:padding">@dimen/default_material_barrier</item>
-        <item name="android:layout_margin">@dimen/default_material_barrier</item>
-        <item name="android:textSize">@dimen/default_button_text_size</item>
-        <item name="android:textColor">@color/button_default_text_color</item>
-        <item name="android:textStyle">bold</item>
+
+    <!--DIALOGS-->
+    <style name="dialog">
+        <item name="android:padding">@dimen/dialog_padding</item>
+        <item name="android:layout_margin">@dimen/dialog_margin</item>
+        <item name="elevation">@dimen/dialog_elevation</item>
     </style>
-    <style name="grey_button">
-        <item name="android:background">@drawable/corner_grey_button</item>
-        <item name="android:padding">@dimen/default_material_barrier</item>
-        <item name="android:layout_margin">@dimen/default_material_barrier</item>
-        <item name="android:textSize">@dimen/default_button_text_size</item>
-        <item name="android:textColor">@color/button_default_text_color</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-    <style name="link_button">
-        <item name="android:background">@color/invisible</item>
-        <item name="android:padding">@dimen/default_material_barrier</item>
-        <item name="android:layout_margin">@dimen/default_material_barrier</item>
-        <item name="android:textSize">@dimen/link_button_text_size</item>
-        <item name="android:textColor">@color/hyper_link</item>
-        <item name="android:textStyle">bold|italic</item>
-    </style>
+        <!--DRG-->
+        <style name="dialog.default" parent="dialog">
+            <item name="android:background">@drawable/corner_dialog_default</item>
+        </style>
+        <style name="dialog.red" parent="dialog">
+            <item name="android:background">@drawable/corner_dialog_red</item>
+        </style>
+        <style name="dialog.gray" parent="dialog">
+            <item name="android:background">@drawable/corner_dialog_gray</item>
+        </style>
 
-
-
-    <style name="default_dialog">
-        <item name="android:background">@drawable/round_corner_dialog</item>
-        <item name="android:padding">@dimen/default_material_barrier</item>
-        <item name="android:layout_margin">@dimen/default_material_barrier</item>
-        <item name="android:textSize">@dimen/default_button_text_size</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-
-
-    <style name="default_toolbar">
-        <item name="android:padding">@dimen/default_material_barrier</item>
+    <!--TOOLBARS-->
+    <style name="toolbar">
+        <item name="android:padding">@dimen/toolbar_padding</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:background">@color/tool_bar</item>
+        <item name="elevation">@dimen/toolbar_elevation</item>
     </style>
-    <style name="default_toolbar_default_button">
-        <item name="android:background">@drawable/corner_default_button</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_width">48dp</item>
-        <item name="android:padding">@dimen/default_material_barrier</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
+        <!--DRG-->
+        <style name="toolbar.default" parent="toolbar">
+            <item name="android:background">@color/toolbar_default_background</item>
+        </style>
+        <style name="toolbar.red" parent="toolbar">
+            <item name="android:background">@color/toolbar_red_background</item>
+        </style>
+        <style name="toolbar.gray" parent="toolbar">
+            <item name="android:background">@color/toolbar_gray_background</item>
+        </style>
 
-
-
-    <style name="default_title">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textSize">48sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/default_title_color</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-    </style>
-    <style name="default_title_default_toolbar">
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textAlignment">gravity</item>
-        <item name="android:padding">@dimen/default_material_barrier</item>
-    </style>
-
-    <style name="default_recycler_view">
-        <item name="android:background">@color/default_recycler_view_background</item>
+    <!--RECYCLER VIEWS-->
+    <style name="recyclerView">
         <item name="android:transcriptMode">alwaysScroll</item>
+        <item name="elevation">@dimen/recyclerView_elevation</item>
     </style>
+        <!--DRG-->
+        <style name="recyclerView.default" parent="recyclerView">
+            <item name="android:background">@color/recyclerView_default_background</item>
+        </style>
+        <style name="recyclerView.red" parent="recyclerView">
+            <item name="android:background" parent="toolbar">@color/recyclerView_red_background</item>
+        </style>
+        <style name="recyclerView.gray" parent="recyclerView">
+            <item name="android:background" parent="toolbar">@color/recyclerView_gray_background</item>
+        </style>
+        <!--ITEMS-->
+        <style name="recyclerViewItem">
 
-    <style name="default_message_list_item">
-        <item name="android:background">@drawable/corner_default_message_list_item</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">wrap_content</item>
-    </style>
-    <style name="system_message_list_item">
-        <item name="android:background">@color/invisible</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-        <item name="android:layout_width">wrap_content</item>
-    </style>
+        </style>
+            <!--DRG-->
+            <style name="recyclerViewItem.default" parent="recyclerViewItem">
+                <item name="android:background">@color/recyclerViewItem_default_background</item>
+            </style>
+            <style name="recyclerViewItem.red" parent="recyclerViewItem">
+                <item name="android:background">@color/recyclerViewItem_red_background</item>
+            </style>
+            <style name="recyclerViewItem.gray" parent="recyclerViewItem">
+                <item name="android:background">@color/recyclerViewItem_gray_background</item>
+            </style>
+
+
+
+    <!--FONTS-->
+        <style name="font.headline1" parent="TextAppearance.MaterialComponents.Headline1">
+            <item name="android:textSize">96sp</item>
+        </style>
+        <style name="font.headline2" parent="TextAppearance.MaterialComponents.Headline2">
+            <item name="android:textSize">60sp</item>
+        </style>
+        <style name="font.headline3" parent="TextAppearance.MaterialComponents.Headline3">
+            <item name="android:textSize">48sp</item>
+        </style>
+        <style name="font.headline4" parent="TextAppearance.MaterialComponents.Headline4">
+            <item name="android:textSize">34sp</item>
+        </style>
+        <style name="font.headline5" parent="TextAppearance.MaterialComponents.Headline5">
+            <item name="android:textSize">24sp</item>
+        </style>
+        <style name="font.headline6" parent="TextAppearance.MaterialComponents.Headline6">
+            <item name="android:textSize">20sp</item>
+        </style>
+        <style name="font.subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+            <item name="android:textSize">16sp</item>
+        </style>
+        <style name="font.subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+            <item name="android:textSize">14sp</item>
+        </style>
+        <style name="font.body1" parent="TextAppearance.MaterialComponents.Body1">
+            <item name="android:textSize">16sp</item>
+        </style>
+        <style name="font.body2" parent="TextAppearance.MaterialComponents.Body2">
+            <item name="android:textSize">14sp</item>
+        </style>
+        <style name="font.button" parent="TextAppearance.MaterialComponents.Button">
+            <item name="android:textSize">14sp</item>
+        </style>
+        <style name="font.caption" parent="TextAppearance.MaterialComponents.Caption">
+            <item name="android:textSize">12sp</item>
+        </style>
+        <style name="font.overline" parent="TextAppearance.MaterialComponents.Overline">
+            <item name="android:textSize">10sp</item>
+        </style>
+
+
 
 
 </resources>

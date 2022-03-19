@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    style="@style/default_dialog">
+    style="@style/dialog.default">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,13 +14,15 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
                 style="@style/default_title"
                 android:text="@string/change_image" />
 
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dialog_width"
+                android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20sp"
                 android:orientation="vertical">
 
@@ -51,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/cancel"
-                    style="@style/default_button"/>
+                    style="@style/button.default"/>
 
                 <View
                     android:id="@+id/change_view_barrier"
@@ -65,7 +67,7 @@
                     android:layout_height="match_parent"
                     android:text="@string/change"
                     android:visibility="gone"
-                    style="@style/default_button" />
+                    style="@style/button.default" />
 
                 <View
                     android:layout_width="30dp"
@@ -76,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="@string/select_img"
-                    style="@style/default_button" />
+                    style="@style/button.default" />
 
             </LinearLayout>
 
