@@ -42,7 +42,7 @@ public class UserSettingsActivity extends FirebaseActivity {
         setContentView(R.layout.activity_user_settings);
         init();
         updateViewData();
-        user.addUserListener("14", new OnGetDataListener<User>() {
+        user.addUserListener(this, "14", new OnGetDataListener<User>() {
             @Override
             public void onGetData(User data) {
                 UserSettingsActivity.this.user = data;
@@ -84,6 +84,11 @@ public class UserSettingsActivity extends FirebaseActivity {
             public void isConnected() {
                 DialogUserNameAndFamilyChange dialog = new DialogUserNameAndFamilyChange(UserSettingsActivity.this, user);
                 dialog.create(R.id.fragmentContainerView);
+            }
+
+            @Override
+            public void isNotConnected() {
+
             }
         });
     }

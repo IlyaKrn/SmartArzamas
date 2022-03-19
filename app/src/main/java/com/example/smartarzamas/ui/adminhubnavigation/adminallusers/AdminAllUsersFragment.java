@@ -41,7 +41,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        User.addUserListListener("20", new OnGetListDataListener<User>() {
+        User.addUserListListener(getContext(), "20", new OnGetListDataListener<User>() {
             @Override
             public void onGetData(ArrayList<User> data) {
                 if (userMainList.size() > 0) userMainList.clear();

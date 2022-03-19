@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.smartarzamas.R;
+import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnUpdateUser;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.firebaseobjects.User;
@@ -70,10 +71,19 @@ public class DialogUserNameAndFamilyChange extends Dialog{
                     User buffUser = user;
                     buffUser.name = name;
                     buffUser.family = family;
-                    user.setNewData(buffUser, new OnUpdateUser() {
+                    user.setNewData(getContext(), buffUser, new OnSetDataListener<User>() {
                         @Override
-                        public void onUpdate(User user) {
+                        public void onSetData(User data) {
                             destroy();
+                        }
+
+                        @Override
+                        public void onNoConnection() {
+
+                        }
+
+                        @Override
+                        public void onCanceled() {
 
                         }
                     });

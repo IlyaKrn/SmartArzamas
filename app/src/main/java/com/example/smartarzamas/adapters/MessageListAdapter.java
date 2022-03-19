@@ -154,7 +154,7 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
                     notMy_ivIcon.setVisibility(View.GONE);
                     notMy_progressImage.setVisibility(View.VISIBLE);
                     notMy_tvMessage.setText(item.message);
-                    User.getUserById(item.userId, new OnGetDataListener<User>() {
+                    User.getUserById(context, item.userId, new OnGetDataListener<User>() {
                         @Override
                         public void onGetData(User data) {
                             u = data;

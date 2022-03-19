@@ -70,7 +70,7 @@ public abstract class FirebaseActivity extends AppCompatActivity implements Swip
         if (getIntent().getSerializableExtra(USER_INTENT) != null){
             // получение пользователя из предыдущей активности
             this.user = (User) getIntent().getSerializableExtra(USER_INTENT);
-            User.getUserById(user.id, new OnGetDataListener<User>() {
+            User.getUserById(this, user.id, new OnGetDataListener<User>() {
                 @Override
                 public void onGetData(User data) {
                     FirebaseActivity.this.user = data;

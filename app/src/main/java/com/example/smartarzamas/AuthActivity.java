@@ -86,7 +86,7 @@ public class AuthActivity extends FirebaseActivity {
         // проверка currentUser
         if (currentUser != null){
             Log.d(LOG_TAG, "current user from SQLite: email is " + currentUser.login + " password is " + currentUser.password);
-            User.getUserById(currentUser.id, new OnGetDataListener<User>() {
+            User.getUserById(this, currentUser.id, new OnGetDataListener<User>() {
                 @Override
                 public void onGetData(User data) {
                     AuthActivity.this.user = data;
@@ -135,7 +135,7 @@ public class AuthActivity extends FirebaseActivity {
                                     // если вход прошел успешно
                                     if (task.isSuccessful()){
                                         if (auth.getCurrentUser().isEmailVerified()) {
-                                            User.getUserById(Utils.getKeyString(login), new OnGetDataListener<User>() {
+                                            User.getUserById(AuthActivity.this, Utils.getKeyString(login), new OnGetDataListener<User>() {
                                                 @Override
                                                 public void onGetData(User data) {
                                                     if (!data.banned) {
@@ -200,6 +200,11 @@ public class AuthActivity extends FirebaseActivity {
                                 }
                             });
                         }
+
+                        @Override
+                        public void isNotConnected() {
+
+                        }
                     });
 
                 }
@@ -246,6 +251,11 @@ public class AuthActivity extends FirebaseActivity {
                         else {
                             Utils.showWarning(tvLoginErr, R.string.enter_login);
                         }
+                    }
+
+                    @Override
+                    public void isNotConnected() {
+
                     }
                 });
 
@@ -356,6 +366,11 @@ public class AuthActivity extends FirebaseActivity {
                                     }
                                 });
                             }
+
+                            @Override
+                            public void isNotConnected() {
+
+                            }
                         });
                     }
                     // вывод предупреждения о различии пароля
@@ -440,6 +455,11 @@ public class AuthActivity extends FirebaseActivity {
                                         }
                                     });
                                 }
+
+                                @Override
+                                public void isNotConnected() {
+
+                                }
                             });
                         }
                         else {
@@ -505,6 +525,11 @@ public class AuthActivity extends FirebaseActivity {
                                 }
                             }
                         });
+                    }
+
+                    @Override
+                    public void isNotConnected() {
+
                     }
                 });
 

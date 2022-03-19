@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
+import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnUpdateUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
@@ -59,7 +60,7 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
             item = getItem(position);
             btMenu.setVisibility(View.GONE);
 
-            User.getUserById(item.id, new OnGetDataListener<User>() {
+            User.getUserById(context, item.id, new OnGetDataListener<User>() {
                 @Override
                 public void onGetData(User data) {
                     item = data;
@@ -118,37 +119,77 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
                                     break;
                                 case R.id.set_admin:
                                     item.isAdmin = true;
-                                    item.setNewData(item, new OnUpdateUser() {
+                                    item.setNewData(context, item, new OnSetDataListener<User>() {
                                         @Override
-                                        public void onUpdate(User user) {
+                                        public void onSetData(User data) {
                                             Toast.makeText(context, "Пользователь " + user.email + " стал администратором", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onNoConnection() {
+
+                                        }
+
+                                        @Override
+                                        public void onCanceled() {
+
                                         }
                                     });
                                     break;
                                 case R.id.remove_admin:
                                     item.isAdmin = false;
-                                    item.setNewData(item, new OnUpdateUser() {
+                                    item.setNewData(context, item, new OnSetDataListener<User>() {
                                         @Override
-                                        public void onUpdate(User user) {
+                                        public void onSetData(User data) {
                                             Toast.makeText(context, "Пользователь " + user.email + " стал пользователем", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onNoConnection() {
+
+                                        }
+
+                                        @Override
+                                        public void onCanceled() {
+
                                         }
                                     });
                                     break;
                                 case R.id.ban:
                                     item.banned = true;
-                                    item.setNewData(item, new OnUpdateUser() {
+                                    item.setNewData(context, item, new OnSetDataListener<User>() {
                                         @Override
-                                        public void onUpdate(User user) {
+                                        public void onSetData(User data) {
                                             Toast.makeText(context, "Пользователь " + user.email + " заблокирован", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onNoConnection() {
+
+                                        }
+
+                                        @Override
+                                        public void onCanceled() {
+
                                         }
                                     });
                                     break;
                                 case R.id.unban:
                                     item.banned = false;
-                                    item.setNewData(item, new OnUpdateUser() {
+                                    item.setNewData(context, item, new OnSetDataListener<User>() {
                                         @Override
-                                        public void onUpdate(User user) {
+                                        public void onSetData(User data) {
                                             Toast.makeText(context, "Пользователь " + user.email + " разблокирован", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        @Override
+                                        public void onNoConnection() {
+
+                                        }
+
+                                        @Override
+                                        public void onCanceled() {
+
                                         }
                                     });
                                     break;

@@ -42,7 +42,7 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
         setContentView(R.layout.activity_admin_user_settings);
         init();
         updateViewData();
-        user.addUserListener("7", new OnGetDataListener<User>() {
+        user.addUserListener(this, "7", new OnGetDataListener<User>() {
             @Override
             public void onGetData(User data) {
                 AdminUserSettingsActivity.this.user = data;
@@ -84,6 +84,11 @@ public class AdminUserSettingsActivity extends FirebaseActivity {
             public void isConnected() {
                 DialogUserNameAndFamilyChange dialog = new DialogUserNameAndFamilyChange(AdminUserSettingsActivity.this, user);
                 dialog.create(R.id.fragmentContainerView);
+            }
+
+            @Override
+            public void isNotConnected() {
+
             }
         });
     }

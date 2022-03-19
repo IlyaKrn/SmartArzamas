@@ -77,7 +77,7 @@ public class AdminChatSettingsActivity extends FirebaseActivity {
                 finish();
             }
         });
-        User.addUserListListener("10", new OnGetListDataListener<User>() {
+        User.addUserListListener(this, "10", new OnGetListDataListener<User>() {
             @Override
             public void onGetData(ArrayList<User> data) {
                 if (members.size() > 0)members.clear();

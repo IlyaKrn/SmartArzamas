@@ -72,7 +72,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
                 finish();
             }
         });
-        User.addUserListListener("13", new OnGetListDataListener<User>() {
+        User.addUserListListener(this, "13", new OnGetListDataListener<User>() {
             @Override
             public void onGetData(ArrayList<User> data) {
                 if (members.size() > 0)members.clear();
