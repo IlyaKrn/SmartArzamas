@@ -7,29 +7,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="start"
         android:layout_marginHorizontal="1dp"
         android:layout_marginVertical="20dp"
-        android:layout_gravity="top"
         android:orientation="vertical">
 
         <com.example.smartarzamas.support.IconView
             android:id="@+id/user_icon"
-            android:visibility="visible"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent"/>
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/progress"
-            android:visibility="gone"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_width="match_parent"/>
+            android:visibility="gone" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/tv_user_name"
         android:layout_width="match_parent"
-        android:layout_gravity="center_vertical"
         android:layout_height="match_parent"
         android:layout_marginHorizontal="48dp" />
 

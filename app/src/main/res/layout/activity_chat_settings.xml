@@ -26,7 +26,9 @@
 
         <TextView
             android:text="@string/about_chat"
-            style="@style/text.title.second" />
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            style="@style/text.span.main" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -67,17 +69,13 @@
                     android:orientation="vertical">
                     <TextView
                         android:id="@+id/chat_name"
-                        android:textSize="24dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        style="@style/text.span.main"/>
                     <TextView
                         android:id="@+id/chat_description"
-                        android:layout_width="wrap_content"
-                        android:textSize="24dp"
-                        android:layout_height="wrap_content"/>
+                        style="@style/text.paragraph.main"/>
                 </LinearLayout>
             </LinearLayout>
-                     <androidx.recyclerview.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/rv_members"/>

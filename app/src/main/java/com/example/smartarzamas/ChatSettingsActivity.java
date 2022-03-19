@@ -31,10 +31,7 @@ import java.util.ArrayList;
 public class ChatSettingsActivity extends FirebaseActivity {
 
     private ImageButton btClose;
-    private Button btChangeName;
-    private Button btChangeIcon;
-    private Button btChangedDescription;
-    private ImageView chatIcon;
+     private ImageView chatIcon;
     private TextView tvChatName;
     private TextView tvChatDescription;
     private ProgressBar progressBar;
@@ -75,9 +72,9 @@ public class ChatSettingsActivity extends FirebaseActivity {
         User.addUserListListener(this, "13", new OnGetListDataListener<User>() {
             @Override
             public void onGetData(ArrayList<User> data) {
-                if (members.size() > 0)members.clear();
-                for (User u : data){
-                    if(chat.isMember(u))
+                if (members.size() > 0) members.clear();
+                for (User u : data) {
+                    if (chat.isMember(u))
                         members.add(u);
                 }
                 adapter.notifyDataSetChanged();
@@ -85,7 +82,7 @@ public class ChatSettingsActivity extends FirebaseActivity {
 
             @Override
             public void onVoidData() {
-                if (members.size() > 0)members.clear();
+                if (members.size() > 0) members.clear();
                 adapter.notifyDataSetChanged();
             }
 
@@ -100,50 +97,12 @@ public class ChatSettingsActivity extends FirebaseActivity {
                 finish();
             }
         });
-        btChangedDescription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogChatDescriptionChange dialog = new DialogChatDescriptionChange(ChatSettingsActivity.this, user, chat);
-                dialog.create(R.id.fragmentContainerView);
-            }
-        });
         btClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-        btChangeIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogChatIconChange dialog = new DialogChatIconChange(ChatSettingsActivity.this, user, chat);
-                dialog.create(R.id.fragmentContainerView);
-                dialog.setOnIconChangeListener(new OnIconChangeListener() {
-                    @Override
-                    public void onChange(Bitmap bitmap) {
-                        chatIcon.setImageBitmap(bitmap);
-                    }
-                });
-            }
-        });
-        btChangeName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Utils.isConnected(getApplicationContext(), new Utils.Connection() {
-                    @Override
-                    public void isConnected() {
-                        DialogChatNameChange dialog = new DialogChatNameChange(ChatSettingsActivity.this, user, chat);
-                        dialog.create(R.id.fragmentContainerView);
-                    }
-
-                    @Override
-                    public void isNotConnected() {
-
-                    }
-                });
-            }
-        });
-
     }
     // инициализация
     void init(){
@@ -153,9 +112,6 @@ public class ChatSettingsActivity extends FirebaseActivity {
         tvChatDescription = findViewById(R.id.chat_description);
         progressBar = findViewById(R.id.progress);
         rvMembers = findViewById(R.id.rv_members);
-        btChangeIcon = findViewById(R.id.bt_change_chat_icon);
-        btChangeName = findViewById(R.id.bt_change_chat_name);
-        btChangedDescription = findViewById(R.id.bt_change_chat_description);
         btClose = findViewById(R.id.bt_close);
         rvMembers.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserListAdapter(this, user, false, members, new FirebaseAdapter.OnStateClickListener<User>() {

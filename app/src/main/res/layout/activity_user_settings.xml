@@ -71,19 +71,13 @@
                         android:paddingLeft="10dp">
                         <TextView
                             android:id="@+id/user_name"
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            style="@style/text.span.main"/>
                         <TextView
                             android:id="@+id/user_family"
-                            android:textSize="24dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            style="@style/text.span.main"/>
                         <TextView
                             android:id="@+id/user_email"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"/>
+                            style="@style/text.span.main"/>
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout

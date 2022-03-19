@@ -161,7 +161,7 @@
             <!--FONTS-->
             <style name="text.span.main" parent="text.span">
                 <item name="android:textSize">16sp</item>
-                <item name="android:textStyle">bold</item>
+                <item name="android:textStyle">normal</item>
                 <item name="android:textColor">@color/text_span_main_color</item>
             </style>
             <style name="text.span.second" parent="text.span">
