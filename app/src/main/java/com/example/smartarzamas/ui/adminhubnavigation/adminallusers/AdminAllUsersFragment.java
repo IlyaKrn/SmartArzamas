@@ -17,7 +17,7 @@ import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.FirebaseAdapter;
 import com.example.smartarzamas.adapters.UserListAdapter;
-import com.example.smartarzamas.databinding.NavigationFragmentAllChatsBinding;
+import com.example.smartarzamas.databinding.FragmentDashboardBinding;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
@@ -29,8 +29,8 @@ import java.util.ArrayList;
 
 public class AdminAllUsersFragment extends HubNavigationCommon {
 
-    private AdminAllUsersViewModel allChatsViewModel;
-    private NavigationFragmentAllChatsBinding binding;
+    private AdminAllUsersViewModel adminAllUsersViewModel;
+    private FragmentDashboardBinding binding;
     private static AdminAllUsersFragmentCallback callback;
 
     private ArrayList<User> userMainList = new ArrayList<>();
@@ -85,14 +85,14 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
 
 
 
-        allChatsViewModel.getSearch().observe(getViewLifecycleOwner(), new Observer<String>() {
+        adminAllUsersViewModel.getSearch().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 searchString = s;
                 callback.onSearchUpdate(s);
             }
         });
-        allChatsViewModel.getCategory().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
+        adminAllUsersViewModel.getCategory().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
             @Override
             public void onChanged(ArrayList<String> strings) {
                 category = strings;
@@ -109,7 +109,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
                 AdminAllUsersFragment.this.category = categories;
-                allChatsViewModel.setCategory(category);
+                adminAllUsersViewModel.setCategory(category);
                 callback.onCategoryUpdate(category);
                 updateListForView();
             }
@@ -117,7 +117,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
             @Override
             public void onSearchStringChange(String search) {
                 AdminAllUsersFragment.this.searchString = search;
-                allChatsViewModel.setSearch(searchString);
+                adminAllUsersViewModel.setSearch(searchString);
                 callback.onSearchUpdate(searchString);
                 updateListForView();
             }
@@ -127,8 +127,8 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         HubNavigationCommon.currentNavigationFragment = ALL_CHATS;
-        allChatsViewModel = new ViewModelProvider(this.getActivity()).get(AdminAllUsersViewModel.class);
-        binding = NavigationFragmentAllChatsBinding.inflate(inflater, container, false);
+        adminAllUsersViewModel = new ViewModelProvider(this.getActivity()).get(AdminAllUsersViewModel.class);
+        binding = FragmentDashboardBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 
         rvUsers = binding.rvChats;

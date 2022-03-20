@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.smartarzamas.AdminHubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.MapInfoWindowAdapter;
-import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
+import com.example.smartarzamas.databinding.FragmentNotificationsBinding;
 import com.example.smartarzamas.firebaseobjects.Locate;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
@@ -34,8 +34,8 @@ import java.util.ArrayList;
 
 public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapReadyCallback {
 
-    private AdminMapViewModel mapViewModel;
-    private NavigationFragmentMapBinding binding;
+    private AdminMapViewModel adminMapViewModel;
+    private FragmentNotificationsBinding binding;
     private static AdminMapFragmentCallback callback;
     private SupportMapFragment mapView;
     private GoogleMap googleMap;
@@ -99,14 +99,14 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
 
 
 
-        mapViewModel.getSearch().observe(getViewLifecycleOwner(), new Observer<String>() {
+        adminMapViewModel.getSearch().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 searchString = s;
                 callback.onSearchUpdate(s);
             }
         });
-        mapViewModel.getCategory().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
+        adminMapViewModel.getCategory().observe(getViewLifecycleOwner(), new Observer<ArrayList<String>>() {
             @Override
             public void onChanged(ArrayList<String> strings) {
                 category = strings;
@@ -145,7 +145,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
                 AdminMapFragment.this.category = categories;
-                mapViewModel.setCategory(category);
+                adminMapViewModel.setCategory(category);
                 callback.onCategoryUpdate(category);
                 updateMapForView();
             }
@@ -153,7 +153,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
             @Override
             public void onSearchStringChange(String search) {
                 AdminMapFragment.this.searchString = search;
-                mapViewModel.setSearch(searchString);
+                adminMapViewModel.setSearch(searchString);
                 callback.onSearchUpdate(searchString);
                 updateMapForView();
             }
@@ -163,8 +163,8 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         HubNavigationCommon.currentNavigationFragment = MAP;
-        mapViewModel = new ViewModelProvider(this.getActivity()).get(AdminMapViewModel.class);
-        binding = NavigationFragmentMapBinding.inflate(inflater, container, false);
+        adminMapViewModel = new ViewModelProvider(this.getActivity()).get(AdminMapViewModel.class);
+        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         root = binding.getRoot();
         mapView = ((SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map));
         mapView.getMapAsync(this);
