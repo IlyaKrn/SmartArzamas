@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:background">@color/invisible</item>
-    </style>
 
+    
 
     <!--BUTTONS-->
     <style name="button">
@@ -91,16 +89,25 @@
         <item name="android:padding">@dimen/toolbar_padding</item>
         <item name="android:layout_height">?attr/actionBarSize</item>
         <item name="elevation">@dimen/toolbar_elevation</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+
+        <item name="android:contentInsetStart">4dp</item>
+        <item name="android:contentInsetLeft">4dp</item>
+        <item name="contentInsetEnd">4dp</item>
+        <item name="contentInsetRight">4dp</item>
+        <item name="contentInsetLeft">4dp</item>
+        <item name="contentInsetStart">4dp</item>
     </style>
         <!--DRG-->
         <style name="toolbar.default" parent="toolbar">
-            <item name="android:background">@color/toolbar_default_background</item>
+            <item name="android:background">@drawable/corner_toolbar_default</item>
         </style>
         <style name="toolbar.red" parent="toolbar">
-            <item name="android:background">@color/toolbar_red_background</item>
+            <item name="android:background">@drawable/corner_toolbar_red</item>
         </style>
         <style name="toolbar.gray" parent="toolbar">
-            <item name="android:background">@color/toolbar_gray_background</item>
+            <item name="android:background">@drawable/corner_toolbar_gray</item>
         </style>
 
 

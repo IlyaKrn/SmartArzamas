@@ -22,10 +22,11 @@
     <dimen name="dialog_padding">4dp</dimen>
     <dimen name="dialog_elevation">4dp</dimen>
     <dimen name="dialog_margin">4dp</dimen>
-    <dimen name="dialog_corneradius">16dp</dimen>
+    <dimen name="dialog_cornerRadius">16dp</dimen>
 
     <dimen name="toolbar_padding">4dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="toolbar_cornerRadius">256dp</dimen>
 
     <dimen name="recyclerView_elevation">4dp</dimen>
 
