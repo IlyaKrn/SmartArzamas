@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/tv_name"
-            style="@style/text.title"/>
+            style="@style/text.title.second"/>
 
         <ImageButton
             android:id="@+id/bt_chat_menu"

@@ -27,6 +27,7 @@
     <dimen name="toolbar_padding">4dp</dimen>
     <dimen name="toolbar_elevation">4dp</dimen>
     <dimen name="toolbar_cornerRadius">256dp</dimen>
+    <dimen name="toolbar_height">?android:attr/actionBarSize</dimen>
 
     <dimen name="recyclerView_elevation">4dp</dimen>
 
