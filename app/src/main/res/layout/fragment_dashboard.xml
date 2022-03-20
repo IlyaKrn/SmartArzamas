@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/recyclerView_default_background"
     tools:context=".ui.adminhubnavigation.adminallusers.AdminAllUsersFragment">
 
 
@@ -13,8 +14,9 @@
         android:orientation="vertical">
 
         <View
-            android:layout_width="0dp"
-            style="@style/toolbar.default"/>
+            android:layout_width="match_parent"
+            style="@style/toolbar.default"
+            android:background="@color/recyclerView_default_background"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -32,20 +34,40 @@
 
 
         <View
-            android:layout_width="0dp"
-            style="@style/toolbar.default"/>
+            android:layout_width="match_parent"
+            style="@style/toolbar.default"
+            android:background="@color/recyclerView_default_background"/>
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_chats"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        android:paddingVertical="@dimen/toolbar_height"
-        style="@style/recyclerView.default"/>
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <View
+                android:layout_width="match_parent"
+                style="@style/toolbar.default"
+                android:background="@color/recyclerView_default_background"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_chats"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/recyclerView.default"/>
+
+            <View
+                android:layout_width="match_parent"
+                style="@style/toolbar.default"
+                android:background="@color/recyclerView_default_background"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </FrameLayout>
