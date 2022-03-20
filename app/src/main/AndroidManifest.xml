@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.smartarzamas">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,24 +11,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
-        <activity
-            android:name=".AdminUserSettingsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AdminChatActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AdminChatSettingsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".AdminHubActivity"
-            android:exported="true"
-            android:label="@string/title_activity_admin_hub"
-            android:theme="@style/Theme.Design" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".AdminUserSettingsActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="true" />
+        <activity
+            android:name=".AdminChatActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="true" />
+        <activity
+            android:name=".AdminChatSettingsActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="true" />
+        <activity
+            android:name=".AdminHubActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
+            android:exported="true"
+            android:label="@string/title_activity_admin_hub"
+            android:theme="@style/Theme.Design" />
+
 
         <activity
             android:name=".HubActivity"
