@@ -9,7 +9,7 @@
         <item name="android:layout_margin">@dimen/button_margin</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:elevation">@dimen/button_elevation</item>
+        <item name="elevation">@dimen/button_elevation</item>
     </style>
         <!--DRG-->
         <style name="button.default" parent="button">
@@ -69,7 +69,7 @@
     <style name="dialog">
         <item name="android:padding">@dimen/dialog_padding</item>
         <item name="android:layout_margin">@dimen/dialog_margin</item>
-        <item name="android:elevation">@dimen/dialog_elevation</item>
+        <item name="elevation">@dimen/dialog_elevation</item>
     </style>
         <!--DRG-->
         <style name="dialog.default" parent="dialog">
@@ -88,7 +88,7 @@
     <style name="toolbar">
         <item name="android:padding">@dimen/toolbar_padding</item>
         <item name="android:layout_height">@dimen/toolbar_height</item>
-        <item name="android:elevation">@dimen/toolbar_elevation</item>
+        <item name="elevation">@dimen/toolbar_elevation</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingEnd">8dp</item>
 
@@ -116,7 +116,7 @@
     <!--RECYCLER VIEWS-->
     <style name="recyclerView">
         <item name="android:transcriptMode">alwaysScroll</item>
-        <item name="android:elevation">@dimen/recyclerView_elevation</item>
+        <item name="elevation">@dimen/recyclerView_elevation</item>
     </style>
         <!--DRG-->
         <style name="recyclerView.default" parent="recyclerView">
@@ -142,6 +142,9 @@
             <style name="recyclerViewItem.gray" parent="recyclerViewItem">
                 <item name="android:background">@color/recyclerViewItem_gray_background</item>
             </style>
+
+
+
 
     <!--TEXT STYLES-->
     <style name="text">
@@ -237,13 +240,13 @@
             <item name="android:gravity">fill_vertical</item>
             <item name="android:singleLine">false</item>
         </style>
-        <!--FONTS-->
-        <style name="editText.paragraph.main" parent="editText.paragraph">
-            <item name="android:textSize">20sp</item>
-            <item name="android:textColor">@color/editText_paragraph_main_color</item>
-            <item name="android:textColorHint">@color/editText_paragraph_hint_main_color</item>
-        </style>
-        <style name="editText.paragraph.second" parent="editText.paragraph">
+            <!--FONTS-->
+            <style name="editText.paragraph.main" parent="editText.paragraph">
+                <item name="android:textSize">20sp</item>
+                <item name="android:textColor">@color/editText_paragraph_main_color</item>
+                <item name="android:textColorHint">@color/editText_paragraph_hint_main_color</item>
+            </style>
+            <style name="editText.paragraph.second" parent="editText.paragraph">
             <item name="android:textSize">20sp</item>
             <item name="android:textColor">@color/editText_paragraph_second_color</item>
             <item name="android:textColorHint">@color/editText_paragraph_hint_second_color</item>

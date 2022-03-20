@@ -12,7 +12,7 @@
     <dimen name="button_text_size">16dp</dimen>
     <dimen name="button_padding">4dp</dimen>
     <dimen name="button_margin">4dp</dimen>
-    <dimen name="button_elevation">4dp</dimen>
+    <dimen name="button_elevation">12dp</dimen>
     <dimen name="button_cornerRadius">8dp</dimen>
     <dimen name="button_toolbarHeightAndWidth">48dp</dimen>
     <dimen name="button_toolbarMargin">0dp</dimen>
@@ -20,16 +20,16 @@
     <dimen name="button_fabPadding">0dp</dimen>
 
     <dimen name="dialog_padding">4dp</dimen>
-    <dimen name="dialog_elevation">4dp</dimen>
+    <dimen name="dialog_elevation">24dp</dimen>
     <dimen name="dialog_margin">4dp</dimen>
     <dimen name="dialog_cornerRadius">16dp</dimen>
 
     <dimen name="toolbar_padding">4dp</dimen>
-    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="toolbar_elevation">8dp</dimen>
     <dimen name="toolbar_cornerRadius">256dp</dimen>
     <dimen name="toolbar_height">?android:attr/actionBarSize</dimen>
 
-    <dimen name="recyclerView_elevation">4dp</dimen>
+    <dimen name="recyclerView_elevation">0dp</dimen>
 
     <dimen name="text_padding">4dp</dimen>
 
