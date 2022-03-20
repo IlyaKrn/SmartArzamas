@@ -9,7 +9,7 @@
         <item name="android:layout_margin">@dimen/button_margin</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:textStyle">bold</item>
-        <item name="elevation">@dimen/button_elevation</item>
+        <item name="android:elevation">@dimen/button_elevation</item>
     </style>
         <!--DRG-->
         <style name="button.default" parent="button">
@@ -29,6 +29,7 @@
             <item name="android:layout_height">@dimen/button_toolbarHeightAndWidth</item>
             <item name="android:layout_width">@dimen/button_toolbarHeightAndWidth</item>
             <item name="android:layout_margin">@dimen/button_toolbarMargin</item>
+            <item name="android:elevation">@dimen/button_toolbarElevation</item>
         </style>
             <!--DRG-->
             <style name="button.toolbar.default" parent="button.toolbar">
@@ -88,7 +89,7 @@
     <style name="toolbar">
         <item name="android:padding">@dimen/toolbar_padding</item>
         <item name="android:layout_height">@dimen/toolbar_height</item>
-        <item name="elevation">@dimen/toolbar_elevation</item>
+        <item name="android:elevation">@dimen/toolbar_elevation</item>
         <item name="android:paddingStart">8dp</item>
         <item name="android:paddingEnd">8dp</item>
 
@@ -115,7 +116,7 @@
 
     <!--RECYCLER VIEWS-->
     <style name="recyclerView">
-        <item name="elevation">@dimen/recyclerView_elevation</item>
+        <item name="android:elevation">@dimen/recyclerView_elevation</item>
     </style>
         <!--DRG-->
         <style name="recyclerView.default" parent="recyclerView">

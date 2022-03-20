@@ -11,14 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarMain"
         style="@style/toolbar.default"
-        android:layout_width="match_parent"
-        android:elevation="4dp"
-        android:contentInsetStart="4dp"
-        android:contentInsetLeft="4dp"
-        app:contentInsetEnd="4dp"
-        app:contentInsetRight="4dp"
-        app:contentInsetLeft="4dp"
-        app:contentInsetStart="4dp">
+        android:layout_width="match_parent">
 
         <ImageButton
             android:id="@+id/bt_close"
@@ -49,14 +42,7 @@
     <androidx.appcompat.widget.Toolbar
         style="@style/toolbar.default"
         android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:elevation="4dp"
-        android:contentInsetStart="4dp"
-        android:contentInsetLeft="4dp"
-        app:contentInsetEnd="4dp"
-        app:contentInsetRight="4dp"
-        app:contentInsetLeft="4dp"
-        app:contentInsetStart="4dp">
+        android:layout_width="match_parent">
 
         <ImageButton
             android:id="@+id/bt_set_image"
