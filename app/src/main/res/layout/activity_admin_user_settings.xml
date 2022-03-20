@@ -74,7 +74,6 @@
                             style="@style/text.span.main"/>
                         <TextView
                             android:id="@+id/user_family"
-                            android:textSize="24dp"
                             style="@style/text.span.main"/>
                         <TextView
                             android:id="@+id/user_email"
