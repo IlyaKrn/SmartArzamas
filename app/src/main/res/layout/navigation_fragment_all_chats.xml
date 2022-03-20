@@ -12,9 +12,8 @@
         android:orientation="vertical">
 
         <View
-            android:layout_width="match_parent"
-            style="@style/toolbar.default"
-            android:background="@color/recyclerView_default_background"/>
+            android:layout_width="0dp"
+            style="@style/toolbar.default"/>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -38,9 +37,8 @@
 
 
         <View
-            android:layout_width="match_parent"
-            style="@style/toolbar.default"
-            android:background="@color/recyclerView_default_background"/>
+            android:layout_width="0dp"
+            style="@style/toolbar.default"/>
 
     </LinearLayout>
 
