@@ -45,23 +45,22 @@
                 <item name="android:textColor">@color/button_gray_text_color</item>
             </style>
         <!--FAB BUTTONS-->
-        <style name="button.fab" parent="button">
+        <style name="fab">
             <item name="android:padding">@dimen/button_fabPadding</item>
-            <item name="android:layout_margin">@dimen/button_fabMargin</item>
             <item name="android:layout_height">wrap_content</item>
             <item name="android:layout_width">wrap_content</item>
             <item name="android:layout_gravity">bottom|end</item>
-            <item name="android:layout_marginBottom">@dimen/button_fabMargin</item>
-            <item name="android:layout_marginRight">@dimen/button_fabMargin</item>
+            <item name="android:layout_marginBottom">@dimen/button_fabMarginBottom</item>
+            <item name="android:layout_marginEnd">@dimen/button_fabMargin</item>
         </style>
             <!--DRG-->
-            <style name="button.fab.default" parent="button.fab">
+            <style name="fab.default" parent="fab">
                 <item name="android:backgroundTint">@color/button_fab_default_background</item>
             </style>
-            <style name="button.fab.red" parent="button.fab">
+            <style name="fab.red" parent="fab">
                 <item name="android:backgroundTint">@color/button_fab_red_background</item>
             </style>
-            <style name="button.fab.gray" parent="button.fab">
+            <style name="fab.gray" parent="fab">
         <item name="android:backgroundTint">@color/button_fab_gray_background</item>
     </style>
 

@@ -9,14 +9,14 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add"
-        style="@style/button.fab.default"
+        style="@style/fab.default"
         android:visibility="visible"
         android:onClick="onAddLocate"
         android:src="@android:drawable/ic_input_add" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_cancel"
-        style="@style/button.fab.default"
+        style="@style/fab.default"
         android:visibility="gone"
         android:onClick="onAddLocate"
         android:src="@android:drawable/ic_menu_close_clear_cancel" />

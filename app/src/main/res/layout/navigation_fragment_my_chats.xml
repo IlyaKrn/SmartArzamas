@@ -10,7 +10,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        style="@style/button.fab.default"
+        style="@style/fab.default"
         android:src="@android:drawable/ic_input_add" />
 
 
