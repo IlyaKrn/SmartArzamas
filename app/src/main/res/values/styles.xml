@@ -10,7 +10,7 @@
         <item name="android:padding">@dimen/button_padding</item>
         <item name="android:layout_margin">@dimen/button_margin</item>
         <item name="android:textSize">@dimen/button_text_size</item>
-        <item name="android:textStyle">normal</item>
+        <item name="android:textStyle">bold</item>
         <item name="elevation">@dimen/button_elevation</item>
     </style>
         <!--DRG-->
@@ -34,15 +34,15 @@
         </style>
             <!--DRG-->
             <style name="button.toolbar.default" parent="button.toolbar">
-                <item name="android:background">@drawable/corner_button_default</item>
+                <item name="android:background">@drawable/corner_button_toolbar_default</item>
                 <item name="android:textColor">@color/button_default_text_color</item>
             </style>
             <style name="button.toolbar.red" parent="button.toolbar">
-                <item name="android:background">@drawable/corner_button_red</item>
+                <item name="android:background">@drawable/corner_button_toolbar_red</item>
                 <item name="android:textColor">@color/button_red_text_color</item>
             </style>
             <style name="button.toolbar.gray" parent="button.toolbar">
-                <item name="android:background">@drawable/corner_button_gray</item>
+                <item name="android:background">@drawable/corner_button_toolbar_gray</item>
                 <item name="android:textColor">@color/button_gray_text_color</item>
             </style>
         <!--FAB BUTTONS-->
@@ -141,12 +141,11 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textAlignment">gravity</item>
-        <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/text_padding</item>
     </style>
         <!--TYPES-->
         <style name="text.title">
-
+            <item name="android:gravity">center</item>
         </style>
             <!--FONTS-->
             <style name="text.title.main" parent="text.title">
@@ -156,37 +155,99 @@
             </style>
             <style name="text.title.second" parent="text.title">
                 <item name="android:textSize">20sp</item>
-                <item name="android:textStyle">normal</item>
+                <item name="android:textStyle">bold</item>
                 <item name="android:textColor">@color/text_title_second_color</item>
             </style>
         <style name="text.span">
-
+            <item name="android:gravity">start</item>
         </style>
             <!--FONTS-->
             <style name="text.span.main" parent="text.span">
                 <item name="android:textSize">16sp</item>
-                <item name="android:textStyle">normal</item>
+                <item name="android:textStyle">bold</item>
                 <item name="android:textColor">@color/text_span_main_color</item>
             </style>
             <style name="text.span.second" parent="text.span">
                 <item name="android:textSize">12sp</item>
-                <item name="android:textStyle">normal</item>
+                <item name="android:textStyle">bold</item>
                 <item name="android:textColor">@color/text_span_second_color</item>
             </style>
         <style name="text.paragraph">
-
+            <item name="android:gravity">fill_vertical</item>
         </style>
             <!--FONTS-->
             <style name="text.paragraph.main" parent="text.paragraph">
                 <item name="android:textSize">16sp</item>
-                <item name="android:textStyle">normal</item>
+                <item name="android:textStyle">bold</item>
                 <item name="android:textColor">@color/text_paragraph_main_color</item>
             </style>
             <style name="text.paragraph.second" parent="text.paragraph">
                 <item name="android:textSize">14sp</item>
-                <item name="android:textStyle">normal</item>
+                <item name="android:textStyle">bold</item>
                 <item name="android:textColor">@color/text_paragraph_second_color</item>
             </style>
+        <style name="text.warning">
+            <item name="android:textColor">@color/design_default_color_error</item>
+        </style>
+        <!--FONTS-->
+            <style name="text.warning.main" parent="text.warning">
+                <item name="android:textSize">16sp</item>
+                <item name="android:textStyle">bold</item>
+            </style>
+            <style name="text.warning.second" parent="text.warning">
+                <item name="android:textSize">12sp</item>
+                <item name="android:textStyle">bold</item>
+            </style>
+
+
+    <style name="editText">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textAlignment">gravity</item>
+        <item name="android:gravity">start</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+    <!--TYPES-->
+
+        <style name="editText.span">
+            <item name="android:gravity">start</item>
+            <item name="android:singleLine">true</item>
+        </style>
+            <!--FONTS-->
+            <style name="editText.span.main" parent="editText.span">
+                <item name="android:textSize">20sp</item>
+                <item name="android:layout_height">60dp</item>
+                <item name="android:textColor">@color/editText_span_main_color</item>
+                <item name="android:textColorHint">@color/editText_span_hint_main_color</item>
+            </style>
+            <style name="editText.span.second" parent="editText.span">
+                <item name="android:textSize">20sp</item>
+                <item name="android:layout_height">48dp</item>
+                <item name="android:textColor">@color/editText_span_second_color</item>
+                <item name="android:textColorHint">@color/editText_span_hint_second_color</item>
+            </style>
+        <style name="editText.paragraph">
+            <item name="android:gravity">fill_vertical</item>
+            <item name="android:singleLine">false</item>
+        </style>
+        <!--FONTS-->
+        <style name="editText.paragraph.main" parent="editText.paragraph">
+            <item name="android:textSize">20sp</item>
+            <item name="android:textColor">@color/editText_paragraph_main_color</item>
+            <item name="android:textColorHint">@color/editText_paragraph_hint_main_color</item>
+        </style>
+        <style name="editText.paragraph.second" parent="editText.paragraph">
+            <item name="android:textSize">20sp</item>
+            <item name="android:textColor">@color/editText_paragraph_second_color</item>
+            <item name="android:textColorHint">@color/editText_paragraph_hint_second_color</item>
+        </style>
+
+
+
+
+
+
+
 
 
 

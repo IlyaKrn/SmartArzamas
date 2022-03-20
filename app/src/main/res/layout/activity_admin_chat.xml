@@ -72,8 +72,7 @@
 
             <EditText
                 android:id="@+id/et_send"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                style="@style/editText.span.second"
                 android:hint="Написать сообщение" />
 
         </LinearLayout>

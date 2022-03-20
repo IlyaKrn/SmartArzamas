@@ -28,14 +28,12 @@
                 <EditText
                     android:id="@+id/et_chat_description"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    style="@style/editText.span.main"
                     android:hint="@string/chat_desription" />
                 <TextView
                     android:id="@+id/tv_description_err"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
             </LinearLayout>
 
             <LinearLayout

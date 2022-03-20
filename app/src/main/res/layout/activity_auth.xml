@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:visibility="visible"
+            android:visibility="gone"
             android:id="@+id/layout_sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,61 +31,51 @@
                 android:orientation="vertical">
                 <EditText
                     android:id="@+id/et_user_name_up"
+                    style="@style/editText.span.main"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:hint="@string/user_name" />
                 <TextView
                     android:id="@+id/tv_name_err_up"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
                 <EditText
                     android:id="@+id/et_user_family_up"
+                    style="@style/editText.span.main"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:hint="@string/user_family" />
                 <TextView
                     android:id="@+id/tv_family_err_up"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
                 <EditText
                     android:id="@+id/et_email_up"
+                    style="@style/editText.span.main"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:hint="@string/login" />
                 <TextView
                     android:id="@+id/tv_email_err_up"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
                 <EditText
                     android:id="@+id/et_password_up"
+                    style="@style/editText.span.main"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
                 <TextView
                     android:id="@+id/tv_password_err_up"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
                 <EditText
                     android:id="@+id/et_second_password_up"
+                    style="@style/editText.span.main"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:hint="@string/recycle_password"
                     android:inputType="textPassword" />
                 <TextView
                     android:id="@+id/tv_second_password_err_up"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
                 <CheckBox
                     android:id="@+id/cb_always_use_up"
                     android:layout_width="match_parent"
@@ -134,7 +124,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@color/invisible">
             <TextView
                 android:layout_gravity="center_horizontal"
@@ -147,27 +137,23 @@
                 android:orientation="vertical">
                 <EditText
                     android:id="@+id/et_email_in"
+                    style="@style/editText.span.main"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:hint="@string/login" />
                 <TextView
                     android:id="@+id/tv_email_err_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error"/>
+                    style="@style/text.warning.main"
+                    android:visibility="gone"/>
                 <EditText
                     android:id="@+id/et_password_in"
+                    style="@style/editText.span.main"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:hint="@string/password"
                     android:inputType="textPassword" />
                 <TextView
                     android:id="@+id/tv_password_err_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
                 <CheckBox
                     android:id="@+id/cb_always_use_in"
                     android:layout_width="match_parent"

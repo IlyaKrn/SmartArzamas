@@ -69,21 +69,25 @@
 
     <!--BACKGROUND-->
 
-    <color name="button_default_background">@color/design_purple_dark</color>
-    <color name="button_red_background">@color/design_blue_dark</color>
-    <color name="button_gray_background">@color/design_yellow_dark</color>
+    <color name="button_default_background">@color/design_purple_main</color>
+    <color name="button_red_background">@color/design_blue_main</color>
+    <color name="button_gray_background">@color/design_yellow_main</color>
 
-    <color name="button_fab_default_background">@color/design_purple_dark</color>
-    <color name="button_fab_red_background">@color/design_blue_dark</color>
-    <color name="button_fab_gray_background">@color/design_yellow_dark</color>
+    <color name="button_fab_default_background">@color/design_purple_main</color>
+    <color name="button_fab_red_background">@color/design_blue_main</color>
+    <color name="button_fab_gray_background">@color/design_yellow_main</color>
+
+    <color name="button_toolbar_default_background">@color/design_purple_light</color>
+    <color name="button_toolbar_red_background">@color/design_blue_light</color>
+    <color name="button_toolbar_gray_background">@color/design_yellow_light</color>
 
     <color name="toolbar_default_background">@color/design_purple_light</color>
     <color name="toolbar_red_background">@color/design_blue_light</color>
     <color name="toolbar_gray_background">@color/design_yellow_light</color>
 
-    <color name="dialog_default_background">@color/design_purple_main</color>
-    <color name="dialog_red_background">@color/design_blue_main</color>
-    <color name="dialog_gray_background">@color/design_yellow_main</color>
+    <color name="dialog_default_background">@color/design_purple_light</color>
+    <color name="dialog_red_background">@color/design_blue_light</color>
+    <color name="dialog_gray_background">@color/design_yellow_light</color>
 
     <color name="recyclerView_default_background">@color/white</color>
     <color name="recyclerView_red_background">@color/white</color>
@@ -108,6 +112,15 @@
     <color name="text_paragraph_main_color">@color/design_black_main</color>
     <color name="text_paragraph_second_color">@color/design_black_main</color>
 
+    <color name="editText_span_main_color">@color/design_black_main</color>
+    <color name="editText_span_second_color">@color/design_black_main</color>
+    <color name="editText_paragraph_main_color">@color/design_black_main</color>
+    <color name="editText_paragraph_second_color">@color/design_black_main</color>
+
+    <color name="editText_span_hint_main_color">@color/design_black_light</color>
+    <color name="editText_span_hint_second_color">@color/design_black_light</color>
+    <color name="editText_paragraph_hint_main_color">@color/design_black_light</color>
+    <color name="editText_paragraph_hint_second_color">@color/design_black_light</color>
 
 
 

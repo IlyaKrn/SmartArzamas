@@ -24,11 +24,9 @@
 
         <com.example.smartarzamas.support.EditTextSearch
             android:id="@+id/et_search"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            style="@style/editText.span.second"
             android:layout_weight="1"
-            android:hint="@string/search"
-            android:textSize="23sp" />
+            android:hint="@string/search" />
 
         <ImageButton
             android:id="@+id/bt_profile"

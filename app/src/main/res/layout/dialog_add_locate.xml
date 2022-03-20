@@ -29,42 +29,33 @@
                 <EditText
                     android:id="@+id/et_locate_name"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    style="@style/editText.span.main"
                     android:hint="@string/chat_name" />
                 <TextView
                     android:id="@+id/tv_locate_name_err"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
                 <EditText
                     android:id="@+id/tv_locate_category"
-                    android:textSize="18sp"
-                    android:editable="false"
-                    android:paddingLeft="4dp"
-                    android:elegantTextHeight="true"
+                    style="@style/editText.span.main"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:editable="false"
                     android:hint="@string/chat_category" />
                 <TextView
                     android:id="@+id/tv_category_err"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
 
                 <EditText
                     android:id="@+id/et_locate_description"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    style="@style/editText.span.main"
                     android:hint="@string/description" />
 
                 <TextView
                     android:id="@+id/tv_description_err"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:textColor="@color/design_default_color_error" />
+                    style="@style/text.warning.main"
+                    android:visibility="gone" />
 
                 <LinearLayout
                     android:visibility="visible"

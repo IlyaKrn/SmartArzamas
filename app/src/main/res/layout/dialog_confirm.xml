@@ -20,9 +20,8 @@
 
             <TextView
                 android:id="@+id/tv_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="24sp"
+                style="@style/text.paragraph.main"
+                android:text="dfgdfg"
                 android:layout_marginHorizontal="20sp"
                 android:textAlignment="center"/>
 
