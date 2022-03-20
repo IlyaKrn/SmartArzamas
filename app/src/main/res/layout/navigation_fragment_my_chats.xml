@@ -8,41 +8,19 @@
     tools:context=".ui.hubnavigation.mychats.MyChatsFragment">
 
 
-    <LinearLayout
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        style="@style/button.fab.default"
+        android:src="@android:drawable/ic_input_add" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:layout_marginHorizontal="24dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
-        <View
-            android:layout_width="0dp"
-            style="@style/toolbar.default"/>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab"
-                style="@style/button.fab.default"
-                android:src="@android:drawable/ic_input_add" />
-
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView"
-                android:layout_marginHorizontal="24dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-        </FrameLayout>
-
-
-        <View
-            android:layout_width="0dp"
-            style="@style/toolbar.default"/>
-
-    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

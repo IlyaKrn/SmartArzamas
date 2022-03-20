@@ -8,37 +8,14 @@
     tools:context=".ui.adminhubnavigation.adminallusers.AdminAllUsersFragment">
 
 
-    <LinearLayout
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:layout_marginHorizontal="24dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
-        <View
-            android:layout_width="match_parent"
-            style="@style/toolbar.default"
-            android:background="@color/recyclerView_default_background"/>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragmentContainerView"
-                android:layout_marginHorizontal="24dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-
-        </FrameLayout>
-
-
-        <View
-            android:layout_width="match_parent"
-            style="@style/toolbar.default"
-            android:background="@color/recyclerView_default_background"/>
-
-    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"

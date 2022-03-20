@@ -17,6 +17,7 @@
     <dimen name="button_toolbarHeightAndWidth">48dp</dimen>
     <dimen name="button_toolbarMargin">0dp</dimen>
     <dimen name="button_fabMargin">56dp</dimen>
+    <dimen name="button_fabMarginBottom">112dp</dimen>
     <dimen name="button_fabPadding">0dp</dimen>
     <dimen name="button_toolbarElevation">0dp</dimen>
     <dimen name="dialog_padding">4dp</dimen>
