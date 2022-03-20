@@ -48,60 +48,65 @@
     <color name="invisible">#00FFFFFF</color>
 
 
+    <color name="design_black_light">#484745</color>
+    <color name="design_black_main">#21201E</color>
+    <color name="design_black_dark">#000000</color>
+
+    <color name="design_purple_light">#ffedff</color>
+    <color name="design_purple_main">#CDBBF7</color>
+    <color name="design_purple_dark">#9b8bc4</color>
+
+    <color name="design_blue_light">#edffff</color>
+    <color name="design_blue_main">#B9F5FE</color>
+    <color name="design_blue_dark">#87c2cb</color>
+
+    <color name="design_yellow_light">#fffffe</color>
+    <color name="design_yellow_main">#FEE9CA</color>
+    <color name="design_yellow_dark">#cbb89a</color>
+
 
 
 
     <!--BACKGROUND-->
 
-    <color name="button_default_background">@color/white</color>
-    <color name="button_red_background">@color/red_500</color>
-    <color name="button_gray_background">@color/grey_500</color>
+    <color name="button_default_background">@color/design_purple_dark</color>
+    <color name="button_red_background">@color/design_blue_dark</color>
+    <color name="button_gray_background">@color/design_yellow_dark</color>
 
-    <color name="button_fab_default_background">@color/white</color>
-    <color name="button_fab_red_background">@color/red_500</color>
-    <color name="button_fab_gray_background">@color/grey_500</color>
+    <color name="button_fab_default_background">@color/design_purple_dark</color>
+    <color name="button_fab_red_background">@color/design_blue_dark</color>
+    <color name="button_fab_gray_background">@color/design_yellow_dark</color>
 
-    <color name="toolbar_default_background">@color/white</color>
-    <color name="toolbar_red_background">@color/red_200</color>
-    <color name="toolbar_gray_background">@color/grey_500</color>
+    <color name="toolbar_default_background">@color/design_purple_light</color>
+    <color name="toolbar_red_background">@color/design_blue_light</color>
+    <color name="toolbar_gray_background">@color/design_yellow_light</color>
 
-    <color name="dialog_default_background">@color/white</color>
-    <color name="dialog_red_background">@color/red_200</color>
-    <color name="dialog_gray_background">@color/grey_200</color>
+    <color name="dialog_default_background">@color/design_purple_main</color>
+    <color name="dialog_red_background">@color/design_blue_main</color>
+    <color name="dialog_gray_background">@color/design_yellow_main</color>
 
     <color name="recyclerView_default_background">@color/white</color>
-    <color name="recyclerView_red_background">@color/red_200</color>
-    <color name="recyclerView_gray_background">@color/grey_200</color>
+    <color name="recyclerView_red_background">@color/white</color>
+    <color name="recyclerView_gray_background">@color/white</color>
 
-    <color name="recyclerViewItem_default_background">@color/white</color>
-    <color name="recyclerViewItem_red_background">@color/red_200</color>
-    <color name="recyclerViewItem_gray_background">@color/grey_200</color>
+    <color name="recyclerViewItem_default_background">@color/design_purple_light</color>
+    <color name="recyclerViewItem_red_background">@color/design_blue_light</color>
+    <color name="recyclerViewItem_gray_background">@color/design_yellow_light</color>
 
 
     <!--TEXT COLOR-->
 
-    <color name="button_default_text_color">@color/black</color>
-    <color name="button_red_text_color">@color/black</color>
-    <color name="button_gray_text_color">@color/black</color>
+    <color name="button_default_text_color">@color/design_black_main</color>
+    <color name="button_red_text_color">@color/design_black_main</color>
+    <color name="button_gray_text_color">@color/design_black_main</color>
 
-    <color name="toolbar_default_text_color">@color/black</color>
-    <color name="toolbar_red_text_color">@color/black</color>
-    <color name="toolbar_gray_text_color">@color/black</color>
 
-    <color name="dialog_default_text_color">@color/black</color>
-    <color name="dialog_red_text_color">@color/black</color>
-    <color name="dialog_gray_text_color">@color/black</color>
-
-    <color name="recyclerViewItem_default_text_color">@color/black</color>
-    <color name="recyclerViewItem_red_text_color">@color/black</color>
-    <color name="recyclerViewItem_gray_text_color">@color/black</color>
-
-    <color name="text_title_main_color">@color/black</color>
-    <color name="text_title_second_color">@color/black</color>
-    <color name="text_span_main_color">@color/black</color>
-    <color name="text_span_second_color">@color/black</color>
-    <color name="text_paragraph_main_color">@color/black</color>
-    <color name="text_paragraph_second_color">@color/black</color>
+    <color name="text_title_main_color">@color/design_black_main</color>
+    <color name="text_title_second_color">@color/design_black_main</color>
+    <color name="text_span_main_color">@color/design_black_main</color>
+    <color name="text_span_second_color">@color/design_black_main</color>
+    <color name="text_paragraph_main_color">@color/design_black_main</color>
+    <color name="text_paragraph_second_color">@color/design_black_main</color>
 
 
 
