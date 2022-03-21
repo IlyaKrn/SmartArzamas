@@ -1,21 +1,19 @@
-<FrameLayout android:id="@+id/item_body"
+<LinearLayout android:id="@+id/item_body"
     android:layout_width="match_parent"
     android:orientation="horizontal"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/userItem_padding">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:layout_marginHorizontal="1dp"
-        android:layout_marginVertical="20dp"
+        android:layout_width="@dimen/userItem_iconHeightAndWidth"
+        android:layout_height="@dimen/userItem_iconHeightAndWidth"
         android:orientation="vertical">
 
         <com.example.smartarzamas.support.IconView
             android:id="@+id/user_icon"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:visibility="visible" />
 
         <ProgressBar
@@ -26,12 +24,21 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_user_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="48dp" />
+        android:layout_weight="1"
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv_user_name"
+            style="@style/text.span.main"/>
+
+        <TextView
+            android:id="@+id/tv_user_email"
+            style="@style/text.span.second"/>
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/bt_item_menu"
@@ -39,4 +46,4 @@
         android:layout_height="48dp"
         android:layout_gravity="center_vertical|end"
         android:background="@drawable/ic_menu_spots"/>
-</FrameLayout>
+</LinearLayout>

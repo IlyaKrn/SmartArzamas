@@ -38,5 +38,9 @@
     <dimen name="message_cornerRadius">24dp</dimen>
     <dimen name="message_padding">4dp</dimen>
     <dimen name="message_margin">96dp</dimen>
+    <dimen name="message_iconHeightAndWidth">56dp</dimen>
+
+    <dimen name="userItem_iconHeightAndWidth">56dp</dimen>
+    <dimen name="userItem_padding">4dp</dimen>
 
 </resources>

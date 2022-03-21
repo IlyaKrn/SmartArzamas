@@ -45,12 +45,14 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
         private final ImageButton btMenu;
         private final ProgressBar progressImage;
         private final TextView tvName;
+        private final TextView tvEmail;
         private final IconView ivIcon;
 
         public UserHolder(@NonNull View itemView) {
             super(itemView);
             btMenu = itemView.findViewById(R.id.bt_item_menu);
             tvName = itemView.findViewById(R.id.tv_user_name);
+            tvEmail = itemView.findViewById(R.id.tv_user_email);
             ivIcon = itemView.findViewById(R.id.user_icon);
             progressImage = itemView.findViewById(R.id.progress);
         }
@@ -58,14 +60,14 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
         @Override
         public void bind(int position) {
             item = getItem(position);
+            ivIcon.setVisibility(View.GONE);
+            progressImage.setVisibility(View.VISIBLE);
             btMenu.setVisibility(View.GONE);
-
+            tvName.setText(item.name);
+            tvEmail.setText(item.email);
             User.getUserById(context, item.id, new OnGetDataListener<User>() {
                 @Override
                 public void onGetData(User data) {
-                    item = data;
-                    if (data.id.equals(item.id))
-                        tvName.setText(item.name);
                     if (savedIcons.get(item.id) != null) {
                         if (data.id.equals(item.id)) {
                             ivIcon.setImageBitmap(savedIcons.get(item.id));

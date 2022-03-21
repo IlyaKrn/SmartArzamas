@@ -14,8 +14,8 @@
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="@dimen/message_iconHeightAndWidth"
+            android:layout_height="@dimen/message_iconHeightAndWidth"
             android:layout_gravity="top"
             android:orientation="vertical">
 
