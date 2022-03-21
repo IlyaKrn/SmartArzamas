@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -237,6 +238,7 @@ public class ChatActivity extends FirebaseActivity {
         });
     }
     private void scrollMessages(){
+        ((NestedScrollView) findViewById(R.id.sv_rv_messages_container)).fullScroll((View.FOCUS_DOWN));
         rvMessages.scrollToPosition(messageList.size()-1);
     }
     private void updateViewData(){

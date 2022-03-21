@@ -30,14 +30,38 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_messages"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_rv_messages_container"
+        android:overScrollMode="ifContentScrolls"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom"
-        style="@style/recyclerView.default"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_marginBottom="?attr/actionBarSize" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                style="@style/toolbar.default"
+                android:elevation="0dp"
+                android:background="@color/recyclerView_default_background"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_messages"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                style="@style/recyclerView.default" />
+
+            <View
+                android:layout_width="match_parent"
+                style="@style/toolbar.default"
+                android:elevation="0dp"
+                android:background="@color/recyclerView_default_background"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <androidx.appcompat.widget.Toolbar
         style="@style/toolbar.default"
