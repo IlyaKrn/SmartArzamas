@@ -27,12 +27,14 @@ public class Message implements Serializable {
     public String message;
     public String userId;
     public ArrayList<String> imageRefs = new ArrayList<>();
+    public String date;
 
     public Message(String message, String user, String id, ArrayList<String> images) {
         this.id = id;
         this.message = message;
         this.userId = user;
         this.imageRefs = images;
+        this.date = Utils.getCurrentDate();
     }
 
     public Message() {

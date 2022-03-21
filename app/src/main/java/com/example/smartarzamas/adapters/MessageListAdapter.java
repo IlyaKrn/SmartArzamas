@@ -41,7 +41,7 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
 
     public class MessageHolder extends FirebaseHolder<Message>{
 
-        private final ImageButton btMenu;
+
         private final TableMessageImages notMy_tlImages;
         private final ProgressBar notMy_progressImage;
         private final TextView notMy_tvMessage;
@@ -65,7 +65,6 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
 
         public MessageHolder(@NonNull View itemView) {
             super(itemView);
-            btMenu = itemView.findViewById(R.id.bt_item_menu);
 
             notMy_tvMessage = this.itemView.findViewById(R.id.not_my_tv_message);
             notMy_tvName = this.itemView.findViewById(R.id.not_my_tv_user_name);
@@ -90,7 +89,6 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
         @Override
         public void bind(int position) {
             item = getItem(position);
-            btMenu.setVisibility(View.GONE);
 
             system_tlImages.removeBitmaps();
             notMy_tlImages.removeBitmaps();
@@ -146,7 +144,7 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
                     showMyMessage();
                     my_tvMessage.setText(item.message);
                     my_tvName.setText(R.string.my_message_name);
-                    my_tvDate.setText(Utils.getDateString());
+                    my_tvDate.setText(item.date);
 
                 }
                 else {
@@ -154,6 +152,7 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
                     notMy_ivIcon.setVisibility(View.GONE);
                     notMy_progressImage.setVisibility(View.VISIBLE);
                     notMy_tvMessage.setText(item.message);
+                    notMy_tvDate.setText(item.date);
                     User.getUserById(context, item.userId, new OnGetDataListener<User>() {
                         @Override
                         public void onGetData(User data) {
@@ -203,19 +202,13 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
             else {
                 showSystemMessage();
                 system_tvMessage.setText(item.message);
-                system_tvDate.setText(Utils.getDateString());
+                system_tvDate.setText(item.date);
             }
         }
 
         @Override
         public void bindAdmin(int position) {
-            btMenu.setVisibility(View.VISIBLE);
-            btMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
 
-                }
-            });
         }
 
 

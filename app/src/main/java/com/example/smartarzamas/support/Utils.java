@@ -18,19 +18,43 @@ import android.widget.Toast;
 import com.example.smartarzamas.R;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
 
 // класс с различными методами
 
 public final class Utils {
 
     // получение строки с текущей датой
-    // например 12.12.12 12:12
-    public static String getDateString(){
-        //  Date date = new Date();
-        //String dateString = String.valueOf(date);
-        //Log.e(null, dateString);
-        return "";// dateString;
+    // например 12.12.2012 12:12:12
+    public static String getCurrentDate(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeZone(TimeZone.getTimeZone("UTC" + 3));
+        String day = calendar.get(Calendar.DAY_OF_MONTH) + "";
+        String month = calendar.get(Calendar.MONTH) + "";
+        String year = calendar.get(Calendar.YEAR) + "";
+        String hour = calendar.get(Calendar.HOUR) + "";
+        String minute = calendar.get(Calendar.MINUTE) + "";
+        String second = calendar.get(Calendar.SECOND) + "";
+
+        if (day.length() < 2)
+            day = "0" + day;
+        if (month.length() < 2)
+            month = "0" + month;
+        if (hour.length() < 2)
+            hour = "0" + hour;
+        if (minute.length() < 2)
+            minute = "0" + minute;
+        if (second.length() < 2)
+            second = "0" + second;
+
+        return day + "." +
+                month + "." +
+                year + " " +
+                hour + ":" +
+                minute + ":" +
+                second;
     }
     // проверка наличия подключения к интернету
     private static boolean hasConnection(final Context context){

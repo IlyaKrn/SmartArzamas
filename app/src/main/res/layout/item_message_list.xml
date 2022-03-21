@@ -2,12 +2,14 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/message_padding">
 
     <LinearLayout
         android:id="@+id/not_my_item_body"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="@dimen/message_margin"
         android:visibility="gone"
         android:orientation="horizontal">
 
@@ -31,17 +33,21 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="4dp"
+            android:layout_height="0dp"/>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="@drawable/corner_message_default">
 
             <TextView
                 android:id="@+id/not_my_tv_user_name"
                 style="@style/text.span.second" />
-
 
             <TextView
                 android:id="@+id/not_my_tv_message"
@@ -58,14 +64,7 @@
                 style="@style/text.span.second"
                 android:layout_gravity="end" />
 
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/bt_item_menu"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_gravity="top"
-            android:background="@drawable/ic_menu_spots"/>
+            </LinearLayout>
 
 
     </LinearLayout>
@@ -78,7 +77,10 @@
         android:layout_width="wrap_content"
         android:orientation="vertical"
         android:visibility="gone"
-        android:layout_gravity="end">
+        android:layout_gravity="end"
+        android:layout_marginStart="@dimen/message_margin"
+        android:padding="8dp"
+        android:background="@drawable/corner_message_red">
 
 
         <TextView
@@ -104,10 +106,13 @@
 
     <LinearLayout
         android:id="@+id/system_item_body"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/message_margin"
+        android:padding="8dp"
+        android:background="@drawable/corner_message_gray">
 
             <TextView
                 android:id="@+id/system_tv_message"
@@ -123,7 +128,8 @@
 
             <TextView
                 android:id="@+id/system_tv_date"
-                style="@style/text.span.second"/>
+                style="@style/text.span.second"
+                android:layout_gravity="end"/>
 
     </LinearLayout>
 
