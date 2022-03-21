@@ -2,74 +2,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/ripple">
+    android:orientation="horizontal"
+    android:padding="@dimen/chatItem_padding">
+
+    <LinearLayout
+        android:layout_width="@dimen/chatItem_iconHeightAndWidth"
+        android:layout_height="@dimen/chatItem_iconHeightAndWidth"
+        android:orientation="vertical">
+
+        <com.example.smartarzamas.support.IconView
+            android:id="@+id/chat_icon"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ProgressBar
+            android:id="@+id/progress"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginVertical="5dp"
-        android:layout_marginHorizontal="5dp">
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/text.span.main"
+            android:text="sfgedfg"/>
 
-
-            <com.example.smartarzamas.support.IconView
-                android:id="@+id/chat_icon"
-                android:visibility="visible"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <ProgressBar
-                android:id="@+id/progress"
-                android:visibility="gone"
-                android:layout_height="match_parent"
-                android:layout_width="match_parent"/>
-
-        </LinearLayout>
-
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginEnd="48dp">
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    style="@style/text.title.second"
-                    android:text="sfgedfg"
-                    android:layout_gravity="center_vertical"/>
-
-
-                <TextView
-                    android:id="@+id/tv_category"
-                    style="@style/text.span.main"
-                    android:layout_gravity="bottom"
-                    android:text="sfgedfg"/>
-
-            </LinearLayout>
-
-
-            <ImageButton
-                android:id="@+id/bt_item_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/ic_menu_spots"
-                android:layout_gravity="end|center_vertical"/>
-
-        </FrameLayout>
-
-
-
+        <TextView
+            android:id="@+id/tv_category"
+            style="@style/text.span.second"
+            android:text="sfgedfg"/>
 
     </LinearLayout>
 
+    <ImageButton
+        android:id="@+id/bt_item_menu"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/ic_menu_spots"
+        android:layout_gravity="end|center_vertical"/>
 </LinearLayout>
