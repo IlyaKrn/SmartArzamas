@@ -35,6 +35,15 @@
             <View
                 android:layout_width="match_parent"
                 style="@style/toolbar.default"
+                android:layout_margin="0dp"
+                android:elevation="0dp"
+                android:background="@color/recyclerView_default_background"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_elevation"
+                style="@style/toolbar.default"
+                android:layout_margin="0dp"
                 android:elevation="0dp"
                 android:background="@color/recyclerView_default_background"/>
 
@@ -47,6 +56,15 @@
             <View
                 android:layout_width="match_parent"
                 style="@style/toolbar.default"
+                android:layout_margin="0dp"
+                android:elevation="0dp"
+                android:background="@color/recyclerView_default_background"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/toolbar_elevation"
+                style="@style/toolbar.default"
+                android:layout_margin="0dp"
                 android:elevation="0dp"
                 android:background="@color/recyclerView_default_background"/>
 
