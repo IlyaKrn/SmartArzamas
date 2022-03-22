@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="@dimen/chatItem_padding">
 
@@ -44,8 +45,7 @@
 
     <ImageButton
         android:id="@+id/bt_item_menu"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@drawable/ic_menu_spots"
+        style="@style/button.toolbar.default"
+        android:src="@drawable/ic_menu_spots"
         android:layout_gravity="end|center_vertical"/>
 </LinearLayout>

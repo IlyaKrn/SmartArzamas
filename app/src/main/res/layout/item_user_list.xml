@@ -42,8 +42,7 @@
 
     <ImageButton
         android:id="@+id/bt_item_menu"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        style="@style/button.toolbar.default"
         android:layout_gravity="center_vertical|end"
-        android:background="@drawable/ic_menu_spots"/>
+        android:src="@drawable/ic_menu_spots"/>
 </LinearLayout>
