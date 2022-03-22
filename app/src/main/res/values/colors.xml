@@ -122,12 +122,12 @@
 
     <!--TEXT COLOR-->
     <color name="textColor">@color/design_black_main</color>
-    <color name="textColor_dark">@color/design_dark_black_main</color>
+    <color name="textColor_dark">@color/design_dark_black_dark</color>
 
 
     <!--ICON COLOR-->
-    <color name="itemColor">@color/design_black_main</color>
-    <color name="itemColor_dark">@color/design_dark_black_main</color>
+    <color name="iconColor">@color/design_black_main</color>
+    <color name="iconColor_dark">@color/design_dark_black_dark</color>
 
 
 
