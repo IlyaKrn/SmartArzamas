@@ -157,8 +157,7 @@
                     android:visibility="gone" />
                 <CheckBox
                     android:id="@+id/cb_always_use_in"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/text.span.main"
                     android:text="@string/always_use_this_account"
                     android:checked="true"/>
             </LinearLayout>
