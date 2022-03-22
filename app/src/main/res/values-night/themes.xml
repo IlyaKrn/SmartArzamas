@@ -30,6 +30,7 @@
 
 
         <item name="android:textColor">@color/textColor_dark</item>
+        <item name="iconColor">@color/itemColor_dark</item>
 
     </style>
 

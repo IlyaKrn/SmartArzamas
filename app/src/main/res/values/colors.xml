@@ -124,6 +124,39 @@
     <color name="textColor">@color/design_black_main</color>
     <color name="textColor_dark">@color/design_dark_black_main</color>
 
+
+    <!--ICON COLOR-->
+    <color name="itemColor">@color/design_black_main</color>
+    <color name="itemColor_dark">@color/design_dark_black_main</color>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <!--TEXT COLOR was set hard in style-->
     <color name="button_default_text_color">?android:textColor</color>
     <color name="button_red_text_color">?android:textColor</color>

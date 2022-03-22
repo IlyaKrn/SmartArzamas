@@ -26,4 +26,6 @@
     <attr name="color_black_main" format="reference|color"/>
     <attr name="color_black_dark" format="reference|color"/>
 
+    <attr name="iconColor" format="reference|color"/>
+
 </resources>
