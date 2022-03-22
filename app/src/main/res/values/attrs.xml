@@ -10,4 +10,20 @@
 
     </declare-styleable>
 
+    <attr name="color_default_light" format="reference|color"/>
+    <attr name="color_default_main" format="reference|color"/>
+    <attr name="color_default_dark" format="reference|color"/>
+
+    <attr name="color_red_light" format="reference|color"/>
+    <attr name="color_red_main" format="reference|color"/>
+    <attr name="color_red_dark" format="reference|color"/>
+
+    <attr name="color_gray_light" format="reference|color"/>
+    <attr name="color_gray_main" format="reference|color"/>
+    <attr name="color_gray_dark" format="reference|color"/>
+
+    <attr name="color_black_light" format="reference|color"/>
+    <attr name="color_black_main" format="reference|color"/>
+    <attr name="color_black_dark" format="reference|color"/>
+
 </resources>
