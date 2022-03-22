@@ -90,7 +90,7 @@
 
     <!--BACKGROUND-->
 
-    <color name="button_default_background">@color/design_purple_main</color>
+    <color name="button_default_background">?color_default_main</color>
     <color name="button_red_background">@color/design_blue_main</color>
     <color name="button_gray_background">@color/design_yellow_main</color>
 
