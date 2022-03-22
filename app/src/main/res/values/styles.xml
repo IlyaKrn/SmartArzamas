@@ -55,13 +55,13 @@
         </style>
             <!--DRG-->
             <style name="fab.default" parent="fab">
-                <item name="android:backgroundTint">@color/button_fab_default_background</item>
+                <item name="android:backgroundTint">?color_default_main</item>
             </style>
             <style name="fab.red" parent="fab">
-                <item name="android:backgroundTint">@color/button_fab_red_background</item>
+                <item name="android:backgroundTint">?color_red_main</item>
             </style>
             <style name="fab.gray" parent="fab">
-        <item name="android:backgroundTint">@color/button_fab_gray_background</item>
+        <item name="android:backgroundTint">?color_gray_main</item>
     </style>
 
 
@@ -161,12 +161,12 @@
             <style name="text.title.main" parent="text.title">
                 <item name="android:textSize">48sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">@color/text_title_main_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
             <style name="text.title.second" parent="text.title">
                 <item name="android:textSize">20sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">@color/text_title_second_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
         <style name="text.span">
             <item name="android:gravity">start</item>
@@ -175,12 +175,12 @@
             <style name="text.span.main" parent="text.span">
                 <item name="android:textSize">16sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">@color/text_span_main_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
             <style name="text.span.second" parent="text.span">
                 <item name="android:textSize">12sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">@color/text_span_second_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
         <style name="text.paragraph">
             <item name="android:gravity">fill_vertical</item>
@@ -189,12 +189,12 @@
             <style name="text.paragraph.main" parent="text.paragraph">
                 <item name="android:textSize">20sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">@color/text_paragraph_main_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
             <style name="text.paragraph.second" parent="text.paragraph">
                 <item name="android:textSize">16sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">@color/text_paragraph_second_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
         <style name="text.warning">
             <item name="android:textColor">@color/design_default_color_error</item>
@@ -227,16 +227,16 @@
             <style name="editText.span.main" parent="editText.span">
                 <item name="android:textSize">20sp</item>
                 <item name="android:layout_height">60dp</item>
-                <item name="android:textColor">@color/editText_span_main_color</item>
-                <item name="android:textColorHint">@color/editText_span_hint_main_color</item>
-                <item name="android:backgroundTint">@color/editText_span_tint_main_color</item>
+                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColorHint">?color_black_main</item>
+                <item name="android:backgroundTint">?color_black_main</item>
             </style>
             <style name="editText.span.second" parent="editText.span">
                 <item name="android:textSize">20sp</item>
                 <item name="android:layout_height">48dp</item>
-                <item name="android:textColor">@color/editText_span_second_color</item>
-                <item name="android:textColorHint">@color/editText_span_hint_second_color</item>
-                <item name="android:backgroundTint">@color/editText_span_tint_second_color</item>
+                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColorHint">?color_black_main</item>
+                <item name="android:backgroundTint">?color_black_main</item>
             </style>
         <style name="editText.paragraph">
             <item name="android:gravity">fill_vertical</item>
@@ -245,15 +245,15 @@
             <!--FONTS-->
             <style name="editText.paragraph.main" parent="editText.paragraph">
                 <item name="android:textSize">20sp</item>
-                <item name="android:textColor">@color/editText_paragraph_main_color</item>
-                <item name="android:textColorHint">@color/editText_paragraph_hint_main_color</item>
-                <item name="android:backgroundTint">@color/editText_paragraph_tint_main_color</item>
+                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColorHint">?color_black_main</item>
+                <item name="android:backgroundTint">?color_black_main</item>
             </style>
             <style name="editText.paragraph.second" parent="editText.paragraph">
-            <item name="android:textSize">20sp</item>
-            <item name="android:textColor">@color/editText_paragraph_second_color</item>
-            <item name="android:textColorHint">@color/editText_paragraph_hint_second_color</item>
-                <item name="android:backgroundTint">@color/editText_paragraph_tint_second_color</item>
+                <item name="android:textSize">20sp</item>
+                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColorHint">?color_black_main</item>
+                <item name="android:backgroundTint">?color_black_main</item>
         </style>
 
 

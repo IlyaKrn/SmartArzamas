@@ -94,6 +94,7 @@
     <color name="button_red_background">?color_red_main</color>
     <color name="button_gray_background">?color_gray_main</color>
 
+    <!--FAB was set hard in style-->
     <color name="button_fab_default_background">@color/design_default_main</color>
     <color name="button_fab_red_background">@color/design_red_main</color>
     <color name="button_fab_gray_background">@color/design_gray_main</color>
@@ -120,7 +121,7 @@
 
 
     <!--TEXT COLOR-->
-
+    <!--TEXT COLOR was set hard in style-->
     <color name="button_default_text_color">@color/design_black_main</color>
     <color name="button_red_text_color">@color/design_black_main</color>
     <color name="button_gray_text_color">@color/design_black_main</color>
