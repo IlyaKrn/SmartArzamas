@@ -126,11 +126,6 @@
                 android:layout_height="match_parent"
                 app:messageType="system"/>
 
-            <TextView
-                android:id="@+id/system_tv_date"
-                style="@style/text.span.second"
-                android:layout_gravity="end"/>
-
     </LinearLayout>
 
 </FrameLayout>

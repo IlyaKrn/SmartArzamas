@@ -58,7 +58,6 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
 
         private final View system_itemBody;
         private final TextView system_tvMessage;
-        private final TextView system_tvDate;
         private final TableMessageImages system_tlImages;
 
         User u;
@@ -82,7 +81,6 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
 
             system_itemBody = this.itemView.findViewById(R.id.system_item_body);
             system_tvMessage = this.itemView.findViewById(R.id.system_tv_message);
-            system_tvDate = this.itemView.findViewById(R.id.system_tv_date);
             system_tlImages = itemView.findViewById(R.id.system_lv_images);
         }
 
@@ -202,7 +200,6 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
             else {
                 showSystemMessage();
                 system_tvMessage.setText(item.message);
-                system_tvDate.setText(item.date);
             }
         }
 
