@@ -27,7 +27,7 @@
             android:id="@+id/bt_chat_menu"
             style="@style/button.toolbar.default"
             android:layout_gravity="end"
-            app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+            app:srcCompat="@drawable/ic_menu" />
 
     </androidx.appcompat.widget.Toolbar>
 
