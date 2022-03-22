@@ -229,12 +229,14 @@
                 <item name="android:layout_height">60dp</item>
                 <item name="android:textColor">@color/editText_span_main_color</item>
                 <item name="android:textColorHint">@color/editText_span_hint_main_color</item>
+                <item name="android:backgroundTint">@color/editText_span_tint_main_color</item>
             </style>
             <style name="editText.span.second" parent="editText.span">
                 <item name="android:textSize">20sp</item>
                 <item name="android:layout_height">48dp</item>
                 <item name="android:textColor">@color/editText_span_second_color</item>
                 <item name="android:textColorHint">@color/editText_span_hint_second_color</item>
+                <item name="android:backgroundTint">@color/editText_span_tint_second_color</item>
             </style>
         <style name="editText.paragraph">
             <item name="android:gravity">fill_vertical</item>
@@ -245,11 +247,13 @@
                 <item name="android:textSize">20sp</item>
                 <item name="android:textColor">@color/editText_paragraph_main_color</item>
                 <item name="android:textColorHint">@color/editText_paragraph_hint_main_color</item>
+                <item name="android:backgroundTint">@color/editText_paragraph_tint_main_color</item>
             </style>
             <style name="editText.paragraph.second" parent="editText.paragraph">
             <item name="android:textSize">20sp</item>
             <item name="android:textColor">@color/editText_paragraph_second_color</item>
             <item name="android:textColorHint">@color/editText_paragraph_hint_second_color</item>
+                <item name="android:backgroundTint">@color/editText_paragraph_tint_second_color</item>
         </style>
 
 

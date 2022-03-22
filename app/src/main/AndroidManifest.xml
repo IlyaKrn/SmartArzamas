@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SmartArzamas">
+        android:theme="@style/Theme.SmartArzamas.NoActionBar">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -33,14 +33,14 @@
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true"
             android:label="@string/title_activity_admin_hub"
-            android:theme="@style/Theme.Design" />
+            android:theme="@style/Theme.SmartArzamas" />
 
 
         <activity
             android:name=".HubActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true"
-            android:theme="@style/Theme.Design" />
+            android:theme="@style/Theme.SmartArzamas" />
         <activity
             android:name=".UserSettingsActivity"
             android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SmartArzamas" parent="Theme.Design.Light.NoActionBar">
+    <style name="Theme.SmartArzamas" parent="Theme.Design">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -27,5 +27,11 @@
         <item name="color_red_dark">@color/design_dark_black_dark</item>
         <item name="color_gray_dark">@color/design_dark_gray_dark</item>
         <item name="color_black_dark">@color/design_dark_black_dark</item>
+    </style>
+
+    <style name="Theme.SmartArzamas.NoActionBar" parent="Theme.SmartArzamas">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 </resources>

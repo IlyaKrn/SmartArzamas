@@ -67,21 +67,21 @@
 
 
 
-    <color name="design_dark_black_light">#484745</color>
-    <color name="design_dark_black_main">#21201E</color>
-    <color name="design_dark_black_dark">#000000</color>
+    <color name="design_dark_black_light">#F6CB74</color>
+    <color name="design_dark_black_main">#8A8A3D</color>
+    <color name="design_dark_black_dark">#9A4A4A</color>
 
-    <color name="design_dark_default_light">#ffedff</color>
-    <color name="design_dark_default_main">#CDBBF7</color>
-    <color name="design_dark_default_dark">#9b8bc4</color>
+    <color name="design_dark_default_light">#FF0000</color>
+    <color name="design_dark_default_main">#F7BBBB</color>
+    <color name="design_dark_default_dark">#C48B8B</color>
 
-    <color name="design_dark_red_light">#edffff</color>
-    <color name="design_dark_red_main">#B9F5FE</color>
-    <color name="design_dark_red_dark">#87c2cb</color>
+    <color name="design_dark_red_light">#F0FFED</color>
+    <color name="design_dark_red_main">#BEFEB9</color>
+    <color name="design_dark_red_dark">#A9CB87</color>
 
-    <color name="design_dark_gray_light">#fffffe</color>
-    <color name="design_dark_gray_main">#FEE9CA</color>
-    <color name="design_dark_gray_dark">#cbb89a</color>
+    <color name="design_dark_gray_light">#FFFFFE</color>
+    <color name="design_dark_gray_main">#A1D8FECA</color>
+    <color name="design_dark_gray_dark">#BBC9FB</color>
 
 
 
@@ -91,32 +91,32 @@
     <!--BACKGROUND-->
 
     <color name="button_default_background">?color_default_main</color>
-    <color name="button_red_background">@color/design_red_main</color>
-    <color name="button_gray_background">@color/design_gray_main</color>
+    <color name="button_red_background">?color_red_main</color>
+    <color name="button_gray_background">?color_gray_main</color>
 
     <color name="button_fab_default_background">@color/design_default_main</color>
     <color name="button_fab_red_background">@color/design_red_main</color>
     <color name="button_fab_gray_background">@color/design_gray_main</color>
 
-    <color name="button_toolbar_default_background">@color/design_default_light</color>
-    <color name="button_toolbar_red_background">@color/design_red_light</color>
-    <color name="button_toolbar_gray_background">@color/design_gray_light</color>
+    <color name="button_toolbar_default_background">?color_default_light</color>
+    <color name="button_toolbar_red_background">?color_red_light</color>
+    <color name="button_toolbar_gray_background">?color_gray_light</color>
 
-    <color name="toolbar_default_background">@color/design_default_light</color>
-    <color name="toolbar_red_background">@color/design_red_light</color>
-    <color name="toolbar_gray_background">@color/design_gray_light</color>
+    <color name="toolbar_default_background">?color_default_light</color>
+    <color name="toolbar_red_background">?color_red_light</color>
+    <color name="toolbar_gray_background">?color_gray_light</color>
 
-    <color name="dialog_default_background">@color/design_default_light</color>
-    <color name="dialog_red_background">@color/design_red_light</color>
-    <color name="dialog_gray_background">@color/design_gray_light</color>
+    <color name="dialog_default_background">?color_default_light</color>
+    <color name="dialog_red_background">?color_red_light</color>
+    <color name="dialog_gray_background">?color_gray_light</color>
 
     <color name="recyclerView_default_background">@color/white</color>
     <color name="recyclerView_red_background">@color/white</color>
     <color name="recyclerView_gray_background">@color/white</color>
 
-    <color name="recyclerViewItem_default_background">@color/design_default_light</color>
-    <color name="recyclerViewItem_red_background">@color/design_red_light</color>
-    <color name="recyclerViewItem_gray_background">@color/design_gray_light</color>
+    <color name="recyclerViewItem_default_background">?color_default_light</color>
+    <color name="recyclerViewItem_red_background">?color_red_light</color>
+    <color name="recyclerViewItem_gray_background">?color_gray_light</color>
 
 
     <!--TEXT COLOR-->
@@ -142,6 +142,11 @@
     <color name="editText_span_hint_second_color">@color/design_black_light</color>
     <color name="editText_paragraph_hint_main_color">@color/design_black_light</color>
     <color name="editText_paragraph_hint_second_color">@color/design_black_light</color>
+
+    <color name="editText_span_tint_main_color" >@color/design_black_light</color>
+    <color name="editText_span_tint_second_color" >@color/design_black_light</color>
+    <color name="editText_paragraph_tint_main_color" >@color/design_black_light</color>
+    <color name="editText_paragraph_tint_second_color">@color/design_black_light</color>
 
 
 
