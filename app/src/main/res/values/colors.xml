@@ -121,10 +121,13 @@
 
 
     <!--TEXT COLOR-->
+    <color name="textColor">@color/design_black_main</color>
+    <color name="textColor_dark">@color/design_dark_black_main</color>
+
     <!--TEXT COLOR was set hard in style-->
-    <color name="button_default_text_color">@color/design_black_main</color>
-    <color name="button_red_text_color">@color/design_black_main</color>
-    <color name="button_gray_text_color">@color/design_black_main</color>
+    <color name="button_default_text_color">?android:textColor</color>
+    <color name="button_red_text_color">?android:textColor</color>
+    <color name="button_gray_text_color">?android:textColor</color>
 
 
     <color name="text_title_main_color">@color/design_black_main</color>

@@ -28,6 +28,9 @@
         <item name="color_gray_dark">@color/design_gray_dark</item>
         <item name="color_black_dark">@color/design_black_dark</item>
 
+
+        <item name="android:textColor">@color/textColor</item>
+
     </style>
 
     <style name="Theme.SmartArzamas.NoActionBar" parent="Theme.SmartArzamas">

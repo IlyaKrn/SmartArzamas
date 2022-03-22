@@ -14,15 +14,15 @@
         <!--DRG-->
         <style name="button.default" parent="button">
             <item name="android:background">@drawable/corner_button_default</item>
-            <item name="android:textColor">@color/button_default_text_color</item>
+            <item name="android:textColor">?color_black_main</item>
         </style>
         <style name="button.red" parent="button">
             <item name="android:background">@drawable/corner_button_red</item>
-            <item name="android:textColor">@color/button_red_text_color</item>
+            <item name="android:textColor">?color_black_main</item>
         </style>
         <style name="button.gray" parent="button">
             <item name="android:background">@drawable/corner_button_gray</item>
-            <item name="android:textColor">@color/button_gray_text_color</item>
+            <item name="android:textColor">?color_black_main</item>
         </style>
         <!--TOOLBAR BUTTONS-->
         <style name="button.toolbar" parent="button">
@@ -34,15 +34,15 @@
             <!--DRG-->
             <style name="button.toolbar.default" parent="button.toolbar">
                 <item name="android:background">@drawable/corner_button_toolbar_default</item>
-                <item name="android:textColor">@color/button_default_text_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
             <style name="button.toolbar.red" parent="button.toolbar">
                 <item name="android:background">@drawable/corner_button_toolbar_red</item>
-                <item name="android:textColor">@color/button_red_text_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
             <style name="button.toolbar.gray" parent="button.toolbar">
                 <item name="android:background">@drawable/corner_button_toolbar_gray</item>
-                <item name="android:textColor">@color/button_gray_text_color</item>
+                <item name="android:textColor">?color_black_main</item>
             </style>
         <!--FAB BUTTONS-->
         <style name="fab">
@@ -227,16 +227,16 @@
             <style name="editText.span.main" parent="editText.span">
                 <item name="android:textSize">20sp</item>
                 <item name="android:layout_height">60dp</item>
-                <item name="android:textColor">?color_black_main</item>
-                <item name="android:textColorHint">?color_black_main</item>
-                <item name="android:backgroundTint">?color_black_main</item>
+                <item name="android:textColor">?android:textColor</item>
+                <item name="android:textColorHint">?android:textColor</item>
+                <item name="android:backgroundTint">?android:textColor</item>
             </style>
             <style name="editText.span.second" parent="editText.span">
                 <item name="android:textSize">20sp</item>
                 <item name="android:layout_height">48dp</item>
-                <item name="android:textColor">?color_black_main</item>
-                <item name="android:textColorHint">?color_black_main</item>
-                <item name="android:backgroundTint">?color_black_main</item>
+                <item name="android:textColor">?android:textColor</item>
+                <item name="android:textColorHint">?android:textColor</item>
+                <item name="android:backgroundTint">?android:textColor</item>
             </style>
         <style name="editText.paragraph">
             <item name="android:gravity">fill_vertical</item>
@@ -245,15 +245,15 @@
             <!--FONTS-->
             <style name="editText.paragraph.main" parent="editText.paragraph">
                 <item name="android:textSize">20sp</item>
-                <item name="android:textColor">?color_black_main</item>
-                <item name="android:textColorHint">?color_black_main</item>
-                <item name="android:backgroundTint">?color_black_main</item>
+                <item name="android:textColor">?android:textColor</item>
+                <item name="android:textColorHint">?android:textColor</item>
+                <item name="android:backgroundTint">?android:textColor</item>
             </style>
             <style name="editText.paragraph.second" parent="editText.paragraph">
                 <item name="android:textSize">20sp</item>
-                <item name="android:textColor">?color_black_main</item>
-                <item name="android:textColorHint">?color_black_main</item>
-                <item name="android:backgroundTint">?color_black_main</item>
+                <item name="android:textColor">?android:textColor</item>
+                <item name="android:textColorHint">?android:textColor</item>
+                <item name="android:backgroundTint">?android:textColor</item>
         </style>
 
 
