@@ -13,6 +13,19 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
         <!-- Customize your theme here. -->
 
-        <item name="color_default_main">@color/design_yellow_dark</item>
+        <item name="color_default_light">@color/design_dark_default_light</item>
+        <item name="color_red_light">@color/design_dark_black_light</item>
+        <item name="color_gray_light">@color/design_dark_gray_light</item>
+        <item name="color_black_light">@color/design_dark_black_light</item>
+
+        <item name="color_default_main">@color/design_dark_default_main</item>
+        <item name="color_red_main">@color/design_dark_black_main</item>
+        <item name="color_gray_main">@color/design_dark_gray_main</item>
+        <item name="color_black_main">@color/design_dark_black_main</item>
+
+        <item name="color_default_dark">@color/design_dark_default_dark</item>
+        <item name="color_red_dark">@color/design_dark_black_dark</item>
+        <item name="color_gray_dark">@color/design_dark_gray_dark</item>
+        <item name="color_black_dark">@color/design_dark_black_dark</item>
     </style>
 </resources>

@@ -52,17 +52,17 @@
     <color name="design_black_main">#21201E</color>
     <color name="design_black_dark">#000000</color>
 
-    <color name="design_purple_light">#ffedff</color>
-    <color name="design_purple_main">#CDBBF7</color>
-    <color name="design_purple_dark">#9b8bc4</color>
+    <color name="design_default_light">#ffedff</color>
+    <color name="design_default_main">#CDBBF7</color>
+    <color name="design_default_dark">#9b8bc4</color>
 
-    <color name="design_blue_light">#edffff</color>
-    <color name="design_blue_main">#B9F5FE</color>
-    <color name="design_blue_dark">#87c2cb</color>
+    <color name="design_red_light">#edffff</color>
+    <color name="design_red_main">#B9F5FE</color>
+    <color name="design_red_dark">#87c2cb</color>
 
-    <color name="design_yellow_light">#fffffe</color>
-    <color name="design_yellow_main">#FEE9CA</color>
-    <color name="design_yellow_dark">#cbb89a</color>
+    <color name="design_gray_light">#fffffe</color>
+    <color name="design_gray_main">#FEE9CA</color>
+    <color name="design_gray_dark">#cbb89a</color>
 
 
 
@@ -71,17 +71,17 @@
     <color name="design_dark_black_main">#21201E</color>
     <color name="design_dark_black_dark">#000000</color>
 
-    <color name="design_dark_purple_light">#ffedff</color>
-    <color name="design_dark_purple_main">#CDBBF7</color>
-    <color name="design_dark_purple_dark">#9b8bc4</color>
+    <color name="design_dark_default_light">#ffedff</color>
+    <color name="design_dark_default_main">#CDBBF7</color>
+    <color name="design_dark_default_dark">#9b8bc4</color>
 
-    <color name="design_dark_blue_light">#edffff</color>
-    <color name="design_dark_blue_main">#B9F5FE</color>
-    <color name="design_dark_blue_dark">#87c2cb</color>
+    <color name="design_dark_red_light">#edffff</color>
+    <color name="design_dark_red_main">#B9F5FE</color>
+    <color name="design_dark_red_dark">#87c2cb</color>
 
-    <color name="design_dark_yellow_light">#fffffe</color>
-    <color name="design_dark_yellow_main">#FEE9CA</color>
-    <color name="design_dark_yellow_dark">#cbb89a</color>
+    <color name="design_dark_gray_light">#fffffe</color>
+    <color name="design_dark_gray_main">#FEE9CA</color>
+    <color name="design_dark_gray_dark">#cbb89a</color>
 
 
 
@@ -91,32 +91,32 @@
     <!--BACKGROUND-->
 
     <color name="button_default_background">?color_default_main</color>
-    <color name="button_red_background">@color/design_blue_main</color>
-    <color name="button_gray_background">@color/design_yellow_main</color>
+    <color name="button_red_background">@color/design_red_main</color>
+    <color name="button_gray_background">@color/design_gray_main</color>
 
-    <color name="button_fab_default_background">@color/design_purple_main</color>
-    <color name="button_fab_red_background">@color/design_blue_main</color>
-    <color name="button_fab_gray_background">@color/design_yellow_main</color>
+    <color name="button_fab_default_background">@color/design_default_main</color>
+    <color name="button_fab_red_background">@color/design_red_main</color>
+    <color name="button_fab_gray_background">@color/design_gray_main</color>
 
-    <color name="button_toolbar_default_background">@color/design_purple_light</color>
-    <color name="button_toolbar_red_background">@color/design_blue_light</color>
-    <color name="button_toolbar_gray_background">@color/design_yellow_light</color>
+    <color name="button_toolbar_default_background">@color/design_default_light</color>
+    <color name="button_toolbar_red_background">@color/design_red_light</color>
+    <color name="button_toolbar_gray_background">@color/design_gray_light</color>
 
-    <color name="toolbar_default_background">@color/design_purple_light</color>
-    <color name="toolbar_red_background">@color/design_blue_light</color>
-    <color name="toolbar_gray_background">@color/design_yellow_light</color>
+    <color name="toolbar_default_background">@color/design_default_light</color>
+    <color name="toolbar_red_background">@color/design_red_light</color>
+    <color name="toolbar_gray_background">@color/design_gray_light</color>
 
-    <color name="dialog_default_background">@color/design_purple_light</color>
-    <color name="dialog_red_background">@color/design_blue_light</color>
-    <color name="dialog_gray_background">@color/design_yellow_light</color>
+    <color name="dialog_default_background">@color/design_default_light</color>
+    <color name="dialog_red_background">@color/design_red_light</color>
+    <color name="dialog_gray_background">@color/design_gray_light</color>
 
     <color name="recyclerView_default_background">@color/white</color>
     <color name="recyclerView_red_background">@color/white</color>
     <color name="recyclerView_gray_background">@color/white</color>
 
-    <color name="recyclerViewItem_default_background">@color/design_purple_light</color>
-    <color name="recyclerViewItem_red_background">@color/design_blue_light</color>
-    <color name="recyclerViewItem_gray_background">@color/design_yellow_light</color>
+    <color name="recyclerViewItem_default_background">@color/design_default_light</color>
+    <color name="recyclerViewItem_red_background">@color/design_red_light</color>
+    <color name="recyclerViewItem_gray_background">@color/design_gray_light</color>
 
 
     <!--TEXT COLOR-->
