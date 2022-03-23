@@ -121,13 +121,13 @@
     </style>
         <!--DRG-->
         <style name="recyclerView.default" parent="recyclerView">
-            <item name="android:background">?toolbar_default_background</item>
+            <item name="android:background">?recyclerView_default_background</item>
         </style>
         <style name="recyclerView.red" parent="recyclerView">
-            <item name="android:background" parent="toolbar">?toolbar_red_background</item>
+            <item name="android:background" parent="toolbar">?recyclerView_red_background</item>
         </style>
         <style name="recyclerView.gray" parent="recyclerView">
-            <item name="android:background" parent="toolbar">?toolbar_gray_background</item>
+            <item name="android:background" parent="toolbar">?recyclerView_gray_background</item>
         </style>
         <!--ITEMS-->
         <style name="recyclerViewItem">

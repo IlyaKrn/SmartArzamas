@@ -42,7 +42,6 @@
     <attr name="recyclerViewItem_gray_background" format="color|reference"/>
 
     <attr name="iconColor" format="color|reference"/>
-    <attr name="iconColor_dark" format="color|reference"/>
 
 
     <!--TEXT COLOR-->
