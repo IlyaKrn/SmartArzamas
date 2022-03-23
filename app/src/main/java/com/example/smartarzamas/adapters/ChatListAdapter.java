@@ -70,6 +70,10 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
             tvCategory.setText(item.category);
             btMenu.setVisibility(View.GONE);
 
+            itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_default_background));
+            if (item.banned){
+                itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_red_background));
+            }
 
             Chat.getChatById(context, item.id, new OnGetDataListener<Chat>() {
                 @Override

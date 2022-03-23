@@ -65,6 +65,15 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
             btMenu.setVisibility(View.GONE);
             tvName.setText(item.name);
             tvEmail.setText(item.email);
+
+            itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_default_background));
+            if (item.banned){
+                itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_red_background));
+            }
+            if (item.isAdmin){
+                itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_gray_background));
+            }
+
             User.getUserById(context, item.id, new OnGetDataListener<User>() {
                 @Override
                 public void onGetData(User data) {
@@ -108,99 +117,101 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
 
         @Override
         public void bindAdmin(int position) {
-            btMenu.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    PopupMenu popup = new PopupMenu(context, view);
-                    popup.inflate(R.menu.popup_menu_user_list_item);
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem menuItem) {
-                            switch (menuItem.getItemId()) {
-                                case R.id.set_admin:
-                                    item.isAdmin = true;
-                                    item.setNewData(context, item, new OnSetDataListener<User>() {
-                                        @Override
-                                        public void onSetData(User data) {
-                                            Toast.makeText(context, "Пользователь " + user.email + " стал администратором", Toast.LENGTH_SHORT).show();
-                                        }
+            if (!user.email.equals(item.email)) {
+                btMenu.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        PopupMenu popup = new PopupMenu(context, view);
+                        popup.inflate(R.menu.popup_menu_user_list_item);
+                        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                            @Override
+                            public boolean onMenuItemClick(MenuItem menuItem) {
+                                switch (menuItem.getItemId()) {
+                                    case R.id.set_admin:
+                                        item.isAdmin = true;
+                                        item.setNewData(context, item, new OnSetDataListener<User>() {
+                                            @Override
+                                            public void onSetData(User data) {
+                                                Toast.makeText(context, "Пользователь " + user.email + " стал администратором", Toast.LENGTH_SHORT).show();
+                                            }
 
-                                        @Override
-                                        public void onNoConnection() {
+                                            @Override
+                                            public void onNoConnection() {
 
-                                        }
+                                            }
 
-                                        @Override
-                                        public void onCanceled() {
+                                            @Override
+                                            public void onCanceled() {
 
-                                        }
-                                    });
-                                    break;
-                                case R.id.remove_admin:
-                                    item.isAdmin = false;
-                                    item.setNewData(context, item, new OnSetDataListener<User>() {
-                                        @Override
-                                        public void onSetData(User data) {
-                                            Toast.makeText(context, "Пользователь " + user.email + " стал пользователем", Toast.LENGTH_SHORT).show();
-                                        }
+                                            }
+                                        });
+                                        break;
+                                    case R.id.remove_admin:
+                                        item.isAdmin = false;
+                                        item.setNewData(context, item, new OnSetDataListener<User>() {
+                                            @Override
+                                            public void onSetData(User data) {
+                                                Toast.makeText(context, "Пользователь " + user.email + " стал пользователем", Toast.LENGTH_SHORT).show();
+                                            }
 
-                                        @Override
-                                        public void onNoConnection() {
+                                            @Override
+                                            public void onNoConnection() {
 
-                                        }
+                                            }
 
-                                        @Override
-                                        public void onCanceled() {
+                                            @Override
+                                            public void onCanceled() {
 
-                                        }
-                                    });
-                                    break;
-                                case R.id.ban:
-                                    item.banned = true;
-                                    item.setNewData(context, item, new OnSetDataListener<User>() {
-                                        @Override
-                                        public void onSetData(User data) {
-                                            Toast.makeText(context, "Пользователь " + user.email + " заблокирован", Toast.LENGTH_SHORT).show();
-                                        }
+                                            }
+                                        });
+                                        break;
+                                    case R.id.ban:
+                                        item.banned = true;
+                                        item.setNewData(context, item, new OnSetDataListener<User>() {
+                                            @Override
+                                            public void onSetData(User data) {
+                                                Toast.makeText(context, "Пользователь " + user.email + " заблокирован", Toast.LENGTH_SHORT).show();
+                                            }
 
-                                        @Override
-                                        public void onNoConnection() {
+                                            @Override
+                                            public void onNoConnection() {
 
-                                        }
+                                            }
 
-                                        @Override
-                                        public void onCanceled() {
+                                            @Override
+                                            public void onCanceled() {
 
-                                        }
-                                    });
-                                    break;
-                                case R.id.unban:
-                                    item.banned = false;
-                                    item.setNewData(context, item, new OnSetDataListener<User>() {
-                                        @Override
-                                        public void onSetData(User data) {
-                                            Toast.makeText(context, "Пользователь " + user.email + " разблокирован", Toast.LENGTH_SHORT).show();
-                                        }
+                                            }
+                                        });
+                                        break;
+                                    case R.id.unban:
+                                        item.banned = false;
+                                        item.setNewData(context, item, new OnSetDataListener<User>() {
+                                            @Override
+                                            public void onSetData(User data) {
+                                                Toast.makeText(context, "Пользователь " + user.email + " разблокирован", Toast.LENGTH_SHORT).show();
+                                            }
 
-                                        @Override
-                                        public void onNoConnection() {
+                                            @Override
+                                            public void onNoConnection() {
 
-                                        }
+                                            }
 
-                                        @Override
-                                        public void onCanceled() {
+                                            @Override
+                                            public void onCanceled() {
 
-                                        }
-                                    });
-                                    break;
+                                            }
+                                        });
+                                        break;
+                                }
+                                return false;
                             }
-                            return false;
-                        }
-                    });
-                    popup.show();
-                }
-            });
-            btMenu.setVisibility(View.VISIBLE);
+                        });
+                        popup.show();
+                    }
+                });
+                btMenu.setVisibility(View.VISIBLE);
+            }
         }
     }
 }
