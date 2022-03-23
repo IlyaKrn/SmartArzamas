@@ -1,6 +1,7 @@
 package com.example.smartarzamas.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.smartarzamas.AdminChatActivity;
+import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
@@ -21,6 +24,7 @@ import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
+import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -120,14 +124,12 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
                             @Override
                             public boolean onMenuItemClick(MenuItem menuItem) {
                                 switch (menuItem.getItemId()) {
-                                    case R.id.open_chat:
-                                        break;
                                     case R.id.ban:
                                         item.banned = true;
                                         item.setNewData(context, item, new OnSetDataListener<Chat>() {
                                             @Override
                                             public void onSetData(Chat data) {
-                                                Toast.makeText(context, "Чат " + data.name + " разблокирован", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Чат " + data.name + " заблокирован", Toast.LENGTH_SHORT).show();
                                             }
 
                                             @Override
@@ -146,7 +148,7 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
                                         item.setNewData(context, item, new OnSetDataListener<Chat>() {
                                             @Override
                                             public void onSetData(Chat data) {
-                                                Toast.makeText(context, "Чат " + data.name + " заблокирован", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Чат " + data.name + " разблокирован", Toast.LENGTH_SHORT).show();
                                             }
 
                                             @Override

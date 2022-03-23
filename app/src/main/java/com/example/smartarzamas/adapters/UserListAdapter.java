@@ -117,8 +117,6 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             switch (menuItem.getItemId()) {
-                                case R.id.view_profile:
-                                    break;
                                 case R.id.set_admin:
                                     item.isAdmin = true;
                                     item.setNewData(context, item, new OnSetDataListener<User>() {

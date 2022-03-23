@@ -75,15 +75,11 @@ public class AdminAllChatsFragment extends HubNavigationCommon {
         adapter = new ChatListAdapter(getActivity().getApplicationContext(), user, true, chatList, new FirebaseAdapter.OnStateClickListener<Chat>() {
             @Override
             public void onClick(Chat item) {
-                if (!item.banned) {
-                    Intent intent = new Intent(AdminAllChatsFragment.this.getActivity(), AdminChatActivity.class);
-                    intent.putExtra(FirebaseActivity.CHAT_ID, item.id);
-                    intent.putExtra(FirebaseActivity.USER_INTENT, user);
-                    AdminAllChatsFragment.this.getActivity().startActivity(intent);
-                }
-                else {
-                    Toast.makeText(getContext(), getString(R.string.chat_banned), Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(AdminAllChatsFragment.this.getActivity(), AdminChatActivity.class);
+                intent.putExtra(FirebaseActivity.CHAT_ID, item.id);
+                intent.putExtra(FirebaseActivity.USER_INTENT, user);
+                AdminAllChatsFragment.this.getActivity().startActivity(intent);
+
             }
 
             @Override
