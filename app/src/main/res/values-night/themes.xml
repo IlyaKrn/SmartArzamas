@@ -12,26 +12,76 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
         <!-- Customize your theme here. -->
-        <item name="android:colorBackground">@color/white</item>
-
-        <item name="color_default_light">@color/design_dark_default_light</item>
-        <item name="color_red_light">@color/design_dark_black_light</item>
-        <item name="color_gray_light">@color/design_dark_gray_light</item>
-        <item name="color_black_light">@color/design_dark_black_light</item>
-
-        <item name="color_default_main">@color/design_dark_default_main</item>
-        <item name="color_red_main">@color/design_dark_black_main</item>
-        <item name="color_gray_main">@color/design_dark_gray_main</item>
-        <item name="color_black_main">@color/design_dark_black_main</item>
-
-        <item name="color_default_dark">@color/design_dark_default_dark</item>
-        <item name="color_red_dark">@color/design_dark_black_dark</item>
-        <item name="color_gray_dark">@color/design_dark_gray_dark</item>
-        <item name="color_black_dark">@color/design_dark_black_dark</item>
 
 
-        <item name="android:textColor">@color/textColor_dark</item>
-        <item name="iconColor">@color/iconColor_dark</item>
+        <!--BACKGROUND-->
+
+        <item name="button_default_background">@color/black</item>
+        <item name="button_red_background">@color/black</item>
+        <item name="button_gray_background">@color/black</item>
+
+        <item name="button_fab_default_background">@color/black</item>
+        <item name="button_fab_red_background">@color/black</item>
+        <item name="button_fab_gray_background">@color/black</item>
+
+        <item name="button_toolbar_default_background">@color/black</item>
+        <item name="button_toolbar_red_background">@color/black</item>
+        <item name="button_toolbar_gray_background">@color/black</item>
+
+        <item name="toolbar_default_background">@color/black</item>
+        <item name="toolbar_red_background">@color/black</item>
+        <item name="toolbar_gray_background">@color/black</item>
+
+        <item name="dialog_default_background">@color/black</item>
+        <item name="dialog_red_background">@color/black</item>
+        <item name="dialog_gray_background">@color/black</item>
+
+        <item name="recyclerView_default_background">@color/black</item>
+        <item name="recyclerView_red_background">@color/black</item>
+        <item name="recyclerView_gray_background">@color/black</item>
+
+        <item name="recyclerViewItem_default_background">@color/black</item>
+        <item name="recyclerViewItem_red_background">@color/black</item>
+        <item name="recyclerViewItem_gray_background">@color/black</item>
+
+        <!--TEXT COLOR-->
+
+        <item name="button_default_text_color">@color/black</item>
+        <item name="button_red_text_color">@color/black</item>
+        <item name="button_gray_text_color">@color/black</item>
+
+        <item name="text_title_main_color">@color/black</item>
+        <item name="text_title_second_color">@color/black</item>
+
+        <item name="text_span_main_color">@color/black</item>
+        <item name="text_span_second_color">@color/black</item>
+
+        <item name="text_paragraph_main_color">@color/black</item>
+        <item name="text_paragraph_second_color">@color/black</item>
+
+        <item name="editText_span_main_color">@color/black</item>
+        <item name="editText_span_second_color">@color/black</item>
+
+        <item name="editText_paragraph_main_color">@color/black</item>
+        <item name="editText_paragraph_second_color">@color/black</item>
+
+        <item name="editText_span_hint_main_color">@color/black</item>
+        <item name="editText_span_hint_second_color">@color/black</item>
+
+        <item name="editText_paragraph_hint_main_color">@color/black</item>
+        <item name="editText_paragraph_hint_second_color">@color/black</item>
+
+        <item name="editText_span_tint_main_color">@color/black</item>
+        <item name="editText_span_tint_second_color">@color/black</item>
+
+        <item name="editText_paragraph_tint_main_color">@color/black</item>
+        <item name="editText_paragraph_tint_second_color">@color/black</item>
+
+        <!--SPECIAL-->
+
+        <item name="iconColor">@color/black</item>
+        <item name="iconColor_dark">@color/black</item>
+        <item name="android:colorBackground">@color/black</item>
 
     </style>
 

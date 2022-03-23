@@ -21,6 +21,7 @@ import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnUpdateUser;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
+import com.example.smartarzamas.support.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,12 +67,12 @@ public class UserListAdapter extends FirebaseAdapter<User, UserListAdapter.UserH
             tvName.setText(item.name);
             tvEmail.setText(item.email);
 
-            itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_default_background));
+            itemView.setBackgroundColor(Utils.getColorFromTheme(context, R.attr.recyclerView_default_background));
             if (item.banned){
-                itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_red_background));
+                itemView.setBackgroundColor(Utils.getColorFromTheme(context, R.attr.recyclerView_red_background));
             }
             if (item.isAdmin){
-                itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_gray_background));
+                itemView.setBackgroundColor(Utils.getColorFromTheme(context, R.attr.recyclerView_gray_background));
             }
 
             User.getUserById(context, item.id, new OnGetDataListener<User>() {

@@ -3,6 +3,7 @@ package com.example.smartarzamas.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.IconView;
+import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragment;
 
 import java.util.ArrayList;
@@ -70,9 +72,10 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
             tvCategory.setText(item.category);
             btMenu.setVisibility(View.GONE);
 
-            itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_default_background));
+
+            itemView.setBackgroundColor(Utils.getColorFromTheme(context, R.attr.recyclerView_default_background));
             if (item.banned){
-                itemView.setBackgroundColor(context.getResources().getColor(R.color.recyclerView_red_background));
+                itemView.setBackgroundColor(Utils.getColorFromTheme(context, R.attr.recyclerView_red_background));
             }
 
             Chat.getChatById(context, item.id, new OnGetDataListener<Chat>() {

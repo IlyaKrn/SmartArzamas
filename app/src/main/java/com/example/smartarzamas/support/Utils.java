@@ -10,10 +10,13 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.util.Log;
+import android.os.Build;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.AttrRes;
+import androidx.annotation.RequiresApi;
 
 import com.example.smartarzamas.R;
 
@@ -26,8 +29,14 @@ import java.util.TimeZone;
 
 public final class Utils {
 
+    public static int getColorFromTheme(Context context, @AttrRes int color){
+        TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(color, typedValue, true);
+        return typedValue.data;
+    }
+
     // получение строки с текущей датой
-    // например 12.12.2012 12:12:12
+    // например 12.12.2012x12:12:12
     public static String getCurrentDate(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeZone(TimeZone.getTimeZone("UTC" + 3));

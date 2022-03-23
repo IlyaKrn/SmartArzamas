@@ -45,7 +45,7 @@
         style="@style/toolbar.default"
         android:layout_gravity="bottom"
         app:itemIconTint="?iconColor"
-        app:itemTextColor="?android:textColor"
+        app:itemTextColor="?iconColor"
         app:menu="@menu/navigation_menu_hub" />
 
     <androidx.fragment.app.FragmentContainerView

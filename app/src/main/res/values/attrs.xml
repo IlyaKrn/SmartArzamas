@@ -10,22 +10,64 @@
 
     </declare-styleable>
 
-    <attr name="color_default_light" format="reference|color"/>
-    <attr name="color_default_main" format="reference|color"/>
-    <attr name="color_default_dark" format="reference|color"/>
 
-    <attr name="color_red_light" format="reference|color"/>
-    <attr name="color_red_main" format="reference|color"/>
-    <attr name="color_red_dark" format="reference|color"/>
+    <!--BACKGROUND-->
 
-    <attr name="color_gray_light" format="reference|color"/>
-    <attr name="color_gray_main" format="reference|color"/>
-    <attr name="color_gray_dark" format="reference|color"/>
+    <attr name="button_default_background" format="color|reference"/>
+    <attr name="button_red_background" format="color|reference"/>
+    <attr name="button_gray_background" format="color|reference"/>
 
-    <attr name="color_black_light" format="reference|color"/>
-    <attr name="color_black_main" format="reference|color"/>
-    <attr name="color_black_dark" format="reference|color"/>
+    <attr name="button_fab_default_background" format="color|reference"/>
+    <attr name="button_fab_red_background" format="color|reference"/>
+    <attr name="button_fab_gray_background" format="color|reference"/>
 
-    <attr name="iconColor" format="reference|color"/>
+    <attr name="button_toolbar_default_background" format="color|reference"/>
+    <attr name="button_toolbar_red_background" format="color|reference"/>
+    <attr name="button_toolbar_gray_background" format="color|reference"/>
+
+    <attr name="toolbar_default_background" format="color|reference"/>
+    <attr name="toolbar_red_background" format="color|reference"/>
+    <attr name="toolbar_gray_background" format="color|reference"/>
+
+    <attr name="dialog_default_background" format="color|reference"/>
+    <attr name="dialog_red_background" format="color|reference"/>
+    <attr name="dialog_gray_background" format="color|reference"/>
+
+    <attr name="recyclerView_default_background" format="color|reference"/>
+    <attr name="recyclerView_red_background" format="color|reference"/>
+    <attr name="recyclerView_gray_background" format="color|reference"/>
+
+    <attr name="recyclerViewItem_default_background" format="color|reference"/>
+    <attr name="recyclerViewItem_red_background" format="color|reference"/>
+    <attr name="recyclerViewItem_gray_background" format="color|reference"/>
+
+    <attr name="iconColor" format="color|reference"/>
+    <attr name="iconColor_dark" format="color|reference"/>
+
+
+    <!--TEXT COLOR-->
+
+    <attr name="button_default_text_color" format="color|reference"/>
+    <attr name="button_red_text_color" format="color|reference"/>
+    <attr name="button_gray_text_color" format="color|reference"/>
+    <attr name="text_title_main_color"  format="color|reference"/>
+    <attr name="text_title_second_color"  format="color|reference"/>
+    <attr name="text_span_main_color"  format="color|reference"/>
+    <attr name="text_span_second_color"  format="color|reference"/>
+    <attr name="text_paragraph_main_color"  format="color|reference"/>
+    <attr name="text_paragraph_second_color"  format="color|reference"/>
+    <attr name="editText_span_main_color"  format="color|reference"/>
+    <attr name="editText_span_second_color"  format="color|reference"/>
+    <attr name="editText_paragraph_main_color"  format="color|reference"/>
+    <attr name="editText_paragraph_second_color"  format="color|reference"/>
+    <attr name="editText_span_hint_main_color"  format="color|reference"/>
+    <attr name="editText_span_hint_second_color"  format="color|reference"/>
+    <attr name="editText_paragraph_hint_main_color"  format="color|reference"/>
+    <attr name="editText_paragraph_hint_second_color"  format="color|reference"/>
+    <attr name="editText_span_tint_main_color"   format="color|reference"/>
+    <attr name="editText_span_tint_second_color"   format="color|reference"/>
+    <attr name="editText_paragraph_tint_main_color"   format="color|reference"/>
+    <attr name="editText_paragraph_tint_second_color"  format="color|reference"/>
+
 
 </resources>

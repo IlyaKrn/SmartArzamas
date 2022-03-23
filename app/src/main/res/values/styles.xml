@@ -15,15 +15,15 @@
         <!--DRG-->
         <style name="button.default" parent="button">
             <item name="android:background">@drawable/corner_button_default</item>
-            <item name="android:textColor">?color_black_main</item>
+            <item name="android:textColor">?button_default_text_color</item>
         </style>
         <style name="button.red" parent="button">
             <item name="android:background">@drawable/corner_button_red</item>
-            <item name="android:textColor">?color_black_main</item>
+            <item name="android:textColor">?button_red_text_color</item>
         </style>
         <style name="button.gray" parent="button">
             <item name="android:background">@drawable/corner_button_gray</item>
-            <item name="android:textColor">?color_black_main</item>
+            <item name="android:textColor">?button_gray_text_color</item>
         </style>
         <!--TOOLBAR BUTTONS-->
         <style name="button.toolbar" parent="button">
@@ -35,15 +35,15 @@
             <!--DRG-->
             <style name="button.toolbar.default" parent="button.toolbar">
                 <item name="android:background">@drawable/corner_button_toolbar_default</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?button_default_text_color</item>
             </style>
             <style name="button.toolbar.red" parent="button.toolbar">
                 <item name="android:background">@drawable/corner_button_toolbar_red</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?button_red_text_color</item>
             </style>
             <style name="button.toolbar.gray" parent="button.toolbar">
                 <item name="android:background">@drawable/corner_button_toolbar_gray</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?button_gray_text_color</item>
             </style>
         <!--FAB BUTTONS-->
         <style name="fab">
@@ -56,13 +56,13 @@
         </style>
             <!--DRG-->
             <style name="fab.default" parent="fab">
-                <item name="android:backgroundTint">?color_default_main</item>
+                <item name="android:backgroundTint">?button_fab_default_background</item>
             </style>
             <style name="fab.red" parent="fab">
-                <item name="android:backgroundTint">?color_red_main</item>
+                <item name="android:backgroundTint">?button_fab_red_background</item>
             </style>
             <style name="fab.gray" parent="fab">
-        <item name="android:backgroundTint">?color_gray_main</item>
+        <item name="android:backgroundTint">?button_fab_gray_background</item>
     </style>
 
 
@@ -121,13 +121,13 @@
     </style>
         <!--DRG-->
         <style name="recyclerView.default" parent="recyclerView">
-            <item name="android:background">@color/recyclerView_default_background</item>
+            <item name="android:background">?toolbar_default_background</item>
         </style>
         <style name="recyclerView.red" parent="recyclerView">
-            <item name="android:background" parent="toolbar">@color/recyclerView_red_background</item>
+            <item name="android:background" parent="toolbar">?toolbar_red_background</item>
         </style>
         <style name="recyclerView.gray" parent="recyclerView">
-            <item name="android:background" parent="toolbar">@color/recyclerView_gray_background</item>
+            <item name="android:background" parent="toolbar">?toolbar_gray_background</item>
         </style>
         <!--ITEMS-->
         <style name="recyclerViewItem">
@@ -135,13 +135,13 @@
         </style>
             <!--DRG-->
             <style name="recyclerViewItem.default" parent="recyclerViewItem">
-                <item name="android:background">@color/recyclerViewItem_default_background</item>
+                <item name="android:background">?recyclerViewItem_default_background</item>
             </style>
             <style name="recyclerViewItem.red" parent="recyclerViewItem">
-                <item name="android:background">@color/recyclerViewItem_red_background</item>
+                <item name="android:background">?recyclerViewItem_red_background</item>
             </style>
             <style name="recyclerViewItem.gray" parent="recyclerViewItem">
-                <item name="android:background">@color/recyclerViewItem_gray_background</item>
+                <item name="android:background">?recyclerViewItem_gray_background</item>
             </style>
 
 
@@ -162,12 +162,12 @@
             <style name="text.title.main" parent="text.title">
                 <item name="android:textSize">48sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?text_title_main_color</item>
             </style>
             <style name="text.title.second" parent="text.title">
                 <item name="android:textSize">20sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?text_title_second_color</item>
             </style>
         <style name="text.span">
             <item name="android:gravity">start</item>
@@ -176,12 +176,12 @@
             <style name="text.span.main" parent="text.span">
                 <item name="android:textSize">16sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?text_span_main_color</item>
             </style>
             <style name="text.span.second" parent="text.span">
                 <item name="android:textSize">12sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?text_span_second_color</item>
             </style>
         <style name="text.paragraph">
             <item name="android:gravity">fill_vertical</item>
@@ -190,12 +190,12 @@
             <style name="text.paragraph.main" parent="text.paragraph">
                 <item name="android:textSize">20sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?text_paragraph_main_color</item>
             </style>
             <style name="text.paragraph.second" parent="text.paragraph">
                 <item name="android:textSize">16sp</item>
                 <item name="android:textStyle">bold</item>
-                <item name="android:textColor">?color_black_main</item>
+                <item name="android:textColor">?text_paragraph_second_color</item>
             </style>
         <style name="text.warning">
             <item name="android:textColor">@color/design_default_color_error</item>
@@ -228,16 +228,16 @@
             <style name="editText.span.main" parent="editText.span">
                 <item name="android:textSize">20sp</item>
                 <item name="android:layout_height">60dp</item>
-                <item name="android:textColor">?android:textColor</item>
-                <item name="android:textColorHint">?android:textColor</item>
-                <item name="android:backgroundTint">?android:textColor</item>
+                <item name="android:textColor">?editText_span_main_color</item>
+                <item name="android:textColorHint">?editText_span_main_color</item>
+                <item name="android:backgroundTint">?editText_span_main_color</item>
             </style>
             <style name="editText.span.second" parent="editText.span">
                 <item name="android:textSize">20sp</item>
                 <item name="android:layout_height">48dp</item>
-                <item name="android:textColor">?android:textColor</item>
-                <item name="android:textColorHint">?android:textColor</item>
-                <item name="android:backgroundTint">?android:textColor</item>
+                <item name="android:textColor">?editText_span_second_color</item>
+                <item name="android:textColorHint">?editText_span_second_color</item>
+                <item name="android:backgroundTint">?editText_span_second_color</item>
             </style>
         <style name="editText.paragraph">
             <item name="android:gravity">fill_vertical</item>
@@ -246,15 +246,15 @@
             <!--FONTS-->
             <style name="editText.paragraph.main" parent="editText.paragraph">
                 <item name="android:textSize">20sp</item>
-                <item name="android:textColor">?android:textColor</item>
-                <item name="android:textColorHint">?android:textColor</item>
-                <item name="android:backgroundTint">?android:textColor</item>
+                <item name="android:textColor">?editText_paragraph_main_color</item>
+                <item name="android:textColorHint">?editText_paragraph_main_color</item>
+                <item name="android:backgroundTint">?editText_paragraph_main_color</item>
             </style>
             <style name="editText.paragraph.second" parent="editText.paragraph">
                 <item name="android:textSize">20sp</item>
-                <item name="android:textColor">?android:textColor</item>
-                <item name="android:textColorHint">?android:textColor</item>
-                <item name="android:backgroundTint">?android:textColor</item>
+                <item name="android:textColor">?editText_paragraph_second_color</item>
+                <item name="android:textColorHint">?editText_paragraph_second_color</item>
+                <item name="android:backgroundTint">?editText_paragraph_second_color</item>
         </style>
 
 
