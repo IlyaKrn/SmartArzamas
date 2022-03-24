@@ -16,13 +16,13 @@
 
         <!--BACKGROUND-->
 
-        <item name="button_default_background">@color/design_default_dark</item>
-        <item name="button_red_background">@color/design_red_dark</item>
-        <item name="button_gray_background">@color/design_gray_dark</item>
+        <item name="button_default_background">@color/design_default_main</item>
+        <item name="button_red_background">@color/design_red_main</item>
+        <item name="button_gray_background">@color/design_gray_main</item>
 
-        <item name="button_fab_default_background">@color/design_default_dark</item>
-        <item name="button_fab_red_background">@color/design_red_dark</item>
-        <item name="button_fab_gray_background">@color/design_gray_light</item>
+        <item name="button_fab_default_background">@color/design_default_main</item>
+        <item name="button_fab_red_background">@color/design_red_main</item>
+        <item name="button_fab_gray_background">@color/design_gray_main</item>
 
         <item name="button_toolbar_default_background">@color/design_default_main</item>
         <item name="button_toolbar_red_background">@color/design_red_main</item>
@@ -32,15 +32,15 @@
         <item name="toolbar_red_background">@color/design_red_main</item>
         <item name="toolbar_gray_background">@color/design_gray_main</item>
 
-        <item name="dialog_default_background">@color/design_default_main</item>
-        <item name="dialog_red_background">@color/design_red_main</item>
-        <item name="dialog_gray_background">@color/design_gray_main</item>
+        <item name="dialog_default_background">@color/design_default_light</item>
+        <item name="dialog_red_background">@color/design_red_light</item>
+        <item name="dialog_gray_background">@color/design_gray_light</item>
 
-        <item name="recyclerView_default_background">@color/design_default_light</item>
+        <item name="recyclerView_default_background">@color/white</item>
         <item name="recyclerView_red_background">@color/design_red_light</item>
         <item name="recyclerView_gray_background">@color/design_gray_light</item>
 
-        <item name="recyclerViewItem_default_background">@color/design_default_light</item>
+        <item name="recyclerViewItem_default_background">@color/white</item>
         <item name="recyclerViewItem_red_background">@color/design_red_light</item>
         <item name="recyclerViewItem_gray_background">@color/design_gray_light</item>
 
