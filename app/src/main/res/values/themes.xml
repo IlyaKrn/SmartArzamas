@@ -81,6 +81,7 @@
 
         <item name="iconColor">@color/design_black_main</item>
         <item name="android:colorBackground">@color/white</item>
+        <item name="android:textColor">@color/design_black_main</item>
 
     </style>
 

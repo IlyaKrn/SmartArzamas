@@ -81,7 +81,7 @@
 
         <item name="iconColor">@color/white</item>
         <item name="android:colorBackground">@color/design_black_main</item>
-
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="Theme.SmartArzamas.NoActionBar" parent="Theme.SmartArzamas">
