@@ -77,8 +77,9 @@ public class AdminHubActivity extends FirebaseActivity {
 
         etSearch.addTextEditListener(new EditTextSearch.OnTextChangeListener() {
             @Override
-            public void onChange(CharSequence charSequence) {
+            public void onChange(Editable editable) {
                 CallbackManager.callOnSearchStringChange(etSearch.getText().toString());
+
             }
         });
         btMenu.setOnClickListener(new View.OnClickListener() {
