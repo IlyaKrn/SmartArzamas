@@ -40,11 +40,10 @@ public class EditTextSearch extends androidx.appcompat.widget.AppCompatEditText 
         });
     }
 
-    @Override
-    public void setText(CharSequence text, BufferType type) {
+    public void setHardText(CharSequence text) {
         closeTextWatcher();
-        super.getText().clear();
-        super.append(text);
+        setText(text);
+        setSelection(getText().length());
         openTextWatcher();
     }
 

@@ -197,7 +197,7 @@ public class HubActivity extends FirebaseActivity {
 
             @Override
             public void onSearchUpdate(String search) {
-                etSearch.setText(search);
+                etSearch.setHardText(search);
             }
 
             @Override
@@ -215,7 +215,7 @@ public class HubActivity extends FirebaseActivity {
 
             @Override
             public void onSearchUpdate(String search) {
-                etSearch.setText(search);
+                etSearch.setHardText(search);
             }
 
             @Override
@@ -227,7 +227,7 @@ public class HubActivity extends FirebaseActivity {
         MapFragment.setCallback(new MapFragmentCallback() {
             @Override
             public void onSearchUpdate(String search) {
-                etSearch.setText(search);
+                etSearch.setHardText(search);
             }
 
             @Override
