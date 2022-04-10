@@ -23,6 +23,7 @@ import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
+import com.example.smartarzamas.ui.adminhubnavigation.AdminHubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 
@@ -128,7 +129,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
 
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        HubNavigationCommon.currentNavigationFragment = ALL_CHATS;
+        AdminHubNavigationCommon.currentNavigationFragment = AdminHubNavigationCommon.ALL_USERS;
         adminAllUsersViewModel = new ViewModelProvider(this.getActivity()).get(AdminAllUsersViewModel.class);
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         root = binding.getRoot();

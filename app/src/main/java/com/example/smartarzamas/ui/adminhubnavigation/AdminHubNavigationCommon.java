@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public abstract class AdminHubNavigationCommon extends Fragment {
     public static final String LOG_TAG = "AdminHubNavigationLog";
     public static final String ALL_CHATS = "all";
-    public static final String MY_CHATS = "my";
+    public static final String ALL_USERS = "my";
     public static final String MAP = "map";
 
     public static String currentNavigationFragment;

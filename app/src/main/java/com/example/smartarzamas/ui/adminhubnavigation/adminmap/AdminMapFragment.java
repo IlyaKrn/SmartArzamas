@@ -164,7 +164,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
 
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        HubNavigationCommon.currentNavigationFragment = MAP;
+        AdminHubNavigationCommon.currentNavigationFragment = AdminHubNavigationCommon.MAP;
         adminMapViewModel = new ViewModelProvider(this.getActivity()).get(AdminMapViewModel.class);
         binding = FragmentNotificationsBinding.inflate(inflater, container, false);
         root = binding.getRoot();

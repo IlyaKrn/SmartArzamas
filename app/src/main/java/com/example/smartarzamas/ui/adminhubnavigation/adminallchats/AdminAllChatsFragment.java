@@ -26,6 +26,7 @@ import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
+import com.example.smartarzamas.ui.adminhubnavigation.AdminHubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -141,7 +142,7 @@ public class AdminAllChatsFragment extends HubNavigationCommon {
 
     @Override
     protected void init(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        HubNavigationCommon.currentNavigationFragment = ALL_CHATS;
+        AdminHubNavigationCommon.currentNavigationFragment = AdminHubNavigationCommon.ALL_CHATS;
         adminAllChatsViewModel = new ViewModelProvider(this.getActivity()).get(AdminAllChatsViewModel.class);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();

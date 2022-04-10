@@ -17,6 +17,7 @@ import com.example.smartarzamas.ui.DialogConfirm;
 import com.example.smartarzamas.ui.OnConfirmListener;
 import com.example.smartarzamas.ui.OnDestroyListener;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
+import com.example.smartarzamas.ui.adminhubnavigation.AdminHubNavigationCommon;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragment;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallchats.AdminAllChatsFragmentCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.adminallusers.AdminAllUsersFragment;
@@ -257,20 +258,20 @@ public class AdminHubActivity extends FirebaseActivity {
     private static class CallbackManager{
 
         public static void callOnCategoryChange(ArrayList<String> categories){
-            if (allChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.ALL_CHATS))
+            if (allChatsActivityCallback != null && AdminHubNavigationCommon.currentNavigationFragment.equals(AdminHubNavigationCommon.ALL_CHATS))
                 allChatsActivityCallback.onCategoryChange(categories);
-            if (allUsersActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MY_CHATS))
+            if (allUsersActivityCallback != null && AdminHubNavigationCommon.currentNavigationFragment.equals(AdminHubNavigationCommon.ALL_USERS))
                 allUsersActivityCallback.onCategoryChange(categories);
-            if (mapActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MAP))
+            if (mapActivityCallback != null && AdminHubNavigationCommon.currentNavigationFragment.equals(AdminHubNavigationCommon.MAP))
                 mapActivityCallback.onCategoryChange(categories);
         }
 
         public static void callOnSearchStringChange(String search){
-            if (allChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.ALL_CHATS))
+            if (allChatsActivityCallback != null && AdminHubNavigationCommon.currentNavigationFragment.equals(AdminHubNavigationCommon.ALL_CHATS))
                 allChatsActivityCallback.onSearchStringChange(search);
-            if (allUsersActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MY_CHATS))
+            if (allUsersActivityCallback != null && AdminHubNavigationCommon.currentNavigationFragment.equals(AdminHubNavigationCommon.ALL_USERS))
                 allUsersActivityCallback.onSearchStringChange(search);
-            if (mapActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MAP))
+            if (mapActivityCallback != null && AdminHubNavigationCommon.currentNavigationFragment.equals(AdminHubNavigationCommon.MAP))
                 mapActivityCallback.onSearchStringChange(search);
         }
 
