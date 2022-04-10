@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.smartarzamas.AdminHubActivity;
+import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.MapInfoWindowAdapter;
 import com.example.smartarzamas.databinding.FragmentNotificationsBinding;
@@ -20,6 +21,7 @@ import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubNavigationCommon;
+import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -141,7 +143,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
 
     @Override
     protected void addAdminHubActivityCallback() {
-        AdminHubActivity.setAdminMapActivityCallback(new AdminHubActivityCallback() {
+        HubActivity.setMapActivityCallback(new HubActivityCallback() {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
                 AdminMapFragment.this.category = categories;
