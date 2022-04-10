@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smartarzamas.AdminChatActivity;
+import com.example.smartarzamas.AdminHubActivity;
 import com.example.smartarzamas.FirebaseActivity;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
@@ -24,6 +25,7 @@ import com.example.smartarzamas.databinding.FragmentHomeBinding;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -118,7 +120,7 @@ public class AdminAllChatsFragment extends HubNavigationCommon {
 
     @Override
     protected void addHubActivityCallback() {
-        HubActivity.setAllChatsActivityCallback(new HubActivityCallback() {
+        AdminHubActivity.setAdminAllChatsActivityCallback(new AdminHubActivityCallback() {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
                 AdminAllChatsFragment.this.category = categories;

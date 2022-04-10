@@ -48,7 +48,7 @@ public class AdminHubActivity extends FirebaseActivity {
     private ArrayList<String> searchingTags = Category.getAllTags();
 
     private static AdminHubActivityCallback allChatsActivityCallback;
-    private static AdminHubActivityCallback myChatsActivityCallback;
+    private static AdminHubActivityCallback allUsersActivityCallback;
     private static AdminHubActivityCallback mapActivityCallback;
 
 
@@ -198,7 +198,7 @@ public class AdminHubActivity extends FirebaseActivity {
 
             @Override
             public void onSearchUpdate(String search) {
-                etSearch.setText(search);
+                etSearch.setHardText(search);
             }
 
             @Override
@@ -209,7 +209,7 @@ public class AdminHubActivity extends FirebaseActivity {
         AdminAllUsersFragment.setCallback(new AdminAllUsersFragmentCallback() {
             @Override
             public void onSearchUpdate(String search) {
-
+                etSearch.setHardText(search);
             }
 
             @Override
@@ -220,7 +220,7 @@ public class AdminHubActivity extends FirebaseActivity {
         AdminMapFragment.setCallback(new AdminMapFragmentCallback() {
             @Override
             public void onSearchUpdate(String search) {
-                etSearch.setText(search);
+                etSearch.setHardText(search);
             }
 
             @Override
@@ -247,8 +247,8 @@ public class AdminHubActivity extends FirebaseActivity {
     public static void setAdminAllChatsActivityCallback(AdminHubActivityCallback allChatsActivityCallback) {
         AdminHubActivity.allChatsActivityCallback = allChatsActivityCallback;
     }
-    public static void setAdminMyChatsActivityCallback(AdminHubActivityCallback myChatsActivityCallback) {
-        AdminHubActivity.myChatsActivityCallback = myChatsActivityCallback;
+    public static void setAdminAllUsersActivityCallback(AdminHubActivityCallback allUsersActivityCallback) {
+        AdminHubActivity.allUsersActivityCallback = allUsersActivityCallback;
     }
     public static void setAdminMapActivityCallback(AdminHubActivityCallback mapActivityCallback) {
         AdminHubActivity.mapActivityCallback = mapActivityCallback;
@@ -259,8 +259,8 @@ public class AdminHubActivity extends FirebaseActivity {
         public static void callOnCategoryChange(ArrayList<String> categories){
             if (allChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.ALL_CHATS))
                 allChatsActivityCallback.onCategoryChange(categories);
-            if (myChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MY_CHATS))
-                myChatsActivityCallback.onCategoryChange(categories);
+            if (allUsersActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MY_CHATS))
+                allUsersActivityCallback.onCategoryChange(categories);
             if (mapActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MAP))
                 mapActivityCallback.onCategoryChange(categories);
         }
@@ -268,8 +268,8 @@ public class AdminHubActivity extends FirebaseActivity {
         public static void callOnSearchStringChange(String search){
             if (allChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.ALL_CHATS))
                 allChatsActivityCallback.onSearchStringChange(search);
-            if (myChatsActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MY_CHATS))
-                myChatsActivityCallback.onSearchStringChange(search);
+            if (allUsersActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MY_CHATS))
+                allUsersActivityCallback.onSearchStringChange(search);
             if (mapActivityCallback != null && HubNavigationCommon.currentNavigationFragment.equals(HubNavigationCommon.MAP))
                 mapActivityCallback.onSearchStringChange(search);
         }

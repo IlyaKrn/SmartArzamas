@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smartarzamas.AdminHubActivity;
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.FirebaseAdapter;
@@ -21,6 +22,7 @@ import com.example.smartarzamas.databinding.FragmentDashboardBinding;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.firebaseobjects.User;
 import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
 
@@ -105,7 +107,7 @@ public class AdminAllUsersFragment extends HubNavigationCommon {
 
     @Override
     protected void addHubActivityCallback() {
-        HubActivity.setAllChatsActivityCallback(new HubActivityCallback() {
+        AdminHubActivity.setAdminAllUsersActivityCallback(new AdminHubActivityCallback() {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
                 AdminAllUsersFragment.this.category = categories;

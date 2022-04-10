@@ -143,7 +143,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
 
     @Override
     protected void addAdminHubActivityCallback() {
-        HubActivity.setMapActivityCallback(new HubActivityCallback() {
+        AdminHubActivity.setAdminMapActivityCallback(new AdminHubActivityCallback() {
             @Override
             public void onCategoryChange(ArrayList<String> categories) {
                 AdminMapFragment.this.category = categories;
