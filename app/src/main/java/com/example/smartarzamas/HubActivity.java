@@ -76,7 +76,7 @@ public class HubActivity extends FirebaseActivity {
 
         etSearch.addTextEditListener(new EditTextSearch.OnTextChangeListener() {
             @Override
-            public void onChange(Editable editable) {
+            public void onChange(CharSequence charSequence) {
                 CallbackManager.callOnSearchStringChange(etSearch.getText().toString());
 
             }

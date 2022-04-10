@@ -25,6 +25,8 @@ public class EditTextSearch extends androidx.appcompat.widget.AppCompatEditText 
         addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!isClosed)
+                    onTextChangeListener.onChange(charSequence);
             }
 
             @Override
@@ -34,8 +36,6 @@ public class EditTextSearch extends androidx.appcompat.widget.AppCompatEditText 
 
             @Override
             public void afterTextChanged(Editable editable) {
-                if (!isClosed)
-                    onTextChangeListener.onChange(editable);
             }
         });
     }
@@ -56,6 +56,6 @@ public class EditTextSearch extends androidx.appcompat.widget.AppCompatEditText 
     }
 
     public interface OnTextChangeListener {
-        void onChange(Editable editable);
+        void onChange(CharSequence charSequence);
     }
 }
