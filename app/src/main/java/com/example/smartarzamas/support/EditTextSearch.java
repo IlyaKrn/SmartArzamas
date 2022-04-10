@@ -43,7 +43,8 @@ public class EditTextSearch extends androidx.appcompat.widget.AppCompatEditText 
     @Override
     public void setText(CharSequence text, BufferType type) {
         closeTextWatcher();
-        super.setText(text);
+        super.getText().clear();
+        super.append(text);
         openTextWatcher();
     }
 
