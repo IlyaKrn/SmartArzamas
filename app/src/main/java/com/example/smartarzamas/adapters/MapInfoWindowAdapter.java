@@ -5,7 +5,9 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -30,11 +32,12 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private final View rootView;
     private final Context context;
     private final ArrayList<Locate> locates;
+    private Map<Locate, Bitmap> cache;
     private TextView title;
     private TextView snippet;
     private ImageView icon;
     private ProgressBar progress;
-    private Map<Locate, Bitmap> cache;
+    private FrameLayout ivContainer;
 
 
     public MapInfoWindowAdapter(Context context, User user, ArrayList<Locate> locates) {
@@ -54,6 +57,8 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         snippet = rootView.findViewById(R.id.tv_snippet);
         icon = rootView.findViewById(R.id.icon);
         progress = rootView.findViewById(R.id.progress);
+        ivContainer = rootView.findViewById(R.id.ll_iv_container);
+        ivContainer.getLayoutParams().width = ivContainer.getHeight();
 
         for(Locate l : locates){
             if (marker.getPosition().equals(l.locate())){
