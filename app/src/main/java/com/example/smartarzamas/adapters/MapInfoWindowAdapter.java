@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
@@ -58,7 +59,7 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             if (marker.getPosition().equals(l.locate())){
                 title.setText(l.name);
                 snippet.setText(l.description);
-                if (cache.get(l) != null)
+                if (cache != null && cache.get(l) != null)
                     icon.setImageBitmap(cache.get(l));
             }
         }

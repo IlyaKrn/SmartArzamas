@@ -1,6 +1,8 @@
 package com.example.smartarzamas.ui.hubnavigation.map;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +15,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.smartarzamas.HubActivity;
 import com.example.smartarzamas.R;
+import com.example.smartarzamas.adapters.MapInfoWindowAdapter;
 import com.example.smartarzamas.databinding.NavigationFragmentMapBinding;
 import com.example.smartarzamas.firebaseobjects.Locate;
+import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
@@ -28,6 +32,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class MapFragment extends HubNavigationCommon implements OnMapReadyCallback {
@@ -37,6 +43,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     private static MapFragmentCallback callback;
     private SupportMapFragment mapView;
     private GoogleMap googleMap;
+    private MapInfoWindowAdapter mapAdapter;
 
     private ArrayList<Locate> locateMainList = new ArrayList<>();
     private ArrayList<Locate> locateList = new ArrayList<>();
@@ -52,12 +59,27 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
             public void onGetData(ArrayList<Locate> data) {
                 if (locateMainList.size() > 0) locateMainList.clear();
                 locateMainList.addAll(data);
+                Map<Locate, Bitmap> cache = new HashMap<>();
+                final int[] count = {0};
+                for (Locate l : locateMainList){
+                    l.getIconAsync(getContext(), new OnGetIcon() {
+                        @Override
+                        public void onLoad(Bitmap bitmap) {
+                            count[0]++;
+                            cache.put(l, bitmap);
+                            Log.e("ffff", "fffffff");
+                            if (locateMainList.size() == count[0])
+                                mapAdapter.loadCache(cache);
+                        }
+                    });
+                }
                 updateMapForView();
             }
 
             @Override
             public void onVoidData() {
-
+                if (locateMainList.size() > 0) locateMainList.clear();
+                updateMapForView();
             }
 
             @Override
@@ -71,6 +93,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
                 getActivity().finish();
             }
         });
+
         View.OnClickListener onAddListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +131,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
                 callback.onCategoryUpdate(strings);
             }
         });
+        mapAdapter = new MapInfoWindowAdapter(getContext(), user, locateList);
         return root;
     }
 
@@ -127,7 +151,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
             googleMap.clear();
             for (Locate l : locateList){
                 if (googleMap != null) {
-                    googleMap.addMarker(new MarkerOptions().title(l.name).snippet(l.description).position(l.locate()));
+                    googleMap.addMarker(new MarkerOptions().position(l.locate()));
                 }
             }
         }
@@ -181,6 +205,7 @@ public class MapFragment extends HubNavigationCommon implements OnMapReadyCallba
     @Override
     public void onMapReady(@NonNull GoogleMap gMap) {
         googleMap = gMap;
+        googleMap.setInfoWindowAdapter(mapAdapter);
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(55.400135, 43.828324), 11));
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
