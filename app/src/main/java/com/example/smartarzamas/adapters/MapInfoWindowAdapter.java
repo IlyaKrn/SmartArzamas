@@ -19,7 +19,9 @@ import com.example.smartarzamas.firebaseobjects.User;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
@@ -31,6 +33,7 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private TextView snippet;
     private ImageView icon;
     private ProgressBar progress;
+    private Map<Locate, Bitmap> cache;
 
 
     public MapInfoWindowAdapter(Context context, User user, ArrayList<Locate> locates) {
@@ -38,6 +41,11 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         this.context = context;
         this.rootView = LayoutInflater.from(context).inflate(R.layout.map_info_window, null);
         this.locates = locates;
+    }
+
+
+    public void loadCache(Map<Locate, Bitmap> c){
+        this.cache = c;
     }
 
     private void setData(Marker marker){
@@ -50,17 +58,8 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             if (marker.getPosition().equals(l.locate())){
                 title.setText(l.name);
                 snippet.setText(l.description);
-                progress.setVisibility(View.VISIBLE);
-                icon.setVisibility(View.GONE);
-                l.getIconAsync(context, new OnGetIcon() {
-                    @Override
-                    public void onLoad(Bitmap bitmap) {
-                        Log.e(";lkjnlij", ";ojoj");
-                        icon.setImageBitmap(bitmap);
-                        progress.setVisibility(View.GONE);
-                        icon.setVisibility(View.VISIBLE);
-                    }
-                });
+                if (cache.get(l) != null)
+                    icon.setImageBitmap(cache.get(l));
             }
         }
     }

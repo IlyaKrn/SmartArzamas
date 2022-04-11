@@ -1,6 +1,8 @@
 package com.example.smartarzamas.ui.adminhubnavigation.adminmap;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.example.smartarzamas.R;
 import com.example.smartarzamas.adapters.MapInfoWindowAdapter;
 import com.example.smartarzamas.databinding.FragmentNotificationsBinding;
 import com.example.smartarzamas.firebaseobjects.Locate;
+import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
 import com.example.smartarzamas.support.Utils;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
@@ -32,6 +35,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapReadyCallback {
@@ -57,6 +62,20 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
             public void onGetData(ArrayList<Locate> data) {
                 if (locateMainList.size() > 0) locateMainList.clear();
                 locateMainList.addAll(data);
+                Map<Locate, Bitmap> cache = new HashMap<>();
+                final int[] count = {0};
+                for (Locate l : locateMainList){
+                    l.getIconAsync(getContext(), new OnGetIcon() {
+                        @Override
+                        public void onLoad(Bitmap bitmap) {
+                            count[0]++;
+                            cache.put(l, bitmap);
+                            Log.e("ffff", "fffffff");
+                            if (locateMainList.size() == count[0])
+                                mapAdapter.loadCache(cache);
+                        }
+                    });
+                }
                 updateMapForView();
             }
 
