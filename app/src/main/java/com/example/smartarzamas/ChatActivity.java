@@ -23,6 +23,7 @@ import com.example.smartarzamas.adapters.MessageListAdapter;
 import com.example.smartarzamas.firebaseobjects.Chat;
 import com.example.smartarzamas.firebaseobjects.Message;
 import com.example.smartarzamas.firebaseobjects.OnGetDataListener;
+import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.firebaseobjects.OnSetIcon;
 import com.example.smartarzamas.support.Utils;
 import com.google.firebase.database.DataSnapshot;
@@ -146,17 +147,32 @@ public class ChatActivity extends FirebaseActivity {
                                         Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                                             @Override
                                             public void isConnected() {
-                                                dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                boolean isExists = false;
+                                                for (String s : chat.membersEmailList) {
+                                                    if (s.equals(user.email)) {
+                                                        isExists = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if (!isExists)
+                                                    chat.membersEmailList.add(user.email);
+                                                chat.messages.add(m);
+                                                chat.setNewData(ChatActivity.this, chat, new OnSetDataListener<Chat>() {
                                                     @Override
-                                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                                        dataSnapshot.child("messages").getRef().setValue(messageList);
+                                                    public void onSetData(Chat data) {
                                                         scrollMessages();
                                                         etSend.setText("");
                                                         imagesForSend.clear();
                                                     }
 
                                                     @Override
-                                                    public void onCancelled(DatabaseError databaseError) {
+                                                    public void onNoConnection() {
+
+                                                    }
+
+                                                    @Override
+                                                    public void onCanceled() {
+
                                                     }
                                                 });
                                             }
@@ -176,17 +192,32 @@ public class ChatActivity extends FirebaseActivity {
                         Utils.isConnected(getApplicationContext(), new Utils.Connection() {
                             @Override
                             public void isConnected() {
-                                dbChats.child(chat.id).addListenerForSingleValueEvent(new ValueEventListener() {
+                                boolean isExists = false;
+                                for (String s : chat.membersEmailList) {
+                                    if (s.equals(user.email)) {
+                                        isExists = true;
+                                        break;
+                                    }
+                                }
+                                if (!isExists)
+                                    chat.membersEmailList.add(user.email);
+                                chat.messages.add(m);
+                                chat.setNewData(ChatActivity.this, chat, new OnSetDataListener<Chat>() {
                                     @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        dataSnapshot.child("messages").getRef().setValue(messageList);
+                                    public void onSetData(Chat data) {
                                         scrollMessages();
                                         etSend.setText("");
                                         imagesForSend.clear();
                                     }
 
                                     @Override
-                                    public void onCancelled(DatabaseError databaseError) {
+                                    public void onNoConnection() {
+
+                                    }
+
+                                    @Override
+                                    public void onCanceled() {
+
                                     }
                                 });
                             }
