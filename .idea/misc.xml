@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/dialog_add_locate.xml" value="0.1213768115942029" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/dialog_chat_description_change.xml" value="0.1213768115942029" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/dialog_chat_icon_change.xml" value="0.12158054711246201" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/dialog_user_icon_change.xml" value="0.1213768115942029" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/map_info_window.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/navigation_fragment_all_chats.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/navigation_fragment_my_chats.xml" value="0.2391304347826087" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/SmartArzamas/app/src/main/res/drawable-v24/ic_profile.xml" value="0.1" />

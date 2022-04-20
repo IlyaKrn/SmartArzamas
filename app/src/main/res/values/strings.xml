@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartArzamas</string>
+    <string name="app_name">Умный Арзамас</string>
     <string name="enter">Вход</string>
     <string name="registration">Регистрация</string>
     <string name="sign_in">Войти</string>
