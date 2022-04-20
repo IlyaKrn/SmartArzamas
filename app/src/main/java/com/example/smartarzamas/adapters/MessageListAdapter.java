@@ -27,20 +27,26 @@ import java.util.Map;
 
 public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdapter.MessageHolder> {
 
-    private Map<String, Bitmap> savedIcons = new HashMap<>();
-    private Map<String, ArrayList<Bitmap>> savedImages = new HashMap<>();
+    private Map<String, Bitmap> savedIcons = new HashMap<>(); // кэш картинок
+    private Map<String, ArrayList<Bitmap>> savedImages = new HashMap<>(); // кэш картинок из сообщений
 
+    // конструктор
     public MessageListAdapter(Context context, User user, boolean isAdmin, ArrayList<Message> items, OnStateClickListener<Message> onItemClickListener) {
         super(context, user, isAdmin, items, onItemClickListener);
     }
 
+    // создание холдера
     @Override
     protected MessageHolder onCreateHolder(@NonNull ViewGroup parent, int viewType) {
         return new MessageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message_list, parent, false));
     }
 
+
+    // холдер
     public class MessageHolder extends FirebaseHolder<Message>{
 
+
+        // элементы разметки (моё сообщение, чужое сообщение, системное сообщение)
 
         private final TableMessageImages notMy_tlImages;
         private final ProgressBar notMy_progressImage;
@@ -60,8 +66,9 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
         private final TextView system_tvMessage;
         private final TableMessageImages system_tlImages;
 
-        User u;
+        User u; // пользователь
 
+        // конструктор
         public MessageHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -84,10 +91,12 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
             system_tlImages = itemView.findViewById(R.id.system_lv_images);
         }
 
+        // обновление холдера
         @Override
         public void bind(int position) {
             item = getItem(position);
 
+            // установка данных
             system_tlImages.removeBitmaps();
             notMy_tlImages.removeBitmaps();
             my_tlImages.removeBitmaps();
@@ -209,6 +218,7 @@ public class MessageListAdapter extends FirebaseAdapter<Message, MessageListAdap
         }
 
 
+        // отображение нужных элементов разметки
 
         private void showNotMyMessage(){
             notMy_itemBody.setVisibility(View.VISIBLE);

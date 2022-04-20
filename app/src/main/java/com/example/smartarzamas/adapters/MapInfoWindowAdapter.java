@@ -28,11 +28,12 @@ import java.util.Map;
 
 public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
 
-    private final User user;
+    private final User user; // пользователь
+    private final Context context; // контекст
+    private final ArrayList<Locate> locates; // список меток
+    private Map<Locate, Bitmap> cache; // кэш картинок
+    // разметка
     private final View rootView;
-    private final Context context;
-    private final ArrayList<Locate> locates;
-    private Map<Locate, Bitmap> cache;
     private TextView title;
     private TextView snippet;
     private ImageView icon;
@@ -40,6 +41,7 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private FrameLayout ivContainer;
 
 
+    //конструктор
     public MapInfoWindowAdapter(Context context, User user, ArrayList<Locate> locates) {
         this.user = user;
         this.context = context;
@@ -47,11 +49,12 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         this.locates = locates;
     }
 
-
+    // загрузка кэша
     public void loadCache(Map<Locate, Bitmap> c){
         this.cache = c;
     }
 
+    // установка данных
     private void setData(Marker marker){
         title = rootView.findViewById(R.id.tv_title);
         snippet = rootView.findViewById(R.id.tv_snippet);

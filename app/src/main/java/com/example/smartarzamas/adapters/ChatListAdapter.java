@@ -34,26 +34,31 @@ import java.util.Map;
 
 public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatHolder> {
 
-    private Map<String, Bitmap> savedIcons = new HashMap<>();
+    private Map<String, Bitmap> savedIcons = new HashMap<>(); // кэш картинок
 
+    // конструктор
     public ChatListAdapter(Context context, User user, boolean isAdmin, ArrayList<Chat> items, OnStateClickListener<Chat> onItemClickListener) {
         super(context, user, isAdmin, items, onItemClickListener);
     }
 
+    // создание холдера
     @Override
     protected ChatHolder onCreateHolder(@NonNull ViewGroup parent, int viewType) {
         return new ChatHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_list, parent, false));
     }
 
 
+    // холдер
     public class ChatHolder extends FirebaseHolder<Chat> {
 
+        // элементы разметки
         private final ImageButton btMenu;
         private final ProgressBar progressImage;
         private final TextView tvName;
         private final TextView tvCategory;
         private final IconView ivIcon;
 
+        // конструктор
         public ChatHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
@@ -63,9 +68,11 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
             btMenu = itemView.findViewById(R.id.bt_item_menu);
         }
 
+        // обновление холдера
         @Override
         public void bind(int position) {
-            item = getItem(position);
+            item = getItem(position); // получение элемента
+            // установка данных
             ivIcon.setVisibility(View.GONE);
             progressImage.setVisibility(View.VISIBLE);
             tvName.setText(item.name);
@@ -78,6 +85,7 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
                 itemView.setBackgroundColor(Utils.getColorFromTheme(context, R.attr.recyclerView_red_background));
             }
 
+            // установка картинки из кэша или загрузка из Firebase
             Chat.getChatById(context, item.id, new OnGetDataListener<Chat>() {
                 @Override
                 public void onGetData(Chat data) {
@@ -120,8 +128,10 @@ public class ChatListAdapter extends FirebaseAdapter<Chat, ChatListAdapter.ChatH
             });
         }
 
+        // если пользоватнль - администратор
         @Override
         public void bindAdmin(int position) {
+            // кнопка меню
             btMenu.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
