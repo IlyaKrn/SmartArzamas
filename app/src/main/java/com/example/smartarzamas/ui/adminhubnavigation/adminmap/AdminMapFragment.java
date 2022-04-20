@@ -21,16 +21,21 @@ import com.example.smartarzamas.databinding.FragmentNotificationsBinding;
 import com.example.smartarzamas.firebaseobjects.Locate;
 import com.example.smartarzamas.firebaseobjects.OnGetIcon;
 import com.example.smartarzamas.firebaseobjects.OnGetListDataListener;
+import com.example.smartarzamas.firebaseobjects.OnSetDataListener;
 import com.example.smartarzamas.support.Utils;
+import com.example.smartarzamas.ui.DialogConfirm;
+import com.example.smartarzamas.ui.OnConfirmListener;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubActivityCallback;
 import com.example.smartarzamas.ui.adminhubnavigation.AdminHubNavigationCommon;
 import com.example.smartarzamas.ui.hubnavigation.HubActivityCallback;
 import com.example.smartarzamas.ui.hubnavigation.HubNavigationCommon;
+import com.example.smartarzamas.ui.hubnavigation.map.MapFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -221,6 +226,44 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
                 }
             }
         });
-        updateMapForView();
+        googleMap.setOnInfoWindowLongClickListener(new GoogleMap.OnInfoWindowLongClickListener() {
+            @Override
+            public void onInfoWindowLongClick(@NonNull Marker marker) {
+                DialogConfirm dialog = new DialogConfirm(AdminMapFragment.this, "Удаление", "Удалить", "Вы действительно хотите удалить метку?", new OnConfirmListener() {
+                    @Override
+                    public void onConfirm(DialogConfirm d) {
+                        d.freeze();
+                        for (Locate l : locateMainList) {
+                            if (l.locate().equals(marker.getPosition())) {
+                                l.setNewData(getContext(), null, new OnSetDataListener<Locate>() {
+                                    @Override
+                                    public void onSetData(Locate data) {
+                                        Toast.makeText(getContext(), "Метка удалена", Toast.LENGTH_LONG).show();
+                                    }
+
+                                    @Override
+                                    public void onNoConnection() {
+
+                                    }
+
+                                    @Override
+                                    public void onCanceled() {
+
+                                    }
+                                });
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancel(DialogConfirm d) {
+                        d.destroy();
+                    }
+                });
+            }
+        });
+
+
+      updateMapForView();
     }
 }
