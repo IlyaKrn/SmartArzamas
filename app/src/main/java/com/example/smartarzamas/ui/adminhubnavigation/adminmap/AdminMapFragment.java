@@ -239,6 +239,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
                                     @Override
                                     public void onSetData(Locate data) {
                                         Toast.makeText(getContext(), "Метка удалена", Toast.LENGTH_LONG).show();
+                                        d.destroy();
                                     }
 
                                     @Override
