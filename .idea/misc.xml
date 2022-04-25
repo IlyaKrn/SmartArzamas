@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/activity_auth.xml" value="0.4" />
         <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/dialog_add_locate.xml" value="0.1213768115942029" />
         <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/dialog_chat_description_change.xml" value="0.1213768115942029" />
         <entry key="..\:/Users/1/AndroidStudioProjects/SmartArzamas/app/src/main/res/layout/dialog_chat_icon_change.xml" value="0.12158054711246201" />
