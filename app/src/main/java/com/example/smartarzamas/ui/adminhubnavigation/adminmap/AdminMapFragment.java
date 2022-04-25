@@ -260,6 +260,7 @@ public class AdminMapFragment extends AdminHubNavigationCommon implements OnMapR
                         d.destroy();
                     }
                 });
+                dialog.create(R.id.fragmentContainerView);
             }
         });
 
